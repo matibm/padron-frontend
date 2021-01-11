@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 //=====Componentes=======
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+
 // import { LoginComponent } from './auth/login/login.component';
 // import { RegisterComponent } from './auth/register/register.component';
 
@@ -23,6 +24,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
     // LoginComponent,
     // RegisterComponent,
     NopagefoundComponent,
+    
     // BreadcrumbsComponent,
     // SidebarComponent,
     // HeaderComponent,
