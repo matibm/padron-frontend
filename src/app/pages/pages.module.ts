@@ -14,6 +14,7 @@ import { PagesComponent } from './pages.component';
 
 import { AppRoutingModule } from '../app-routing.module';
 import { from } from 'rxjs';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 
 
@@ -25,6 +26,7 @@ import { from } from 'rxjs';
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
+    AccountSettingsComponent,
   ],
   
   exports: [
@@ -32,6 +34,7 @@ import { from } from 'rxjs';
     ProgressComponent,
     Grafica1Component,
     PagesComponent,
+    AccountSettingsComponent,
 
   ],
 
