@@ -20,6 +20,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import localePy from '@angular/common/locales/es-PY';
 registerLocaleData(localePy, 'es-PY');
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 // import { LoginComponent } from './auth/login/login.component';
 // import { RegisterComponent } from './auth/register/register.component';
@@ -56,7 +57,7 @@ registerLocaleData(localePy, 'es-PY');
     ReactiveFormsModule,
     DpDatePickerModule,
     NgSelectModule,
-     
+    SweetAlert2Module.forRoot()
     // NgbModule
   ],
   providers: [CurrencyPipe, { provide: LOCALE_ID, useValue: 'es-PY' }],

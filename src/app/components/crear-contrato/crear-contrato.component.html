@@ -189,6 +189,34 @@
                             </div>
 
                         </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4 col-xs">
+                                <div class="form-group">
+                                    <label for="">Numero de Factura: </label>
+                                    <input type="text" class="form-control" name="" autocomplete="off" [(ngModel)]="numeroFactura" id="" aria-describedby="helpId" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-8 col-xs  ">
+                                <label>Lugar de cobranza</label>
+
+                                <div class="row">
+                                    <div class="col-md col-xs">
+                                        <input [(ngModel)]="radioLugarCobranza" name="idTipoPlan3" type="radio" class="with-gap radio-col-blue-grey" id="radio_particular" value="particular" required>
+                                        <label for="radio_particular">Direccion Particular</label>
+                                    </div>
+                                    <div class="col-md col-xs">
+                                        <input [(ngModel)]="radioLugarCobranza" name="idTipoPlan3" type="radio" class="with-gap radio-col-blue-grey" id="radio_laboral" value="laboral" required>
+                                        <label for="radio_laboral">Direccion Laboral</label>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
@@ -339,8 +367,12 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" [disabled]="disableCrearContrato()" class="btn float-right btn-primary">Crear
+                <button type="button" (click)="crearContrato()" [disabled]="disableCrearContrato()" class="btn float-right btn-primary">Crear
                     Contrato</button>
+                <button [swal]="{ title: 'Save file as...', input: 'text', showDenyButton: true, denyButtonText: 'Don\'t save', showCancelButton: true }" (confirm)="null" (deny)="null" (dismiss)="null">
+                  
+                    Save
+                  </button>
             </div>
         </div>
     </div>

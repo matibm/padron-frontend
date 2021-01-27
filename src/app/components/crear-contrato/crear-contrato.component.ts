@@ -7,6 +7,8 @@ import { Producto } from '../../models/producto';
 import { Usuario } from '../../models/usuario';
 import { Component, OnInit } from '@angular/core';
 // import { Options } from 'select2';
+import { SwalPortalTargets,SwalDirective } from '@sweetalert2/ngx-sweetalert2';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-contrato',
@@ -32,8 +34,9 @@ export class CrearContratoComponent implements OnInit {
   plazo: number
   paraNgmodel = 0
   contrato: Contrato
-  montoCuotas  
+  montoCuotas
   model = '2020-03-12'
+  radioLugarCobranza = 'particular'
   beneficiarioVacio = {
     nombre: '',
     doc: '',
@@ -62,10 +65,11 @@ export class CrearContratoComponent implements OnInit {
   }
   inhumados: Inhumado[] = [this.inhumadoVacio]
   cuotas
-  radioValue = 'administracion' 
+  radioValue = 'administracion'
   fechaPago = new Date()
   pagoradioValue = 'contado'
   stringFechaPago
+  numeroFactura
   pruebalog(event) {
     event.preventDefault()
     console.log(event);
@@ -75,9 +79,10 @@ export class CrearContratoComponent implements OnInit {
   radioAdministracion = false
   radioCobrador = false
   constructor(public _productoService: ProductosService,
-    public _usuarioService: UsuarioService,
+    public _usuarioService: UsuarioService,public readonly swalTargets: SwalPortalTargets,
     public _contratoService: ContratoService
-  ) { }
+  ) { 
+    }
 
   async ngOnInit() {
     this.productos = await this._productoService.getProductos()
@@ -132,11 +137,11 @@ export class CrearContratoComponent implements OnInit {
       this.pagoradioValue = 'cuota'
       this.montoCuotas = this.saldo / this.plazo;
       this.cuotas = this.crearCuotas(this.montoCuotas, this.plazo);
-    }else{
+    } else {
       this.resetPlazo()
     }
   }
-  resetPlazo(){
+  resetPlazo() {
     this.plazo = null
     this.cuotas = null;
     this.montoCuotas = null;
@@ -183,8 +188,8 @@ export class CrearContratoComponent implements OnInit {
     // let today = [year, month, day].join('-');
 
     let nuevo_contrato: Contrato = {
-      id_contrato: '34567',   // se puede quitar
-      cobrador: this.cobrador,
+      id_contrato: new Date().getTime().toString(),   // se puede quitar
+      cobrador: this.cobrador || {},
       cuota: this.montoCuotas,
       entrega: this.entrega,
       id_servicio: this.producto.ID_PRODUCTO, // se puede quitar
@@ -261,7 +266,7 @@ export class CrearContratoComponent implements OnInit {
   disableCrearContrato() {
     console.log("probando ");
     if (this.producto && this.cliente && this.vendedor && this.radioValue) {
-      return false; 
+      return false;
     }
     return true;
   }
@@ -289,6 +294,6 @@ export class CrearContratoComponent implements OnInit {
     return cuotas
   }
 
-  
+
 
 }
