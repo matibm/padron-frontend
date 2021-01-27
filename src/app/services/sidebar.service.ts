@@ -7,11 +7,11 @@ export class SidebarService {
 
   menu: any[] = [
     {
-      titulo: 'Dashboard!!',
-      icono: 'mdi mdi-gauge',
+      titulo: 'Contrato',
+      icono: 'mdi mdi-file-document',
       submenu: [
-        { titulo: 'Main', url:'/'},
-        { titulo: 'ProgressBar', url:'progress'},
+        { titulo: 'nuevo contrato', url:'crear_contrato'},
+        { titulo: 'lista de contratos', url:'progress'},
         { titulo: 'Graficas', url:'grafica1'},
       ]
     }

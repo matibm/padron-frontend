@@ -1,3 +1,4 @@
+import { CrearContratoComponent } from './../components/crear-contrato/crear-contrato.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -10,11 +11,26 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 
 const routes: Routes = [
     {
+        path: 'contrato', 
+        component: PagesComponent,
+        children: [
+          {path: '', component: DashboardComponent},
+          {path: 'progress', component: ProgressComponent},
+          {path: 'crear_contrato', component: CrearContratoComponent},
+          {path: 'grafica1', component: Grafica1Component},
+          {path: 'account-settings', component: AccountSettingsComponent},
+          
+        ]
+    
+    
+      },
+    {
         path: 'dashboard', 
         component: PagesComponent,
         children: [
           {path: '', component: DashboardComponent},
           {path: 'progress', component: ProgressComponent},
+          {path: 'crear_contrato', component: CrearContratoComponent},
           {path: 'grafica1', component: Grafica1Component},
           {path: 'account-settings', component: AccountSettingsComponent},
           

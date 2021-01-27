@@ -5,35 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class SettingsService {
 
-  private  linkTheme = document.querySelector('#theme')
-  
-
-  constructor() {
-    console.log('settings service init');
-
-    const h = localStorage.getItem('theme') || './assets/css/colors/dark.css'
-    console.log(h,'guardado');
-    
-
-    this.linkTheme.setAttribute('href',h);
-    
+  private  linkTheme = document.querySelector('#theme') 
+  constructor() { 
+    const h = localStorage.getItem('theme') || './assets/css/colors/dark.css'  
+    this.linkTheme.setAttribute('href',h); 
    }
 
-   changeTheme(theme:string){
-    console.log(theme);
-    
-
-    console.log(this.linkTheme);
-    
-    const URL = `./assets/css/colors/${ theme }.css`;
-
-    console.log(URL);
-
+   changeTheme(theme:string){ 
+    const URL = `./assets/css/colors/${ theme }.css`; 
     this.linkTheme.setAttribute('href',URL);
     localStorage.setItem('theme',URL)
-    this.checkCurrentTheme()
-    
-    
+    this.checkCurrentTheme() 
   }
 
   checkCurrentTheme(){

@@ -1,4 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
 #themecolors .selector {
     cursor: pointer;
+}
+
+.inline-flex {
+    display: flex;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.close-icon :hover {
+    color: #ef5350;
 }

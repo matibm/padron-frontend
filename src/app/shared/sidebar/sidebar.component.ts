@@ -8,15 +8,28 @@ import { SidebarService } from 'src/app/services/sidebar.service';
   ]
 })
 export class SidebarComponent implements OnInit {
-
+  class = ''
   menuItems: any[];
-  constructor( private sidebarService: SidebarService ) { 
-    this.menuItems= sidebarService.menu;
+  constructor(private sidebarService: SidebarService) {
+    this.menuItems = sidebarService.menu;
     console.log(this.menuItems);
-    
+
   }
 
   ngOnInit(): void {
+  }
+
+  onclickItem(event) {
+     
+    for (let u = 0; u < event.target.parentElement.parentElement.childNodes.length; u++) {
+      const element = event.target.parentElement.parentElement.childNodes[u];
+      if (element.firstChild) {
+        element.firstChild.classList.remove('active');
+        
+      }
+
+    }
+    event.target.classList.add('active');
   }
 
 }

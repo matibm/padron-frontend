@@ -1,13 +1,25 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-// =====Modulos=====
+ // =====Modulos=====
 import { AppRoutingModule } from './app-routing.module';
 import { PagesModule } from './pages/pages.module';
 import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
+import { CurrencyPipe, CommonModule, registerLocaleData } from '@angular/common';
 
 //=====Componentes=======
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { CrearContratoComponent } from './components/crear-contrato/crear-contrato.component';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { PricePipe } from './pipes/price.pipe';
+import {DpDatePickerModule} from 'ng2-date-picker';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import localePy from '@angular/common/locales/es-PY';
+registerLocaleData(localePy, 'es-PY');
 
 // import { LoginComponent } from './auth/login/login.component';
 // import { RegisterComponent } from './auth/register/register.component';
@@ -24,19 +36,30 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
     // LoginComponent,
     // RegisterComponent,
     NopagefoundComponent,
-    
+    CrearContratoComponent,
+    PricePipe,
+
     // BreadcrumbsComponent,
     // SidebarComponent,
     // HeaderComponent,
-    
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     PagesModule,
-    AuthModule
+    HttpClientModule,
+    AutocompleteLibModule,
+    AuthModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    DpDatePickerModule,
+    NgSelectModule,
+     
+    // NgbModule
   ],
-  
+  providers: [CurrencyPipe, { provide: LOCALE_ID, useValue: 'es-PY' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

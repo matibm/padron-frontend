@@ -37,6 +37,8 @@ export class IncrementadorComponent  implements OnInit{
   }
 
   onChange(nuevoValor: number){
+    console.log("incrementador");
+    
       if (nuevoValor>=100){
         this.progreso=100
       } else if(nuevoValor<=0){

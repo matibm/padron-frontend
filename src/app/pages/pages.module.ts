@@ -41,7 +41,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
   imports: [ 
     CommonModule, 
     FormsModule,
-    SharedModule,
+     SharedModule,
     RouterModule,
     ComponentsModule,
     
