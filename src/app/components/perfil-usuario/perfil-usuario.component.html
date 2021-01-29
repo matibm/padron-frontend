@@ -1,0 +1,70 @@
+<div class="" *ngIf="usuario">
+
+    <h1>{{usuario.NOMBRES}} {{usuario.APELLIDOS}}</h1>
+
+    <div *ngIf="contratos" class="card">
+
+        <div class="card-body">
+            <h4 class="card-title">Contratos</h4>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>fecha</th>
+                        <th>Nro. Contrato</th>
+                        <th>Servicio o Producto</th>
+
+                        <th>Manzana</th>
+                        <th>Fila</th>
+                        <th>Parcela</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- -->
+                    <tr *ngFor="let contrato of contratos; let i = index;">
+                        <td scope="row">{{i+1}}</td>
+                        <td>{{contrato.fecha_creacion_unix | date}}</td>
+                        <td>{{contrato.nro_contrato}}</td>
+                        <td>{{contrato.nombre_servicio}}</td>
+
+                        <td *ngIf="!contrato.manzana">---</td>
+                        <td *ngIf="!contrato.fila">---</td>
+                        <td *ngIf="!contrato.parcela">---</td>
+                        <td *ngIf="contrato.manzana">{{contrato.manzana}}</td>
+                        <td *ngIf="contrato.fila">{{contrato.fila}}</td>
+                        <td *ngIf="contrato.parcela">{{contrato.parcela}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div *ngIf="cuotas" class="card">
+        <div class="card-body">
+            <h3 class="card-title">Cuotas</h3>
+
+            <div style="overflow: auto; max-height: 400px;">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Vencimiento</th>
+                            <th>Monto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let cuota of cuotas; let i = index">
+                            <td scope="row">{{i+1}}</td>
+                            <td>{{cuota.vencimiento | date}}</td>
+                            <td>{{cuota.haber | currency:'':'':'2.0' }} Gs</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

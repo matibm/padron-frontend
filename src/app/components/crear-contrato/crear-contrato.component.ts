@@ -7,7 +7,7 @@ import { Producto } from '../../models/producto';
 import { Usuario } from '../../models/usuario';
 import { Component, OnInit } from '@angular/core';
 // import { Options } from 'select2';
-import { SwalPortalTargets,SwalDirective } from '@sweetalert2/ngx-sweetalert2';
+import { SwalPortalTargets, SwalDirective } from '@sweetalert2/ngx-sweetalert2';
 import swal from 'sweetalert2';
 
 @Component({
@@ -75,14 +75,15 @@ export class CrearContratoComponent implements OnInit {
     console.log(event);
 
   }
+  showInfoContrato = false;
   radioDebito = false
   radioAdministracion = false
   radioCobrador = false
   constructor(public _productoService: ProductosService,
-    public _usuarioService: UsuarioService,public readonly swalTargets: SwalPortalTargets,
+    public _usuarioService: UsuarioService, public readonly swalTargets: SwalPortalTargets,
     public _contratoService: ContratoService
-  ) { 
-    }
+  ) {
+  }
 
   async ngOnInit() {
     this.productos = await this._productoService.getProductos()
@@ -173,7 +174,6 @@ export class CrearContratoComponent implements OnInit {
     this.calcularSaldo(num)
     return Number(num);
   }
-
   async crearContrato() {
     // var d = new Date(),
     //   month = '' + (d.getMonth() + 1),
@@ -207,13 +207,21 @@ export class CrearContratoComponent implements OnInit {
 
     }
     console.log(nuevo_contrato);
+    let send = {
+      contrato: nuevo_contrato,
+      cuotas: this.cuotas
+    }
 
-
-    await this._contratoService.newContrato(nuevo_contrato);
+    await this._contratoService.newContrato(send).then(() => {
+      swal.fire({
+        icon: 'success',
+        title: 'Contrato creado',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
+    });
 
   }
-
-
   async searchCobradores(val: any) {
     if (val.term.length > 0) {
       this.cobradores = await this._usuarioService.buscarUsuarios('COBRADORES', val.term)
@@ -287,7 +295,10 @@ export class CrearContratoComponent implements OnInit {
       cuotas.push({
         numero: i + 1,
         vencimiento: new Date(`${year}/${mes}/${dia}`),
-        monto: monto
+        monto: monto,
+        haber: monto,
+        titular: this.cliente,
+        fecha_creacion_unix : new Date().getTime()
       })
       mes++;
     }

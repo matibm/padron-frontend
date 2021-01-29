@@ -95,6 +95,10 @@ export class Contrato {
         public ci_beneficiario4?: string,
         public ci_beneficiario5?: string,
         public ci_beneficiario6?: string,
+        public manzana?: string,
+        public parcela?: string,
+        public sector?: string,
+        public fila?: string,
        
 
     ) {

@@ -1,3 +1,4 @@
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
  // =====Modulos=====
@@ -21,7 +22,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import localePy from '@angular/common/locales/es-PY';
 registerLocaleData(localePy, 'es-PY');
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-
+import {NgxPaginationModule} from 'ngx-pagination'; 
 // import { LoginComponent } from './auth/login/login.component';
 // import { RegisterComponent } from './auth/register/register.component';
 
@@ -38,9 +39,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     // RegisterComponent,
     NopagefoundComponent,
     CrearContratoComponent,
-    PricePipe,
-
-    // BreadcrumbsComponent,
+    PricePipe
+     // BreadcrumbsComponent,
     // SidebarComponent,
     // HeaderComponent,
 
@@ -48,6 +48,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgxPaginationModule,
     PagesModule,
     HttpClientModule,
     AutocompleteLibModule,
@@ -55,6 +56,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+  
     DpDatePickerModule,
     NgSelectModule,
     SweetAlert2Module.forRoot()

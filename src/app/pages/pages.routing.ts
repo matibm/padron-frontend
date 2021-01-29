@@ -1,3 +1,6 @@
+import { PerfilUsuarioComponent } from './../components/perfil-usuario/perfil-usuario.component';
+import { UsuariosComponent } from './../components/usuarios/usuarios.component';
+import { ListaContratosComponent } from './../components/lista-contratos/lista-contratos.component';
 import { CrearContratoComponent } from './../components/crear-contrato/crear-contrato.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -17,6 +20,8 @@ const routes: Routes = [
           {path: '', component: DashboardComponent},
           {path: 'progress', component: ProgressComponent},
           {path: 'crear_contrato', component: CrearContratoComponent},
+          {path: 'lista_contratos', component: ListaContratosComponent},
+          {path: 'usuarios', component: UsuariosComponent},
           {path: 'grafica1', component: Grafica1Component},
           {path: 'account-settings', component: AccountSettingsComponent},
           
@@ -32,6 +37,10 @@ const routes: Routes = [
           {path: 'progress', component: ProgressComponent},
           {path: 'crear_contrato', component: CrearContratoComponent},
           {path: 'grafica1', component: Grafica1Component},
+          {path: 'usuarios', component: UsuariosComponent},
+          {path: 'usuario/:id', component: PerfilUsuarioComponent},
+          {path: 'lista_contratos', component: ListaContratosComponent},
+
           {path: 'account-settings', component: AccountSettingsComponent},
           
         ]

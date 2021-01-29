@@ -1,6 +1,7 @@
 import { URL_SERVICIOS } from './../config/global';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,14 @@ export class UsuarioService {
       return resp.usuarios
     })
   }
+
+  getUsuarioPorId(id): Promise<Usuario>{
+    let url = URL_SERVICIOS + `/usuario/id/${id}`;
+    return this.http.get(url).toPromise().then((resp: any) => {
+      return resp.usuario
+    })
+  }
+
   getClientes() {
     let url = URL_SERVICIOS + '/usuario/clientes';
     return this.http.get(url).toPromise().then((resp: any) => {

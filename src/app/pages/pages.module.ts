@@ -35,7 +35,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     Grafica1Component,
     PagesComponent,
     AccountSettingsComponent,
-
+    ComponentsModule
   ],
 
   imports: [ 

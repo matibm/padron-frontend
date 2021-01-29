@@ -1,0 +1,42 @@
+<div class="card">
+
+    <div class="card-body">
+        <h4 class="card-title">Contratos</h4>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>fecha</th>
+                    <th>Nro. Contrato</th>
+                    <th>Servicio o Producto</th>
+                    <th>Cliente</th>
+                    <th>RUC/CI</th>
+                    <th>Manzana</th>
+                    <th>Fila</th>
+                    <th>Parcela</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- -->
+                <tr *ngFor="let contrato of contratos | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
+                    <td scope="row">{{page*10 + (i+1) - 10}}</td>
+                    <td>{{contrato.fecha_creacion_unix | date}}</td>
+                    <td>{{contrato.nro_contrato}}</td>
+                    <td>{{contrato.nombre_servicio}}</td>
+                    <td *ngIf="contrato.titular">{{contrato.titular.NOMBRES}} {{contrato.titular.APELLIDOS}}</td>
+                    <td *ngIf="!contrato.titular">---</td>
+                    <td>{{contrato.titular.RUC}}</td>
+                    <td *ngIf="!contrato.manzana">---</td>
+                    <td *ngIf="!contrato.fila">---</td>
+                    <td *ngIf="!contrato.parcela">---</td>
+                    <td *ngIf="contrato.manzana">{{contrato.manzana}}</td>
+                    <td *ngIf="contrato.fila">{{contrato.fila}}</td>
+                    <td *ngIf="contrato.parcela">{{contrato.parcela}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event); page = $event"></pagination-controls>
+    </div>
+</div>
