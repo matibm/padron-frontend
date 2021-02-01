@@ -14,6 +14,7 @@ export class Usuario {
         public LUGAR_TRABAJO?: string,
         public TEL_TRABAJO?: string,
         public NOMCIUDAD?: string,
+        public password?: string,
         public NOMDEPAR?: string,
         public CARGOCONTA?: string,
         public TELEFONO?: string,

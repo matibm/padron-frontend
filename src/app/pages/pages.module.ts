@@ -16,6 +16,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { from } from 'rxjs';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
+import { QrCodeModule } from 'ng-qrcode';
 
 
 
@@ -44,7 +45,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
      SharedModule,
     RouterModule,
     ComponentsModule,
-    
+    QrCodeModule
     
   ],
 })

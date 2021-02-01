@@ -1,45 +1,230 @@
-<div class="" *ngIf="usuario">
-
-    <h1>{{usuario.NOMBRES}} {{usuario.APELLIDOS}}</h1>
-
-    <div *ngIf="contratos" class="card">
-
-        <div class="card-body">
-            <h4 class="card-title">Contratos</h4>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>fecha</th>
-                        <th>Nro. Contrato</th>
-                        <th>Servicio o Producto</th>
-
-                        <th>Manzana</th>
-                        <th>Fila</th>
-                        <th>Parcela</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- -->
-                    <tr *ngFor="let contrato of contratos; let i = index;">
-                        <td scope="row">{{i+1}}</td>
-                        <td>{{contrato.fecha_creacion_unix | date}}</td>
-                        <td>{{contrato.nro_contrato}}</td>
-                        <td>{{contrato.nombre_servicio}}</td>
-
-                        <td *ngIf="!contrato.manzana">---</td>
-                        <td *ngIf="!contrato.fila">---</td>
-                        <td *ngIf="!contrato.parcela">---</td>
-                        <td *ngIf="contrato.manzana">{{contrato.manzana}}</td>
-                        <td *ngIf="contrato.fila">{{contrato.fila}}</td>
-                        <td *ngIf="contrato.parcela">{{contrato.parcela}}</td>
-                    </tr>
-
-                </tbody>
-            </table>
+<div *ngIf="usuario" class="row">
+    <!-- Column -->
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card"> <img class="card-img" src="../assets/images/background/socialbg.jpg" alt="Card image">
+            <div class="card-img-overlay card-inverse social-profile d-flex ">
+                <div class="align-self-center"> <img src="../assets/images/users/1.jpg" class="img-circle" width="100">
+                    <h4 class="card-title">James Anderson</h4>
+                    <h6 class="card-subtitle">@jamesandre</h6>
+                    <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt </p>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body"> <small class="text-muted">Email address </small>
+                <h6>hannagover@gmail.com</h6> <small class="text-muted p-t-30 db">Phone</small>
+                <h6>+91 654 784 547</h6> <small class="text-muted p-t-30 db">Address</small>
+                <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
+                <div class="map-box">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508"
+                        width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div> <small class="text-muted p-t-30 db">Social Profile</small>
+                <br />
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-facebook"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-twitter"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-youtube"></i></button>
+            </div>
         </div>
     </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Perfil</a>
+                </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Contratos</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Settings</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="home" role="tabpanel">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 col-xs-6 b-r"> <strong>Nombre Completo</strong>
+                                <br>
+                                <p class="text-muted">{{usuario.NOMBRES}} {{usuario.APELLIDOS}}</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6 b-r"> <strong>RUC</strong>
+                                <br>
+                                <p class="text-muted">{{usuario.RUC}}</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6 b-r"> <strong>Rol de Usuario</strong>
+                                <br>
+                                <p class="text-muted">administrador</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6"> <strong>Estado</strong>
+                                <br>
+                                <p *ngIf="usuario.ACTIVO == '1'" class="text-muted">Inactivo</p>
+                                <p *ngIf="usuario.ACTIVO == '0'" class="text-muted">Activo</p>
+
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xs col-md b-r">
+                                <h3 class="font-medium ">Telefonos</h3>
+                                <p for=""><strong>Telefono: </strong> {{usuario.TELEFONO}}</p>
+                                <p for=""><strong>Telefono 1: </strong> {{usuario.TELEFONO1}}</p>
+                                <p for=""><strong>Telefono 2: </strong> {{usuario.TELEFONO2}}</p>
+                                <p for=""><strong>Telefono 3: </strong> {{usuario.TELEFONO3}}</p>
+                                <p for=""><strong>Telefono fax: </strong> {{usuario.TELEFONO_FAX}}</p>
+                                <p for=""><strong>Telefono trabajo: </strong> {{usuario.TEL_TRABAJO}}</p>
+                                <p for=""><strong>Telefono contacto 1: </strong>{{usuario.TEL_CONTACTO}}</p>
+                                <p for=""><strong>Telefono contacto 2: </strong>{{usuario.TEL_CONTA2}}</p>
+                                <p for=""><strong>Telefono contacto 3: </strong>{{usuario.TEL_CONTA3}}</p>
+                                <p for=""><strong>Telefono contacto 4: </strong>{{usuario.TEL_CONTA4}}</p>
+                                <p for=""><strong>Telefono contacto 5: </strong>{{usuario.TEL_CONTA5}}</p>
+                            </div>
+                            <div class="col-xs col-md">
+                                <h3 class="font-medium ">Direcciones</h3>
+                                <p><strong>Ciudad: </strong> {{usuario.NOMCIUDAD}}</p>
+                                <p><strong>Departamento: </strong> {{usuario.NOMDEPAR}}</p>
+                                <p><strong>Direccion: </strong> {{usuario.DIRECCION}}</p>
+                                <p><strong>Direccion laboral: </strong> {{usuario.direccion_laboral}}</p>
+                                <p><strong>Direccion particular: </strong> {{usuario.direccion_particular}}</p>
+                                <p><strong>Direccion trabajo</strong> {{usuario.DIRECCION_TRABAJO}}</p>
+                                <p><strong>Ciudad trabajo</strong> {{usuario.ciudad_trabajo}}</p>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h3 class="font-medium ">Características de Usuario</h3>
+                        <div class="row">
+                            <div class="col-xs col-md-2 mt-1">
+                                <input [(ngModel)]="isVendedor" type="checkbox" id="check_vendedor" class="filled-in chk-col-light-blue" (click)="$event.preventDefault()" checked />
+                                <label for="check_vendedor">Vendedor</label>
+                            </div>
+                            <div class="col-xs col-md-2 mt-1">
+                                <input [(ngModel)]="isCobrador" type="checkbox" id="check_cobrador" class="filled-in chk-col-light-blue" (click)="$event.preventDefault()" checked />
+                                <label for="check_cobrador">Cobrador</label>
+                            </div>
+                            <div class="col-xs col-md-2 mt-1">
+                                <input [(ngModel)]="isCliente" type="checkbox" id="check_cliente" class="filled-in chk-col-light-blue" (click)="$event.preventDefault()" checked />
+                                <label for="check_cliente">Cliente</label>
+                            </div>
+                            <div class="col-xs col-md-2 mt-1">
+                                <input [(ngModel)]="isEmpleado" type="checkbox" id="check_empleado" class="filled-in chk-col-light-blue" (click)="$event.preventDefault()" checked />
+                                <label for="check_empleado">Empleado</label>
+                            </div>
+                            <div class="col-xs col-md-2 mt-1">
+                                <input [(ngModel)]="isPersona" type="checkbox" id="check_persona" class="filled-in chk-col-light-blue" (click)="$event.preventDefault()" checked />
+                                <label for="check_persona">Persona</label>
+                            </div>
+                            <div class="col-xs col-md-2 mt-1">
+                                <input [(ngModel)]="isEmpresa" type="checkbox" id="check_empresa" class="filled-in chk-col-light-blue" (click)="$event.preventDefault()" checked />
+                                <label for="check_empresa">Empresa</label>
+                            </div>
+                            <div class="col-xs col-md-2 mt-1">
+                                <input [(ngModel)]="isBanco" type="checkbox" id="check_banco" class="filled-in chk-col-light-blue" (click)="$event.preventDefault()" checked />
+                                <label for="check_banco">Banco</label>
+                            </div>
+                            <div class="col-xs col-md-2 mt-1">
+                                <input [(ngModel)]="manejaCaja" type="checkbox" id="check_maneja_caja" class="filled-in chk-col-light-blue" (click)="$event.preventDefault()" checked />
+                                <label for="check_maneja_caja">Maneja Caja</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--second tab-->
+                <div class="tab-pane" id="profile" role="tabpanel">
+                    <div class="card-body">
+
+                        <div *ngIf="contratos" class="card">
+
+                            <div class="card-body">
+                                <h4 class="card-title">Contratos</h4>
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>fecha</th>
+                                            <th>Nro. Contrato</th>
+                                            <th>Servicio o Producto</th>
+
+                                            <th>Manzana</th>
+                                            <th>Fila</th>
+                                            <th>Parcela</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- -->
+                                        <tr [routerLink]="['/dashboard/info_contrato', contrato._id]" class="pointer" *ngFor="let contrato of contratos; let i = index;">
+                                            <td scope="row">{{i+1}}</td>
+                                            <td>{{contrato.fecha_creacion_unix | date}}</td>
+                                            <td>{{contrato.nro_contrato}}</td>
+                                            <td>{{contrato.nombre_servicio}}</td>
+
+                                            <td *ngIf="!contrato.manzana">---</td>
+                                            <td *ngIf="!contrato.fila">---</td>
+                                            <td *ngIf="!contrato.parcela">---</td>
+                                            <td *ngIf="contrato.manzana">{{contrato.manzana}}</td>
+                                            <td *ngIf="contrato.fila">{{contrato.fila}}</td>
+                                            <td *ngIf="contrato.parcela">{{contrato.parcela}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="settings" role="tabpanel">
+                    <div class="card-body">
+                        <form (ngSubmit)="actualizarUsuario(usuario)" class="form-horizontal form-material">
+                            <div class="form-group">
+                                <label class="col-md-12">Nombres</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="off" [(ngModel)]="usuario.NOMBRES" name="nombre" type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="example-email" class="col-md-12">Email</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="off" type="email" [(ngModel)]="usuario.EMAIL" name="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Password</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="off" [(ngModel)]="usuario.password" type="password" name="pass" class="form-control form-control-line">
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <label class="col-sm-12">Select Country</label>
+                                <div class="col-sm-12">
+                                    <select class="form-control form-control-line">
+                                        <option>London</option>
+                                        <option>India</option>
+                                        <option>Usa</option>
+                                        <option>Canada</option>
+                                        <option>Thailand</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-success">Update Profile</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>
+
+
+<div class="" *ngIf="usuario">
+
+
 
     <div *ngIf="cuotas" class="card">
         <div class="card-body">

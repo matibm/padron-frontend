@@ -12,11 +12,11 @@ export class UsuariosComponent implements OnInit {
   constructor(
     public _usuarioService: UsuarioService
   ) { }
-  usuarios : Usuario[]
+  usuarios: Usuario[]
 
- async ngOnInit() {
+  async ngOnInit() {
     this.usuarios = await this._usuarioService.getUsuarios();
-console.log(this.usuarios);
+    console.log(this.usuarios);
 
   }
 

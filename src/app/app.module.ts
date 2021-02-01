@@ -1,3 +1,4 @@
+import { URL_SERVICIOS } from './config/global';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +24,7 @@ import localePy from '@angular/common/locales/es-PY';
 registerLocaleData(localePy, 'es-PY');
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {NgxPaginationModule} from 'ngx-pagination'; 
+
 // import { LoginComponent } from './auth/login/login.component';
 // import { RegisterComponent } from './auth/register/register.component';
 
@@ -56,7 +58,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-  
+ 
     DpDatePickerModule,
     NgSelectModule,
     SweetAlert2Module.forRoot()

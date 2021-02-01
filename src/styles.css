@@ -13,6 +13,10 @@
     cursor: pointer;
 }
 
+.cursor-default {
+    cursor: default;
+}
+
 .close-icon :hover {
     color: #ef5350;
 }
