@@ -5,6 +5,10 @@
 export const environment = {
   production: false
 };
+export const URL_ENVIRONMENT = 'imperial.mburgos.xyz'
+// export const URL_ENVIRONMENT = 'imperial.mburgos.xyz:4000'
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file

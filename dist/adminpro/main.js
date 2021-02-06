@@ -1496,18 +1496,21 @@ PagesComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
   \*****************************************/
-/*! exports provided: environment */
+/*! exports provided: environment, URL_ENVIRONMENT */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_ENVIRONMENT", function() { return URL_ENVIRONMENT; });
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 const environment = {
     production: false
 };
+const URL_ENVIRONMENT = 'imperial.mburgos.xyz';
+// export const URL_ENVIRONMENT = 'imperial.mburgos.xyz:4000'
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
@@ -4072,7 +4075,8 @@ IncrementadorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_SERVICIOS", function() { return URL_SERVICIOS; });
-const URL_SERVICIOS = 'mburgos.xyz:4000';
+// export const URL_SERVICIOS = URL_ENVIRONMENT
+const URL_SERVICIOS = 'https://imperial.mburgos.xyz';
 
 
 /***/ }),

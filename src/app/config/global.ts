@@ -1,1 +1,4 @@
-export const URL_SERVICIOS = 'mburgos.xyz:4000'
+import { URL_ENVIRONMENT } from './../../environments/environment';
+
+// export const URL_SERVICIOS = URL_ENVIRONMENT
+export const URL_SERVICIOS = 'https://imperial.mburgos.xyz'
