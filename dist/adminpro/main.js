@@ -4072,7 +4072,7 @@ IncrementadorComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵd
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL_SERVICIOS", function() { return URL_SERVICIOS; });
-const URL_SERVICIOS = 'http://localhost:4000';
+const URL_SERVICIOS = 'mburgos.xyz:4000';
 
 
 /***/ }),
