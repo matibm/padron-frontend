@@ -18,7 +18,7 @@ export class ContratoService {
   getContratos(page?) {
     let p = page || 1
     let url = URL_SERVICIOS + '/contrato/all?page=' + p;
-    url += `?token=${this._usuarioService.token}`
+    url += `&token=${this._usuarioService.token}`
     return this.http.get(url).toPromise().then((resp: any) => {
       return resp
     })

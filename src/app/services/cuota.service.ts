@@ -22,5 +22,14 @@ export class CuotaService {
       return resp.cuotas
     })
   }
+  getCuotaById(id){
+    let url = `${URL_SERVICIOS}/cuota/by_id/${id}`;
+    url += `?token=${this._usuarioService.token}`
+    return this.http.get(url).toPromise().then((resp: any) => {
+      console.log(resp);
+      
+      return resp.cuota
+    })
+  }
 
 }

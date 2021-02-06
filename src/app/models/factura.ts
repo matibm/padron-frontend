@@ -1,6 +1,7 @@
+import { Cuota } from './cuota';
 import { Usuario } from "./usuario";
 
-export class Cuota {
+export class Factura {
     constructor(
         public id_movimiento?: string,
         public fecha?: string,
@@ -10,7 +11,8 @@ export class Cuota {
         public nom_cliente?: string,
         public debe?: number,
         public _id?: string,
-        public factura?: string,
+        public cuota_correspondiente?: Cuota,
+        public cuota_correspondiente_id?: string,
         public haber?: number,
         public iva?: number,
         public nro_fact_fiscal?: string,
@@ -41,6 +43,7 @@ export class Cuota {
         public descuento?: string,
         public mes_a_pagar?: string,
         public vencimiento_a_pagar?: string,
+        public fecha_creacion_unix?: string,
         public conciliado?: string,
         public titular?: Usuario,
     

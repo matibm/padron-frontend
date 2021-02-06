@@ -241,7 +241,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let cuota of cuotas; let i = index">
+                        <tr [routerLink]="['/dashboard/cuota', cuota._id]" *ngFor="let cuota of cuotas; let i = index">
                             <td scope="row">{{i+1}}</td>
                             <td>{{cuota.vencimiento | date}}</td>
                             <td>{{cuota.haber | currency:'':'':'2.0' }} Gs</td>

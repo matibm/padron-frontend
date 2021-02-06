@@ -9,12 +9,14 @@ import { ListaContratosComponent } from './lista-contratos/lista-contratos.compo
 import {NgxPaginationModule} from 'ngx-pagination';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.component';
-import { InfoContratoComponent } from './info-contrato/info-contrato.component'; 
+import { InfoContratoComponent } from './info-contrato/info-contrato.component';
+import { CuotaComponent } from './cuota/cuota.component';
+import { FacturasComponent } from './facturas/facturas.component'; 
 
 
 
 @NgModule({
-  declarations: [IncrementadorComponent, DonaComponent, ListaContratosComponent, UsuariosComponent, PerfilUsuarioComponent, InfoContratoComponent],
+  declarations: [IncrementadorComponent, DonaComponent, ListaContratosComponent, UsuariosComponent, PerfilUsuarioComponent, InfoContratoComponent, CuotaComponent, FacturasComponent],
   imports: [
     CommonModule,
     FormsModule,

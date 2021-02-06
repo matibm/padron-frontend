@@ -23,6 +23,15 @@ export class SidebarService {
         { titulo: 'Clientes', url:'clientes'},
         { titulo: 'Vendedores', url:'vendedores'},
       ]
+    },
+    {
+      titulo: 'Finanzas',
+      icono: 'mdi mdi-account-multiple',
+      submenu: [
+        { titulo: 'Facturas', url:'facturas'},
+        { titulo: 'Clientes', url:'clientes'},
+        { titulo: 'Vendedores', url:'vendedores'},
+      ]
     }
   ]
   

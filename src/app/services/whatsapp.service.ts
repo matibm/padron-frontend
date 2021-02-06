@@ -14,7 +14,7 @@ export class WhatsappService {
   constructor(public http: HttpClient,
     public _usuarioService: UsuarioService,
   ) {
-    this.socket = io.connect('localhost:4000')
+    // this.socket = io.connect('localhost:4000')
   }
 
   generateQr() {

@@ -1,3 +1,5 @@
+import { FacturasComponent } from './../components/facturas/facturas.component';
+import { CuotaComponent } from './../components/cuota/cuota.component';
 import { AuthGuard } from './../auth.guard';
 import { InfoContratoComponent } from './../components/info-contrato/info-contrato.component';
 import { PerfilUsuarioComponent } from './../components/perfil-usuario/perfil-usuario.component';
@@ -43,6 +45,8 @@ const routes: Routes = [
       { path: 'usuario/:id', component: PerfilUsuarioComponent },
       { path: 'lista_contratos', component: ListaContratosComponent },
       { path: 'info_contrato/:id', component: InfoContratoComponent },
+      { path: 'cuota/:id', component: CuotaComponent },
+      { path: 'facturas', component: FacturasComponent },
 
       { path: 'account-settings', component: AccountSettingsComponent },
 

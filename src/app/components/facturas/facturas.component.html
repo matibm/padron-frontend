@@ -1,0 +1,33 @@
+<div class="card">
+
+    <div class="card-body">
+        <h4 class="card-title">Facturas</h4>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>fecha</th>
+                    <th>Nro. Contrato</th>
+                    <th>Servicio o Producto</th>
+                    <th>Cliente</th>
+                    <th>RUC/CI</th>
+                    <th>Manzana</th>
+                    <th>Fila</th>
+                    <th>Parcela</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } -->
+                <tr [routerLink]="['/dashboard/info_contrato', factura._id]" class="pointer" *ngFor="let factura of facturas ; let i = index;">
+                    <td scope="row">{{page*10 + (i+1) - 10}}</td>
+                    <td>{{factura.fecha_creacion_unix | date}}</td>
+                    <td>{{factura.haber | currency:'':'':'2.0'}}</td>
+
+
+                </tr>
+
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event); page = $event"></pagination-controls>
+    </div>
+</div>
