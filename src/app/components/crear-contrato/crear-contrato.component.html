@@ -12,9 +12,9 @@
 
                     <div *ngIf="!cliente">
 
-                        <ng-select [items]="clientes" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
-                                <div (click)="seleccionarCliente(item)"> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
                                     <small>{{item.RUC}}</small>
                                 </div>
 
@@ -54,9 +54,9 @@
                     <!-- <ng-select [items]="cars" bindLabel="name" bindValue="id" [(ngModel)]="selectedCar">
                     </ng-select> -->
                     <div *ngIf="!vendedor">
-                        <ng-select [items]="vendedores" (search)="searchVendedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar vendedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-select [items]="vendedores" [(ngModel)]="vendedor" (search)="searchVendedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar vendedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
-                                <div (click)="seleccionarVendedor(item)"> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
                                     <small>{{item.RUC}}</small>
                                 </div>
                             </ng-template>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="ng-autocomplete">
                         <div *ngIf="!cobrador">
-                            <ng-select [items]="cobradores" [(ngModel)]="cobrador" (ngModelChange)="seleccionarCobrador(cobrador)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                            <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchCobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
                                     <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
                                         <small>{{item.RUC}}</small>
