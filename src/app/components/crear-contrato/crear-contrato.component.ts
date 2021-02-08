@@ -25,15 +25,14 @@ export class CrearContratoComponent implements OnInit {
   prodductosSearch = this.productos;
   vendedoresSearch = this.vendedores;
   cobradoresSearch = this.vendedores;
-  entrega
+  entrega = 0
   producto: Producto
   saldo = 0
   vendedor: Usuario
   nro_contrato = ''
   cobrador: Usuario
   plazo: number
-  paraNgmodel = 0
-  contrato: Contrato
+   contrato: Contrato
   montoCuotas
   model = '2020-03-12'
   radioLugarCobranza = 'particular'
@@ -64,7 +63,7 @@ export class CrearContratoComponent implements OnInit {
 
   }
   inhumados: Inhumado[] = [this.inhumadoVacio]
-  cuotas
+  facturas
   radioValue = 'administracion'
   fechaPago = new Date()
   pagoradioValue = 'contado'
@@ -123,8 +122,8 @@ export class CrearContratoComponent implements OnInit {
   }
 
   calcularSaldo(entrega) {
-    this.paraNgmodel = entrega
-
+    console.log(entrega);
+    
     if (entrega) {
       this.saldo = this.producto.PRECIO_MAYORISTA - parseInt(entrega);
     } else {
@@ -137,14 +136,14 @@ export class CrearContratoComponent implements OnInit {
     if (this.plazo > 0) {
       this.pagoradioValue = 'cuota'
       this.montoCuotas = this.saldo / this.plazo;
-      this.cuotas = this.crearCuotas(this.montoCuotas, this.plazo);
+      this.facturas = this.crearFacturas(this.montoCuotas, this.plazo);
     } else {
       this.resetPlazo()
     }
   }
   resetPlazo() {
     this.plazo = null
-    this.cuotas = null;
+    this.facturas = null;
     this.montoCuotas = null;
     this.pagoradioValue = 'contado'
 
@@ -162,7 +161,7 @@ export class CrearContratoComponent implements OnInit {
       } else {
         // date is valid
         this.fechaPago = d
-        this.cuotas = this.crearCuotas(this.montoCuotas, this.plazo);
+        this.facturas = this.crearFacturas(this.montoCuotas, this.plazo);
 
       }
     } else {
@@ -187,6 +186,12 @@ export class CrearContratoComponent implements OnInit {
 
     // let today = [year, month, day].join('-');
 
+    
+    if (!this.facturas && this.pagoradioValue === 'contado') {
+      this.plazo = 1 
+      this.facturas = this.crearFacturas(this.saldo, 1)
+    }
+     
     let nuevo_contrato: Contrato = {
       id_contrato: new Date().getTime().toString(),   // se puede quitar
       cobrador: this.cobrador || {},
@@ -197,7 +202,7 @@ export class CrearContratoComponent implements OnInit {
       plazo: this.plazo,
       precio_total: this.producto.PRECIO_MAYORISTA,
       producto: this.producto,
-      titular: this.cliente,
+       titular: this.cliente,
       nro_contrato: this.nro_contrato,
       activo: '1',
       vendedor: this.vendedor,
@@ -206,10 +211,11 @@ export class CrearContratoComponent implements OnInit {
       fecha_creacion_unix: new Date().valueOf() // falta poner campode fecha para poder modificar
 
     }
+
     console.log(nuevo_contrato);
     let send = {
       contrato: nuevo_contrato,
-      cuotas: this.cuotas
+      facturas: this.facturas
     }
 
     await this._contratoService.newContrato(send).then(() => {
@@ -255,6 +261,8 @@ export class CrearContratoComponent implements OnInit {
     this.vendedor = vendedor;
   }
   seleccionarProducto(producto: Producto) {
+    console.log(producto);
+    
     if (this.cobrador) {
       this.radioValue = 'cobrador'
     }
@@ -279,11 +287,11 @@ export class CrearContratoComponent implements OnInit {
     return true;
   }
 
-  crearCuotas(monto, cantidad) {
+  crearFacturas(monto, cantidad) {
     if (!cantidad) {
       return null;
     }
-    let cuotas = []
+    let factura = []
     let mes = this.fechaPago.getMonth() + 1
     let year = this.fechaPago.getFullYear()
     let dia = this.fechaPago.getDate()
@@ -292,7 +300,7 @@ export class CrearContratoComponent implements OnInit {
         year++;
         mes = 1;
       }
-      cuotas.push({
+      factura.push({
         numero: i + 1,
         vencimiento: new Date(`${year}/${mes}/${dia}`),
         monto: monto,
@@ -302,7 +310,7 @@ export class CrearContratoComponent implements OnInit {
       })
       mes++;
     }
-    return cuotas
+    return factura
   }
 
 

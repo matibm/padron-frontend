@@ -7,27 +7,27 @@
                 <tr>
                     <th>#</th>
                     <th>fecha</th>
-                    <th>Nro. Contrato</th>
-                    <th>Servicio o Producto</th>
-                    <th>Cliente</th>
-                    <th>RUC/CI</th>
-                    <th>Manzana</th>
-                    <th>Fila</th>
-                    <th>Parcela</th>
+                    <th>Monto</th>
+                    <th *ngIf="!fromOutside">Cliente</th>
+                    <th>Vencimiento</th>
+                    <th *ngIf="!fromOutside">Servicio</th>
+                    <th>Pagado</th>
                 </tr>
             </thead>
             <tbody>
                 <!--  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } -->
-                <tr [routerLink]="['/dashboard/info_contrato', factura._id]" class="pointer" *ngFor="let factura of facturas ; let i = index;">
+                <tr [routerLink]="['/dashboard/factura', factura._id]" class="pointer" *ngFor="let factura of facturas  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
                     <td scope="row">{{page*10 + (i+1) - 10}}</td>
-                    <td>{{factura.fecha_creacion_unix | date}}</td>
-                    <td>{{factura.haber | currency:'':'':'2.0'}}</td>
-
-
+                    <td>{{factura.fecha_creacion_unix | date:' d, MMM y - h:mm a'}}</td>
+                    <td>{{factura.haber | currency:'':'':'2.0'}} Gs</td>
+                    <td *ngIf="!fromOutside">{{factura.titular.NOMBRES}} {{factura.titular.APELLIDOS}}</td>
+                    <td>{{factura.vencimiento | date}}</td>
+                    <td *ngIf="!fromOutside">{{factura.contrato.nombre_servicio }}</td>
+                    <td *ngIf="factura.pagado">{{factura.fecha_pagado_unix | date}}</td>
+                    <td *ngIf="!factura.pagado">Pendiente</td>
                 </tr>
-
             </tbody>
         </table>
-        <pagination-controls (pageChange)="pageChanged($event); page = $event"></pagination-controls>
+        <pagination-controls *ngIf="count>10" (pageChange)="pageChanged($event); page = $event"></pagination-controls>
     </div>
 </div>

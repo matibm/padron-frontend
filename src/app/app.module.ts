@@ -33,6 +33,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 // import { HeaderComponent } from './shared/header/header.component';
 
 
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
- 
+    NgxLoadingModule.forRoot({}),
+
     DpDatePickerModule,
     NgSelectModule,
     SweetAlert2Module.forRoot()

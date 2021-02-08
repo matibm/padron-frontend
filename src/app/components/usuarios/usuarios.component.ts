@@ -13,10 +13,14 @@ export class UsuariosComponent implements OnInit {
     public _usuarioService: UsuarioService
   ) { }
   usuarios: Usuario[]
+  public loading = false;
 
   async ngOnInit() {
+    this.loading = true;
+
     this.usuarios = await this._usuarioService.getUsuarios();
     console.log(this.usuarios);
+    this.loading = false;
 
   }
 

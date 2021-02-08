@@ -83,9 +83,9 @@
                     </div>
                     <div class="ng-autocomplete">
                         <div *ngIf="!cobrador">
-                            <ng-select [items]="cobradores" (search)="searchCobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                            <ng-select [items]="cobradores" [(ngModel)]="cobrador" (ngModelChange)="seleccionarCobrador(cobrador)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
-                                    <div (click)="seleccionarCobrador(item)"> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                    <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
                                         <small>{{item.RUC}}</small>
                                     </div>
 
@@ -114,9 +114,9 @@
                             <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
                         </div>
                     </div>
-                    <ng-select *ngIf="!producto" [items]="productos" notFoundText="no se encontraron resultados" placeholder="buscar producto" bindLabel="NOMBRE">
+                    <ng-select *ngIf="!producto" [(ngModel)]="producto" (ngModelChange)="seleccionarProducto(producto)" [items]="productos" notFoundText="no se encontraron resultados" placeholder="buscar producto" bindLabel="NOMBRE">
                         <ng-template ng-option-tmp let-item="item">
-                            <div (click)="seleccionarProducto(item)"> {{item.NOMBRE}} {{item.COD_CORTO}} <br>
+                            <div> {{item.NOMBRE}} {{item.COD_CORTO}} <br>
                             </div>
                         </ng-template>
                     </ng-select>
@@ -142,7 +142,6 @@
                                     <label for="radio_5">Cuotas</label>
                                 </div>
 
-
                             </div>
 
                         </div>
@@ -150,21 +149,21 @@
                             <div class="col-md col-xs">
                                 <div class="form-group">
                                     <label for="">Entrega</label>
-                                    <input type="text" class="form-control" [ngModel]="paraNgmodel | currency:'':'':'1.0'" (ngModelChange)="paraNgmodel =currencyInputChanged($event)" #entrega>
+                                    <input type="number" class="form-control" (ngModelChange)="calcularSaldo(en.value)" #en [(ngModel)]="entrega">
                                 </div>
                                 <h5>saldo <b>{{saldo | currency:'':'':'2.0'}} Gs</b></h5>
                             </div>
                             <div class="col-md col-xs">
                                 <div class="form-group">
                                     <label for="">plazo</label>
-                                    <input type="number" class="form-control" [(ngModel)]="plazo" (ngModelChange)="calcularCuotas()" #entrega>
+                                    <input type="number" class="form-control" [(ngModel)]="plazo" (ngModelChange)="calcularCuotas()">
                                 </div>
                                 <h5>Monto Cuotas: <b>{{montoCuotas | currency:'':'':'2.0' }} Gs</b></h5>
                             </div>
                             <div class="col-md col-xs">
                                 <div class="form-group">
                                     <label for="">Fecha de pago </label>
-                                    <input type="text" placeholder="AAAA-MM-DD" class="form-control" [(ngModel)]="stringFechaPago" (ngModelChange)="calcularFechaPago()" #entrega>
+                                    <input type="text" placeholder="AAAA-MM-DD" class="form-control" [(ngModel)]="stringFechaPago" (ngModelChange)="calcularFechaPago()">
                                 </div>
                                 <h5> <b>{{fechaPago |date}}</b></h5>
                             </div>
@@ -221,7 +220,7 @@
                     </div>
                 </div>
             </div>
-            <div class="" *ngIf="cuotas">
+            <div class="" *ngIf="facturas">
 
                 <div class="card">
                     <div class="card-body">
@@ -240,7 +239,7 @@
 
                                 <tbody>
 
-                                    <tr *ngFor="let cuota of cuotas; let i = index">
+                                    <tr *ngFor="let cuota of facturas; let i = index">
                                         <td scope="row">{{i+1}}</td>
                                         <td>{{cuota.vencimiento | date}}</td>
                                         <td>{{cuota.monto| currency:'':'':'2.0' }} Gs</td>

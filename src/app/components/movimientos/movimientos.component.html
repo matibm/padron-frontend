@@ -1,0 +1,33 @@
+<div class="card">
+
+
+
+    <div class="card-body">
+
+
+        <div style="justify-content: space-between;" class="inline-flex">
+            <h4 class="card-title">Categoria</h4>
+            <div class="pointer close-icon ml-auto">
+                <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+            </div>
+        </div>
+        <div class="ng-autocomplete">
+            <div>
+                <ng-select [items]="tipos_movimiento" [(ngModel)]="tipo" (ngModelChange)="selectCategory(tipo.descripcion, tipo.nombre_padre)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES">
+                    <ng-template ng-option-tmp let-item="item">
+                        <div> {{item.nombre_padre}} - {{item.descripcion}} <br>
+                        </div>
+
+                    </ng-template>
+                </ng-select>
+            </div>
+        </div>
+        <ol class="mt-2 breadcrumb">
+            <li *ngFor="let item of breadCrumb" class="breadcrumb-item">
+                <a href="javascript:void(0)"><strong>{{item.nombre}}</strong></a>
+            </li>
+            <!-- <li class="breadcrumb-item">Contratos</li>
+            <li class="breadcrumb-item active">Nuevo contrato</li> -->
+        </ol>
+    </div>
+</div>

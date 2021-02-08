@@ -29,7 +29,7 @@ export class SidebarService {
       icono: 'mdi mdi-account-multiple',
       submenu: [
         { titulo: 'Facturas', url:'facturas'},
-        { titulo: 'Clientes', url:'clientes'},
+        { titulo: 'Movimientos', url:'movimientos'},
         { titulo: 'Vendedores', url:'vendedores'},
       ]
     }

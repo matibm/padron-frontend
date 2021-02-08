@@ -1,5 +1,6 @@
+import { MovimientosComponent } from './../components/movimientos/movimientos.component';
+import { FacturaComponent } from './../components/factura/factura.component';
 import { FacturasComponent } from './../components/facturas/facturas.component';
-import { CuotaComponent } from './../components/cuota/cuota.component';
 import { AuthGuard } from './../auth.guard';
 import { InfoContratoComponent } from './../components/info-contrato/info-contrato.component';
 import { PerfilUsuarioComponent } from './../components/perfil-usuario/perfil-usuario.component';
@@ -45,8 +46,9 @@ const routes: Routes = [
       { path: 'usuario/:id', component: PerfilUsuarioComponent },
       { path: 'lista_contratos', component: ListaContratosComponent },
       { path: 'info_contrato/:id', component: InfoContratoComponent },
-      { path: 'cuota/:id', component: CuotaComponent },
+      { path: 'factura/:id', component: FacturaComponent },
       { path: 'facturas', component: FacturasComponent },
+      { path: 'movimientos', component: MovimientosComponent },
 
       { path: 'account-settings', component: AccountSettingsComponent },
 

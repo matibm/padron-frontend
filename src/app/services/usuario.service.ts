@@ -70,6 +70,8 @@ export class UsuarioService {
   }
 
   login(usuario) {
+    console.log(usuario);
+    
     let url = `${URL_SERVICIOS}/usuario/login`;
     return this.http.post(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);

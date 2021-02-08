@@ -19,6 +19,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { QrCodeModule } from 'ng-qrcode';
 
 
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
@@ -45,8 +46,9 @@ import { QrCodeModule } from 'ng-qrcode';
      SharedModule,
     RouterModule,
     ComponentsModule,
-    QrCodeModule
-    
+    QrCodeModule,
+    NgxLoadingModule.forRoot({})
+
   ],
 })
 export class PagesModule { }

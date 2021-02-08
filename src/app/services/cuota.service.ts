@@ -23,12 +23,12 @@ export class CuotaService {
     })
   }
   getCuotaById(id){
-    let url = `${URL_SERVICIOS}/cuota/by_id/${id}`;
+    let url = `${URL_SERVICIOS}/factura/by_id/${id}`;
     url += `?token=${this._usuarioService.token}`
     return this.http.get(url).toPromise().then((resp: any) => {
       console.log(resp);
       
-      return resp.cuota
+      return resp.factura
     })
   }
 

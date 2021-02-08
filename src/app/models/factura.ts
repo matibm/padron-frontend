@@ -1,3 +1,4 @@
+import { Contrato } from './contrato';
 import { Cuota } from './cuota';
 import { Usuario } from "./usuario";
 
@@ -46,6 +47,9 @@ export class Factura {
         public fecha_creacion_unix?: string,
         public conciliado?: string,
         public titular?: Usuario,
+        public contrato?: Contrato,
+        public pagado?: boolean,
+        public fecha_pagado_unix?: number,
     
     ) {
 

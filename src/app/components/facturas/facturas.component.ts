@@ -12,21 +12,24 @@ import { Component, OnInit, Input } from '@angular/core';
 export class FacturasComponent implements OnInit {
 
   constructor(public _facturaService: FacturaService) { }
-
+  
   async ngOnInit() {
-    let resp = await this._facturaService.getFacturas() 
-    this.facturas = resp.facturas
-    this.count = resp.count
+    if (!this.facturas && !this.fromOutside) {
+      let resp = await this._facturaService.getFacturas() 
+      this.facturas = resp.facturas
+      this.count = resp.count  
+    }
   }
   page = 1
   count = 0
-  facturas: Factura[]
+  @Input () fromOutside = false
+  @Input () facturas: Factura[]
 
   async pageChanged(page) {
     let resp = await this._facturaService.getFacturas(page)
 
 
-    this.facturas = resp.contratos
+    this.facturas = resp.facturas
     this.count = resp.count
     console.log(page);
 
