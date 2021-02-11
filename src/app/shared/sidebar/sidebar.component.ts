@@ -10,7 +10,7 @@ import { SidebarService } from 'src/app/services/sidebar.service';
 export class SidebarComponent implements OnInit {
   class = ''
   menuItems: any[];
-  constructor(private sidebarService: SidebarService) {
+  constructor(public sidebarService: SidebarService) {
     this.menuItems = sidebarService.menu;
     console.log(this.menuItems);
 
@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
   }
 
   onclickItem(event) {
-     
+     this.sidebarService.refreshRoute()
     for (let u = 0; u < event.target.parentElement.parentElement.childNodes.length; u++) {
       const element = event.target.parentElement.parentElement.childNodes[u];
       if (element.firstChild) {

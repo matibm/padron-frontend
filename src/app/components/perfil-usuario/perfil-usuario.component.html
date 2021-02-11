@@ -153,7 +153,7 @@
                                     </thead>
                                     <tbody>
                                         <!-- -->
-                                        <tr [routerLink]="['/dashboard/info_contrato', contrato._id]" class="pointer" *ngFor="let contrato of contratos; let i = index;">
+                                        <tr [routerLink]="['/admin/info_contrato', contrato._id]" class="pointer" *ngFor="let contrato of contratos; let i = index;">
                                             <td scope="row">{{i+1}}</td>
                                             <td>{{contrato.fecha_creacion_unix | date}}</td>
                                             <td>{{contrato.nro_contrato}}</td>
@@ -241,7 +241,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr [routerLink]="['/dashboard/cuota', cuota._id]" *ngFor="let cuota of cuotas; let i = index">
+                        <tr [routerLink]="['/admin/cuota', cuota._id]" *ngFor="let cuota of cuotas; let i = index">
                             <td scope="row">{{i+1}}</td>
                             <td>{{cuota.vencimiento | date}}</td>
                             <td>{{cuota.haber | currency:'':'':'2.0' }} Gs</td>

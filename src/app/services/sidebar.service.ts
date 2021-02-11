@@ -1,10 +1,11 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
-
+  urlActual
   menu: any[] = [
     {
       titulo: 'Contrato',
@@ -35,6 +36,12 @@ export class SidebarService {
     }
   ]
   
+
+  refreshRoute(){
+    this.urlActual = this.router.url
+    console.log("cambiando url", this.urlActual);
+    
+  }
   
-  constructor() { }
+  constructor(private router : Router) { }
 }

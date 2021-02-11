@@ -18,7 +18,7 @@
             </thead>
             <tbody>
                 <!-- -->
-                <tr [routerLink]="['/dashboard/info_contrato', contrato._id]" class="pointer" *ngFor="let contrato of contratos | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
+                <tr [routerLink]="['/admin/info_contrato', contrato._id]" class="pointer" *ngFor="let contrato of contratos | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
                     <td scope="row">{{page*10 + (i+1) - 10}}</td>
                     <td>{{contrato.fecha_creacion_unix | date}}</td>
                     <td>{{contrato.nro_contrato}}</td>

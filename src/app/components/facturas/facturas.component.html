@@ -16,7 +16,7 @@
             </thead>
             <tbody>
                 <!--  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } -->
-                <tr [routerLink]="['/dashboard/factura', factura._id]" class="pointer" *ngFor="let factura of facturas  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
+                <tr [routerLink]="['/admin/factura', factura._id]" class="pointer" *ngFor="let factura of facturas  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
                     <td scope="row">{{page*10 + (i+1) - 10}}</td>
                     <td>{{factura.fecha_creacion_unix | date:' d, MMM y - h:mm a'}}</td>
                     <td>{{factura.haber | currency:'':'':'2.0'}} Gs</td>

@@ -19,7 +19,7 @@ export class WhatsappService {
     this.socket = io(URL_SERVICIOS)
   }
 
-  generateQr() {
+  generateQr() {  
     let url = URL_SERVICIOS + '/whatsapp/generate_qr';
     url += `?token=${this._usuarioService.token}`
     return this.http.get(url).toPromise().then((resp: any) => {
