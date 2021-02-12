@@ -1,4 +1,5 @@
-import { NgModule } from '@angular/core';
+import { IconPipe } from './../pipes/icon.pipe';
+ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
@@ -20,6 +21,7 @@ import { QrCodeModule } from 'ng-qrcode';
 
 
 import { NgxLoadingModule } from 'ngx-loading';
+import { AvatarModule } from 'ngx-avatar';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     Grafica1Component,
     PagesComponent,
     AccountSettingsComponent,
-  ],
+    IconPipe
+   ],
   
   exports: [
     DashboardComponent,
@@ -44,6 +47,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     CommonModule, 
     FormsModule,
      SharedModule,
+     AvatarModule,
     RouterModule,
     ComponentsModule,
     QrCodeModule,

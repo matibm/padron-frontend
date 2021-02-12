@@ -34,13 +34,14 @@ export class WhatsappService {
       })
     })
   }
-  pruebaSocket() {
+  emitir(tipo, data) {
     console.log("emitiendo");
-    // return new Observable((subscriber) =>{
-    //   this.socket.
-    // })
-    this.socket.emit('auth', 'e');
+    
+    this.socket.emit(tipo, data);
 
+  }
+  pruebaSocket( ) {
+    
   }
 
 }

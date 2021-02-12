@@ -19,7 +19,7 @@ export class AccountSettingsComponent implements OnInit {
   authenticated = false;
 
   ngOnInit(): void {
-    this._whatsappService.listen('welcome').subscribe((data: any) => {
+    this._whatsappService.listen('push_actividad').subscribe((data: any) => {
       console.log(data);
       
       if (data.authenticated == false) {

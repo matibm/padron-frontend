@@ -1,3 +1,4 @@
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { URL_SERVICIOS } from './config/global';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,7 +35,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 
 import { NgxLoadingModule } from 'ngx-loading';
-
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { NgxLoadingModule } from 'ngx-loading';
     // RegisterComponent,
     NopagefoundComponent,
     CrearContratoComponent,
-    PricePipe
+    PricePipe,
+     
      // BreadcrumbsComponent,
     // SidebarComponent,
     // HeaderComponent,
@@ -60,13 +62,14 @@ import { NgxLoadingModule } from 'ngx-loading';
     FormsModule,
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({}),
-
+    
     DpDatePickerModule,
     NgSelectModule,
     SweetAlert2Module.forRoot()
     // NgbModule
   ],
   providers: [CurrencyPipe, { provide: LOCALE_ID, useValue: 'es-PY' }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [ ]
 })
 export class AppModule { }

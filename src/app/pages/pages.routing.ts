@@ -1,4 +1,4 @@
-import { MovimientosComponent } from './../components/movimientos/movimientos.component';
+ import { MovimientosComponent } from './../components/movimientos/movimientos.component';
 import { FacturaComponent } from './../components/factura/factura.component';
 import { FacturasComponent } from './../components/facturas/facturas.component';
 import { AuthGuard } from './../auth.guard';
@@ -49,7 +49,7 @@ const routes: Routes = [
       { path: 'factura/:id', component: FacturaComponent },
       { path: 'facturas', component: FacturasComponent },
       { path: 'movimientos', component: MovimientosComponent },
-
+ 
       { path: 'account-settings', component: AccountSettingsComponent },
 
     ]

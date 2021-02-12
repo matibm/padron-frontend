@@ -1,1 +1,70 @@
-<p>dashboard works!</p>
+<div class="row">
+
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div *ngFor="let alerta of alertas" class="alert alert-info" role="alert">
+                    <h3>{{alerta.titulo}}</h3>
+                    <span>{{alerta.mensaje}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <h4 class="card-title"><span class="lstick"></span>Actividad</h4>
+                    <!-- <span class="badge badge-success">9</span> -->
+                    <div class="btn-group ml-auto m-t-10">
+                        <a href="JavaScript:void(0)" class="icon-options-vertical link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="javascript:void(0)">Action</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Another action</a>
+                            <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)">Separated link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="activity-box">
+                <div class="card-body">
+                    <!-- Activity item-->
+                    <div *ngFor="let alerta of alertas" class="activity-item">
+                        <div class="round m-r-20">
+                            <ngx-avatar *ngIf="alerta.vendedor" name="{{alerta.vendedor.NOMBRES}}"></ngx-avatar>
+                            <ngx-avatar *ngIf="alerta.tipo == 'PAGO' && alerta.titular" name="{{alerta.titular.NOMBRES}}"></ngx-avatar>
+                        </div>
+                        <div class="m-t-10">
+                            <h5 *ngIf="alerta.vendedor" class="m-b-0 font-medium">{{alerta.vendedor.NOMBRES}}<span class="text-muted font-14 m-l-10">| &nbsp; {{alerta.fecha_unix | date:'short'}}</span></h5>
+                            <h5 *ngIf="alerta.tipo == 'PAGO' && alerta.titular" class="m-b-0 font-medium">{{alerta.titular.NOMBRES}}<span class="text-muted font-14 m-l-10">| &nbsp; {{alerta.fecha_unix | date:'short'}}</span></h5>
+                            <h6 *ngIf="alerta.tipo == 'CONTRATO'" class="text-muted">nuevo contrato </h6>
+                            <h6 *ngIf="alerta.tipo == 'PAGO'" class="text-muted">pago de factura</h6>
+                            <h6 *ngIf="alerta.tipo == 'FACTURA'" class="text-muted">nuevo contrato </h6>
+                            <table class="table vm b-0 m-b-0">
+                                <div class="ml-3 m-1 inline-flex">
+                                    <!-- <img style="width: 60px;" src="../assets/images/contrato.svg" alt="user" /> -->
+                                    <img style="width: 60px;" src="{{alerta.tipo | icon}}" alt="user" />
+                                    <div class="col ">
+                                        <h5 *ngIf="alerta.tipo == 'PAGO'" class="m-b-0 ml-4 font-medium ">{{alerta.factura.haber | currency: '':'':'2.0'}} Gs</h5>
+                                        <h5 *ngIf="alerta.tipo == 'CONTRATO'" class="m-b-0 ml-4 font-medium ">{{alerta.producto.COD_CORTO}}</h5>
+                                        <p class="ml-4 mt-1" style="max-width: 300px;">{{alerta.mensaje}}</p>
+                                    </div>
+
+                                </div>
+                                <!-- <tr>
+                                    <td class="m-r-10 b-0"></td>
+                                    <td class="b-0">
+                                        <h6>54 MB</h6>
+                                    </td>
+                                </tr> -->
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

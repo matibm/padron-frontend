@@ -17,8 +17,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { CrearEgresoComponent } from './crear-egreso/crear-egreso.component';
 import { ListaMovimientosComponent } from './lista-movimientos/lista-movimientos.component';
 import { MovimientosComponent } from './movimientos/movimientos.component';
-import { NgSelectModule } from '@ng-select/ng-select';
-
+import { NgSelectModule } from '@ng-select/ng-select'; 
 
 @NgModule({
   declarations: [IncrementadorComponent,
@@ -31,7 +30,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FacturasComponent,
     CrearEgresoComponent,
     ListaMovimientosComponent,
-    MovimientosComponent],
+    MovimientosComponent
+  
+  ],
   imports: [
     CommonModule,
     FormsModule,
