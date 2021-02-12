@@ -20,7 +20,7 @@ const routes: Routes = [
   
   
   
-  {path: '', redirectTo:'/dashboard', pathMatch: 'full'},
+  {path: '', redirectTo:'/admin', pathMatch: 'full'},
   {path: '**', component: NopagefoundComponent},
   
 
