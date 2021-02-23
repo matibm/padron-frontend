@@ -1,3 +1,5 @@
+import { CrearUsuarioComponent } from './../components/crear-usuario/crear-usuario.component';
+import { ContratoPdfComponent } from './../components/contrato-pdf/contrato-pdf.component';
  import { MovimientosComponent } from './../components/movimientos/movimientos.component';
 import { FacturaComponent } from './../components/factura/factura.component';
 import { FacturasComponent } from './../components/facturas/facturas.component';
@@ -46,9 +48,11 @@ const routes: Routes = [
       { path: 'usuario/:id', component: PerfilUsuarioComponent },
       { path: 'lista_contratos', component: ListaContratosComponent },
       { path: 'info_contrato/:id', component: InfoContratoComponent },
+      { path: 'nuevo_usuario', component: CrearUsuarioComponent },
       { path: 'factura/:id', component: FacturaComponent },
       { path: 'facturas', component: FacturasComponent },
       { path: 'movimientos', component: MovimientosComponent },
+      { path: 'contrato-pdf', component: ContratoPdfComponent },
  
       { path: 'account-settings', component: AccountSettingsComponent },
 
@@ -56,6 +60,7 @@ const routes: Routes = [
 
 
   },
+  { path: 'contratos-pdf', component: ContratoPdfComponent }
 
 ];
 

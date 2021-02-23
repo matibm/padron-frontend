@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService
   ) { }
 
   ngOnInit(): void {

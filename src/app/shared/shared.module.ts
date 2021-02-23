@@ -1,3 +1,7 @@
+import { PipeModule } from './../pipes/pipe.module';
+import { AvatarModule } from 'ngx-avatar';
+import { NombreCortoPipe } from './../pipes/nombre-corto.pipe';
+import { TitleBreadcrumbPipe } from './../pipes/title-breadcrumb.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
@@ -12,6 +16,8 @@ import { RouterModule } from '@angular/router';
     BreadcrumbsComponent,
     SidebarComponent,
     HeaderComponent,
+    TitleBreadcrumbPipe,
+    // NombreCortoPipe
   ],
   exports: [
     BreadcrumbsComponent,
@@ -19,8 +25,10 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
   ],
   imports: [
+    AvatarModule,
     CommonModule,
     RouterModule,
+    PipeModule
   ]
 })
 export class SharedModule { }

@@ -9,13 +9,24 @@ export class UsuarioService {
 
   itsLogued = false;
   token
+  user_id
+  usuario
   constructor(
     public http: HttpClient
   ) {
     this.token = localStorage.getItem('token');
+    this.user_id = localStorage.getItem('user_id');
     this.itsLogued = this.token ? true : false;
+
+    this.inicializarUsuario()
   }
 
+  async inicializarUsuario(){
+
+    if (this.user_id) {
+      this.usuario = await this.getUsuarioPorId(this.user_id)
+    }
+  }
   getUsuarios() {
     let url = URL_SERVICIOS + '/usuario/all';
     url += `?token=${this.token}`
@@ -54,8 +65,10 @@ export class UsuarioService {
     })
   }
   buscarUsuarios(tipo, busqueda) {
-    let url = `${URL_SERVICIOS}/usuario/search/${tipo}/${busqueda}`;
+
+    let url = `${URL_SERVICIOS}/usuario/search/${tipo}`;
     url += `?token=${this.token}`
+    url += `&query=${busqueda}`
     return this.http.get(url).toPromise().then((resp: any) => {
       return resp.usuarios
     })
@@ -69,12 +82,24 @@ export class UsuarioService {
     })
   }
 
+  crearUsuario(usuario){
+    let url = `${URL_SERVICIOS}/usuario/crear_usuario`;
+    url += `?token=${this.token}`
+    return this.http.post(url, usuario).toPromise().then((resp: any) => {
+      console.log(resp);
+      return resp
+    })
+  }
+
   login(usuario) {
     console.log(usuario);
     
     let url = `${URL_SERVICIOS}/usuario/login`;
     return this.http.post(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);
+      this.usuario = resp.user
+      this.user_id = resp.user._id
+      localStorage.setItem('user_id', this.user_id)
       return resp
     })
   }

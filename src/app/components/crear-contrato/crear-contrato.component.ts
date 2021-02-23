@@ -26,13 +26,15 @@ export class CrearContratoComponent implements OnInit {
   vendedoresSearch = this.vendedores;
   cobradoresSearch = this.vendedores;
   entrega = 0
+  fechaMantenimiento
+  stringFechaMantenimiento
   producto: Producto
   saldo = 0
   vendedor: Usuario
   nro_contrato = ''
   cobrador: Usuario
   plazo: number
-   contrato: Contrato
+  contrato: Contrato
   montoCuotas
   model = '2020-03-12'
   radioLugarCobranza = 'particular'
@@ -68,6 +70,7 @@ export class CrearContratoComponent implements OnInit {
   fechaPago = new Date()
   pagoradioValue = 'contado'
   stringFechaPago
+  servicioCMP
   numeroFactura
   pruebalog(event) {
     event.preventDefault()
@@ -85,7 +88,22 @@ export class CrearContratoComponent implements OnInit {
   }
 
   async ngOnInit() {
+    let date = new Date()
+
+    this.fechaMantenimiento = new Date(`${date.getFullYear() + 1}-01-05`)
+    this.fechaMantenimiento.setUTCHours(5)
+
+    console.log(this.fechaMantenimiento);
+
     this.productos = await this._productoService.getProductos()
+    for (let i = 0; i < this.productos.length; i++) {
+      const element = this.productos[i];
+      if (element.COD_CORTO == 'C.M.P.') {
+        this.servicioCMP = element
+      }
+    }
+    console.log(this.servicioCMP);
+
     // this.clientes = await this._usuarioService.getClientes()
     // this.vendedores = await this._usuarioService.getVendedores()
     // this.cobradores = await this._usuarioService.getVendedores()
@@ -98,6 +116,7 @@ export class CrearContratoComponent implements OnInit {
     if (date.length > 4) {
       let hoy = new Date()
       let fechaNacimiento = new Date(date)
+      fechaNacimiento.setHours(5)
       let edad = hoy.getFullYear() - fechaNacimiento.getFullYear()
       let diferenciaMeses = hoy.getMonth() - fechaNacimiento.getMonth()
       if (
@@ -123,12 +142,11 @@ export class CrearContratoComponent implements OnInit {
 
   calcularSaldo(entrega) {
     console.log(entrega);
-    
+
     if (entrega) {
       this.saldo = this.producto.PRECIO_MAYORISTA - parseInt(entrega);
     } else {
       this.saldo = this.producto.PRECIO_MAYORISTA;
-
     }
   }
 
@@ -152,7 +170,6 @@ export class CrearContratoComponent implements OnInit {
 
     let d = new Date(this.stringFechaPago);
     d.setUTCHours(5)
-    console.log(d);
 
     if (Object.prototype.toString.call(d) === "[object Date]") {
       // it is a date
@@ -162,6 +179,25 @@ export class CrearContratoComponent implements OnInit {
         // date is valid
         this.fechaPago = d
         this.facturas = this.crearFacturas(this.montoCuotas, this.plazo);
+
+      }
+    } else {
+      // not a date
+    }
+  }
+  calcularFechaMantenimiento() {
+
+    let d = new Date(this.stringFechaMantenimiento);
+    d.setUTCHours(5)
+
+    if (Object.prototype.toString.call(d) === "[object Date]") {
+      // it is a date
+      if (isNaN(d.getTime())) {  // d.valueOf() could also work
+        // date is not valid
+      } else {
+        // date is valid
+        this.fechaMantenimiento = d
+        // this.facturas = this.crearFacturas(this.montoCuotas, this.plazo);
 
       }
     } else {
@@ -186,12 +222,12 @@ export class CrearContratoComponent implements OnInit {
 
     // let today = [year, month, day].join('-');
 
-    
+
     if (!this.facturas && this.pagoradioValue === 'contado') {
-      this.plazo = 1 
+      this.plazo = 1
       this.facturas = this.crearFacturas(this.saldo, 1)
     }
-     
+
     let nuevo_contrato: Contrato = {
       id_contrato: new Date().getTime().toString(),   // se puede quitar
       cobrador: this.cobrador || {},
@@ -202,7 +238,7 @@ export class CrearContratoComponent implements OnInit {
       plazo: this.plazo,
       precio_total: this.producto.PRECIO_MAYORISTA,
       producto: this.producto,
-       titular: this.cliente,
+      titular: this.cliente,
       nro_contrato: this.nro_contrato,
       activo: '1',
       vendedor: this.vendedor,
@@ -211,8 +247,16 @@ export class CrearContratoComponent implements OnInit {
       fecha_creacion_unix: new Date().valueOf() // falta poner campode fecha para poder modificar
 
     }
-
-    console.log(nuevo_contrato);
+    this.facturas.push({
+      vencimiento: this.fechaMantenimiento,
+      monto: 150000,
+      haber: 150000,
+      titular: this.cliente,
+      iscmp: true,
+      servicio: this.servicioCMP._id,
+      fecha_creacion_unix: new Date().getTime()
+    })
+    console.log(this.facturas);
     let send = {
       contrato: nuevo_contrato,
       facturas: this.facturas
@@ -253,7 +297,10 @@ export class CrearContratoComponent implements OnInit {
 
   customSearchFn(term: string, item: any) {
     term = term.toLowerCase();
-    return item.NOMBRES.toLowerCase().indexOf(term) > -1 || item.APELLIDOS.toLowerCase().includes(term) || item.RUC.toLowerCase().includes(term);
+    return item.NOMBRES.toLowerCase().indexOf(term) > -1 ||
+      item.APELLIDOS.toLowerCase().includes(term) ||
+      item.RAZON.toLowerCase().includes(term) ||
+      item.RUC.toLowerCase().includes(term);
   }
 
 
@@ -261,8 +308,19 @@ export class CrearContratoComponent implements OnInit {
     this.vendedor = vendedor;
   }
   seleccionarProducto(producto: Producto) {
-    console.log(producto);
-    
+    this.beneficiarios = [
+      {
+        nombre: '',
+        doc: '',
+        fecha_nacimiento: '',
+        edad: '',
+        plus_edad: 0
+      }
+    ]
+
+    this.inhumados = [
+      this.inhumadoVacio
+    ]
     if (this.cobrador) {
       this.radioValue = 'cobrador'
     }
@@ -270,7 +328,7 @@ export class CrearContratoComponent implements OnInit {
     this.saldo = producto.PRECIO_MAYORISTA;
     if (producto.COD_CORTO == 'U.D.P.') {
       this.esUdp = true
-    }
+    } else this.esUdp = false;
   }
   seleccionarCliente(cliente) {
     this.cliente = cliente;
@@ -306,13 +364,19 @@ export class CrearContratoComponent implements OnInit {
         monto: monto,
         haber: monto,
         titular: this.cliente,
-        fecha_creacion_unix : new Date().getTime()
+        servicio: this.producto._id,
+        fecha_creacion_unix: new Date().getTime()
       })
       mes++;
     }
     return factura
   }
 
+  facturaMantenimiento
 
+  refactor() {
+    this.producto = null;
+
+  }
 
 }

@@ -1,3 +1,4 @@
+import { PipeModule } from './../pipes/pipe.module';
 import { IconPipe } from './../pipes/icon.pipe';
  import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -48,6 +49,7 @@ import { AvatarModule } from 'ngx-avatar';
     FormsModule,
      SharedModule,
      AvatarModule,
+     PipeModule,
     RouterModule,
     ComponentsModule,
     QrCodeModule,

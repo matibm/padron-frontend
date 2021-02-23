@@ -3,31 +3,166 @@
 
 
     <div class="card-body">
-
-
         <div style="justify-content: space-between;" class="inline-flex">
             <h4 class="card-title">Categoria</h4>
             <div class="pointer close-icon ml-auto">
-                <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                <button (click)="resetBreadcrumb()" type="button" class="btn btn-sm btn-light"><i
+                        class=" ti-close  "></i></button>
             </div>
         </div>
-        <div class="ng-autocomplete">
-            <div>
-                <ng-select [items]="tipos_movimiento" [(ngModel)]="tipo" (ngModelChange)="selectCategory(tipo.descripcion, tipo.nombre_padre)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES">
+        <ol *ngIf="breadCrumb.length>0" class="mt-2 breadcrumb">
+            <li *ngFor="let item of breadCrumb; let i = index;" class="breadcrumb-item">
+                <a (click)="navigateBreadcrumb(i)" href="javascript:void(0)"><strong>{{item.descripcion}}</strong></a>
+            </li>
+        </ol>
+        <div *ngIf="true" class="ng-autocomplete">
+            <div class="inline-flex">
+                <ng-select style="width: 90%;" [items]="tipos_movimiento" [(ngModel)]="tipo" (ngModelChange)="selectCategory(tipo)" [searchFn]="customSearchFnMovimientos" notFoundText="no se encontraron resultados" placeholder="buscar tipo de movimiento">
                     <ng-template ng-option-tmp let-item="item">
-                        <div> {{item.nombre_padre}} - {{item.descripcion}} <br>
+                        <div> {{item.descripcion}} {{item.nombre_padre}}
+                        </div>
+
+                    </ng-template>
+                </ng-select>
+                <button (click)="showCrearMovimiento = true" type="button" [disabled]="breadCrumb.length == 0" class="btn btn-primary ml-2">Crear
+                    Movimiento</button>
+            </div>
+        </div>
+
+        <table *ngIf="!showCrearMovimiento && movimientos.length>0" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nro Factura</th>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th style="width: 25%;">Comentario</th>
+                    <th>Monto haber</th>
+                    <th>Monto total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of movimientos" [ngClass]="'pointer'">
+                    <td>{{item.nro_factura}}</td>
+                    <td>{{item.fecha_creacion_unix | date}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.comentario}}</td>
+
+                    <td>{{item.monto_haber}}</td>
+                    <td>{{item.monto_total | currency: '':'':'2.0'}} Gs</td>
+
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="" *ngIf="showCrearMovimiento"><br>
+            <h3>Nuevo Movimiento</h3>
+            <div class="form-group">
+                <label for="">Nro</label>
+                <input type="text" [(ngModel)]="nro" class="form-control" name="" id="nro" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="">Fecha</label>
+                <input type="text" class="form-control" name="" id="fecha" aria-describedby="helpId" placeholder="">
+            </div>
+            <h3 class="mt-3">Proveedor</h3>
+            <div class="" *ngIf="!proveedor">
+                <ng-select [items]="proveedores" [(ngModel)]="proveedor" (search)="searchProveedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar proveedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                    <ng-template ng-option-tmp let-item="item">
+                        <div>
+                            <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                            <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                            <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                            <small>{{item.RUC}}</small>
                         </div>
 
                     </ng-template>
                 </ng-select>
             </div>
+            <div class="" *ngIf="proveedor">
+                <div>
+                    <div *ngIf="proveedor.NOMBRES">{{proveedor .NOMBRES}} {{proveedor .APELLIDOS}}</div>
+                    <div *ngIf="proveedor   .NOMBRES && proveedor  .RAZON"> - </div>
+                    <div *ngIf="proveedor   .RAZON">{{proveedor .RAZON}} </div>
+
+                    <small>{{proveedor.RUC}}</small>
+                </div>
+            </div>
+
+            <h3 class="mt-3">Cliente</h3>
+
+            <div class="" *ngIf="!cliente">
+                <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                    <ng-template ng-option-tmp let-item="item">
+                        <div>
+                            <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                            <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                            <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                            <small>{{item.RUC}}</small>
+                        </div>
+
+                    </ng-template>
+                </ng-select>
+            </div>
+            <div class="" *ngIf="cliente">
+                <div>
+                    <div *ngIf="cliente.NOMBRES">{{cliente.NOMBRES}} {{cliente.APELLIDOS}}</div>
+                    <div *ngIf="cliente.NOMBRES && cliente.RAZON"> - </div>
+                    <div *ngIf="cliente.RAZON">{{cliente.RAZON}} </div>
+
+                    <small>{{cliente.RUC}}</small>
+                </div>
+            </div>
+
+            <div class="mt-3 form-group">
+                <label for="">Nro. Factura Proveedor</label>
+                <input type="text" [(ngModel)]="nroFacturaProveedor" class="form-control" name="" id="nrofacturaproveedor" aria-describedby="helpId" placeholder="">
+            </div>
+            <h3 class="mt-3">Origen Fondo</h3>
+            <div class="" *ngIf="!fondo">
+                <ng-select [items]="fondos" [(ngModel)]="fondo" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                    <ng-template ng-option-tmp let-item="item">
+                        <div>
+                            <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                            <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                            <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                            <small>{{item.RUC}}</small>
+                        </div>
+
+                    </ng-template>
+                </ng-select>
+            </div>
+
+            <div class="" *ngIf="fondo">
+                <div>
+                    <div *ngIf="fondo.NOMBRES">{{fondo.NOMBRES}} {{fondo.APELLIDOS}}</div>
+                    <div *ngIf="fondo.NOMBRES && fondo.RAZON"> - </div>
+                    <div *ngIf="fondo.RAZON">{{fondo.RAZON}} </div>
+
+                    <small>{{fondo.RUC}}</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="">Comentario</label>
+                <input type="text" [(ngModel)]="comentario" class="form-control" name="" id="monto" aria-describedby="helpId" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="">Monto</label>
+                <input type="text" [(ngModel)]="monto" class="form-control" name="" id="monto" aria-describedby="helpId" placeholder="">
+            </div>
+
+            <div class="float-right">
+                <button type="button" class="btn btn-danger">cancelar</button>
+                <button type="submit" (click)="crearMovimiento()" class="btn btn-primary ml-2">Crear</button>
+            </div>
+
         </div>
-        <ol class="mt-2 breadcrumb">
-            <li *ngFor="let item of breadCrumb" class="breadcrumb-item">
-                <a href="javascript:void(0)"><strong>{{item.nombre}}</strong></a>
-            </li>
-            <!-- <li class="breadcrumb-item">Contratos</li>
-            <li class="breadcrumb-item active">Nuevo contrato</li> -->
-        </ol>
+
     </div>
 </div>

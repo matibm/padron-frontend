@@ -9,9 +9,9 @@ import { Component, HostListener, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   @HostListener('document:visibilitychange', ['$event']) onVisibility(event) {
- 
+
     console.log(document.visibilityState);
-    
+
     this.viendo = document.visibilityState
   }
 
@@ -27,13 +27,14 @@ export class DashboardComponent implements OnInit {
     this._whatsappService.listen('push_actividad').subscribe((data: any) => {
       console.log(data);
 
-      this.alertas.push(data)
+      this.alertas.unshift(data)
+
       if (this.viendo == 'visible') {
         setTimeout(() => {
-        // emitir que ya se vio
-        }, 3000);  
+          // emitir que ya se vio
+        }, 3000);
       }
-      
+
     })
     this._whatsappService.listen('push_actividades').subscribe((data: any) => {
       console.log(data);
@@ -41,13 +42,13 @@ export class DashboardComponent implements OnInit {
       this.alertas = data
       if (this.viendo == 'visible') {
         setTimeout(() => {
-        // emitir que ya se vio
-        }, 3000);  
+          // emitir que ya se vio
+        }, 3000);
       }
-      
+
     })
-    this._whatsappService.emitir('get_actividades','e')
-    
+    this._whatsappService.emitir('get_actividades', 'e')
+
   }
 
 }

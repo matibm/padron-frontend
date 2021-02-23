@@ -1,3 +1,6 @@
+import { PipeModule } from './../pipes/pipe.module';
+import { NombreCortoPipe } from './../pipes/nombre-corto.pipe';
+import { AvatarModule } from 'ngx-avatar';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,7 +20,9 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { CrearEgresoComponent } from './crear-egreso/crear-egreso.component';
 import { ListaMovimientosComponent } from './lista-movimientos/lista-movimientos.component';
 import { MovimientosComponent } from './movimientos/movimientos.component';
-import { NgSelectModule } from '@ng-select/ng-select'; 
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ContratoPdfComponent } from './contrato-pdf/contrato-pdf.component';
+import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component'; 
 
 @NgModule({
   declarations: [IncrementadorComponent,
@@ -30,25 +35,28 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FacturasComponent,
     CrearEgresoComponent,
     ListaMovimientosComponent,
-    MovimientosComponent
-  
+    MovimientosComponent,
+    ContratoPdfComponent,
+    CrearUsuarioComponent,
+    
   ],
   imports: [
+    AvatarModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     ChartsModule,
         NgSelectModule,
-
     RouterModule,
     NgxPaginationModule,
-    NgxLoadingModule.forRoot({})
-
+    NgxLoadingModule.forRoot({}),
+    PipeModule
   ],
   exports: [
     IncrementadorComponent,
     DonaComponent,
-    ListaContratosComponent
+    ListaContratosComponent,
+    
   ]
 
 })

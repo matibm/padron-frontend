@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-body">
+        <div class="form-group">
+            <label for="">Nombres</label>
+            <input [(ngModel)]="nombres" type="text" class="form-control" name="nombres">
+        </div>
+        <div class="form-group">
+            <label for="">Apellidos</label>
+            <input [(ngModel)]="apellidos" type="text" class="form-control" name="apellidos">
+        </div>
+        <div class="form-group">
+            <label for="">Telefono</label>
+            <input [(ngModel)]="telefono" type="text" class="form-control" name="telefono">
+        </div>
+        <div class="form-group">
+            <label for="">email</label>
+            <input [(ngModel)]="email" type="text" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+            <label for="">contraseña</label>
+            <input type="password" [(ngModel)]="password" class="form-control" name="password">
+        </div>
+
+        <div class="float-right">
+            <button type="button" (click)="crearUsuario()" class="btn btn-primary">Crear Usuario</button>
+        </div>
+    </div>
+</div>

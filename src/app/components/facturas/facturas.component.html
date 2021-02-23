@@ -23,6 +23,8 @@
                     <td *ngIf="!fromOutside">{{factura.titular.NOMBRES}} {{factura.titular.APELLIDOS}}</td>
                     <td>{{factura.vencimiento | date}}</td>
                     <td *ngIf="!fromOutside">{{factura.contrato.nombre_servicio }}</td>
+                    <td *ngIf="!fromOutside && factura.servicio">
+                        <div *ngIf="factura.servicio.COD_CORTO == 'C.M.P.'"></div> {{factura.contrato.nombre_servicio }}</td>
                     <td *ngIf="factura.pagado">{{factura.fecha_pagado_unix | date}}</td>
                     <td *ngIf="!factura.pagado">Pendiente</td>
                 </tr>

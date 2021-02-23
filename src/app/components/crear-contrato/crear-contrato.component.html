@@ -193,7 +193,7 @@
                             <div class="col-md-4 col-xs">
                                 <div class="form-group">
                                     <label for="">Numero de Factura: </label>
-                                    <input type="text" class="form-control" name="" autocomplete="off" [(ngModel)]="numeroFactura" id="" aria-describedby="helpId" placeholder="">
+                                    <input type="text" class="form-control" name="" autocomplete="off" [(ngModel)]="numeroFactura" id="facturanumero" aria-describedby="helpId" placeholder="">
                                 </div>
                             </div>
 
@@ -281,7 +281,7 @@
                                             <input type="text" class="form-control" [(ngModel)]="item.nombre" name="name-{{i}}" placeholder="nombre completo">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" (ngModelChange)="item.edad = calcularEdad(item.fecha_nacimiento)" [(ngModel)]="item.fecha_nacimiento" name="name-{{i}}" placeholder="aaaa/mm/dd">
+                                            <input type="text" class="form-control" (ngModelChange)="item.edad = calcularEdad(fchn.value)" #fchn [(ngModel)]="item.fecha_nacimiento" name="name-{{i}}" placeholder="aaaa/mm/dd">
                                         </td>
                                         <td>
                                             <label for="">{{item.edad}}</label>
@@ -329,6 +329,18 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body  ">
+                            <h3>Cuota de Mantenimiento</h3>
+                            <div style="max-width: 300px;" class="form-group">
+                                <label for="">Fecha de pago </label>
+                                <input type="text" placeholder="AAAA-MM-DD" class="form-control" [(ngModel)]="stringFechaMantenimiento" (ngModelChange)="calcularFechaMantenimiento()">
+                            </div>
+
+                            <span>Fecha por defecto <b>{{fechaMantenimiento |date}}</b> </span>
+
                         </div>
                     </div>
                     <div class="card">

@@ -1,3 +1,4 @@
+import { PipeModule } from './pipes/pipe.module';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { URL_SERVICIOS } from './config/global';
 
@@ -35,7 +36,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 
 import { NgxLoadingModule } from 'ngx-loading';
- 
+import { NombreCortoPipe } from './pipes/nombre-corto.pipe';
+  
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     NopagefoundComponent,
     CrearContratoComponent,
     PricePipe,
-     
+    // NombreCortoPipe
      // BreadcrumbsComponent,
     // SidebarComponent,
     // HeaderComponent,
@@ -62,7 +64,7 @@ import { NgxLoadingModule } from 'ngx-loading';
     FormsModule,
     ReactiveFormsModule,
     NgxLoadingModule.forRoot({}),
-    
+    PipeModule,
     DpDatePickerModule,
     NgSelectModule,
     SweetAlert2Module.forRoot()
@@ -70,6 +72,6 @@ import { NgxLoadingModule } from 'ngx-loading';
   ],
   providers: [CurrencyPipe, { provide: LOCALE_ID, useValue: 'es-PY' }],
   bootstrap: [AppComponent],
-  exports: [ ]
+  exports: [ NombreCortoPipe]
 })
 export class AppModule { }
