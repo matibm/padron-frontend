@@ -38,6 +38,22 @@ export class MovimientoService {
       return resp.movimientos
     })
   }
+  getMovimientosByDate(date_start?, date_end?, fondo?, cerrado?: boolean) {
+
+    let url = `${URL_SERVICIOS}/movimientos/by_date`;
+    url += `?token=${this._usuarioService.token}`
+    date_end ? url += `&date_end=${date_end}` : null;
+    date_start ? url += `&date_start=${date_start}` : null;
+    fondo ? url += `&fondo=${fondo}` : null;
+     url += `&cerrado=${cerrado}` 
+
+
+    return this.http.get(url).toPromise().then((resp: any) => {
+      console.log("movimientos", resp);
+
+      return resp
+    })
+  }
   buscarTipoMovimientos(query, nivel) {
     console.log(query);
     console.log(nivel);
@@ -55,14 +71,14 @@ export class MovimientoService {
     })
   }
 
-  crearMovimiento(movimiento){
+  crearMovimiento(movimiento) {
 
     let url = `${URL_SERVICIOS}/movimientos/crear_movimiento`;
     url += `?token=${this._usuarioService.token}`
- 
+
     return this.http.post(url, movimiento).toPromise().then((resp: any) => {
       console.log(resp);
-      
+
 
       return resp.movimiento
     })

@@ -23,5 +23,16 @@ export class UsuariosComponent implements OnInit {
     this.loading = false;
 
   }
+searching 
 
+
+  async searchUsuarios(val: any) {
+ 
+    if (val.length > 0) {
+      
+
+      this.usuarios = await this._usuarioService.buscarUsuarios('ALL', this.searching)
+
+    }
+  }
 }

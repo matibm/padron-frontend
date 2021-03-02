@@ -23,8 +23,9 @@ export class MovimientosComponent implements OnInit {
   showCrearMovimiento = false;
   nroFacturaProveedor
   fechaMovimiento
-  monto
+  monto: number
   comentario
+  loading = false
   constructor(
     public _movimientoService: MovimientoService,
     public _usuarioService: UsuarioService
@@ -32,12 +33,15 @@ export class MovimientosComponent implements OnInit {
   tipos_movimiento
   tipo
   async ngOnInit() {
+    this.loading = true
     this.tipos_movimiento = await this._movimientoService.getTipoMovimiento()
     this.movimientos = await this._movimientoService.getMovimientos()
     console.log(this.movimientos);
     this.clientes = await this._usuarioService.buscarUsuarios('CLIENTES', '')
     this.proveedores = await this._usuarioService.buscarUsuarios('PROVEEDORES', '')
     this.fondos = await this._usuarioService.buscarUsuarios('BANCOS', '')
+    this.loading = false
+
   }
 
   async selectCategory(tipo) {
@@ -65,7 +69,7 @@ export class MovimientosComponent implements OnInit {
     term = term.toLowerCase();
     return item.descripcion.toLowerCase().indexOf(term) > -1 ||
       item.nombre_padre.toLowerCase().includes(term)
-      
+
   }
 
   customSearchFn(term: string, item: any) {
@@ -109,7 +113,7 @@ export class MovimientosComponent implements OnInit {
   }
 
 
-async  crearMovimiento() {
+  async crearMovimiento() {
     let movimiento: Movimiento = {
       cliente: this.cliente,
       fondo: this.fondo,
@@ -124,10 +128,10 @@ async  crearMovimiento() {
       monto_haber: this.monto
     }
     console.log(movimiento);
-    
+
     let resp = await this._movimientoService.crearMovimiento(movimiento)
     console.log(resp);
-    
+
   }
 
   async searchClientes(val) {

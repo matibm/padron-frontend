@@ -1,1 +1,31 @@
-<p>lista-movimientos works!</p>
+<div class="card">
+    <div class="card-body">
+        <h4> <span class="lstick"></span> Egresos </h4>
+
+        <table *ngIf="movimientos.length>0" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Fondo</th>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th style="width: 25%;">Comentario</th>
+                    <th>Monto</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of movimientos" [ngClass]="'pointer'">
+                    <td>{{item.fondo.RAZON}}</td>
+                    <td>{{item.fecha_creacion_unix | date}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.comentario}}</td>
+
+
+                    <td>{{item.monto_haber | currency: '':'':'2.0'}} Gs</td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

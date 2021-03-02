@@ -12,7 +12,7 @@ export class ContratoService {
 
   constructor(
     public http: HttpClient
-    ,public _usuarioService: UsuarioService
+    , public _usuarioService: UsuarioService
   ) { }
 
   getContratos(page?) {
@@ -29,7 +29,7 @@ export class ContratoService {
     url += `?token=${this._usuarioService.token}`
     return this.http.get(url).toPromise().then((resp: any) => {
       console.log(resp);
-      
+
       return resp.contrato
     })
   }
@@ -37,13 +37,25 @@ export class ContratoService {
 
     let url = URL_SERVICIOS + '/contrato/by_id/' + id;
     url += `?token=${this._usuarioService.token}`
-    return this.http.get(url).toPromise().then((resp: any) => {          
+    return this.http.get(url).toPromise().then((resp: any) => {
       return resp.contrato
     })
   }
   newContrato(contrato) {
     let url = URL_SERVICIOS + '/contrato/new';
     url += `?token=${this._usuarioService.token}`
+    return this.http.post(url, contrato).toPromise().then((resp: any) => {
+      console.log(resp);
+
+      return resp.contrato
+    })
+  }
+  updateContrato(contrato, modifica_producto: boolean) {
+    console.log(modifica_producto);
+    
+    let url = URL_SERVICIOS + '/contrato/edit';
+    url += `?token=${this._usuarioService.token}`
+    url += `&modifica_producto=${modifica_producto}`
     return this.http.post(url, contrato).toPromise().then((resp: any) => {
       console.log(resp);
 

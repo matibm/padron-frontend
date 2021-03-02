@@ -1,6 +1,5 @@
 import { PipeModule } from './../pipes/pipe.module';
-import { IconPipe } from './../pipes/icon.pipe';
- import { NgModule } from '@angular/core';
+  import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
@@ -32,7 +31,7 @@ import { AvatarModule } from 'ngx-avatar';
     Grafica1Component,
     PagesComponent,
     AccountSettingsComponent,
-    IconPipe
+     
    ],
   
   exports: [

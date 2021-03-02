@@ -107,117 +107,124 @@
     <div class="row">
         <div class="col-md col-xs">
             <div class="card">
+
                 <div class="card-body">
-                    <div style="justify-content: space-between;" class="inline-flex">
-                        <h3 class="card-title">Producto</h3>
-                        <div *ngIf="producto" (click)="producto = null" class="pointer close-icon ml-auto">
-                            <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
-                        </div>
-                    </div>
-                    <ng-select *ngIf="!producto" [(ngModel)]="producto" (ngModelChange)="seleccionarProducto(producto)" [items]="productos" notFoundText="no se encontraron resultados" placeholder="buscar producto" bindLabel="NOMBRE">
-                        <ng-template ng-option-tmp let-item="item">
-                            <div> {{item.NOMBRE}} {{item.COD_CORTO}} <br>
-                            </div>
-                        </ng-template>
-                    </ng-select>
-
-                    <div class="" *ngIf="producto">
-                        <h5>Nombre: <b>{{producto.NOMBRE}} - {{producto.COD_CORTO}}</b></h5>
-                        <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
-                        <!-- <h5>Entrega: </h5>  -->
-                        <hr>
-
-                        <div class="mt-2 inline-flex">
-                            <h4 class=" mr-3">Forma de Pago: </h4>
-                            <div style="width: 90%;" class="row">
-
-
-                                <div class="col-md-4 col-xs">
-                                    <input [(ngModel)]="pagoradioValue" (click)="resetPlazo()" class="with-gap radio-col-blue-grey" name="idTipoPlan2" type="radio" id="radio_4" value="contado" required>
-
-                                    <label for="radio_4">Contado</label>
-                                </div>
-                                <div class="col-md-4 col-xs">
-                                    <input [(ngModel)]="pagoradioValue" name="idTipoPlan2" class="with-gap radio-col-blue-grey" type="radio" id="radio_5" value="cuota" required>
-                                    <label for="radio_5">Cuotas</label>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <div class="row">
-                            <div class="col-md col-xs">
-                                <div class="form-group">
-                                    <label for="">Entrega</label>
-                                    <input type="number" class="form-control" (ngModelChange)="calcularSaldo(en.value)" #en [(ngModel)]="entrega">
-                                </div>
-                                <h5>saldo <b>{{saldo | currency:'':'':'2.0'}} Gs</b></h5>
-                            </div>
-                            <div class="col-md col-xs">
-                                <div class="form-group">
-                                    <label for="">plazo</label>
-                                    <input type="number" class="form-control" [(ngModel)]="plazo" (ngModelChange)="calcularCuotas()">
-                                </div>
-                                <h5>Monto Cuotas: <b>{{montoCuotas | currency:'':'':'2.0' }} Gs</b></h5>
-                            </div>
-                            <div class="col-md col-xs">
-                                <div class="form-group">
-                                    <label for="">Fecha de pago </label>
-                                    <input type="text" placeholder="AAAA-MM-DD" class="form-control" [(ngModel)]="stringFechaPago" (ngModelChange)="calcularFechaPago()">
-                                </div>
-                                <h5> <b>{{fechaPago |date}}</b></h5>
+                    <div>
+                        <div style="justify-content: space-between;" class="inline-flex">
+                            <h3 class="card-title">Producto</h3>
+                            <div *ngIf="producto" class="pointer close-icon ml-auto">
+                                <button (click)="producto = null" [disabled]='!editarproducto' type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
                             </div>
                         </div>
-                        <hr>
-                        <div class="mt-2 inline-flex">
-                            <div style="width: 100%;" class="row">
-                                <div class="col-md-4 col-xs">
-                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_1" value="cobrador" required>
-
-                                    <label for="radio_1">Cobrador</label>
+                        <ng-select *ngIf="!producto" [(ngModel)]="producto" (ngModelChange)="seleccionarProducto(producto)" [items]="productos" notFoundText="no se encontraron resultados" placeholder="buscar producto" bindLabel="NOMBRE">
+                            <ng-template ng-option-tmp let-item="item">
+                                <div> {{item.NOMBRE}} {{item.COD_CORTO}} <br>
                                 </div>
-                                <div class="col-md-4 col-xs">
-                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_2" value="debito" required>
-                                    <label for="radio_2">Débito Automático</label>
-                                </div>
-                                <div class="col-md-4 col-xs">
-                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_3" value="administracion" required>
-                                    <label for="radio_3">Administracion</label>
-                                </div>
+                            </ng-template>
+                        </ng-select>
 
-                            </div>
+                        <div class="" *ngIf="producto">
+                            <h5>Nombre: <b>{{producto.NOMBRE}} - {{producto.COD_CORTO}}</b></h5>
+                            <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
+                            <!-- <h5>Entrega: </h5>  -->
+                            <hr>
 
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4 col-xs">
-                                <div class="form-group">
-                                    <label for="">Numero de Contrato: </label>
-                                    <input type="text" class="form-control" name="" autocomplete="off" [(ngModel)]="nro_contrato" id="facturanumero" aria-describedby="helpId" placeholder="">
-                                </div>
-                            </div>
+                            <div class="mt-2 inline-flex">
+                                <h4 class=" mr-3">Forma de Pago: </h4>
+                                <div style="width: 90%;" class="row">
 
-                            <div class="col-md-8 col-xs  ">
-                                <label>Lugar de cobranza</label>
 
-                                <div class="row">
-                                    <div class="col-md col-xs">
-                                        <input [(ngModel)]="radioLugarCobranza" name="idTipoPlan3" type="radio" class="with-gap radio-col-blue-grey" id="radio_particular" value="particular" required>
-                                        <label for="radio_particular">Direccion Particular</label>
+                                    <div class="col-md-4 col-xs">
+                                        <input [disabled]='!editarproducto' [(ngModel)]="pagoradioValue" (click)="resetPlazo()" class="with-gap radio-col-blue-grey" name="idTipoPlan2" type="radio" id="radio_4" value="contado" required>
+
+                                        <label for="radio_4">Contado</label>
                                     </div>
-                                    <div class="col-md col-xs">
-                                        <input [(ngModel)]="radioLugarCobranza" name="idTipoPlan3" type="radio" class="with-gap radio-col-blue-grey" id="radio_laboral" value="laboral" required>
-                                        <label for="radio_laboral">Direccion Laboral</label>
+                                    <div class="col-md-4 col-xs">
+                                        <input [disabled]='!editarproducto' [(ngModel)]="pagoradioValue" name="idTipoPlan2" class="with-gap radio-col-blue-grey" type="radio" id="radio_5" value="cuota" required>
+                                        <label for="radio_5">Cuotas</label>
                                     </div>
 
                                 </div>
 
+                            </div>
+                            <div class="row">
+                                <div class="col-md col-xs">
+                                    <div class="form-group">
+                                        <label for="">Entrega</label>
+                                        <input [disabled]='!editarproducto' type="number" class="form-control" (ngModelChange)="calcularSaldo(en.value)" #en [(ngModel)]="entrega">
+                                    </div>
+                                    <h5>saldo <b>{{saldo | currency:'':'':'2.0'}} Gs</b></h5>
+                                </div>
+                                <div class="col-md col-xs">
+                                    <div class="form-group">
+                                        <label for="">plazo</label>
+                                        <input [disabled]='!editarproducto' type="number" class="form-control" [(ngModel)]="plazo" (ngModelChange)="calcularCuotas()">
+                                    </div>
+                                    <h5>Monto Cuotas: <b>{{montoCuotas | currency:'':'':'2.0' }} Gs</b></h5>
+                                </div>
+                                <div class="col-md col-xs">
+                                    <div class="form-group">
+                                        <label for="">Fecha de pago </label>
+                                        <input [disabled]='!editarproducto' type="text" placeholder="AAAA-MM-DD" class="form-control" [(ngModel)]="stringFechaPago" (ngModelChange)="calcularFechaPago()">
+                                    </div>
+                                    <h5> <b>{{fechaPago |date}}</b></h5>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mt-2 inline-flex">
+                                <div style="width: 100%;" class="row">
+                                    <div class="col-md-4 col-xs">
+                                        <input [disabled]='!editarproducto' [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_1" value="cobrador" required>
+
+                                        <label for="radio_1">Cobrador</label>
+                                    </div>
+                                    <div class="col-md-4 col-xs">
+                                        <input [disabled]='!editarproducto' [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_2" value="debito" required>
+                                        <label for="radio_2">Débito Automático</label>
+                                    </div>
+                                    <div class="col-md-4 col-xs">
+                                        <input [disabled]='!editarproducto' [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_3" value="administracion" required>
+                                        <label for="radio_3">Administracion</label>
+                                    </div>
+
+                                </div>
 
                             </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-4 col-xs">
+                                    <div class="form-group">
+                                        <label for="">Numero de Contrato: </label>
+                                        <input [disabled]='!editarproducto' type="text" class="form-control" name="" autocomplete="off" [(ngModel)]="nro_contrato" id="facturanumero" aria-describedby="helpId" placeholder="">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8 col-xs  ">
+                                    <label>Lugar de cobranza</label>
+
+                                    <div class="row">
+                                        <div class="col-md col-xs">
+                                            <input [disabled]='!editarproducto' [(ngModel)]="radioLugarCobranza" name="idTipoPlan3" type="radio" class="with-gap radio-col-blue-grey" id="radio_particular" value="particular" required>
+                                            <label for="radio_particular">Direccion Particular</label>
+                                        </div>
+                                        <div class="col-md col-xs">
+                                            <input [(ngModel)]="radioLugarCobranza" name="idTipoPlan3" type="radio" class="with-gap radio-col-blue-grey" id="radio_laboral" value="laboral" required>
+                                            <label for="radio_laboral">Direccion Laboral</label>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
                         </div>
 
-
                     </div>
+                    <button type="button" *ngIf="editarproducto" (click)="cancelarEdiciondeProducto()" class="btn float-right btn-danger">Cancelar</button>
+                    <button type="button" *ngIf="!editarproducto" (click)="editarProducto()" class="btn float-right btn-info">Editar Producto</button>
+
                 </div>
             </div>
             <div class="" *ngIf="facturas">
@@ -378,18 +385,9 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" (click)="crearContrato()" [disabled]="disableCrearContrato()" class="btn float-right btn-primary">Crear
-                    Contrato</button>
-                <button [swal]="{ title: 'Save file as...', input: 'text', showDenyButton: true, denyButtonText: 'Don\'t save', showCancelButton: true }" (confirm)="null" (deny)="null" (dismiss)="null">
+                <button type="button" (click)="crearContrato()" [disabled]="disableCrearContrato()" class="btn float-right btn-success">Actualizar Contrato</button>
 
-                    Save
-                </button>
             </div>
         </div>
     </div>
-</div>
-
-<div class="" *ngIf="showInfoContrato">
-
-
 </div>

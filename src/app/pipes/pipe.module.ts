@@ -1,3 +1,4 @@
+import { IconPipe } from './icon.pipe';
 import { NombreCortoPipe } from './nombre-corto.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,11 +7,12 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
-    NombreCortoPipe
+    NombreCortoPipe,
+    IconPipe
   ],
   imports: [
     CommonModule
   ], 
-  exports: [NombreCortoPipe]
+  exports: [NombreCortoPipe, IconPipe]
 })
 export class PipeModule { }

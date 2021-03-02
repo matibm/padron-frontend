@@ -29,11 +29,11 @@ export class SidebarService {
     },
     {
       titulo: 'Finanzas',
-      icono: 'mdi mdi-account-multiple',
+      icono: 'mdi mdi-cash',
       submenu: [
         { titulo: 'Facturas', url: 'facturas' },
         { titulo: 'Movimientos', url: 'movimientos' },
-        { titulo: 'Vendedores', url: 'vendedores' },
+        { titulo: 'caja', url: 'info_caja' },
       ]
     }
   ]

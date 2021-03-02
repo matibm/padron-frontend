@@ -22,7 +22,10 @@ import { ListaMovimientosComponent } from './lista-movimientos/lista-movimientos
 import { MovimientosComponent } from './movimientos/movimientos.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ContratoPdfComponent } from './contrato-pdf/contrato-pdf.component';
-import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component'; 
+import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
+import { InfoCajaComponent } from './info-caja/info-caja.component';
+import { EditarContratoComponent } from './editar-contrato/editar-contrato.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [IncrementadorComponent,
@@ -38,15 +41,18 @@ import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
     MovimientosComponent,
     ContratoPdfComponent,
     CrearUsuarioComponent,
-    
+    InfoCajaComponent,
+    EditarContratoComponent,
+
   ],
   imports: [
     AvatarModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    ChartsModule,
-        NgSelectModule,
+    ChartsModule, SweetAlert2Module.forRoot(),
+
+    NgSelectModule,
     RouterModule,
     NgxPaginationModule,
     NgxLoadingModule.forRoot({}),
@@ -56,7 +62,7 @@ import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
     IncrementadorComponent,
     DonaComponent,
     ListaContratosComponent,
-    
+
   ]
 
 })

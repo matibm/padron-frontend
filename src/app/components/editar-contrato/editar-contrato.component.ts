@@ -1,22 +1,31 @@
-import { Contrato } from '../../models/contrato';
-import { Inhumado } from '../../models/unhumado';
-import { ContratoService } from '../../services/contrato.service';
-import { UsuarioService } from '../../services/usuario.service';
-import { ProductosService } from '../../services/productos.service';
-import { Producto } from '../../models/producto';
-import { Usuario } from '../../models/usuario';
+import { ActivatedRoute } from '@angular/router';
+import { Inhumado } from './../../models/unhumado';
+import { Contrato } from './../../models/contrato';
+import { Producto } from './../../models/producto';
+import { Usuario } from './../../models/usuario';
+import { ContratoService } from './../../services/contrato.service';
+import { UsuarioService } from './../../services/usuario.service';
+import { ProductosService } from './../../services/productos.service';
 import { Component, OnInit } from '@angular/core';
-// import { Options } from 'select2';
 import { SwalPortalTargets, SwalDirective } from '@sweetalert2/ngx-sweetalert2';
 import swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-crear-contrato',
-  templateUrl: './crear-contrato.component.html',
-  styleUrls: ['./crear-contrato.component.css']
+  selector: 'app-editar-contrato',
+  templateUrl: './editar-contrato.component.html',
+  styleUrls: ['./editar-contrato.component.css']
 })
-export class CrearContratoComponent implements OnInit {
+export class EditarContratoComponent implements OnInit {
 
+  constructor(
+    public _productoService: ProductosService,
+    public _usuarioService: UsuarioService,
+    public readonly swalTargets: SwalPortalTargets,
+    public _contratoService: ContratoService,
+    public route: ActivatedRoute,
+
+  ) { }
+  opacity = 'disable'
   cliente: Usuario
   clientes: Usuario[] = null
   productos: Producto[] = null
@@ -76,30 +85,21 @@ export class CrearContratoComponent implements OnInit {
   stringFechaPago
   servicioCMP
   numeroFactura
-  pruebalog(event) {
-    event.preventDefault()
-    console.log(event);
-
-  }
-  showInfoContrato = false;
-  radioDebito = false
-  radioAdministracion = false
-  radioCobrador = false
-  constructor(
-    public _productoService: ProductosService,
-    public _usuarioService: UsuarioService, 
-    public readonly swalTargets: SwalPortalTargets,
-    public _contratoService: ContratoService
-  ) {
-  }
-
+  editarproducto = false
+  respaldoProducto
+  id
   async ngOnInit() {
     let date = new Date()
 
-    this.fechaMantenimiento = new Date(`${date.getFullYear() + 1}-01-05`)
-    this.fechaMantenimiento.setUTCHours(5)
-
-    console.log(this.fechaMantenimiento);
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.contrato = await this._contratoService.getContratoById(this.id)
+    this.vendedor = this.contrato.vendedor
+    this.cobrador = this.contrato.cobrador
+    this.seleccionarProducto(this.contrato.producto)
+    this.fechaMantenimiento = new Date(`${date.getFullYear() + 1}-01-05`).setHours(24)
+    console.log(new Date(this.fechaMantenimiento));
+    
+    this.cliente = this.contrato.titular
 
     this.productos = await this._productoService.getProductos()
     for (let i = 0; i < this.productos.length; i++) {
@@ -108,14 +108,8 @@ export class CrearContratoComponent implements OnInit {
         this.servicioCMP = element
       }
     }
-    console.log(this.servicioCMP);
-
-    // this.clientes = await this._usuarioService.getClientes()
-    // this.vendedores = await this._usuarioService.getVendedores()
-    // this.cobradores = await this._usuarioService.getVendedores()
-
   }
-  selectedDate
+
   calcularEdad(date) {
     console.log(date);
 
@@ -234,51 +228,56 @@ export class CrearContratoComponent implements OnInit {
       this.facturas = this.crearFacturas(this.saldo, 1)
     }
 
-    let nuevo_contrato: Contrato = {
-      id_contrato: new Date().getTime().toString(),   // se puede quitar
-      cobrador: this.cobrador || {},
-      cuota: this.montoCuotas,
-      entrega: this.entrega,
-      id_servicio: this.producto.ID_PRODUCTO, // se puede quitar
-      nombre_servicio: this.producto.NOMBRE,
-      plazo: this.plazo,
-      precio_total: this.producto.PRECIO_MAYORISTA,
-      producto: this.producto,
-      titular: this.cliente,
-      nro_contrato: this.nro_contrato,
-      activo: '1',
-      vendedor: this.vendedor,
-      beneficiarios: this.beneficiarios,
-       
-      // fecha_alta: today, // falta poner campode fecha para poder modificar
-      fecha_creacion_unix: new Date().valueOf() // falta poner campode fecha para poder modificar
+    
+      this.contrato.id_contrato = new Date().getTime().toString(),   // se puede quitar
+      this.contrato.cobrador = this.cobrador || {},
+      this.contrato.cuota = this.montoCuotas,
+      this.contrato.entrega = this.entrega,
+      this.contrato.id_servicio = this.producto.ID_PRODUCTO, // se puede quitar
+      this.contrato.nombre_servicio = this.producto.NOMBRE,
+      this.contrato.plazo = this.plazo,
+      this.contrato.precio_total = this.producto.PRECIO_MAYORISTA,
+      this.contrato.producto = this.producto,
+      this.contrato.titular = this.cliente,
+      this.contrato.nro_contrato = this.nro_contrato,
+      this.contrato.activo = '1',
+      this.contrato.vendedor = this.vendedor,
+      this.contrato.beneficiarios = this.beneficiarios,
+      this.contrato.fecha_creacion_unix = new Date().valueOf() // falta poner campode fecha para poder modificar
 
-    }
+    
     if (this.esUdp) {
-      nuevo_contrato.manzana = this.manzana
-      nuevo_contrato.fila = this.fila
-      nuevo_contrato.parcela = this.parcela
-      nuevo_contrato.sector = this.sector
+      this.contrato.manzana = this.manzana
+      this.contrato.fila = this.fila
+      this.contrato.parcela = this.parcela
+      this.contrato.sector = this.sector
+    }else{
+      this.contrato.manzana = null
+      this.contrato.fila = null
+      this.contrato.parcela = null
+      this.contrato.sector = null
     }
-    this.facturas.push({
-      vencimiento: this.fechaMantenimiento,
-      monto: 150000,
-      haber: 150000,
-      titular: this.cliente,
-      iscmp: true,
-      servicio: this.servicioCMP._id,
-      fecha_creacion_unix: new Date().getTime()
-    })
+    if (this.editarproducto && this.esUdp) {
+      this.facturas.push({
+        vencimiento: this.fechaMantenimiento,
+        monto: 150000,
+        haber: 150000,
+        titular: this.cliente,
+        iscmp: true,
+        servicio: this.servicioCMP._id,
+        fecha_creacion_unix: new Date().getTime()
+      })
+    }
     console.log(this.facturas);
     let send = {
-      contrato: nuevo_contrato,
+      contrato: this.contrato,
       facturas: this.facturas
     }
 
-    await this._contratoService.newContrato(send).then(() => {
+    await this._contratoService.updateContrato(send, this.editarproducto).then(() => {
       swal.fire({
         icon: 'success',
-        title: 'Contrato creado',
+        title: 'Contrato actualizado',
         // text: 'I will close in 2 seconds.',
         timer: 2000,
       })
@@ -342,6 +341,7 @@ export class CrearContratoComponent implements OnInit {
     if (producto.COD_CORTO == 'U.D.P.') {
       this.esUdp = true
     } else this.esUdp = false;
+    this.respaldoProducto = this.producto
   }
   seleccionarCliente(cliente) {
     this.cliente = cliente;
@@ -351,7 +351,7 @@ export class CrearContratoComponent implements OnInit {
   }
 
   disableCrearContrato() {
-     if (this.producto && this.cliente && this.vendedor && this.radioValue) {
+    if (this.producto && this.cliente && this.vendedor && this.radioValue) {
       return false;
     }
     return true;
@@ -390,5 +390,34 @@ export class CrearContratoComponent implements OnInit {
     this.producto = null;
 
   }
+
+  cancelarEdiciondeProducto() {
+    this.editarproducto = false
+    this.producto = this.respaldoProducto
+  }
+
+  editarProducto() {
+    swal.fire({
+      icon: 'warning',
+      title: 'Modificar Producto',
+      text: 'Si modifica se eliminarán todas las facturas correspondientes al contrato',
+      showCancelButton: true,
+      cancelButtonText: 'cancelar',
+      cancelButtonColor: '#ef5350',
+      confirmButtonText: 'modificar',
+      confirmButtonColor: '#06d79c',
+      showConfirmButton: true
+    }).then(res => {
+
+      if (res.isConfirmed == true) {
+        this.editarproducto = true
+      } else {
+
+      }
+    })
+  }
+
+
+
 
 }

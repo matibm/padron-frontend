@@ -1,18 +1,36 @@
 <div class="card">
     <div *ngIf="factura" class="card-body">
-        <h4><b>Servicio:</b> {{factura.contrato.nombre_servicio}}</h4>
         <div class="row">
             <div class="col-xs col-md">
                 <div class="card bg-light">
                     <div class="card-body">
                         <div align="center">
-                            <ngx-avatar [size]="70" name="{{[factura.titular.NOMBRES, factura.titular.APELLIDOS ] | nombreCorto }}">
+                            <img class="pointer" [routerLink]="['/admin/info_contrato', factura.contrato._id]" style="width: 70px;" src="{{'CONTRATO' | icon}}" alt="user" />
+
+                        </div>
+                        <h4 class="card-title"><b>Contrato:</b></h4>
+
+                        <h4 class="pointer" [routerLink]="['/admin/info_contrato', factura.contrato._id]">
+
+                            {{factura.contrato.nombre_servicio}}
+                            <br>
+                            <small>{{factura.contrato.producto.COD_CORTO}}</small>
+
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs col-md">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <div align="center">
+                            <ngx-avatar class="pointer" [routerLink]="['/admin/usuario', factura.titular._id]" [size]="70" name="{{[factura.titular.NOMBRES, factura.titular.APELLIDOS ] | nombreCorto }}">
                             </ngx-avatar>
 
                         </div>
                         <h4 class="card-title"><b>Titular:</b></h4>
 
-                        <h4>
+                        <h4 class="pointer" [routerLink]="['/admin/usuario', factura.titular._id]">
                             {{factura.titular.NOMBRES}} {{factura.titular.APELLIDOS}}
                             <br>
                             <small>{{factura.titular.RUC}}</small>
@@ -26,13 +44,13 @@
                 <div class="card bg-light">
                     <div class="card-body">
                         <div align="center">
-                            <ngx-avatar [size]="70" name="{{[factura.contrato.vendedor.NOMBRES, factura.contrato.vendedor.APELLIDOS ] | nombreCorto }}">
+                            <ngx-avatar class="pointer" [routerLink]="['/admin/usuario', factura.contrato.vendedor._id]" [size]="70" name="{{[factura.contrato.vendedor.NOMBRES, factura.contrato.vendedor.APELLIDOS ] | nombreCorto }}">
                             </ngx-avatar>
 
                         </div>
                         <h4 class="card-title"><b>vendedor:</b></h4>
 
-                        <h4>
+                        <h4 class="pointer" [routerLink]="['/admin/usuario', factura.contrato.vendedor._id]">
                             {{factura.contrato.vendedor.NOMBRES}} {{factura.contrato.vendedor.APELLIDOS}}
                             <br>
                             <small>{{factura.contrato.vendedor.RUC}}</small>
@@ -46,13 +64,13 @@
                 <div class="card bg-light">
                     <div class="card-body">
                         <div align="center">
-                            <ngx-avatar [size]="70" name="{{[factura.contrato.cobrador.NOMBRES, factura.contrato.cobrador.APELLIDOS ] | nombreCorto }}">
+                            <ngx-avatar class="pointer" [routerLink]="['/admin/usuario', factura.contrato.cobrador._id]" [size]="70" name="{{[factura.contrato.cobrador.NOMBRES, factura.contrato.cobrador.APELLIDOS ] | nombreCorto }}">
                             </ngx-avatar>
 
                         </div>
                         <h4 class="card-title"><b>Cobrador:</b></h4>
 
-                        <h4>
+                        <h4 class="pointer" [routerLink]="['/admin/usuario', factura.contrato.cobrador._id]">
                             {{factura.contrato.cobrador.NOMBRES}} {{factura.contrato.cobrador.APELLIDOS}}
                             <br>
                             <small>{{factura.contrato.cobrador.RUC}}</small>
@@ -63,44 +81,82 @@
             </div>
 
         </div>
+        <div class="row">
+            <div class="col-xs col-md">
+                <h4><b>Servicio:</b> {{factura.contrato.nombre_servicio}}</h4>
 
-        <h4><b>Fecha de emision:</b> {{factura.fecha_creacion_unix | date:' d, MMM y - h:mm a'}}</h4>
-        <h4><b>Fecha de Vencimientio:</b> {{factura.vencimiento | date:' d, MMM y'}}</h4>
-        <h4 *ngIf="factura.pagado"><b>Fecha de pago:</b> {{factura.fecha_pagado_unix | date:' d, MMM y - h:mm a'}}</h4>
-        <h4><b>Monto:</b> {{factura.haber | currency: '':'':'2.0'}} Gs</h4>
-
-        <div class="inline-flex">
-            <h4 class="mr-3"><b>Fondo:</b></h4>
-            <div class="" *ngIf="!fondo">
-                <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
-                    <ng-template ng-option-tmp let-item="item">
-                        <div>
-                            <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
-                            <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
-                            <div *ngIf="item.RAZON">{{item.RAZON}} </div>
-
-
-                            <small>{{item.RUC}}</small>
-                        </div>
-
-                    </ng-template>
-                </ng-select>
-            </div>
-
-            <div class="" *ngIf="fondo">
-                <h4>
-                    <div *ngIf="fondo.NOMBRES">{{fondo.NOMBRES}} {{fondo.APELLIDOS}}</div>
-                    <div *ngIf="fondo.NOMBRES && fondo.RAZON"> - </div>
-                    <div *ngIf="fondo.RAZON">{{fondo.RAZON}} </div>
-
-                    <small>{{fondo.RUC}}</small>
+                <h4><b>Fecha de emision:</b> {{factura.fecha_creacion_unix | date:' d, MMM y - h:mm a'}}</h4>
+                <h4><b>Fecha de Vencimientio:</b> {{factura.vencimiento | date:' d, MMM y'}}</h4>
+                <h4 *ngIf="factura.pagado"><b>Fecha de pago:</b> {{factura.fecha_pagado_unix | date:' d, MMM y - h:mm a'}}
                 </h4>
+                <h4><b>Monto:</b> {{factura.haber | currency: '':'':'2.0'}} Gs</h4>
+
+                <h4 *ngIf="factura.parcial">Pago parcial correspondiente a
+                    <a (click)="this.id = factura.parcial._id; initialize()" [routerLink]="['/admin/factura', factura.parcial._id]">Factura</a>
+                </h4>
+
+                <div class="inline-flex">
+                    <h4 class="mr-3"><b>Fondo:</b></h4>
+                    <div class="" *ngIf="!fondo">
+                        <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                            <ng-template ng-option-tmp let-item="item">
+                                <div>
+                                    <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                    <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                    <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                                    <small>{{item.RUC}}</small>
+                                </div>
+
+                            </ng-template>
+                        </ng-select>
+                    </div>
+
+                    <div class="" *ngIf="fondo">
+                        <h4>
+                            <div *ngIf="fondo.NOMBRES">{{fondo.NOMBRES}} {{fondo.APELLIDOS}}</div>
+                            <div *ngIf="fondo.NOMBRES && fondo.RAZON"> - </div>
+                            <div *ngIf="fondo.RAZON">{{fondo.RAZON}} </div>
+
+                            <small>{{fondo.RUC}}</small>
+                        </h4>
+                    </div>
+
+                </div>
+
             </div>
 
+            <div *ngIf="!factura.pagado" class="b-l col-xs col-md">
+
+                <div class="" *ngIf="parciales">
+                    <h4 *ngFor="let item of parciales">
+                        <a [routerLink]="['/admin/factura', item._id]">
+                            Pago Parcial 
+                        </a> de {{item.haber | currency: '':'':'2.0'}} Gs en {{item.fecha_pagado_unix | date: 'short'}} Hs
+                    </h4>
+                </div>
+
+                <button *ngIf="!crearParcial" type="button" (click)="crearParcial = true" class="btn btn-light">Crear pago parcial</button>
+                <div *ngIf="crearParcial" class="form-group">
+                    <label for="">monto parcial a pagar</label>
+                    <input type="number" class="form-control" name="montoparcial" [(ngModel)]="montoparcial" (ngModelChange)="verificarMontoParcial(montoparcial)" id="" aria-describedby="helpId" placeholder="">
+                    <small *ngIf="!montoparcialCorrecto" id="helpId" class="form-text text-danger">
+                        El monto debe ser menor al monto total de la
+                        factura</small>
+                    <small *ngIf="montoparcialCorrecto" id="helpId" class="form-text text-muted">
+                        El monto debe ser menor al monto total de la
+                        factura</small>
+                    <button type="button" (click)="crearParcial = false" class="btn mt-2 btn-danger">Cancelar</button>
+
+                </div>
+
+            </div>
         </div>
 
         <div class="float-right mt-3">
-            <button *ngIf="!factura.pagado" (click)="pagar()" type="button" class="btn  btn-primary">Pagar</button>
+            <button *ngIf="!factura.pagado && !crearParcial" [disabled]="!fondo || !montoparcialCorrecto" (click)="pagar()" type="button" class="btn  btn-primary">Pagar</button>
+            <button *ngIf="!factura.pagado && crearParcial" [disabled]="!fondo || !montoparcialCorrecto" (click)="pagar()" type="button" class="btn  btn-primary">Pago parcial</button>
 
         </div>
 

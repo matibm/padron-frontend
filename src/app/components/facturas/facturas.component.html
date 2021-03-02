@@ -1,16 +1,17 @@
 <div class="card">
 
     <div class="card-body">
-        <h4 class="card-title">Facturas</h4>
+        <h4> <span class="lstick"></span> Ingresos </h4>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>fecha</th>
+                    <th style="width: 14%;">fondo</th>
+                    <th style="width: 20%;">fecha</th>
                     <th>Monto</th>
                     <th *ngIf="!fromOutside">Cliente</th>
-                    <th>Vencimiento</th>
-                    <th *ngIf="!fromOutside">Servicio</th>
+                    <th *ngIf="!fromOutside">Vencimiento</th>
+                    <th>Servicio</th>
                     <th>Pagado</th>
                 </tr>
             </thead>
@@ -18,15 +19,20 @@
                 <!--  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } -->
                 <tr [routerLink]="['/admin/factura', factura._id]" class="pointer" *ngFor="let factura of facturas  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
                     <td scope="row">{{page*10 + (i+1) - 10}}</td>
+                    <td *ngIf="factura.fondo">{{factura.fondo.RAZON}}</td>
+                    <td *ngIf="!factura.fondo">Sin fondo</td>
                     <td>{{factura.fecha_creacion_unix | date:' d, MMM y - h:mm a'}}</td>
                     <td>{{factura.haber | currency:'':'':'2.0'}} Gs</td>
                     <td *ngIf="!fromOutside">{{factura.titular.NOMBRES}} {{factura.titular.APELLIDOS}}</td>
-                    <td>{{factura.vencimiento | date}}</td>
-                    <td *ngIf="!fromOutside">{{factura.contrato.nombre_servicio }}</td>
+                    <td *ngIf="!    fromOutside">{{factura.vencimiento | date}}</td>
                     <td *ngIf="!fromOutside && factura.servicio">
-                        <div *ngIf="factura.servicio.COD_CORTO == 'C.M.P.'"></div> {{factura.contrato.nombre_servicio }}</td>
-                    <td *ngIf="factura.pagado">{{factura.fecha_pagado_unix | date}}</td>
-                    <td *ngIf="!factura.pagado">Pendiente</td>
+                        <div *ngIf="factura.servicio.COD_CORTO == 'C.M.P.'"></div> {{factura.contrato.nombre_servicio }}
+                    </td>
+                    <td *ngIf="fromOutside && factura.servicio">
+                        {{factura.servicio.COD_CORTO }}
+                    </td>
+                    <td *ngIf="factura.pagado"><b>{{factura.fecha_pagado_unix | date}}</b></td>
+                    <td class="text-danger" *ngIf="!factura.pagado">Pendiente</td>
                 </tr>
             </tbody>
         </table>

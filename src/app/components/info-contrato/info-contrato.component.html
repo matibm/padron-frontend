@@ -85,7 +85,8 @@
                             <h4 *ngIf="contrato.plazo != 1" class=" mr-3"><b>Forma de Pago:</b> En {{contrato.plazo}} cuotas </h4>
                             <h4 *ngIf="contrato.entrega" class=" mr-3"><b>Entrega:</b> {{contrato.entrega | currency: '':'':'2.0'}} Gs</h4>
                             <h4 *ngIf="!contrato.entrega" class=" mr-3"><b>Entrega:</b> Sin entrega</h4>
-                            <h4 *ngIf="contrato.entrega" class=" mr-3"><b>saldo:</b> {{(contrato.producto.PRECIO_MAYORISTA - contrato.entrega ) | currency: '':'':'2.0'}} Gs</h4>
+                            <h4 *ngIf="contrato.entrega" class=" mr-3"><b>saldo:</b> {{(contrato.producto.PRECIO_MAYORISTA - contrato.entrega ) | currency: '':'':'2.0'}} Gs
+                            </h4>
                         </div>
                         <hr>
                         <div class="row">
@@ -105,152 +106,162 @@
                     </div>
                 </div>
             </div>
-            <div class="" *ngIf="facturas">
 
-                <app-facturas [fromOutside]='true' [facturas]='facturas'></app-facturas>
 
-                <!-- 
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Cuotas</h3>
+        </div>
+        <div class="col-lg" *ngIf="facturas">
 
-                        <div style="overflow: auto; max-height: 400px;">
+            <app-facturas [fromOutside]='true' [facturas]='facturas'></app-facturas>
 
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Vencimiento</th>
-                                        <th>Monto</th>
-                                    </tr>
-                                </thead>
+            <!-- 
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Cuotas</h3>
 
-                                <tbody>
+                    <div style="overflow: auto; max-height: 400px;">
 
-                                    <tr *ngFor="let factura of facturas; let i = index">
-                                        <td scope="row">{{i+1}}</td>
-                                        <td>{{factura.vencimiento | date}}</td>
-                                        <td>{{factura.haber| currency:'':'':'2.0' }} Gs</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-            <div *ngIf="producto">
-                <div *ngIf="!esUdp" class="">
-                    <div class="card">
-                        <div class="card-body">
-                            <h3>Beneficiarios</h3>
-                            <table class=" table  ">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">C.I.</th>
-                                        <th class="text-center">Nombre</th>
-                                        <th class="text-center">Fecha Nacimiento</th>
-                                        <th class="text-center">edad</th>
-                                        <th class="text-center">Plus por edad</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of contrato.beneficiarios; let i = index">
-                                        <td>
-                                            <!-- <input type="text" class="form-control" [(ngModel)]="item.Ruc" name="name-{{i}}" placeholder="cedula de identidad"> -->
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.nombre" name="name-{{i}}" placeholder="nombre completo">
-                                        </td>
-                                        <td>
-                                            <!-- <input type="text" class="form-control"
-                                                (ngModelChange)="item.edad = calcularEdad(item.fecha_nacimiento)"
-                                                [(ngModel)]="item.fecha_nacimiento" name="name-{{i}}"
-                                                placeholder="aaaa/mm/dd"> -->
-                                        </td>
-                                        <td>
-                                            <!-- <label for="">{{item.edad}}</label> -->
-                                        </td>
-                                        <td>
-                                            <!-- <input type="text" class="form-control" [(ngModel)]="item.plus_edad" name="name-{{i}}" placeholder="fecha de inhumacion"> -->
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- <div *ngIf="contrato.beneficiarios.length < 6" class="inline-flex">
-                                <button type="button" (click)="beneficiarioPush()"
-                                    class="btn m-auto btn-circle btn-info">+</button>
-                            </div> -->
-                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Vencimiento</th>
+                                    <th>Monto</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr *ngFor="let factura of facturas; let i = index">
+                                    <td scope="row">{{i+1}}</td>
+                                    <td>{{factura.vencimiento | date}}</td>
+                                    <td>{{factura.haber| currency:'':'':'2.0' }} Gs</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div> -->
+        </div>
 
-                <div *ngIf="esUdp">
-                    <div class="card">
-                        <div class="card-body  ">
-                            <h3>Ubicacion</h3>
-                            <table style="width: 100%; " class=" table ">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">Manzana</th>
-                                        <th class="text-center">Fila</th>
-                                        <th class="text-center">Parcela</th>
-                                        <th class="text-center">Sector</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h3>Inhumaciones</h3>
-                            <table class=" table  ">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">C.I.</th>
-                                        <th class="text-center">Nombre</th>
-                                        <th class="text-center">Fecha fallecimiento</th>
-                                        <th class="text-center">Fecha Inhumacion</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of contrato.inhumados; let i = index">
-                                        <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.ci" name="name-{{i}}" placeholder="cedula de identidad">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.nombre" name="name-{{i}}" placeholder="nombre completo">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.fecha_fallecimiento" name="name-{{i}}" placeholder="fecha de fallecimiento">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.fecha_inhumacion" name="name-{{i}}" placeholder="fecha de inhumacion">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+    </div>
 
-                        </div>
-                    </div>
+    <div *ngIf="producto">
+        <div *ngIf="!esUdp" class="">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Beneficiarios</h3>
+                    <table class=" table  ">
+                        <thead>
+                            <tr>
+                                <th class="text-center">C.I.</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Fecha Nacimiento</th>
+                                <th class="text-center">edad</th>
+                                <th class="text-center">Plus por edad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of contrato.beneficiarios; let i = index">
+                                <td>
+                                    <!-- <input type="text" class="form-control" [(ngModel)]="item.Ruc" name="name-{{i}}" placeholder="cedula de identidad"> -->
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" [(ngModel)]="item.nombre" name="name-{{i}}" placeholder="nombre completo">
+                                </td>
+                                <td>
+                                    <!-- <input type="text" class="form-control"
+                                        (ngModelChange)="item.edad = calcularEdad(item.fecha_nacimiento)"
+                                        [(ngModel)]="item.fecha_nacimiento" name="name-{{i}}"
+                                        placeholder="aaaa/mm/dd"> -->
+                                </td>
+                                <td>
+                                    <!-- <label for="">{{item.edad}}</label> -->
+                                </td>
+                                <td>
+                                    <!-- <input type="text" class="form-control" [(ngModel)]="item.plus_edad" name="name-{{i}}" placeholder="fecha de inhumacion"> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- <div *ngIf="contrato.beneficiarios.length < 6" class="inline-flex">
+                        <button type="button" (click)="beneficiarioPush()"
+                            class="btn m-auto btn-circle btn-info">+</button>
+                    </div> -->
                 </div>
-
             </div>
         </div>
+
+        <div *ngIf="esUdp">
+            <div class="card">
+                <div class="card-body  ">
+                    <h3>Ubicacion</h3>
+                    <table style="width: 100%; " class=" table ">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Manzana</th>
+                                <th class="text-center">Fila</th>
+                                <th class="text-center">Parcela</th>
+                                <th class="text-center">Sector</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h3>Inhumaciones</h3>
+                    <table class=" table  ">
+                        <thead>
+                            <tr>
+                                <th class="text-center">C.I.</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Fecha fallecimiento</th>
+                                <th class="text-center">Fecha Inhumacion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of contrato.inhumados; let i = index">
+                                <td>
+                                    <input type="text" class="form-control" [(ngModel)]="item.ci" name="name-{{i}}" placeholder="cedula de identidad">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" [(ngModel)]="item.nombre" name="name-{{i}}" placeholder="nombre completo">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" [(ngModel)]="item.fecha_fallecimiento" name="name-{{i}}" placeholder="fecha de fallecimiento">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" [(ngModel)]="item.fecha_inhumacion" name="name-{{i}}" placeholder="fecha de inhumacion">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
     </div>
+    <div class="float-right">
+        <button type="button" [routerLink]="['/admin/editar_contrato', this.id]" class="btn mr-2 btn-secondary">Editar Contrato</button>
+        <button type="button" [routerLink]="['/admin/contrato_pdf', this.id]" class="btn  btn-primary">Ver PDF</button>
+    </div>
+
+
 </div>

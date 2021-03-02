@@ -50,6 +50,8 @@ export class Factura {
         public contrato?: Contrato,
         public pagado?: boolean,
         public fecha_pagado_unix?: number,
+        public fondo?: Usuario,
+        public parcial?: Factura
     
     ) {
 

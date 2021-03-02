@@ -1,3 +1,5 @@
+import { EditarContratoComponent } from './../components/editar-contrato/editar-contrato.component';
+import { InfoCajaComponent } from './../components/info-caja/info-caja.component';
 import { CrearUsuarioComponent } from './../components/crear-usuario/crear-usuario.component';
 import { ContratoPdfComponent } from './../components/contrato-pdf/contrato-pdf.component';
  import { MovimientosComponent } from './../components/movimientos/movimientos.component';
@@ -52,7 +54,9 @@ const routes: Routes = [
       { path: 'factura/:id', component: FacturaComponent },
       { path: 'facturas', component: FacturasComponent },
       { path: 'movimientos', component: MovimientosComponent },
-      { path: 'contrato-pdf', component: ContratoPdfComponent },
+      { path: 'contrato_pdf/:id', component: ContratoPdfComponent },
+      { path: 'editar_contrato/:id', component: EditarContratoComponent },
+      { path: 'info_caja', component: InfoCajaComponent },
  
       { path: 'account-settings', component: AccountSettingsComponent },
 

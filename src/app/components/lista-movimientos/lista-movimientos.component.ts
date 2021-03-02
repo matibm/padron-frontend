@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Movimiento } from './../../models/movimiento';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-lista-movimientos',
@@ -8,6 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class ListaMovimientosComponent implements OnInit {
 
   constructor() { }
+
+
+
+
+  @Input() movimientos: Movimiento[]
 
   ngOnInit(): void {
   }

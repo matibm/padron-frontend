@@ -21,6 +21,41 @@
             <input type="password" [(ngModel)]="password" class="form-control" name="password">
         </div>
 
+        <div class="row">
+            <div class="col-xs col-md-2 mt-1">
+                <input [(ngModel)]="isVendedor" type="checkbox" id="check_vendedor" class="filled-in chk-col-light-blue" checked />
+                <label for="check_vendedor">Vendedor</label>
+            </div>
+            <div class="col-xs col-md-2 mt-1">
+                <input [(ngModel)]="isCobrador" type="checkbox" id="check_cobrador" class="filled-in chk-col-light-blue" checked />
+                <label for="check_cobrador">Cobrador</label>
+            </div>
+            <div class="col-xs col-md-2 mt-1">
+                <input [(ngModel)]="isCliente" type="checkbox" id="check_cliente" class="filled-in chk-col-light-blue" checked />
+                <label for="check_cliente">Cliente</label>
+            </div>
+            <div class="col-xs col-md-2 mt-1">
+                <input [(ngModel)]="isEmpleado" type="checkbox" id="check_empleado" class="filled-in chk-col-light-blue" checked />
+                <label for="check_empleado">Empleado</label>
+            </div>
+            <div class="col-xs col-md-2 mt-1">
+                <input [(ngModel)]="isPersona" type="checkbox" id="check_persona" class="filled-in chk-col-light-blue" checked />
+                <label for="check_persona">Persona</label>
+            </div>
+            <div class="col-xs col-md-2 mt-1">
+                <input [(ngModel)]="isEmpresa" type="checkbox" id="check_empresa" class="filled-in chk-col-light-blue" checked />
+                <label for="check_empresa">Empresa</label>
+            </div>
+            <div class="col-xs col-md-2 mt-1">
+                <input [(ngModel)]="isBanco" type="checkbox" id="check_banco" class="filled-in chk-col-light-blue" checked />
+                <label for="check_banco">Banco</label>
+            </div>
+            <div class="col-xs col-md-2 mt-1">
+                <input [(ngModel)]="manejaCaja" type="checkbox" id="check_maneja_caja" class="filled-in chk-col-light-blue" checked />
+                <label for="check_maneja_caja">Maneja Caja</label>
+            </div>
+        </div>
+
         <div class="float-right">
             <button type="button" (click)="crearUsuario()" class="btn btn-primary">Crear Usuario</button>
         </div>

@@ -34,7 +34,10 @@
             <ul class="nav nav-tabs profile-tab" role="tablist">
                 <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Perfil</a>
                 </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Contratos</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Contratos</a>
+                </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#facturas" role="tab">Facturas</a>
+                </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Settings</a>
                 </li>
             </ul>
@@ -173,6 +176,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="tab-pane" id="facturas" role="tabpanel">
+                    <div *ngIf="facturas" class="card-body">
+                        <app-facturas [fromOutside]="true" [facturas]="facturas"></app-facturas>
+
+                    </div>
+                </div>
                 <div class="tab-pane" id="settings" role="tabpanel">
                     <div class="card-body">
                         <form (ngSubmit)="actualizarUsuario(usuario)" class="form-horizontal form-material">
@@ -180,6 +189,12 @@
                                 <label class="col-md-12">Nombres</label>
                                 <div class="col-md-12">
                                     <input autocomplete="off" [(ngModel)]="usuario.NOMBRES" name="nombre" type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Apellidos</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="off" [(ngModel)]="usuario.APELLIDOS" name="nombre" type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -194,25 +209,89 @@
                                     <input autocomplete="off" [(ngModel)]="usuario.password" type="password" name="pass" class="form-control form-control-line">
                                 </div>
                             </div>
-
-                            <!-- <div class="form-group">
-                                <label class="col-sm-12">Select Country</label>
-                                <div class="col-sm-12">
-                                    <select class="form-control form-control-line">
-                                        <option>London</option>
-                                        <option>India</option>
-                                        <option>Usa</option>
-                                        <option>Canada</option>
-                                        <option>Thailand</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-xs col-md-2 mt-1">
+                                    <input [(ngModel)]="isVendedor" type="checkbox" name="check_vendedor_edit" id="check_vendedor_edit" class="filled-in chk-col-light-blue" (click)="prueba();isVendedor? null: isVendedor = 'check_vendedor_edit'" checked />
+                                    <label for="check_vendedor_edit">Vendedor</label>
                                 </div>
-                            </div> -->
+                                <div class="col-xs col-md-2 mt-1">
+                                    <input [(ngModel)]="isCobrador" type="checkbox" name="check_cobrador_edit" id="check_cobrador_edit" class="filled-in chk-col-light-blue" (click)="isCobrador? null: isCobrador = 'check_cobrador_edit'" checked />
+                                    <label for="check_cobrador_edit">Cobrador</label>
+                                </div>
+                                <div class="col-xs col-md-2 mt-1">
+                                    <input [(ngModel)]="isCliente" type="checkbox" name="check_cliente_edit" id="check_cliente_edit" class="filled-in chk-col-light-blue" (click)="isCliente? null: isCliente = 'check_cliente_edit'" checked />
+                                    <label for="check_cliente_edit">Cliente</label>
+                                </div>
+                                <div class="col-xs col-md-2 mt-1">
+                                    <input [(ngModel)]="isEmpleado" type="checkbox" name="check_empleado_edit" id="check_empleado_edit" class="filled-in chk-col-light-blue" (click)="isEmpleado? null: isEmpleado = 'check_empleado_edit'" checked />
+                                    <label for="check_empleado_edit">Empleado</label>
+                                </div>
+                                <div class="col-xs col-md-2 mt-1">
+                                    <input [(ngModel)]="isPersona" type="checkbox" name="check_persona_edit" id="check_persona_edit" class="filled-in chk-col-light-blue" (click)="isPersona? null: isPersona = 'check_persona_edit'" checked />
+                                    <label for="check_persona_edit">Persona</label>
+                                </div>
+                                <div class="col-xs col-md-2 mt-1">
+                                    <input [(ngModel)]="isEmpresa" type="checkbox" name="check_empresa_edit" id="check_empresa_edit" class="filled-in chk-col-light-blue" (click)="isEmpresa? null: isEmpresa = 'check_empresa_edit'" checked />
+                                    <label for="check_empresa_edit">Empresa</label>
+                                </div>
+                                <div class="col-xs col-md-2 mt-1">
+                                    <input [(ngModel)]="isBanco" type="checkbox" name="check_banco_edit" id="check_banco_edit" class="filled-in chk-col-light-blue" (click)="isBanco? null: isBanco = 'check_banco_edit'" checked />
+                                    <label for="check_banco_edit">Banco</label>
+                                </div>
+                                <div class="col-xs col-md-2 mt-1">
+                                    <input [(ngModel)]="manejaCaja" type="checkbox" name="check_maneja_caja_edit" id="check_maneja_caja_edit" class="filled-in chk-col-light-blue" (click)="manejaCaja? null: manejaCaja = 'check_maneja_caja_edit'" checked />
+                                    <label for="check_maneja_caja_edit">Maneja Caja</label>
+                                </div>
+                            </div>
+
+
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-success">Update Profile</button>
                                 </div>
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"><span class="lstick"></span>Recent Comments</h4>
+            </div>
+            <!-- ============================================================== -->
+            <!-- Comment widgets -->
+            <!-- ============================================================== -->
+            <div class="chat-right-aside comment-widgets">
+                <!-- Comment Row -->
+
+                <div style="max-height: 600px ;overflow: auto;" class="chat-rbox">
+                    <div *ngFor="let item of comentarios" class="d-flex flex-row comment-row">
+                        <div class="p-2"><span class="round">
+                            <ngx-avatar   name="{{[item.titular.NOMBRES, item.titular.APELLIDOS ] | nombreCorto }}"></ngx-avatar>
+                            
+                        </span></div>
+                        <div class="comment-text w-100">
+                            <h5>{{item.titular.NOMBRES}}</h5>
+                            <p class="m-b-5">{{item.texto}}</p>
+                            <div class="comment-footer"> <span class="text-muted pull-right">{{item.fecha_unix | date}}</span> <span class="action-icons">
+                                        <a href="javascript:void(0)"><i class="ti-pencil-alt"></i></a>
+                                        <a href="javascript:void(0)"><i class="ti-check"></i></a>
+                                        <a href="javascript:void(0)"><i class="ti-heart"></i></a>    
+                                    </span> </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-body b-t">
+                    <div class="row">
+                        <div class="col-8">
+                            <textarea placeholder="Type your message here" #texto class="form-control b-0"></textarea>
+                        </div>
+                        <div class="col-4 text-right">
+                            <button type="button" (click)="comentar(texto.value)" class="btn btn-info ">Comentar </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -226,30 +305,4 @@
 
 
 
-    <div *ngIf="cuotas" class="card">
-        <div class="card-body">
-            <h3 class="card-title">Cuotas</h3>
-
-            <div style="overflow: auto; max-height: 400px;">
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Vencimiento</th>
-                            <th>Monto</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr [routerLink]="['/admin/cuota', cuota._id]" *ngFor="let cuota of cuotas; let i = index">
-                            <td scope="row">{{i+1}}</td>
-                            <td>{{cuota.vencimiento | date}}</td>
-                            <td>{{cuota.haber | currency:'':'':'2.0' }} Gs</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </div>
 </div>

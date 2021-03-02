@@ -2,31 +2,44 @@
     <ng-template #customLoadingTemplate>
 
     </ng-template>
+    <div class="card">
+        <div class="card-body">
+            <form class="form-material m-t-40">
+                <div class="form-group">
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nombres</th>
-                <th>Apellidos</th>
-                <th>Accion</th>
-            </tr>
-        </thead>
-        <tbody>
+                    <input type="text" (keyup)="searchUsuarios(val.value)" [(ngModel)]="searching" name="search" #val class="form-control form-control-line" placeholder="Busca usuario">
+                </div>
+            </form>
 
-            <tr [routerLink]="['/admin/usuario', usuario._id]" class="pointer" *ngFor="let usuario of usuarios; let i = index">
-                <td scope="row">{{i+1}}</td>
-                <td>{{usuario.NOMBRES}}</td>
-                <td>{{usuario.APELLIDOS}}</td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-outline-dark">
-                    <i class="fa fa-pencil"></i>
-    
-                    </button>
-                </td>
-            </tr>
 
-        </tbody>
-    </table>
-    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr [routerLink]="['/admin/usuario', usuario._id]" class="pointer" *ngFor="let usuario of usuarios; let i = index">
+                        <td scope="row">{{i+1}}</td>
+                        <td>{{usuario.NOMBRES}}</td>
+                        <td>{{usuario.APELLIDOS}}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-outline-dark">
+                                <i class="fa fa-pencil"></i>
+        
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate">
+    </ngx-loading>
 </div>
