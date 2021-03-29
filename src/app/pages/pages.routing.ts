@@ -1,8 +1,11 @@
+import { TransferenciaComponent } from './../components/transferencia/transferencia.component';
+import { ListaFacturasComponent } from './../components/lista-facturas/lista-facturas.component';
+import { ResumenComponent } from './../components/resumen/resumen.component';
 import { EditarContratoComponent } from './../components/editar-contrato/editar-contrato.component';
 import { InfoCajaComponent } from './../components/info-caja/info-caja.component';
 import { CrearUsuarioComponent } from './../components/crear-usuario/crear-usuario.component';
 import { ContratoPdfComponent } from './../components/contrato-pdf/contrato-pdf.component';
- import { MovimientosComponent } from './../components/movimientos/movimientos.component';
+import { MovimientosComponent } from './../components/movimientos/movimientos.component';
 import { FacturaComponent } from './../components/factura/factura.component';
 import { FacturasComponent } from './../components/facturas/facturas.component';
 import { AuthGuard } from './../auth.guard';
@@ -52,19 +55,21 @@ const routes: Routes = [
       { path: 'info_contrato/:id', component: InfoContratoComponent },
       { path: 'nuevo_usuario', component: CrearUsuarioComponent },
       { path: 'factura/:id', component: FacturaComponent },
-      { path: 'facturas', component: FacturasComponent },
+      { path: 'facturas', component: ListaFacturasComponent },
       { path: 'movimientos', component: MovimientosComponent },
       { path: 'contrato_pdf/:id', component: ContratoPdfComponent },
       { path: 'editar_contrato/:id', component: EditarContratoComponent },
       { path: 'info_caja', component: InfoCajaComponent },
- 
+      { path: 'resumen', component: ResumenComponent },
+      { path: 'transferencia', component: TransferenciaComponent },
+
       { path: 'account-settings', component: AccountSettingsComponent },
 
     ]
 
 
   },
-  { path: 'contratos-pdf', component: ContratoPdfComponent }
+  { path: 'contratos-pdf/:id', component: ContratoPdfComponent }
 
 ];
 

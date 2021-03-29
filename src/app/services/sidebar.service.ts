@@ -14,16 +14,14 @@ export class SidebarService {
       submenu: [
         { titulo: 'nuevo contrato', url: 'crear_contrato' },
         { titulo: 'lista de contratos', url: 'lista_contratos' },
-        { titulo: 'Graficas', url: 'grafica1' },
-      ]
+       ]
     },
     {
       titulo: 'Usuarios',
       icono: 'mdi mdi-account-multiple',
       submenu: [
         { titulo: 'General', url: 'usuarios' },
-        { titulo: 'Clientes', url: 'clientes' },
-        { titulo: 'Vendedores', url: 'vendedores' },
+       
         { titulo: 'Nuevo Usuario', url: 'nuevo_usuario' },
       ]
     },
@@ -34,11 +32,12 @@ export class SidebarService {
         { titulo: 'Facturas', url: 'facturas' },
         { titulo: 'Movimientos', url: 'movimientos' },
         { titulo: 'caja', url: 'info_caja' },
+        { titulo: 'resumen', url: 'resumen' },
+        { titulo: 'transferencias', url: 'transferencia' },
       ]
     }
   ]
-
-
+ 
   refreshRoute() {
     this.urlActual = this.router.url
     console.log("cambiando url", this.urlActual);

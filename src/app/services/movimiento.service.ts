@@ -1,3 +1,4 @@
+import { CajaService } from './caja.service';
 import { URL_SERVICIOS } from './../config/global';
 import { UsuarioService } from './usuario.service';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +11,8 @@ export class MovimientoService {
 
   constructor(
     public http: HttpClient,
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+    public _cajaService: CajaService
 
   ) { }
   getTipoMovimiento(nivel?, padre?) {
@@ -45,7 +47,7 @@ export class MovimientoService {
     date_end ? url += `&date_end=${date_end}` : null;
     date_start ? url += `&date_start=${date_start}` : null;
     fondo ? url += `&fondo=${fondo}` : null;
-     url += `&cerrado=${cerrado}` 
+    url += `&cerrado=${cerrado}`
 
 
     return this.http.get(url).toPromise().then((resp: any) => {
@@ -71,10 +73,11 @@ export class MovimientoService {
     })
   }
 
-  crearMovimiento(movimiento) {
-
+  async crearMovimiento(movimiento) {
+    let caja = await this._cajaService.getCajaActual()
     let url = `${URL_SERVICIOS}/movimientos/crear_movimiento`;
     url += `?token=${this._usuarioService.token}`
+    url += `&caja=${caja._id}`
 
     return this.http.post(url, movimiento).toPromise().then((resp: any) => {
       console.log(resp);

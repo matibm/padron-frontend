@@ -1,12 +1,13 @@
 <div class="card">
     <div class="card-body">
-        <h4> <span class="lstick"></span> Egresos </h4>
+        <h4 *ngIf="showTitle"> <span class="lstick"></span> Egresos </h4>
 
-        <table *ngIf="movimientos.length>0" class="table table-hover">
+        <table *ngIf="movimientos" class="table table-hover">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Fondo</th>
-                    <th>Fecha</th>
+                    <th style="min-width: 120px;">Fecha</th>
                     <th>Nombre</th>
                     <th style="width: 25%;">Comentario</th>
                     <th>Monto</th>
@@ -14,9 +15,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of movimientos" [ngClass]="'pointer'">
+                <tr *ngFor="let item of movimientos; let i = index;" [ngClass]="'pointer'">
+                    <td>{{i+1}}</td>
                     <td>{{item.fondo.RAZON}}</td>
-                    <td>{{item.fecha_creacion_unix | date}}</td>
+                    <td>
+                        {{item.fecha_creacion_unix | date:' d, MMM y'}}
+                        <br> {{item.fecha_creacion_unix | date:' h:mm a'}}
+
+
+                    </td>
                     <td>{{item.nombre}}</td>
                     <td>{{item.comentario}}</td>
 

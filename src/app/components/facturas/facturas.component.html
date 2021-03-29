@@ -1,13 +1,13 @@
 <div class="card">
 
     <div class="card-body">
-        <h4> <span class="lstick"></span> Ingresos </h4>
+        <h4 *ngIf="showlabel"> <span class="lstick"></span> Ingresos </h4>
         <table class="table table-hover">
             <thead>
                 <tr>
                     <th>#</th>
                     <th style="width: 14%;">fondo</th>
-                    <th style="width: 20%;">fecha</th>
+                    <th>fecha</th>
                     <th>Monto</th>
                     <th *ngIf="!fromOutside">Cliente</th>
                     <th *ngIf="!fromOutside">Vencimiento</th>
@@ -21,10 +21,15 @@
                     <td scope="row">{{page*10 + (i+1) - 10}}</td>
                     <td *ngIf="factura.fondo">{{factura.fondo.RAZON}}</td>
                     <td *ngIf="!factura.fondo">Sin fondo</td>
-                    <td>{{factura.fecha_creacion_unix | date:' d, MMM y - h:mm a'}}</td>
+                    <td>
+                        {{factura.fecha_creacion_unix | date:' d, MMM y'}}
+                        <br> {{factura.fecha_creacion_unix | date:' h:mm a'}}
+
+
+                    </td>
                     <td>{{factura.haber | currency:'':'':'2.0'}} Gs</td>
-                    <td *ngIf="!fromOutside">{{factura.titular.NOMBRES}} {{factura.titular.APELLIDOS}}</td>
-                    <td *ngIf="!    fromOutside">{{factura.vencimiento | date}}</td>
+                    <td *ngIf="!fromOutside">{{factura.titular.NOMBRES| nombreCorto}} {{factura.titular.APELLIDOS | nombreCorto}} </td>
+                    <td *ngIf="!fromOutside">{{factura.vencimiento | date}}</td>
                     <td *ngIf="!fromOutside && factura.servicio">
                         <div *ngIf="factura.servicio.COD_CORTO == 'C.M.P.'"></div> {{factura.contrato.nombre_servicio }}
                     </td>

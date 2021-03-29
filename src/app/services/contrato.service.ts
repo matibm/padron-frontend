@@ -15,10 +15,29 @@ export class ContratoService {
     , public _usuarioService: UsuarioService
   ) { }
 
-  getContratos(page?) {
+
+  getContratos(page?, options?: { fecha_inicio?: number, fecha_fin?: number, nro_contrato?: string, producto?: string, cliente?: string, ruc?: string, manzana?: string, fila?, parcela?: string }, sort?: { key: string, value: number }) {
+    console.log(options);
+
+
     let p = page || 1
     let url = URL_SERVICIOS + '/contrato/all?page=' + p;
     url += `&token=${this._usuarioService.token}`
+
+    if (options) {
+      Object.entries(options).forEach(([key, value]) => {
+        if (value) {
+          url += `&${key}=${value}`
+
+        }
+      });
+    }
+    if (sort) {
+      url += `&sort_key=${sort.key}`
+      url += `&sort_value=${sort.value}`
+    }
+
+
     return this.http.get(url).toPromise().then((resp: any) => {
       return resp
     })
@@ -52,7 +71,7 @@ export class ContratoService {
   }
   updateContrato(contrato, modifica_producto: boolean) {
     console.log(modifica_producto);
-    
+
     let url = URL_SERVICIOS + '/contrato/edit';
     url += `?token=${this._usuarioService.token}`
     url += `&modifica_producto=${modifica_producto}`

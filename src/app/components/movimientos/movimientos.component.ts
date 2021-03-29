@@ -25,6 +25,8 @@ export class MovimientosComponent implements OnInit {
   fechaMovimiento
   monto: number
   comentario
+  servicio
+  servicios
   loading = false
   constructor(
     public _movimientoService: MovimientoService,

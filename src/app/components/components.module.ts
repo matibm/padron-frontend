@@ -26,6 +26,9 @@ import { CrearUsuarioComponent } from './crear-usuario/crear-usuario.component';
 import { InfoCajaComponent } from './info-caja/info-caja.component';
 import { EditarContratoComponent } from './editar-contrato/editar-contrato.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ResumenComponent } from './resumen/resumen.component';
+import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
+import { TransferenciaComponent } from './transferencia/transferencia.component';
 
 @NgModule({
   declarations: [IncrementadorComponent,
@@ -43,6 +46,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     CrearUsuarioComponent,
     InfoCajaComponent,
     EditarContratoComponent,
+    ResumenComponent,
+    ListaFacturasComponent,
+    TransferenciaComponent,
 
   ],
   imports: [

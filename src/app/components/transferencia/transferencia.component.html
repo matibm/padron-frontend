@@ -1,0 +1,124 @@
+<div class="row">
+    <div class="col-xs col-md">
+        <div class="card">
+
+            <div class="card-body">
+                <h4> <span class="lstick"></span>Origen</h4>
+                <div style="justify-content: space-between;" class="inline-flex">
+
+                    <div *ngIf="fondoOrigen" (click)="fondoOrigen = null" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+                <div class="" *ngIf="!fondoOrigen">
+                    <ng-select [items]="fondos" [(ngModel)]="fondoOrigen" (ngModelChange)="selectFondoOrigen(fondoOrigen)" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                                <small>{{item.RUC}}</small>
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+                <div class="" *ngIf="fondoOrigen">
+                    <div>
+                        <div *ngIf="fondoOrigen.NOMBRES">{{fondoOrigen.NOMBRES}} {{fondoOrigen.APELLIDOS}}</div>
+                        <div *ngIf="fondoOrigen.NOMBRES && fondoOrigen.RAZON"> - </div>
+                        <div *ngIf="fondoOrigen.RAZON">{{fondoOrigen.RAZON}} </div>
+
+                        <small>{{fondoOrigen.RUC}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-xs col-md">
+        <div class="card">
+            <div class="card-body">
+                <h4> <span class="lstick"></span>Destino</h4>
+                <div style="justify-content: space-between;" class="inline-flex">
+
+                    <div *ngIf="fondoDestino" (click)="fondoDestino = null" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+                <div class="" *ngIf="!fondoDestino">
+                    <ng-select [items]="fondos" [(ngModel)]="fondoDestino" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                                <small>{{item.RUC}}</small>
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+                <div class="" *ngIf="fondoDestino">
+                    <div>
+                        <div *ngIf="fondoDestino.NOMBRES">{{fondoDestino.NOMBRES}} {{fondoDestino.APELLIDOS}}</div>
+                        <div *ngIf="fondoDestino.NOMBRES && fondoDestino.RAZON"> - </div>
+                        <div *ngIf="fondoDestino.RAZON">{{fondoDestino.RAZON}} </div>
+
+                        <small>{{fondoDestino.RUC}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th style="width: 14%;">fondo</th>
+                    <th>fecha</th>
+                    <th>Monto</th>
+                    <th>Cliente</th>
+                    <th>Vencimiento</th>
+                    <th>Servicio</th>
+                    <th>Pagado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } -->
+                <tr class="pointer" (click)="selectItem(factura._id)" id="id-{{factura._id}}" *ngFor="let factura of facturas  | paginate: { itemsPerPage: 10,totalItems:facturaCount, currentPage: facturaPage } ; let i = index;">
+                    <td scope="row">{{facturaPage*10 + (i+1) - 10}}</td>
+                    <td *ngIf="factura.fondo">{{factura.fondo.RAZON}}</td>
+                    <td *ngIf="!factura.fondo">Sin fondo</td>
+                    <td>
+                        {{factura.fecha_creacion_unix | date:' d, MMM y'}}
+                        <br> {{factura.fecha_creacion_unix | date:' h:mm a'}}
+                    </td>
+                    <td>{{factura.haber | currency:'':'':'2.0'}} Gs</td>
+                    <td>{{factura.titular.NOMBRES}} {{factura.titular.APELLIDOS}}</td>
+                    <td>{{factura.vencimiento | date}}</td>
+                    <td *ngIf="factura.servicio">
+                        <div *ngIf="factura.servicio.COD_CORTO == 'C.M.P.'"></div> {{factura.contrato.nombre_servicio }}
+                    </td>
+                    <td *ngIf=" factura.servicio">
+                        {{factura.servicio.COD_CORTO }}
+                    </td>
+                    <td *ngIf="factura.pagado"><b>{{factura.fecha_pagado_unix | date}}</b></td>
+                    <td class="text-danger" *ngIf="!factura.pagado">Pendiente</td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls *ngIf="facturaCount>10" (pageChange)="pageChanged($event); page = $event"></pagination-controls>
+    </div>
+</div>

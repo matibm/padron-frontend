@@ -14,14 +14,14 @@ export class FacturasComponent implements OnInit {
   constructor(public _facturaService: FacturaService) { }
   todos
   async ngOnInit() {
-    if (!this.facturas && !this.fromOutside) {
-      let resp = await this._facturaService.getFacturas(this.pagado, this.fondo, this.start, this.end, null, null, this.cerrado)
-      this.facturas = resp.facturas
-      this.count = resp.count
-    } else {
+    // if (!this.facturas && !this.fromOutside) {
+    //   let resp = await this._facturaService.getFacturas(this.pagado, this.fondo, this.start, this.end, null, null, this.cerrado)
+    //   this.facturas = resp.facturas
+    //   this.count = resp.count
+    // } else {
 
 
-    }
+    // }
   }
   page = 1
   @Input() fromOutside = false
@@ -32,7 +32,10 @@ export class FacturasComponent implements OnInit {
   @Input() start
   @Input() end
   @Input() cerrado 
+  @Input() showlabel = true 
   async pageChanged(page) {
+    console.log(page);
+    
     let resp = await this._facturaService.getFacturas(this.pagado, this.fondo, this.start, this.end, page, null, this.cerrado)
 
 

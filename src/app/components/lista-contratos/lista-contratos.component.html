@@ -1,19 +1,203 @@
 <div class="card">
+    <div class="card-body">
+        <h4><span class="lstick"></span> Filtros </h4>
+        <div class="row">
+            <div class="col-xs col-md">
+                <div class="form-group">
+                    <label for="fecha_inicio">Fecha inicio :
+                        <span><b>{{date_start | date}}</b></span>
+                    </label>
+                    <input type="text" name="fecha_inicio" [(ngModel)]="date_start_StiringTemporal" (ngModelChange)="date_start = calcularFecha(date_start_StiringTemporal)" id="fecha_inicio" class="form-control" placeholder="AAAA MM DD" aria-describedby="fechainicioid">
 
+                </div>
+            </div>
+            <div class="col-xs b-r col-md">
+                <div class="form-group">
+                    <label for="fecha_fin">Fecha fin:
+                        <span><b>{{date_end | date}}</b></span>
+                    </label>
+                    <input type="text" name="fecha_fin" id="fecha_fin" [(ngModel)]="date_end_StiringTemporal" (ngModelChange)="date_end = calcularFecha(date_end_StiringTemporal)" class="form-control" placeholder="AAAA MM DD" aria-describedby="fechafinid">
+                </div>
+            </div>
+            <div class="col-xs col-md-4">
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <label>Servicio</label>
+                    <div *ngIf="servicio" (click)="servicio = null" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+                <ng-select *ngIf="!servicio" [(ngModel)]="servicio" (ngModelChange)="seleccionarProducto(servicio)" [items]="servicios" notFoundText="no se encontraron resultados" placeholder="buscar servicio" bindLabel="NOMBRE">
+                    <ng-template ng-option-tmp let-item="item">
+                        <div> {{item.NOMBRE}} {{item.COD_CORTO}} <br>
+                        </div>
+                    </ng-template>
+                </ng-select>
+
+                <div class="" *ngIf="servicio">
+                    <div>
+                        servicio XD
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs col-md">
+                <div class="form-group">
+                    <label for="nro_contrato">Nro contrato</label>
+                    <input type="text" name="nro_contrato" id="nro_contratoinput" class="form-control" placeholder="numero de contrato" aria-describedby="nrocontratoid">
+                </div>
+            </div>
+
+        </div>
+        <!-- <hr> -->
+
+        <div class="row">
+            <div class="col-xs col-md-3">
+
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <label>Cobrador</label>
+                    <div *ngIf="cobrador" (click)="cobrador = null" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+                <div class="" *ngIf="!cobrador">
+                    <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchcobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+
+                <div class="" *ngIf="cobrador">
+                    <div>
+                        <div *ngIf="cobrador.NOMBRES">{{cobrador .NOMBRES}} {{cobrador .APELLIDOS}}</div>
+                        <div *ngIf="cobrador   .NOMBRES && cobrador  .RAZON"> - </div>
+                        <div *ngIf="cobrador   .RAZON">{{cobrador .RAZON}} </div>
+
+                        <small>{{cobrador.RUC}}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs col-md-3">
+
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <label>Vendedor</label>
+                    <div *ngIf="vendedor" (click)="vendedor = null" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+                <div class="" *ngIf="!vendedor">
+                    <ng-select [items]="vendedores" [(ngModel)]="vendedor" (search)="searchvendedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar vendedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+
+                <div class="" *ngIf="vendedor">
+                    <div>
+                        <div *ngIf="vendedor.NOMBRES">{{vendedor .NOMBRES}} {{vendedor .APELLIDOS}}</div>
+                        <div *ngIf="vendedor   .NOMBRES && vendedor  .RAZON"> - </div>
+                        <div *ngIf="vendedor   .RAZON">{{vendedor .RAZON}} </div>
+
+                        <small>{{vendedor.RUC}}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs col-md-3">
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <label>Cliente</label>
+                    <div *ngIf="cliente" (click)="cliente = null" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+                <div class="" *ngIf="!cliente">
+                    <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <div class="" *ngIf="cliente">
+                    <div>
+                        <div *ngIf="cliente.NOMBRES">{{cliente.NOMBRES}} {{cliente.APELLIDOS}}</div>
+                        <div *ngIf="cliente.NOMBRES && cliente.RAZON"> - </div>
+                        <div *ngIf="cliente.RAZON">{{cliente.RAZON}} </div>
+
+                        <small>{{cliente.RUC}}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs col-md">
+                <div class="form-group">
+                    <label for="manzana">manzana</label>
+                    <input type="text" [(ngModel)]="manzana" name="manzana" id="manzanainput" class="form-control" placeholder="manzana">
+                </div>
+            </div>
+            <div class="col-xs col-md">
+                <div class="form-group">
+                    <label for="fila">fila</label>
+                    <input type="text" [(ngModel)]="fila" name="fila" id="filainput" class="form-control" placeholder="fila">
+                </div>
+            </div>
+            <div class="col-xs col-md">
+                <div class="form-group">
+                    <label for="parcela">parcela</label>
+                    <input type="text" name="parcela" [(ngModel)]="parcela" id="parcelainput" class="form-control" placeholder="parcela">
+                </div>
+            </div>
+        </div>
+        <div class="" style="width: 100%; display: flex; ">
+            <div class="mx-auto">
+                <button type="button" (click)="filtrar()" class=" btn btn-primary">filtrar</button>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+<div class="card">
     <div class="card-body">
         <h4 class="card-title">Contratos</h4>
         <table class="table table-hover">
             <thead>
-                <tr>
+                <tr #tableHeaad class="thead">
                     <th>#</th>
-                    <th>fecha</th>
-                    <th>Nro. Contrato</th>
-                    <th>Servicio o Producto</th>
-                    <th>Cliente</th>
+                    <th id="fecha_creacion_unix" (click)="ordenar('fecha_creacion_unix')">fecha <i class="ml-1 fa fa-sort-desc"></i></th>
+                    <th id="nro_contrato" (click)="ordenar('nro_contrato')">Nro. Contrato <i class="ml-1 fa fa-sort"></i> </th>
+                    <th id="producto" (click)="ordenar('producto')">Servicio o Producto <i class="ml-1 fa fa-sort"></i>
+                    </th>
+                    <th>Cliente </th>
                     <th>RUC/CI</th>
-                    <th>Manzana</th>
-                    <th>Fila</th>
-                    <th>Parcela</th>
+                    <th id="manzana" (click)="ordenar('manzana')">Manzana <i class="ml-1 fa fa-sort"></i> </th>
+                    <th id="fila" (click)="ordenar('fila')">Fila <i class="ml-1 fa fa-sort"></i> </th>
+                    <th id="parcela" (click)="ordenar('parcela')">Parcela <i class="ml-1 fa fa-sort"></i> </th>
                 </tr>
             </thead>
             <tbody>
@@ -25,7 +209,7 @@
                     <td>{{contrato.nombre_servicio}}</td>
                     <td *ngIf="contrato.titular">{{contrato.titular.NOMBRES}} {{contrato.titular.APELLIDOS}}</td>
                     <td *ngIf="!contrato.titular">---</td>
-                    <td>{{contrato.titular.RUC}}</td>
+                    <td *ngIf="contrato.titular">{{contrato.titular.RUC}}</td>
                     <td *ngIf="!contrato.manzana">---</td>
                     <td *ngIf="!contrato.fila">---</td>
                     <td *ngIf="!contrato.parcela">---</td>
