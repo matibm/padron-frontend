@@ -13,8 +13,8 @@ import { Component, OnInit } from '@angular/core';
 export class InfoContratoComponent implements OnInit {
 
   constructor(
-    public _contratoService: ContratoService ,
-    public activatedRoute:ActivatedRoute,
+    public _contratoService: ContratoService,
+    public activatedRoute: ActivatedRoute,
     public _facturaService: FacturaService
   ) { }
   contrato: Contrato
@@ -26,19 +26,26 @@ export class InfoContratoComponent implements OnInit {
   cobrador
   vendedor
   producto
-  
-  async ngOnInit(){
+
+  async ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.contrato = await this._contratoService.getContratoById(this.id)
     console.log(this.contrato);
-    
+
     this.titular = this.contrato.titular
     this.cliente = this.contrato.titular
     this.producto = this.contrato.producto
     this.vendedor = this.contrato.vendedor
     this.cobrador = this.contrato.cobrador
     this.facturas = await this._facturaService.getFacturasByContrato(this.contrato._id)
-    
+
+  }
+
+  viewContrato() {
+    let wopen = window.open('/contratos-pdf/' + this.id)
+    wopen.onafterprint = (event) => {
+      wopen.close()
+    }
   }
 
 }

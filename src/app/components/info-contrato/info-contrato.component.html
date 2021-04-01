@@ -259,8 +259,9 @@
 
     </div>
     <div class="float-right">
-        <button type="button" [routerLink]="['/admin/editar_contrato', this.id]" class="btn mr-2 btn-secondary">Editar Contrato</button>
-        <button type="button" [routerLink]="['/admin/contrato_pdf', this.id]" class="btn  btn-primary">Ver PDF</button>
+        <button type="button" [routerLink]="['/admin/editar_contrato', this.id]" class="btn mr-2 btn-secondary">Editar
+            Contrato</button>
+        <button type="button" (click)="viewContrato()" class="btn  btn-primary">Ver PDF</button>
     </div>
 
 

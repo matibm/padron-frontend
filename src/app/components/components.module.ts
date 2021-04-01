@@ -29,6 +29,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ResumenComponent } from './resumen/resumen.component';
 import { ListaFacturasComponent } from './lista-facturas/lista-facturas.component';
 import { TransferenciaComponent } from './transferencia/transferencia.component';
+import {NgxPrintModule} from 'ngx-print';
+import { FacturaPdfComponent } from './factura-pdf/factura-pdf.component';
 
 @NgModule({
   declarations: [IncrementadorComponent,
@@ -49,6 +51,7 @@ import { TransferenciaComponent } from './transferencia/transferencia.component'
     ResumenComponent,
     ListaFacturasComponent,
     TransferenciaComponent,
+    FacturaPdfComponent,
 
   ],
   imports: [
@@ -57,7 +60,7 @@ import { TransferenciaComponent } from './transferencia/transferencia.component'
     FormsModule,
     ReactiveFormsModule,
     ChartsModule, SweetAlert2Module.forRoot(),
-
+    NgxPrintModule,
     NgSelectModule,
     RouterModule,
     NgxPaginationModule,

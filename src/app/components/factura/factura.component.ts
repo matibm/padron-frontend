@@ -30,7 +30,8 @@ export class FacturaComponent implements OnInit {
   primeraEjecucion = true
   montoparcial = 0
   montoparcialCorrecto = true
-  parciales: Factura[]  
+  parciales: Factura[]
+  facturaPdf
   async ngOnInit() {
     if (this.primeraEjecucion) {
       this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((e: NavigationEnd) => {
@@ -44,7 +45,23 @@ export class FacturaComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
     this.initialize()
-
+    this.facturaPdf = {
+      nombres: `${this.factura.titular.NOMBRES} ${this.factura.titular.APELLIDOS}`,
+      fecha: this.factura.fecha_pagado_unix,
+      direccion: `${this.factura.titular.direccion_particular}`,
+      ruc: this.factura.titular.RUC,
+      tel: this.factura.titular.TELEFONO1,
+      notaDeRemision: '123123',
+      servicios: [
+        {
+          cantidad: 1,
+          concepto: this.factura.contrato.producto.NOMBRE,
+          precioUnitario: this.factura.haber,
+          cincoPorciento: null,
+          diezPorciento: this.factura.haber * 0.1,
+        }
+      ]
+    }
   }
 
   async initialize() {
@@ -90,6 +107,13 @@ export class FacturaComponent implements OnInit {
     } else {
       this.montoparcialCorrecto = true
 
+    }
+  }
+
+  printFactura() {
+    let wopen = window.open('/factura-pdf/' + this.id)
+    wopen.onafterprint = (event) => {
+      wopen.close()
     }
   }
 

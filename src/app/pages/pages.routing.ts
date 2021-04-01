@@ -1,3 +1,4 @@
+import { FacturaPdfComponent } from './../components/factura-pdf/factura-pdf.component';
 import { TransferenciaComponent } from './../components/transferencia/transferencia.component';
 import { ListaFacturasComponent } from './../components/lista-facturas/lista-facturas.component';
 import { ResumenComponent } from './../components/resumen/resumen.component';
@@ -69,7 +70,8 @@ const routes: Routes = [
 
 
   },
-  { path: 'contratos-pdf/:id', component: ContratoPdfComponent }
+  { path: 'contratos-pdf/:id', component: ContratoPdfComponent },
+  { path: 'factura-pdf/:id', component: FacturaPdfComponent }
 
 ];
 

@@ -156,6 +156,7 @@
 
         <div class="float-right mt-3">
             <button *ngIf="!factura.pagado && !crearParcial" [disabled]="!fondo || !montoparcialCorrecto" (click)="pagar()" type="button" class="btn  btn-primary">Pagar</button>
+            <button *ngIf="factura.pagado" (click)="printFactura()" type="button" class="btn  btn-primary">imprimir Factura</button>
             <button *ngIf="!factura.pagado && crearParcial" [disabled]="!fondo || !montoparcialCorrecto" (click)="pagar()" type="button" class="btn  btn-primary">Pago parcial</button>
 
         </div>

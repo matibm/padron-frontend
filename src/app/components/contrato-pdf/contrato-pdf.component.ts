@@ -23,7 +23,13 @@ export class ContratoPdfComponent implements OnInit {
     this.contrato = await this._contratoService.getContratoById(this.id)
     this.tipo_contrato = this.contrato.producto.COD_CORTO
      console.log(this.contrato);
+     setTimeout(() => {
+      window.print()  
+     }, 500);
      
-  }
+     window.onafterprint = (event) => {
+      console.log('After print');
+      window.close()
+    };  }
 
 }
