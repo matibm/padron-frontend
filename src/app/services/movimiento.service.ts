@@ -40,22 +40,41 @@ export class MovimientoService {
       return resp.movimientos
     })
   }
-  getMovimientosByDate(date_start?, date_end?, fondo?, cerrado?: boolean) {
+  getAllMovimientos(options?) {
 
-    let url = `${URL_SERVICIOS}/movimientos/by_date`;
+    let url = `${URL_SERVICIOS}/movimientos/all`;
     url += `?token=${this._usuarioService.token}`
-    date_end ? url += `&date_end=${date_end}` : null;
-    date_start ? url += `&date_start=${date_start}` : null;
-    fondo ? url += `&fondo=${fondo}` : null;
-    url += `&cerrado=${cerrado}`
-
-
+    if (options) {
+      console.log(options);
+      
+      Object.entries(options).forEach(([key, value]) => {
+        
+          url += `&${key}=${value}`        
+        
+      });
+    }
     return this.http.get(url).toPromise().then((resp: any) => {
-      console.log("movimientos", resp);
-
+      console.log(resp);
+      
       return resp
     })
   }
+  // getMovimientosByDate(date_start?, date_end?, fondo?, cerrado?: boolean) {
+
+  //   let url = `${URL_SERVICIOS}/movimientos/by_date`;
+  //   url += `?token=${this._usuarioService.token}`
+  //   date_end ? url += `&date_end=${date_end}` : null;
+  //   date_start ? url += `&date_start=${date_start}` : null;
+  //   fondo ? url += `&fondo=${fondo}` : null;
+  //   url += `&cerrado=${cerrado}`
+
+
+  //   return this.http.get(url).toPromise().then((resp: any) => {
+  //     console.log("movimientos", resp);
+
+  //     return resp
+  //   })
+  // }
   buscarTipoMovimientos(query, nivel) {
     console.log(query);
     console.log(nivel);

@@ -1,3 +1,4 @@
+import { Contrato } from './contrato';
 import { Usuario } from './usuario';
 
 
@@ -14,6 +15,8 @@ export class Movimiento {
         public monto_iva10?: string,
         public id_cajas?: string,
         public id_concepto?: string,
+        public contrato?: Contrato  ,
+
         public nro_factura?: string,
         public id_moneda?: string,
         public nom_moneda?: string,

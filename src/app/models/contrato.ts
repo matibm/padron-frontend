@@ -13,6 +13,7 @@ export class Contrato {
         public id_servicio?: string,
         public fecha_alta?: string,
         public precio_total?: number,
+        public titular_alternativo?: Usuario,
         // public v2_precio_total?: number,
         public plazo?: number,
         // public v2_plazo?: string,

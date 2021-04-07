@@ -2,6 +2,8 @@ import { URL_SERVICIOS } from './../config/global';
 import { UsuarioService } from './usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import swal from 'sweetalert2';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +24,19 @@ export class CajaService {
     let url = URL_SERVICIOS + '/caja/cerrar_caja';
     url += `?token=${this._usuarioService.token}`
     url += `&caja=${this.cajaActual._id}`
-    start ? url += `&start=${start}` : null
-    end ? url += `&end=${end}` : null
+    url += `&start=${start ? start : 0}`
+    url += `&end=${end ? end : 0}`
     fondo ? url += `&fondo=${fondo}` : null
 
     return this.http.get(url).toPromise().then((resp: any) => {
       console.log(resp);
 
+      swal.fire({
+        icon: 'success',
+        title: 'Caja cerrada',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
       return resp
     })
   }

@@ -19,6 +19,9 @@ export class CrearContratoComponent implements OnInit {
 
   cliente: Usuario
   clientes: Usuario[] = null
+
+  titularAlternativo: Usuario
+
   productos: Producto[] = null
   vendedores: Usuario[] = null
   clientesSearch = this.clientes;
@@ -87,7 +90,7 @@ export class CrearContratoComponent implements OnInit {
   radioCobrador = false
   constructor(
     public _productoService: ProductosService,
-    public _usuarioService: UsuarioService, 
+    public _usuarioService: UsuarioService,
     public readonly swalTargets: SwalPortalTargets,
     public _contratoService: ContratoService
   ) {
@@ -245,11 +248,12 @@ export class CrearContratoComponent implements OnInit {
       precio_total: this.producto.PRECIO_MAYORISTA,
       producto: this.producto,
       titular: this.cliente,
+      titular_alternativo: this.titularAlternativo,
       nro_contrato: this.nro_contrato,
       activo: '1',
       vendedor: this.vendedor,
       beneficiarios: this.beneficiarios,
-       
+
       // fecha_alta: today, // falta poner campode fecha para poder modificar
       fecha_creacion_unix: new Date().valueOf() // falta poner campode fecha para poder modificar
 
@@ -351,8 +355,16 @@ export class CrearContratoComponent implements OnInit {
   }
 
   disableCrearContrato() {
-     if (this.producto && this.cliente && this.vendedor && this.radioValue) {
-      return false;
+    if (this.producto && this.cliente && this.vendedor && this.radioValue) {
+      if (this.esUdp) {
+        if (this.manzana && this.fila && this.parcela) {
+          return false
+        } else {
+          return true
+        }
+      } else {
+        return false
+      }
     }
     return true;
   }

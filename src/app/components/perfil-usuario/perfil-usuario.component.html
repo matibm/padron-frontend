@@ -38,6 +38,8 @@
                 </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#facturas" role="tab">Facturas</a>
                 </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#movimientos" role="tab">Movimientos</a>
+                </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Settings</a>
                 </li>
             </ul>
@@ -182,6 +184,12 @@
 
                     </div>
                 </div>
+                <div class="tab-pane" id="movimientos" role="tabpanel">
+                    <div *ngIf="facturas" class="card-body">
+
+                        <app-lista-movimientos [movimientos]="movimientos"></app-lista-movimientos>
+                    </div>
+                </div>
                 <div class="tab-pane" id="settings" role="tabpanel">
                     <div class="card-body">
                         <form (ngSubmit)="actualizarUsuario(usuario)" class="form-horizontal form-material">
@@ -194,7 +202,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">Apellidos</label>
                                 <div class="col-md-12">
-                                    <input autocomplete="off" [(ngModel)]="usuario.APELLIDOS" name="nombre" type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
+                                    <input autocomplete="off" [(ngModel)]="usuario.APELLIDOS" name="noambre" type="text" placeholder="Johnathan Doe" class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -244,10 +252,108 @@
                                 </div>
                             </div>
 
+                            <hr>
+
+                            <div class="row">
+                                <div class="col-xs col-md">
+                                    <h3>Telefonos</h3>
+                                    <div class="form-group">
+                                        <label for="">Telefono 1:</label>
+                                        <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Telefono 2:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.TELEFONO2" name="Telefono-2" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Telefono 3:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.TELEFONO3" name="Telefono-3" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Telefono fax:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.TELEFONO_FAX" name="Telefono-fax" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Telefono trabajo:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.TEL_TRABAJO" name="Telefono-trabajo" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Telefono contacto 1:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTACTO" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Telefono contacto 2:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTA2" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Telefono contacto 3:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTA3" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Telefono contacto 4:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTA4" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Telefono contacto 5:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTA5" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                </div>
+                                <div class="col-xs col-md">
+                                    <h3>Direcciones</h3>
+                                    <div class="form-group">
+                                        <label for="">Ciudad: </label>
+                                        <input type="text" name="" [(ngModel)]="usuario.NOMCIUDAD" name="</label" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Departamento: </label>
+                                        <input type="text" name="" [(ngModel)]="usuario.NOMDEPAR" name="Departamento:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Direccion: </label>
+                                        <input type="text" name="" [(ngModel)]="usuario.DIRECCION" name="Direccion:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Direccion laboral: </label>
+                                        <input type="text" name="" [(ngModel)]="usuario.direccion_laboral" name="Direccion-laboral" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Direccion particular: :</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.direccion_particular" name="Direccion-particular" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Direccion trabajo:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.DIRECCION_TRABAJO" name="Direccion-trabajo" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Ciudad trabajo:</label>
+                                        <input type="text" name="" [(ngModel)]="usuario.ciudad_trabajo" name="trabajo:</" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button type="submit" class="btn btn-success">Update Profile</button>
+                                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
                                 </div>
                             </div>
                         </form>
@@ -268,17 +374,19 @@
                 <div style="max-height: 600px ;overflow: auto;" class="chat-rbox">
                     <div *ngFor="let item of comentarios" class="d-flex flex-row comment-row">
                         <div class="p-2"><span class="round">
-                            <ngx-avatar   name="{{[item.titular.NOMBRES, item.titular.APELLIDOS ] | nombreCorto }}"></ngx-avatar>
-                            
-                        </span></div>
+                                <ngx-avatar name="{{[item.titular.NOMBRES, item.titular.APELLIDOS ] | nombreCorto }}">
+                                </ngx-avatar>
+
+                            </span></div>
                         <div class="comment-text w-100">
                             <h5>{{item.titular.NOMBRES}}</h5>
                             <p class="m-b-5">{{item.texto}}</p>
-                            <div class="comment-footer"> <span class="text-muted pull-right">{{item.fecha_unix | date}}</span> <span class="action-icons">
-                                        <a href="javascript:void(0)"><i class="ti-pencil-alt"></i></a>
-                                        <a href="javascript:void(0)"><i class="ti-check"></i></a>
-                                        <a href="javascript:void(0)"><i class="ti-heart"></i></a>    
-                                    </span> </div>
+                            <div class="comment-footer"> <span class="text-muted pull-right">{{item.fecha_unix |
+                                    date}}</span> <span class="action-icons">
+                                    <a href="javascript:void(0)"><i class="ti-pencil-alt"></i></a>
+                                    <a href="javascript:void(0)"><i class="ti-check"></i></a>
+                                    <a href="javascript:void(0)"><i class="ti-heart"></i></a>
+                                </span> </div>
                         </div>
                     </div>
 
@@ -290,7 +398,8 @@
                             <textarea placeholder="Type your message here" #texto class="form-control b-0"></textarea>
                         </div>
                         <div class="col-4 text-right">
-                            <button type="button" (click)="comentar(texto.value)" class="btn btn-info ">Comentar </button>
+                            <button type="button" (click)="comentar(texto.value)" class="btn btn-info ">Comentar
+                            </button>
                         </div>
                     </div>
                 </div>

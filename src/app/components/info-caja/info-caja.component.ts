@@ -27,8 +27,10 @@ export class InfoCajaComponent implements OnInit {
   ngmodelstart
   ngmodelend
   public loading = false;
-  start = new Date(new Date().getTime() - (86400000 * 1)).getTime()
+  // start = new Date(new Date().getTime() - (86400000 * 1)).getTime()
   end = new Date().getTime()
+  start = 0
+  
 
   facturaCount = 0
   movimientoCount = 0
@@ -38,13 +40,14 @@ export class InfoCajaComponent implements OnInit {
 
     this.fondos = await this._usuarioService.buscarUsuarios('BANCOS', '')
 
-    let respMovimientos = await this._movimientoService.getMovimientosByDate(this.start, this.end, null, false)
+    // let respMovimientos = await this._movimientoService.getMovimientosByDate(this.start, this.end, null, false)
+    let respMovimientos = await this._movimientoService.getAllMovimientos({cerrado: false})
     this.movimientoCount = respMovimientos.count
     this.movimientos = respMovimientos.movimientos
     console.log(this.movimientos);
 
     this.totalMovimientos = respMovimientos.total.monto_total
-    this.HaberMovimientos = respMovimientos.total.monto_haber | 0
+    this.HaberMovimientos = respMovimientos.total.monto_haber - respMovimientos.total.monto_total | 0
     let respfactura
     if (this.fondo) {
 
@@ -67,17 +70,18 @@ export class InfoCajaComponent implements OnInit {
   }
 
   async seleccionarFondo(fondo) {
-
+     
     if (!fondo) {
       return
     }
     this.loading = true
 
-    let respMovimientos = await this._movimientoService.getMovimientosByDate(this.start, this.end, fondo._id, false)
+    let respMovimientos = await this._movimientoService.getAllMovimientos({cerrado: false, fondo: fondo._id})
     this.movimientos = respMovimientos.movimientos
-
+    console.log(respMovimientos);
+    
     this.totalMovimientos = respMovimientos.total.monto_total
-    this.HaberMovimientos = respMovimientos.total.monto_haber
+    this.HaberMovimientos = respMovimientos.total.monto_haber - respMovimientos.total.monto_total | 0
 
     let respfactura = await this._facturaService.getFacturas(true, fondo._id, this.start, this.end, null, null, false)
     if (respfactura.ok) {

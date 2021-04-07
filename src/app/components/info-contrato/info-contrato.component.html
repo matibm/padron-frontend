@@ -31,6 +31,33 @@
             <div class="card ">
                 <div class="card-body">
                     <div style="justify-content: space-between;" class="inline-flex">
+                        <h3 class="card-title">Titular Alternativo</h3>
+                    </div>
+
+                    <div style="width: 100%; " *ngIf="titularAlternativo ">
+                        <h5>Apellidos: <b>{{titularAlternativo.APELLIDOS}}</b></h5>
+                        <h5>Nombres: <b>{{titularAlternativo.NOMBRES}}</b></h5>
+                        <h5>Razon Social: <b>{{titularAlternativo.RAZON}}</b></h5>
+                        <h5>RUC: <b>{{titularAlternativo.RUC}}</b></h5>
+                        <h5>Direccion: <b>{{titularAlternativo.direccion_particular}}</b></h5>
+                        <h5>Ciudad: <b>{{titularAlternativo.ciudad_trabajo}}</b></h5>
+
+                        <h5>Telefonos: {{titularAlternativo.TELEFONO}}</h5>
+
+                        <div class="row ">
+                            <div class="col ">
+                            </div>
+                            <div class="col ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md col-xs">
+            <div class="card ">
+                <div class="card-body">
+                    <div style="justify-content: space-between;" class="inline-flex">
                         <h4 class="card-title">Vendedor</h4>
 
                     </div>
@@ -64,48 +91,50 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md col-xs">
-            <div class="card">
-                <div class="card-body">
-                    <div style="justify-content: space-between;" class="inline-flex">
-                        <h3 class="card-title">Producto</h3>
+    <div class="card">
+        <div class="card-body">
+            <div style="justify-content: space-between;" class="inline-flex">
+                <h3 class="card-title">Producto</h3>
 
+            </div>
+
+
+            <div class="" *ngIf="producto">
+                <h5>Nombre: <b>{{producto.NOMBRE}} - {{producto.COD_CORTO}}</b></h5>
+                <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
+                <!-- <h5>Entrega: </h5>  -->
+                <hr>
+
+                <div class="mt-2 inline-flex">
+                    <h4 *ngIf="contrato.plazo == 1" class=" mr-3"><b>Forma de Pago:</b> Contado</h4>
+                    <h4 *ngIf="contrato.plazo != 1" class=" mr-3"><b>Forma de Pago:</b> En {{contrato.plazo}} cuotas </h4>
+                    <h4 *ngIf="contrato.entrega" class=" mr-3"><b>Entrega:</b> {{contrato.entrega | currency: '':'':'2.0'}} Gs</h4>
+                    <h4 *ngIf="!contrato.entrega" class=" mr-3"><b>Entrega:</b> Sin entrega</h4>
+                    <h4 *ngIf="contrato.entrega" class=" mr-3"><b>saldo:</b> {{(contrato.producto.PRECIO_MAYORISTA - contrato.entrega ) | currency: '':'':'2.0'}} Gs
+                    </h4>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4 col-xs">
+                        <div class="form-group">
+                            <label for=""><b>Numero de Factura:</b> {{contrato.nro_contrato}}</label>
+
+                        </div>
                     </div>
 
-
-                    <div class="" *ngIf="producto">
-                        <h5>Nombre: <b>{{producto.NOMBRE}} - {{producto.COD_CORTO}}</b></h5>
-                        <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
-                        <!-- <h5>Entrega: </h5>  -->
-                        <hr>
-
-                        <div class="mt-2 inline-flex">
-                            <h4 *ngIf="contrato.plazo == 1" class=" mr-3"><b>Forma de Pago:</b> Contado</h4>
-                            <h4 *ngIf="contrato.plazo != 1" class=" mr-3"><b>Forma de Pago:</b> En {{contrato.plazo}} cuotas </h4>
-                            <h4 *ngIf="contrato.entrega" class=" mr-3"><b>Entrega:</b> {{contrato.entrega | currency: '':'':'2.0'}} Gs</h4>
-                            <h4 *ngIf="!contrato.entrega" class=" mr-3"><b>Entrega:</b> Sin entrega</h4>
-                            <h4 *ngIf="contrato.entrega" class=" mr-3"><b>saldo:</b> {{(contrato.producto.PRECIO_MAYORISTA - contrato.entrega ) | currency: '':'':'2.0'}} Gs
-                            </h4>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-4 col-xs">
-                                <div class="form-group">
-                                    <label for=""><b>Numero de Factura:</b> {{contrato.nro_contrato}}</label>
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-8 col-xs  ">
-                                <label><b>Lugar de cobranza: </b> Direccion particular</label>
-                            </div>
-                        </div>
-
-
+                    <div class="col-md-8 col-xs  ">
+                        <label><b>Lugar de cobranza: </b> Direccion particular</label>
                     </div>
                 </div>
+
+
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md col-xs">
+
+            <app-lista-movimientos [movimientos]="movimientos"></app-lista-movimientos>
 
 
         </div>
@@ -113,34 +142,6 @@
 
             <app-facturas [fromOutside]='true' [facturas]='facturas'></app-facturas>
 
-            <!-- 
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-title">Cuotas</h3>
-
-                    <div style="overflow: auto; max-height: 400px;">
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Vencimiento</th>
-                                    <th>Monto</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-
-                                <tr *ngFor="let factura of facturas; let i = index">
-                                    <td scope="row">{{i+1}}</td>
-                                    <td>{{factura.vencimiento | date}}</td>
-                                    <td>{{factura.haber| currency:'':'':'2.0' }} Gs</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div> -->
         </div>
 
     </div>
@@ -259,8 +260,8 @@
 
     </div>
     <div class="float-right">
-        <button type="button" [routerLink]="['/admin/editar_contrato', this.id]" class="btn mr-2 btn-secondary">Editar
-            Contrato</button>
+        <button type="button" [routerLink]="['/admin/editar_contrato', this.id]" class="btn mr-2 btn-secondary">Editar Contrato</button>
+        <button type="button" (click)="crearMovimiento()" class="btn  btn-primary">Crear Movimiento</button>
         <button type="button" (click)="viewContrato()" class="btn  btn-primary">Ver PDF</button>
     </div>
 

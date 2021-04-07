@@ -19,6 +19,33 @@
                 </div>
             </div> -->
             <div class="col-xs col-md">
+                <label class="">Cliente</label>
+
+                <div class="" *ngIf="!cliente">
+                    <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <div class="" *ngIf="cliente">
+                    <div>
+                        <div *ngIf="cliente.NOMBRES">{{cliente.NOMBRES}} {{cliente.APELLIDOS}}</div>
+                        <div *ngIf="cliente.NOMBRES && cliente.RAZON"> - </div>
+                        <div *ngIf="cliente.RAZON">{{cliente.RAZON}} </div>
+
+                        <small>{{cliente.RUC}}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs col-md">
                 <label>Fondo</label>
                 <div class="" *ngIf="!fondo">
                     <ng-select [items]="fondos" [(ngModel)]="fondo" (search)="searchFondos($event)" notFoundText="no se encontraron resultados" placeholder="buscar fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
@@ -124,33 +151,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs col-md">
-                <label class="">Cliente</label>
 
-                <div class="" *ngIf="!cliente">
-                    <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
-                        <ng-template ng-option-tmp let-item="item">
-                            <div>
-                                <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
-                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
-                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
-
-
-                            </div>
-
-                        </ng-template>
-                    </ng-select>
-                </div>
-                <div class="" *ngIf="cliente">
-                    <div>
-                        <div *ngIf="cliente.NOMBRES">{{cliente.NOMBRES}} {{cliente.APELLIDOS}}</div>
-                        <div *ngIf="cliente.NOMBRES && cliente.RAZON"> - </div>
-                        <div *ngIf="cliente.RAZON">{{cliente.RAZON}} </div>
-
-                        <small>{{cliente.RUC}}</small>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- <hr> -->
 

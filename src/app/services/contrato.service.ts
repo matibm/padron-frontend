@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { promise } from 'protractor';
 import { URL_SERVICIOS } from '../config/global';
+import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ContratoService {
   ) { }
 
 
-  getContratos(page?, options?: { fecha_inicio?: number, fecha_fin?: number, nro_contrato?: string, producto?: string, cliente?: string, ruc?: string, manzana?: string, fila?, parcela?: string }, sort?: { key: string, value: number }) {
+  getContratos(page?, options?: { fecha_inicio?: number, fecha_fin?: number, nro_contrato?: string, producto?: string, cliente?: string,  ruc?: string, manzana?: string, fila?, parcela?: string }, sort?: { key: string, value: number }) {
     console.log(options);
 
 
@@ -77,7 +78,13 @@ export class ContratoService {
     url += `&modifica_producto=${modifica_producto}`
     return this.http.post(url, contrato).toPromise().then((resp: any) => {
       console.log(resp);
-
+      
+      swal.fire({
+        icon: 'success',
+        title: 'Contrato modificado',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
       return resp.contrato
     })
   }

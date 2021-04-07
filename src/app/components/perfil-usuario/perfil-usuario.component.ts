@@ -1,3 +1,5 @@
+import { MovimientoService } from './../../services/movimiento.service';
+import { Movimiento } from './../../models/movimiento';
 import { WhatsappService } from './../../services/whatsapp.service';
 import { ComentarioService } from './../../services/comentario.service';
 import { FacturaService } from './../../services/factura.service';
@@ -21,6 +23,7 @@ export class PerfilUsuarioComponent implements OnInit {
   isCobrador
   isCliente
   isEmpleado
+  movimientos: Movimiento[]
   isPersona
   isEmpresa
   isBanco
@@ -31,7 +34,8 @@ export class PerfilUsuarioComponent implements OnInit {
     public _cuotaService: CuotaService,
     public _contratoService: ContratoService,
     public _facturaService: FacturaService,
-    public _comentarioService: WhatsappService
+    public _comentarioService: WhatsappService,
+    public _movimientoService: MovimientoService
   ) { }
   id
   contratos: Contrato[]
@@ -40,7 +44,7 @@ export class PerfilUsuarioComponent implements OnInit {
   facturas
   comentarios
   async ngOnInit() {
-    
+
     this._comentarioService.listen('push_comentarios').subscribe((data: any) => {
       this.comentarios = data
 
@@ -53,10 +57,12 @@ export class PerfilUsuarioComponent implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
     this.usuario = await this._usuarioService.getUsuarioPorId(this.id)
+    console.log(this.usuario);
+    
     this.usuario.password = ''
 
     this.facturas = (await this._facturaService.getFacturas(null, null, null, null, null, this.id)).facturas
- 
+
 
     this.isVendedor = this.usuario.VENDEDORES == '1' ? 'check_vendedor' : null
     this.isCobrador = this.usuario.COBRADORES == '1' ? 'check_cobrador' : null
@@ -68,6 +74,7 @@ export class PerfilUsuarioComponent implements OnInit {
     this.manejaCaja = this.usuario.MANEJA_CAJA == '1' ? 'check_maneja_caja' : null
     this.cuotas = await this._cuotaService.getCuotaByTitular(this.id)
     this.contratos = await this._contratoService.getContratosByTitular(this.id);
+    this.movimientos = (await this._movimientoService.getAllMovimientos({cliente: this.id})).movimientos
   }
 
   prueba() {
@@ -95,8 +102,8 @@ export class PerfilUsuarioComponent implements OnInit {
       texto: texto
     }
     this._comentarioService.emitir('nuevo_comentario', comentario)
-    
-    
+
+
     this._comentarioService.listen('error').subscribe(data => {
       console.log(data);
 

@@ -3,6 +3,7 @@ import { URL_SERVICIOS } from './../config/global';
 import { UsuarioService } from './usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,12 @@ export class FacturaService {
     monto_parcial ? url += `&monto_parcial=${monto_parcial}` : null
     return this.http.post(url, factura).toPromise().then((resp: any) => {
       console.log(resp);
-
+      swal.fire({
+        icon: 'success',
+        title: 'Factura pagada',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
       return resp.factura
     })
   }

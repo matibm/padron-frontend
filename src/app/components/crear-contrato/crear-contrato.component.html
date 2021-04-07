@@ -46,6 +46,48 @@
             <div class="card ">
                 <div class="card-body">
                     <div style="justify-content: space-between;" class="inline-flex">
+                        <h3 class="card-title">Titular Alternativo</h3>
+                        <div *ngIf="titularAlternativo" (click)="titularAlternativo = null" class="pointer close-icon ml-auto">
+                            <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!titularAlternativo">
+
+                        <ng-select [items]="clientes" [(ngModel)]="titularAlternativo" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar titular" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                            <ng-template ng-option-tmp let-item="item">
+                                <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                    <small>{{item.RUC}}</small>
+                                </div>
+
+                            </ng-template>
+                        </ng-select>
+
+                    </div>
+                    <div style="width: 100%; " *ngIf="titularAlternativo ">
+                        <h5>Apellidos: <b>{{titularAlternativo.APELLIDOS}}</b></h5>
+                        <h5>Nombres: <b>{{titularAlternativo.NOMBRES}}</b></h5>
+                        <h5>Razon Social: <b>{{titularAlternativo.RAZON}}</b></h5>
+                        <h5>RUC: <b>{{titularAlternativo.RUC}}</b></h5>
+                        <h5>Direccion: <b>{{titularAlternativo.direccion_particular}}</b></h5>
+                        <h5>Ciudad: <b>{{titularAlternativo.ciudad_trabajo}}</b></h5>
+
+                        <h5>Telefonos: {{titularAlternativo.TELEFONO}}</h5>
+
+                        <div class="row ">
+                            <div class="col ">
+                            </div>
+                            <div class="col ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md col-xs">
+            <div class="card ">
+                <div class="card-body">
+                    <div style="justify-content: space-between;" class="inline-flex">
                         <h4 class="card-title">Vendedor</h4>
                         <div *ngIf="vendedor" (click)="vendedor = null" class="pointer close-icon ml-auto">
                             <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>

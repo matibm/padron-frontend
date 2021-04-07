@@ -1,7 +1,9 @@
+import { Movimiento } from './../../models/movimiento';
+import { MovimientoService } from './../../services/movimiento.service';
 import { Factura } from './../../models/factura';
 import { FacturaService } from './../../services/factura.service';
 import { Contrato } from './../../models/contrato';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContratoService } from './../../services/contrato.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,7 +17,10 @@ export class InfoContratoComponent implements OnInit {
   constructor(
     public _contratoService: ContratoService,
     public activatedRoute: ActivatedRoute,
-    public _facturaService: FacturaService
+    private router: Router,
+    public _facturaService: FacturaService,
+    public _movimientoService: MovimientoService
+
   ) { }
   contrato: Contrato
   id
@@ -24,8 +29,10 @@ export class InfoContratoComponent implements OnInit {
   cliente
   titular
   cobrador
+  movimientos: Movimiento[]
   vendedor
   producto
+  titularAlternativo
 
   async ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -37,8 +44,9 @@ export class InfoContratoComponent implements OnInit {
     this.producto = this.contrato.producto
     this.vendedor = this.contrato.vendedor
     this.cobrador = this.contrato.cobrador
+    this.titularAlternativo = this.contrato.titular_alternativo
     this.facturas = await this._facturaService.getFacturasByContrato(this.contrato._id)
-
+    this.movimientos = (await this._movimientoService.getAllMovimientos({ contrato: this.contrato._id })).movimientos
   }
 
   viewContrato() {
@@ -46,6 +54,12 @@ export class InfoContratoComponent implements OnInit {
     wopen.onafterprint = (event) => {
       wopen.close()
     }
+  }
+
+  crearMovimiento() {
+    localStorage.setItem('movimiento_contrato', JSON.stringify(this.contrato))
+    localStorage.setItem('crear_movimiento', 'true')
+    this.router.navigateByUrl('/admin/movimientos')
   }
 
 }

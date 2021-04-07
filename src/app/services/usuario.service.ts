@@ -1,8 +1,9 @@
+import swal from 'sweetalert2';
 import { URL_SERVICIOS } from './../config/global';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../models/usuario';
- @Injectable({
+@Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
@@ -21,7 +22,7 @@ export class UsuarioService {
     this.inicializarUsuario()
   }
 
-  async inicializarUsuario(){
+  async inicializarUsuario() {
 
     if (this.user_id) {
       this.usuario = await this.getUsuarioPorId(this.user_id)
@@ -77,22 +78,43 @@ export class UsuarioService {
     url += `?token=${this.token}`
     return this.http.put(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);
+
+      swal.fire({
+        icon: 'success',
+        title: 'Usuario modificado',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
       return resp
     })
   }
 
-  crearUsuario(usuario){
+  crearUsuario(usuario) {
     let url = `${URL_SERVICIOS}/usuario/crear_usuario`;
     url += `?token=${this.token}`
     return this.http.post(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);
-      return resp
+      swal.fire({
+        icon: 'success',
+        title: 'Usuario creado',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
+      return resp.usuario
+    }, (error) => {
+      swal.fire({
+        icon: 'error',
+        title: 'Error al crear usuario',
+        text: error
+
+      })
+      return error
     })
   }
 
   login(usuario) {
     console.log(usuario);
-    
+
     let url = `${URL_SERVICIOS}/usuario/login`;
     return this.http.post(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);
@@ -103,7 +125,7 @@ export class UsuarioService {
     })
   }
 
-  logout(){
+  logout() {
     this.token = ''
     localStorage.removeItem('token');
     this.itsLogued = false;
