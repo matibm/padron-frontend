@@ -1,3 +1,6 @@
+import { EditarProductoComponent } from './../components/editar-producto/editar-producto.component';
+import { ListaProductosComponent } from './../components/lista-productos/lista-productos.component';
+import { CrearProductoComponent } from './../components/crear-producto/crear-producto.component';
 import { FacturaPdfComponent } from './../components/factura-pdf/factura-pdf.component';
 import { TransferenciaComponent } from './../components/transferencia/transferencia.component';
 import { ListaFacturasComponent } from './../components/lista-facturas/lista-facturas.component';
@@ -63,6 +66,9 @@ const routes: Routes = [
       { path: 'info_caja', component: InfoCajaComponent },
       { path: 'resumen', component: ResumenComponent },
       { path: 'transferencia', component: TransferenciaComponent },
+      { path: 'crear_producto', component: CrearProductoComponent },
+      { path: 'editar_producto/:id', component: EditarProductoComponent },
+      { path: 'lista_productos', component: ListaProductosComponent },
 
       { path: 'account-settings', component: AccountSettingsComponent },
 

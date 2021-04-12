@@ -117,7 +117,8 @@
             <app-lista-movimientos *ngIf="movimientos" [movimientos]="movimientos"></app-lista-movimientos>
         </div>
         <div class="col-xs col-md">
-            <app-facturas [fondo]="fondo" [cerrado]="false" [pagado]="true" [start]="start" [end]="end" [count]="facturaCount" [fromOutside]="true" [facturas]="facturas"></app-facturas>
+            <button type="button" (click)="print()" class="btn btn-primary">print</button>
+            <app-facturas [selectable]='true' [fondo]="fondo" (AllSelectedEvent)="isAllSelectedIngresos = $event" (listItemsEvent)="listItems = $event" [cerrado]="false" [pagado]="true" [start]="start" [end]="end" [count]="facturaCount" [fromOutside]="true" [facturas]="facturas"></app-facturas>
         </div>
     </div>
 

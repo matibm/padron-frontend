@@ -9,20 +9,28 @@ export class SidebarService {
   urlActual
   menu: any[] = [
     {
-      titulo: 'Contrato',
+      titulo: 'Contratos',
       icono: 'mdi mdi-file-document',
       submenu: [
-        { titulo: 'nuevo contrato', url: 'crear_contrato' },
+        { titulo: 'crear contrato', url: 'crear_contrato' },
         { titulo: 'lista de contratos', url: 'lista_contratos' },
+       ]
+    },
+    {
+      titulo: 'Productos',
+      icono: 'mdi mdi-shopping',
+      submenu: [
+        { titulo: 'crear producto', url: 'crear_producto' },
+        { titulo: 'lista de productos', url: 'lista_productos' }
        ]
     },
     {
       titulo: 'Usuarios',
       icono: 'mdi mdi-account-multiple',
       submenu: [
-        { titulo: 'General', url: 'usuarios' },
-       
-        { titulo: 'Nuevo Usuario', url: 'nuevo_usuario' },
+        
+        { titulo: 'crear usuario', url: 'nuevo_usuario' },
+        { titulo: 'lista de usuarios', url: 'usuarios' },
       ]
     },
     {

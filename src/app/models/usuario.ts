@@ -12,6 +12,7 @@ export class Usuario {
         public RUC?: string,
         public DIRECCION?: string,
         public LUGAR_TRABAJO?: string,
+        public fondo_online?: string,
         public TEL_TRABAJO?: string,
         public NOMCIUDAD?: string,
         public password?: string,

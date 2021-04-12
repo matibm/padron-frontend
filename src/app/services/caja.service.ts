@@ -40,6 +40,33 @@ export class CajaService {
       return resp
     })
   }
+  cerrarCajaOptions(body, options?) {
+
+    let url = URL_SERVICIOS + '/caja/cerrar_caja';
+    url += `?token=${this._usuarioService.token}`
+    
+    
+    if (options) {
+      Object.entries(options).forEach(([key, value]) => {
+        
+          url += `&${key}=${value}`        
+        
+      });
+    }
+    url += `&caja=${this.cajaActual._id}`
+    
+    return this.http.put(url, body).toPromise().then((resp: any) => {
+      console.log(resp);
+
+      swal.fire({
+        icon: 'success',
+        title: 'Caja cerrada',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
+      return resp
+    })
+  }
 
   getCajaActual() {
     let url = URL_SERVICIOS + '/caja/caja_actual';

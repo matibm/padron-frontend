@@ -5,7 +5,12 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th *ngIf="!selectable">#</th>
+                    <th *ngIf="selectable">
+                        <input [(ngModel)]="selectAll" type="checkbox" name="check_all" id="allitems" class="filled-in  chk-col-light-blue" (click)="selectToAll()" checked />
+                        <label style="margin-bottom:0 ; padding: 0;" for="allitems"></label>
+
+                    </th>
                     <th style="width: 14%;">fondo</th>
                     <th>fecha</th>
                     <th>Monto</th>
@@ -17,9 +22,9 @@
             </thead>
             <tbody>
                 <!--  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } -->
-                <tr [routerLink]="['/admin/factura', factura._id]" class="pointer" *ngFor="let factura of facturas  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
+                <tr (click)="selectItem(factura._id)" id="id-{{factura._id}}" class="item-table pointer" *ngFor="let factura of facturas  | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
                     <td scope="row">{{page*10 + (i+1) - 10}}</td>
-                    <td *ngIf="factura.fondo">{{factura.fondo.RAZON}}</td>
+                    <td *ngIf="factura.fondo">{{factura.fondo.NOMBRES}} {{factura.fondo.APELLIDOS}} {{factura.fondo.RAZON}}</td>
                     <td *ngIf="!factura.fondo">Sin fondo</td>
                     <td>
                         {{factura.fecha_creacion_unix | date:' d, MMM y'}}

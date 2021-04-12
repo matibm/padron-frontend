@@ -32,6 +32,7 @@ export class FacturaComponent implements OnInit {
   montoparcialCorrecto = true
   parciales: Factura[]
   facturaPdf
+  isOnline = false
   async ngOnInit() {
     if (this.primeraEjecucion) {
       this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((e: NavigationEnd) => {
@@ -43,8 +44,8 @@ export class FacturaComponent implements OnInit {
 
 
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
-    this.initialize()
+
+   await this.initialize()
     this.facturaPdf = {
       nombres: `${this.factura.titular.NOMBRES} ${this.factura.titular.APELLIDOS}`,
       fecha: this.factura.fecha_pagado_unix,
@@ -70,7 +71,7 @@ export class FacturaComponent implements OnInit {
     if (this.id) {
       this.factura = await this._facturaService.getFacturaById(this.id)
       this.parciales = (await this._facturaService.getFacturasParcial(this.id)).facturas
-      if (this.factura.pagado) {
+      if (this.factura.fondo) {
         this.fondo = this.factura.fondo
       }
 
@@ -117,4 +118,14 @@ export class FacturaComponent implements OnInit {
     }
   }
 
+  async crearLink(){
+    this.factura = await this._facturaService.crearLinkDePago(this.id, this.fondo._id)
+    this.fondo = this.factura.fondo
+  }
+
+  onSelectFondo() {
+    console.log(this.fondo);
+    
+    this.isOnline = this.fondo.fondo_online == '1' ? true : false
+  }
 }

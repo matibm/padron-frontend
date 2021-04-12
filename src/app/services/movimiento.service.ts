@@ -3,6 +3,7 @@ import { URL_SERVICIOS } from './../config/global';
 import { UsuarioService } from './usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -101,8 +102,21 @@ export class MovimientoService {
     return this.http.post(url, movimiento).toPromise().then((resp: any) => {
       console.log(resp);
 
-
+      swal.fire({
+        icon: 'success',
+        title: 'Movimiento creado',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
       return resp.movimiento
+    }, (error) => {
+      swal.fire({
+        icon: 'error',
+        title: 'Error al crear Movimiento',
+        text: error
+
+      })
+      return error
     })
   }
 

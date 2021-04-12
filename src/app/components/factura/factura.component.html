@@ -94,11 +94,14 @@
                 <h4 *ngIf="factura.parcial">Pago parcial correspondiente a
                     <a (click)="this.id = factura.parcial._id; initialize()" [routerLink]="['/admin/factura', factura.parcial._id]">Factura</a>
                 </h4>
+                <h4 *ngIf="factura.link_de_pago"><b>Link de pago:</b>
+                    <a [href]="factura.link_de_pago">{{factura.link_de_pago}}</a>
+                </h4>
 
                 <div class="inline-flex">
                     <h4 class="mr-3"><b>Fondo:</b></h4>
                     <div class="" *ngIf="!fondo">
-                        <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (ngModelChange)="onSelectFondo(fondo)" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
                                 <div>
                                     <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
@@ -154,10 +157,15 @@
             </div>
         </div>
 
-        <div class="float-right mt-3">
-            <button *ngIf="!factura.pagado && !crearParcial" [disabled]="!fondo || !montoparcialCorrecto" (click)="pagar()" type="button" class="btn  btn-primary">Pagar</button>
-            <button *ngIf="factura.pagado" (click)="printFactura()" type="button" class="btn  btn-primary">imprimir Factura</button>
-            <button *ngIf="!factura.pagado && crearParcial" [disabled]="!fondo || !montoparcialCorrecto" (click)="pagar()" type="button" class="btn  btn-primary">Pago parcial</button>
+        <div *ngIf="!factura.link_de_pago" class="float-right mt-3">
+            <button *ngIf="!isOnline && !factura.pagado && !crearParcial" [disabled]="!fondo || !montoparcialCorrecto" (click)="pagar()" type="button" class="btn mr-2   btn-primary">Pagar</button>
+            <button *ngIf="isOnline" (click)="crearLink()" type="button" class="btn mr-2  btn-info">crear Link de pago</button>
+            <button *ngIf="factura.pagado" (click)="printFactura()" type="button" class="btn mr-2   btn-primary">imprimir Factura</button>
+            <button *ngIf="!factura.pagado && crearParcial" [disabled]="!fondo || !montoparcialCorrecto" (click)="pagar()" type="button" class="btn mr-2   btn-primary">Pago parcial</button>
+
+        </div>
+        <div *ngIf="factura.link_de_pago" class="float-right mt-3">
+            <label for="">Esperando pago online...</label>
 
         </div>
 

@@ -41,6 +41,8 @@ export class ListaFacturasComponent implements OnInit {
     let respF = await this._facturaService.getFacturasOptions(this.opciones)
     this.count = respF.count
     this.facturas = respF.facturas
+    console.log(this.facturas);
+    
     this.servicios = await this._productoService.getProductos()
     this.fondos = await this._usuarioService.buscarUsuarios('BANCOS', '')
   }

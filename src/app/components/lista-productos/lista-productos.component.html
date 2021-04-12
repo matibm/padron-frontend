@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-body">
+        <table class="table hable-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Codigo</th>
+                    <th>precio</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="pointer" [routerLink]="['/admin/editar_producto', item._id]" *ngFor="let item of productos; let i = index;">
+                    <td scope="row">{{i+1}}</td>
+                    <td>{{item.NOMBRE}}</td>
+                    <td>{{item.COD_CORTO}}</td>
+                    <td>{{item.PRECIO_MAYORISTA | currency: '':'':'2.0'}} Gs</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="card-body">
+        <form ngNativeValidate (ngSubmit)="guardarProducto()" #form="ngForm">
+
+            <div *ngIf="producto" class="form-group">
+                <label for="">Nombre</label>
+                <input type="text" [(ngModel)]="producto.NOMBRE" name="nombre" id="" #nombre class="form-control" placeholder="" required aria-describedby="helpId">
+
+                <label for="">Codigo corto</label>
+                <input type="text" [(ngModel)]="producto.COD_CORTO" name="cod" id="" #cod class="form-control" placeholder="" aria-describedby="helpId">
+                <label for="">Precio</label>
+                <input type="number" [(ngModel)]="producto.PRECIO_MAYORISTA" name="precio" id="" #precio class="form-control" placeholder="" required aria-describedby="helpId">
+
+            </div>
+            <button type="reset" (click)="cancelar()" class="btn mr-3 btn-danger">Cancelar</button>
+
+            <button type="submit" class="btn btn-info">Guardar</button>
+        </form>
+    </div>
+</div>

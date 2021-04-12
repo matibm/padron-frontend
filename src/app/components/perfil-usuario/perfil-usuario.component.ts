@@ -28,6 +28,7 @@ export class PerfilUsuarioComponent implements OnInit {
   isEmpresa
   isBanco
   manejaCaja
+  cobroOnline
   constructor(
     public _usuarioService: UsuarioService,
     public route: ActivatedRoute,
@@ -72,6 +73,7 @@ export class PerfilUsuarioComponent implements OnInit {
     this.isEmpresa = this.usuario.EMPRESA == '1' ? 'check_empresa' : null
     this.isBanco = this.usuario.BANCOS == '1' ? 'check_banco' : null
     this.manejaCaja = this.usuario.MANEJA_CAJA == '1' ? 'check_maneja_caja' : null
+    this.cobroOnline = this.usuario.fondo_online == '1' ? 'check_maneja_caja' : null
     this.cuotas = await this._cuotaService.getCuotaByTitular(this.id)
     this.contratos = await this._contratoService.getContratosByTitular(this.id);
     this.movimientos = (await this._movimientoService.getAllMovimientos({cliente: this.id})).movimientos
@@ -91,6 +93,7 @@ export class PerfilUsuarioComponent implements OnInit {
     usuario.EMPRESA = this.isEmpresa ? '1' : '0';
     usuario.BANCOS = this.isBanco ? '1' : '0';
     usuario.MANEJA_CAJA = this.manejaCaja ? '1' : '0';
+    usuario.fondo_online = this.cobroOnline ? '1' : '0';
 
     let resp = await this._usuarioService.modificarUsuarios(usuario)
   }

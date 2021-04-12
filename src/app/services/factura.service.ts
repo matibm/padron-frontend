@@ -54,6 +54,22 @@ export class FacturaService {
       return resp.factura
     })
   }
+  
+  crearLinkDePago(id, fondoId) {
+    let url = `${URL_SERVICIOS}/factura/crear_link/${id}/${fondoId}`;
+    url += `?token=${this._usuarioService.token}`
+    return this.http.get(url).toPromise().then((resp: any) => {      
+      console.log(resp);
+      swal.fire({
+        icon: 'success',
+        title: 'Link de pago creado',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
+      return resp.factura
+    })
+  }
+
   getFacturasByTitular(id) {
     let url = `${URL_SERVICIOS}/factura/by_titular/${id}`;
     url += `?token=${this._usuarioService.token}`

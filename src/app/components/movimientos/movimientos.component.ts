@@ -181,10 +181,12 @@ export class MovimientosComponent implements OnInit {
       monto_haber: montoIngreso,
       monto_total: montoEgreso
     }
-    console.log(movimiento);
+    
 
     let resp = await this._movimientoService.crearMovimiento(movimiento)
-    console.log(resp);
+    
+    this.resetAll()
+
 
   }
 
@@ -259,5 +261,11 @@ export class MovimientosComponent implements OnInit {
       return false
     }
   }
+
+  resetAll(){
+    this.resetBreadcrumb()
+    this.ngOnInit()
+  }
+
 
 }

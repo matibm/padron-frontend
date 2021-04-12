@@ -31,6 +31,9 @@ import { ListaFacturasComponent } from './lista-facturas/lista-facturas.componen
 import { TransferenciaComponent } from './transferencia/transferencia.component';
 import {NgxPrintModule} from 'ngx-print';
 import { FacturaPdfComponent } from './factura-pdf/factura-pdf.component';
+import { CrearProductoComponent } from './crear-producto/crear-producto.component';
+import { ListaProductosComponent } from './lista-productos/lista-productos.component';
+import { EditarProductoComponent } from './editar-producto/editar-producto.component';
 
 @NgModule({
   declarations: [IncrementadorComponent,
@@ -52,6 +55,9 @@ import { FacturaPdfComponent } from './factura-pdf/factura-pdf.component';
     ListaFacturasComponent,
     TransferenciaComponent,
     FacturaPdfComponent,
+    CrearProductoComponent,
+    ListaProductosComponent,
+    EditarProductoComponent,
 
   ],
   imports: [
