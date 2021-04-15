@@ -9,6 +9,15 @@ export class SidebarService {
   urlActual
   menu: any[] = [
     {
+      titulo: 'Usuarios',
+      icono: 'mdi mdi-account-multiple',
+      submenu: [
+        
+        { titulo: 'crear usuario', url: 'nuevo_usuario' },
+        { titulo: 'lista de usuarios', url: 'usuarios' },
+      ]
+    },
+    {
       titulo: 'Contratos',
       icono: 'mdi mdi-file-document',
       submenu: [
@@ -24,20 +33,12 @@ export class SidebarService {
         { titulo: 'lista de productos', url: 'lista_productos' }
        ]
     },
-    {
-      titulo: 'Usuarios',
-      icono: 'mdi mdi-account-multiple',
-      submenu: [
-        
-        { titulo: 'crear usuario', url: 'nuevo_usuario' },
-        { titulo: 'lista de usuarios', url: 'usuarios' },
-      ]
-    },
+    
     {
       titulo: 'Finanzas',
       icono: 'mdi mdi-cash',
       submenu: [
-        { titulo: 'Facturas', url: 'facturas' },
+        { titulo: 'Ingresos', url: 'facturas' },
         { titulo: 'Movimientos', url: 'movimientos' },
         { titulo: 'caja', url: 'info_caja' },
         { titulo: 'resumen', url: 'resumen' },

@@ -36,22 +36,42 @@ export class FacturasComponent implements OnInit {
   @Input() cerrado
   @Input() showlabel = true
   @Input() selectable = false
+  @Input() options:any
   @Output() listItemsEvent = new EventEmitter
   @Output() AllSelectedEvent = new EventEmitter
   listItems = []
   selectAll = false
   async pageChanged(page) {
-    console.log(page);
+    let options: any = {
 
-    let resp = await this._facturaService.getFacturas(this.pagado, this.fondo, this.start, this.end, page, null, this.cerrado)
+    }
+    if (this.pagado == true) {
+      options.pagado = this.pagado
+    } else if (this.pagado == false) {
+      options.pagado = this.pagado
+    }
+    if (this.cerrado == true) {
+      options.cerrado = this.cerrado
+    } else if (this.cerrado == false) {
+      options.cerrado = this.cerrado
+    }
+
+    this.fondo ? options.fondo = this.fondo : ''
+    this.start ? options.start = this.start : ''
+    this.end ? options.end = this.end : ''
+    this.end ? options.end = this.end : ''
+    this.options? options = this.options : ''
+    options.page = page
+    // let resp = await this._facturaService.getFacturas(this.pagado, this.fondo, this.start, this.end, page, null, this.cerrado)
+    let resp = await this._facturaService.getFacturasOptions(options)
 
 
     this.facturas = resp.facturas
     this.count = resp.count
     console.log(page);
     setTimeout(() => {
-    this.setSelected()
-      
+      this.setSelected()
+
     }, 3);
   }
 

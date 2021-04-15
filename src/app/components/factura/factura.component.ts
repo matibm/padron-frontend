@@ -74,7 +74,8 @@ export class FacturaComponent implements OnInit {
       if (this.factura.fondo) {
         this.fondo = this.factura.fondo
       }
-
+      console.log(this.factura);
+      
       this.fondos = await this._usuarioService.buscarUsuarios('BANCOS', '')
 
     }

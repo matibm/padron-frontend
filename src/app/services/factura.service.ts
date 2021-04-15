@@ -27,6 +27,24 @@ export class FacturaService {
       return resp.factura
     })
   }
+  pagarPorMonto(body) {
+
+    let url = URL_SERVICIOS + '/factura/pagar_por_monto';
+    url += `?token=${this._usuarioService.token}`
+
+    return this.http.post(url, body).toPromise().then((resp: any) => {
+      console.log(resp);
+      if (body.confirmado) {
+        swal.fire({
+          icon: 'success',
+          title: 'Pago realizado',
+          text: `Se pagaron ${resp.total} cuota(s)`,
+          timer: 3000,
+        })
+      }
+      return resp.facturas
+    })
+  }
   async pagarFactura(factura, parcial?: boolean, monto_parcial?: number) {
     let caja = await this._cajaService.getCajaActual()
     let url = URL_SERVICIOS + '/factura/pagar';

@@ -11,11 +11,11 @@
                         <label style="margin-bottom:0 ; padding: 0;" for="allitems"></label>
 
                     </th>
-                    <th style="width: 14%;">fondo</th>
-                    <th>fecha</th>
+                    <th style="max-width: 30px;">fondo</th>
+                    <th>Emisión</th>
                     <th>Monto</th>
                     <th *ngIf="!fromOutside">Cliente</th>
-                    <th *ngIf="!fromOutside">Vencimiento</th>
+                    <th>Vencimiento</th>
                     <th>Servicio</th>
                     <th>Pagado</th>
                 </tr>
@@ -28,13 +28,12 @@
                     <td *ngIf="!factura.fondo">Sin fondo</td>
                     <td>
                         {{factura.fecha_creacion_unix | date:' d, MMM y'}}
-                        <br> {{factura.fecha_creacion_unix | date:' h:mm a'}}
-
+                        <div class="" *ngIf="!fromOutside"> {{factura.fecha_creacion_unix | date:' h:mm a'}}</div>
 
                     </td>
                     <td>{{factura.haber | currency:'':'':'2.0'}} Gs</td>
-                    <td *ngIf="!fromOutside">{{factura.titular.NOMBRES| nombreCorto}} {{factura.titular.APELLIDOS | nombreCorto}} </td>
-                    <td *ngIf="!fromOutside">{{factura.vencimiento | date}}</td>
+                    <td *ngIf="!fromOutside">{{factura.titular.NOMBRES | primerNombre}} {{factura.titular.APELLIDOS | primerNombre }} </td>
+                    <td>{{factura.vencimiento | date}}</td>
                     <td *ngIf="!fromOutside && factura.servicio">
                         <div *ngIf="factura.servicio.COD_CORTO == 'C.M.P.'"></div> {{factura.contrato.nombre_servicio }}
                     </td>

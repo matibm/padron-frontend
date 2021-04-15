@@ -77,7 +77,7 @@ export class EditarContratoComponent implements OnInit {
     ci: '',
 
   }
-  inhumados: Inhumado[] = [this.inhumadoVacio]
+  inhumados: Inhumado[] 
   facturas
   radioValue = 'administracion'
   fechaPago = new Date()
@@ -93,11 +93,14 @@ export class EditarContratoComponent implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
     this.contrato = await this._contratoService.getContratoById(this.id)
+  //log(this.contrato);
+    this.saldo = this.contrato.saldo_pendiente
+    this.inhumados = this.contrato.inhumados
     this.vendedor = this.contrato.vendedor
     this.cobrador = this.contrato.cobrador
     this.seleccionarProducto(this.contrato.producto)
     this.fechaMantenimiento = new Date(`${date.getFullYear() + 1}-01-05`).setHours(24)
-    console.log(new Date(this.fechaMantenimiento));
+    
     
     this.cliente = this.contrato.titular
 
@@ -111,8 +114,7 @@ export class EditarContratoComponent implements OnInit {
   }
 
   calcularEdad(date) {
-    console.log(date);
-
+ 
     if (date.length > 4) {
       let hoy = new Date()
       let fechaNacimiento = new Date(date)
@@ -125,28 +127,38 @@ export class EditarContratoComponent implements OnInit {
       ) {
         edad--
       }
-      console.log(edad);
-
+ 
       return edad
     } else return 0
 
   }
 
   beneficiarioPush() {
-    this.beneficiarios.push(this.beneficiarioVacio)
+    this.contrato.beneficiarios.push({
+      nombre: '',
+      doc: '',
+      fecha_nacimiento: '',
+       plus_edad: 0
+    })
   }
 
   inhumadoPush() {
-    this.inhumados.push(this.inhumadoVacio)
+    this.contrato.inhumados.push( {
+      fecha_fallecimiento: '',
+      fecha_inhumacion: '',
+      nombre: '',
+      ci: '',
+  
+    })
   }
 
   calcularSaldo(entrega) {
-    console.log(entrega);
+  //log(entrega);
 
     if (entrega) {
-      this.saldo = this.producto.PRECIO_MAYORISTA - parseInt(entrega);
+      // this.saldo = this.producto.PRECIO_MAYORISTA - parseInt(entrega);
     } else {
-      this.saldo = this.producto.PRECIO_MAYORISTA;
+      // this.saldo = this.producto.PRECIO_MAYORISTA;
     }
   }
 
@@ -210,22 +222,11 @@ export class EditarContratoComponent implements OnInit {
     return Number(num);
   }
   async crearContrato() {
-    // var d = new Date(),
-    //   month = '' + (d.getMonth() + 1),
-    //   day = '' + d.getDate(),
-    //   year = d.getFullYear();
-
-    // if (month.length < 2)
-    //   month = '0' + month;
-    // if (day.length < 2)
-    //   day = '0' + day;
-
-    // let today = [year, month, day].join('-');
-
+   
 
     if (!this.facturas && this.pagoradioValue === 'contado') {
       this.plazo = 1
-      this.facturas = this.crearFacturas(this.saldo, 1)
+      this.facturas = this.crearFacturas(this.contrato.saldo_pendiente, 1)
     }
 
     
@@ -242,9 +243,8 @@ export class EditarContratoComponent implements OnInit {
       this.contrato.nro_contrato = this.nro_contrato,
       this.contrato.activo = '1',
       this.contrato.vendedor = this.vendedor,
-      this.contrato.beneficiarios = this.beneficiarios,
-      this.contrato.fecha_creacion_unix = new Date().valueOf() // falta poner campode fecha para poder modificar
-
+       this.contrato.fecha_creacion_unix = new Date().valueOf() // falta poner campode fecha para poder modificar
+ 
     
     if (this.esUdp) {
       this.contrato.manzana = this.manzana
@@ -268,7 +268,7 @@ export class EditarContratoComponent implements OnInit {
         fecha_creacion_unix: new Date().getTime()
       })
     }
-    console.log(this.facturas);
+  //log(this.facturas);
     let send = {
       contrato: this.contrato,
       facturas: this.facturas
@@ -282,7 +282,7 @@ export class EditarContratoComponent implements OnInit {
         timer: 2000,
       })
     });
-
+    window.history.back()
   }
   async searchCobradores(val: any) {
     if (val.term.length > 0) {
@@ -331,13 +331,19 @@ export class EditarContratoComponent implements OnInit {
     ]
 
     this.inhumados = [
-      this.inhumadoVacio
+      {
+        fecha_fallecimiento: '',
+        fecha_inhumacion: '',
+        nombre: '',
+        ci: '',
+    
+      }
     ]
     if (this.cobrador) {
       this.radioValue = 'cobrador'
     }
     this.producto = producto;
-    this.saldo = producto.PRECIO_MAYORISTA;
+    // this.saldo = producto.PRECIO_MAYORISTA;
     if (producto.COD_CORTO == 'U.D.P.') {
       this.esUdp = true
     } else this.esUdp = false;
@@ -416,8 +422,6 @@ export class EditarContratoComponent implements OnInit {
       }
     })
   }
-
-
-
+ 
 
 }

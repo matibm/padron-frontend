@@ -37,7 +37,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 import { NgxLoadingModule } from 'ngx-loading';
 import { NombreCortoPipe } from './pipes/nombre-corto.pipe';
-  
+   
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +46,7 @@ import { NombreCortoPipe } from './pipes/nombre-corto.pipe';
     NopagefoundComponent,
     CrearContratoComponent,
     PricePipe,
+     
     // NombreCortoPipe
      // BreadcrumbsComponent,
     // SidebarComponent,

@@ -126,6 +126,8 @@
                         <div class="" *ngIf="producto">
                             <h5>Nombre: <b>{{producto.NOMBRE}} - {{producto.COD_CORTO}}</b></h5>
                             <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
+                            <h5>Saldo: <b>{{contrato.saldo_pendiente | currency:'':'':'2.0'}} Gs</b></h5>
+
                             <!-- <h5>Entrega: </h5>  -->
                             <hr>
 
@@ -280,7 +282,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of beneficiarios; let i = index">
+                                    <tr *ngFor="let item of contrato.beneficiarios; let i = index">
                                         <td>
                                             <input type="text" class="form-control" [(ngModel)]="item.doc" name="name-{{i}}" placeholder="cedula de identidad">
                                         </td>
@@ -291,7 +293,7 @@
                                             <input type="text" class="form-control" (ngModelChange)="item.edad = calcularEdad(fchn.value)" #fchn [(ngModel)]="item.fecha_nacimiento" name="name-{{i}}" placeholder="aaaa/mm/dd">
                                         </td>
                                         <td>
-                                            <label for="">{{item.edad}}</label>
+                                            <label for="">1</label>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" [(ngModel)]="item.plus_edad" name="name-{{i}}" placeholder="fecha de inhumacion">
@@ -363,7 +365,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let item of inhumados; let i = index">
+                                    <tr *ngFor="let item of contrato.inhumados; let i = index">
                                         <td>
                                             <input type="text" class="form-control" [(ngModel)]="item.ci" name="name-{{i}}" placeholder="cedula de identidad">
                                         </td>

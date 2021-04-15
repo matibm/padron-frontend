@@ -64,11 +64,45 @@ export class ContratoService {
   newContrato(contrato) {
     let url = URL_SERVICIOS + '/contrato/new';
     url += `?token=${this._usuarioService.token}`
+
+    let timerInterval
+    swal.fire({
+      title: 'Creando contrato',
+      html: 'Por favor espere unos segundos',
+       // timerProgressBar: true,
+      didOpen: () => {
+        swal.showLoading()
+       
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+
     return this.http.post(url, contrato).toPromise().then((resp: any) => {
       console.log(resp);
-
+      swal.fire({
+        icon: 'success',
+        title: 'Contrato creado',
+        // text: 'I will close in 2 seconds.',
+        timer: 2000,
+      })
       return resp.contrato
-    })
+    },
+    (error) =>{
+      swal.fire({
+        icon: 'error',
+        title: 'Error  al crear Contrato',
+        text: JSON.stringify(error),
+        
+      })
+    }
+    )
   }
   updateContrato(contrato, modifica_producto: boolean) {
     console.log(modifica_producto);

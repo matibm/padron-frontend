@@ -77,55 +77,26 @@
                 <div class="card-body">
                     <h3>Telefonos</h3>
                     <div class="form-group">
-                        <label for="">Telefono 1:</label>
+                        <label for="">Celular particular:</label>
                         <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
                     </div>
                     <div class="form-group">
-                        <label for="">Telefono 2:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.TELEFONO2" name="Telefono-2" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        <label for="">Teléfono particular:</label>
+                        <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
                     </div>
                     <div class="form-group">
-                        <label for="">Telefono 3:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.TELEFONO3" name="Telefono-3" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        <label for="">Celular laboral:</label>
+                        <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
                     </div>
                     <div class="form-group">
-                        <label for="">Telefono fax:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.TELEFONO_FAX" name="Telefono-fax" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        <label for="">Teléfono laboral:</label>
+                        <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
                     </div>
-                    <div class="form-group">
-                        <label for="">Telefono trabajo:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.TEL_TRABAJO" name="Telefono-trabajo" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Telefono contacto 1:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTACTO" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="">Telefono contacto 2:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTA2" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="">Telefono contacto 3:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTA3" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="">Telefono contacto 4:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTA4" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="">Telefono contacto 5:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.TEL_CONTA5" name="Telefono-contacto" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -133,41 +104,62 @@
             <div class="card">
                 <div class="card-body">
                     <h3>Direcciones</h3>
-                    <div class="form-group">
-                        <label for="">Ciudad: </label>
-                        <input type="text" name="" [(ngModel)]="usuario.NOMCIUDAD" name="</label" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                    <form class="form-material m-t-40">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Departamento: </label>
-                        <input type="text" name="" [(ngModel)]="usuario.NOMDEPAR" name="Departamento:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        <div class="form-group">
+                            <label for="">Ciudad: </label>
+                            <input type="text" name="" [(ngModel)]="usuario.NOMCIUDAD" name="</label" id="" class="form-control" placeholder="" aria-describedby="helpId">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Direccion: </label>
-                        <input type="text" name="" [(ngModel)]="usuario.DIRECCION" name="Direccion:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        </div>
+                    </form>
+                    <form class="form-material m-t-40">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Direccion laboral: </label>
-                        <input type="text" name="" [(ngModel)]="usuario.direccion_laboral" name="Direccion-laboral" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        <div class="form-group">
+                            <label for="">Departamento: </label>
+                            <input type="text" name="" [(ngModel)]="usuario.NOMDEPAR" name="departamento" id="" class="form-control" placeholder="" aria-describedby="helpId">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Direccion particular: :</label>
-                        <input type="text" name="" [(ngModel)]="usuario.direccion_particular" name="Direccion-particular" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        </div>
+                    </form>
+                    <form class="form-material m-t-40">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Direccion trabajo:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.DIRECCION_TRABAJO" name="Direccion-trabajo" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        <div class="form-group">
+                            <label for="">Direccion: </label>
+                            <input type="text" name="" [(ngModel)]="usuario.DIRECCION" name="Direccion:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Ciudad trabajo:</label>
-                        <input type="text" name="" [(ngModel)]="usuario.ciudad_trabajo" name="trabajo:</" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        </div>
+                    </form>
+                    <form class="form-material m-t-40">
 
-                    </div>
+                        <div class="form-group">
+                            <label for="">Direccion laboral: </label>
+                            <input type="text" name="" [(ngModel)]="usuario.direccion_laboral" name="Direccion-laboral" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                        </div>
+                    </form>
+                    <form class="form-material m-t-40">
+
+                        <div class="form-group">
+                            <label for="">Direccion particular: :</label>
+                            <input type="text" name="" [(ngModel)]="usuario.direccion_particular" name="Direccion-particular" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                        </div>
+                    </form>
+                    <form class="form-material m-t-40">
+
+                        <div class="form-group">
+                            <label for="">Direccion trabajo:</label>
+                            <input type="text" name="" [(ngModel)]="usuario.DIRECCION_TRABAJO" name="Direccion-trabajo" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                        </div>
+                    </form>
+                    <form class="form-material m-t-40">
+
+                        <div class="form-group">
+                            <label for="">Ciudad trabajo:</label>
+                            <input type="text" name="" [(ngModel)]="usuario.ciudad_trabajo" name="trabajo:</" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

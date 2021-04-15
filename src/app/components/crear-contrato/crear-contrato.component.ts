@@ -57,7 +57,7 @@ export class CrearContratoComponent implements OnInit {
   esUdp = false;
   beneficiarios = [
     {
-      nombre: '',
+      nombre: '1',
       doc: '',
       fecha_nacimiento: '',
       edad: '',
@@ -71,17 +71,52 @@ export class CrearContratoComponent implements OnInit {
     ci: '',
 
   }
-  inhumados: Inhumado[] = [this.inhumadoVacio]
+  inhumados = [
+    {
+    fecha_fallecimiento: '1',
+    fecha_inhumacion: '',
+    nombre: '',
+    ci: '1',
+
+  } 
+]
   facturas
-  radioValue = 'administracion'
+  radioValue = 'OFICINA'
   fechaPago = new Date()
   pagoradioValue = 'contado'
   stringFechaPago
   servicioCMP
   numeroFactura
-  pruebalog(event) {
-    event.preventDefault()
-    console.log(event);
+
+  trackItem (index, item) {
+    
+  //log(item);
+    
+    return index
+  }
+  tipos_pago = [
+    {
+      name: 'Oficina',
+      value: 'OFICINA'
+    },
+    {
+      name: 'PAGOPAR',
+      value: 'PAGOPAR'
+    },
+    {
+      name: 'Débito Automático',
+      value: 'DEBITO'
+    },
+    {
+      name: 'Transferencia Bancaria',
+      value: 'BANCARIA'
+    }
+  ]
+
+
+  pruebalog() {
+    
+  //log(this.radioValue);
 
   }
   showInfoContrato = false;
@@ -102,7 +137,7 @@ export class CrearContratoComponent implements OnInit {
     this.fechaMantenimiento = new Date(`${date.getFullYear() + 1}-01-05`)
     this.fechaMantenimiento.setUTCHours(5)
 
-    console.log(this.fechaMantenimiento);
+  //log(this.fechaMantenimiento);
 
     this.productos = await this._productoService.getProductos()
     for (let i = 0; i < this.productos.length; i++) {
@@ -111,7 +146,7 @@ export class CrearContratoComponent implements OnInit {
         this.servicioCMP = element
       }
     }
-    console.log(this.servicioCMP);
+  //log(this.servicioCMP);
 
     // this.clientes = await this._usuarioService.getClientes()
     // this.vendedores = await this._usuarioService.getVendedores()
@@ -120,7 +155,7 @@ export class CrearContratoComponent implements OnInit {
   }
   selectedDate
   calcularEdad(date) {
-    console.log(date);
+  //log(date);
 
     if (date.length > 4) {
       let hoy = new Date()
@@ -134,7 +169,7 @@ export class CrearContratoComponent implements OnInit {
       ) {
         edad--
       }
-      console.log(edad);
+    //log(edad);
 
       return edad
     } else return 0
@@ -150,7 +185,7 @@ export class CrearContratoComponent implements OnInit {
   }
 
   calcularSaldo(entrega) {
-    console.log(entrega);
+  //log(entrega);
 
     if (entrega) {
       this.saldo = this.producto.PRECIO_MAYORISTA - parseInt(entrega);
@@ -219,18 +254,7 @@ export class CrearContratoComponent implements OnInit {
     return Number(num);
   }
   async crearContrato() {
-    // var d = new Date(),
-    //   month = '' + (d.getMonth() + 1),
-    //   day = '' + d.getDate(),
-    //   year = d.getFullYear();
-
-    // if (month.length < 2)
-    //   month = '0' + month;
-    // if (day.length < 2)
-    //   day = '0' + day;
-
-    // let today = [year, month, day].join('-');
-
+   
 
     if (!this.facturas && this.pagoradioValue === 'contado') {
       this.plazo = 1
@@ -253,8 +277,9 @@ export class CrearContratoComponent implements OnInit {
       activo: '1',
       vendedor: this.vendedor,
       beneficiarios: this.beneficiarios,
-
-      // fecha_alta: today, // falta poner campode fecha para poder modificar
+      saldo_pendiente: this.saldo,
+      tipo_pago: this.radioValue,
+      inhumados: this.inhumados,
       fecha_creacion_unix: new Date().valueOf() // falta poner campode fecha para poder modificar
 
     }
@@ -264,29 +289,23 @@ export class CrearContratoComponent implements OnInit {
       nuevo_contrato.parcela = this.parcela
       nuevo_contrato.sector = this.sector
     }
-    this.facturas.push({
-      vencimiento: this.fechaMantenimiento,
-      monto: 150000,
-      haber: 150000,
-      titular: this.cliente,
-      iscmp: true,
-      servicio: this.servicioCMP._id,
-      fecha_creacion_unix: new Date().getTime()
-    })
-    console.log(this.facturas);
-    let send = {
+    // this.facturas.push({
+    //   vencimiento: this.fechaMantenimiento,
+    //   monto: 150000,
+    //   haber: 150000,
+    //   titular: this.cliente,
+    //   iscmp: true,
+    //   servicio: this.servicioCMP._id,
+    //   fecha_creacion_unix: new Date().getTime()
+    // })
+     let send = {
       contrato: nuevo_contrato,
-      facturas: this.facturas
+      facturas: null,
+      fechaPago: this.fechaPago,
+      crearCMP: this.esUdp
     }
 
-    await this._contratoService.newContrato(send).then(() => {
-      swal.fire({
-        icon: 'success',
-        title: 'Contrato creado',
-        // text: 'I will close in 2 seconds.',
-        timer: 2000,
-      })
-    });
+    await this._contratoService.newContrato(send) 
 
   }
   async searchCobradores(val: any) {
@@ -336,11 +355,16 @@ export class CrearContratoComponent implements OnInit {
     ]
 
     this.inhumados = [
-      this.inhumadoVacio
+
+       {
+    fecha_fallecimiento: '',
+    fecha_inhumacion: '',
+    nombre: '',
+    ci: '',
+
+  } 
     ]
-    if (this.cobrador) {
-      this.radioValue = 'cobrador'
-    }
+     
     this.producto = producto;
     this.saldo = producto.PRECIO_MAYORISTA;
     if (producto.COD_CORTO == 'U.D.P.') {

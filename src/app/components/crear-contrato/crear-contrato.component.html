@@ -27,10 +27,11 @@
                         <h5>Nombres: <b>{{cliente.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{cliente.RAZON}}</b></h5>
                         <h5>RUC: <b>{{cliente.RUC}}</b></h5>
-                        <h5>Direccion: <b>{{cliente.direccion_particular}}</b></h5>
-                        <h5>Ciudad: <b>{{cliente.ciudad_trabajo}}</b></h5>
-
-                        <h5>Telefonos: {{cliente.TELEFONO}}</h5>
+                        <h5>Direccion P: <b>{{cliente.DIRECCION}}</b></h5>
+                        <h5>Ciudad P: <b>{{cliente.NOMCIUDAD}}</b></h5>
+                        <h5>Direccion L: <b>{{cliente.DIRECCION_TRABAJO}}</b></h5>
+                        <h5>Ciudad L: <b>{{cliente.ciudad_trabajo}}</b></h5>
+                        <h5>Telefonos: <b>{{cliente.TELEFONO1}}</b></h5>
 
                         <div class="row ">
                             <div class="col ">
@@ -69,7 +70,8 @@
                         <h5>Nombres: <b>{{titularAlternativo.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{titularAlternativo.RAZON}}</b></h5>
                         <h5>RUC: <b>{{titularAlternativo.RUC}}</b></h5>
-                        <h5>Direccion: <b>{{titularAlternativo.direccion_particular}}</b></h5>
+                        <h5>Direccion P: <b>{{titularAlternativo.DIRECCION}}</b></h5>
+                        <h5>Direccion L: <b>{{titularAlternativo.DIRECCION_TRABAJO}}</b></h5>
                         <h5>Ciudad: <b>{{titularAlternativo.ciudad_trabajo}}</b></h5>
 
                         <h5>Telefonos: {{titularAlternativo.TELEFONO}}</h5>
@@ -213,20 +215,24 @@
                         <hr>
                         <div class="mt-2 inline-flex">
                             <div style="width: 100%;" class="row">
-                                <div class="col-md-4 col-xs">
-                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_1" value="cobrador" required>
+                                <div *ngFor="let item of tipos_pago; let i = index;" class="col-md-3 col-xs">
+                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_-{{i}}" [value]="item.value" required>
 
-                                    <label for="radio_1">Cobrador</label>
+                                    <label for="radio_-{{i}}">{{item.name}}</label>
                                 </div>
-                                <div class="col-md-4 col-xs">
-                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_2" value="debito" required>
+                                <!-- <div class="col-md-3 col-xs">
+                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_2" value="DEBITO" required>
                                     <label for="radio_2">Débito Automático</label>
                                 </div>
-                                <div class="col-md-4 col-xs">
-                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_3" value="administracion" required>
-                                    <label for="radio_3">Administracion</label>
+                                <div class="col-md-3 col-xs">
+                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_40" value="BANCARIA" required>
+                                    <label for="radio_40">Transferencia Bancaria</label>
                                 </div>
-
+                                <div class="col-md-3 col-xs">
+                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_3" value="OFICINA" required>
+                                    <label for="radio_3">Oficina</label>
+                                </div> -->
+                                <button type="button" (click)="pruebalog()" class="btn btn-primary">print</button>
                             </div>
 
                         </div>
@@ -239,7 +245,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-8 col-xs  ">
+                            <div *ngIf="false" class="col-md-8 col-xs  ">
                                 <label>Lugar de cobranza</label>
 
                                 <div class="row">
@@ -326,7 +332,7 @@
                                             <input type="text" class="form-control" (ngModelChange)="item.edad = calcularEdad(fchn.value)" #fchn [(ngModel)]="item.fecha_nacimiento" name="name-{{i}}" placeholder="aaaa/mm/dd">
                                         </td>
                                         <td>
-                                            <label for="">{{item.edad}}</label>
+                                            <label for="">{{item.edad}} años</label>
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" [(ngModel)]="item.plus_edad" name="name-{{i}}" placeholder="fecha de inhumacion">
@@ -403,13 +409,13 @@
                                             <input type="text" class="form-control" [(ngModel)]="item.ci" name="name-{{i}}" placeholder="cedula de identidad">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.nombre" name="name-{{i}}" placeholder="nombre completo">
+                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.nombre" placeholder="nombre completo">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.fecha_fallecimiento" name="name-{{i}}" placeholder="fecha de fallecimiento">
+                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.fecha_fallecimiento" placeholder="fecha de fallecimiento">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.fecha_inhumacion" name="name-{{i}}" placeholder="fecha de inhumacion">
+                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.fecha_inhumacion" placeholder="fecha de inhumacion">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -422,10 +428,7 @@
                 </div>
                 <button type="button" (click)="crearContrato()" [disabled]="disableCrearContrato()" class="btn float-right btn-primary">Crear
                     Contrato</button>
-                <button [swal]="{ title: 'Save file as...', input: 'text', showDenyButton: true, denyButtonText: 'Don\'t save', showCancelButton: true }" (confirm)="null" (deny)="null" (dismiss)="null">
 
-                    Save
-                </button>
             </div>
         </div>
     </div>
