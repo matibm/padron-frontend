@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../services/usuario.service';
 import { Movimiento } from './../../models/movimiento';
 import { MovimientoService } from './../../services/movimiento.service';
 import { Factura } from './../../models/factura';
@@ -19,6 +20,7 @@ export class InfoContratoComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     private router: Router,
     public _facturaService: FacturaService,
+    public _usuarioService: UsuarioService,
     public _movimientoService: MovimientoService
 
   ) { }
@@ -35,7 +37,8 @@ export class InfoContratoComponent implements OnInit {
   titularAlternativo
   facturasCount = 0
   facturaOptions: any
-
+  fondos
+  fondo
   facturasAPagar
 
   async ngOnInit() {
@@ -58,7 +61,7 @@ export class InfoContratoComponent implements OnInit {
     let respFacturas = await this._facturaService.getFacturasOptions(this.facturaOptions)
     this.facturas = respFacturas.facturas
     this.facturasCount = respFacturas.count
-
+    this.fondos = await this._usuarioService.buscarUsuarios('BANCOS','')
     this.movimientos = (await this._movimientoService.getAllMovimientos({ contrato: this.contrato._id })).movimientos
   }
 
@@ -100,10 +103,22 @@ export class InfoContratoComponent implements OnInit {
     this.facturasAPagar = await this._facturaService.pagarPorMonto({ contrato: id, monto: monto })
   }
 
-  async confirmarPago(id, monto) {
-     await this._facturaService.pagarPorMonto({ contrato: id, monto: monto, confirmado: true })
+  async confirmarPago(id, monto, fondo) {
+     await this._facturaService.pagarPorMonto({ contrato: id, monto: monto, confirmado: true, fondo: fondo._id })
     this.ngOnInit()
     this.facturasAPagar = null
+  }
+  async searchBancos(val) {
+    this.fondos = await this._usuarioService.buscarUsuarios('BANCOS', val.term)
+  }
+
+
+  customSearchFn(term: string, item: any) {
+    term = term.toLowerCase();
+    return item.NOMBRES.toLowerCase().indexOf(term) > -1 ||
+      item.APELLIDOS.toLowerCase().includes(term) ||
+      item.RAZON.toLowerCase().includes(term) ||
+      item.RUC.toLowerCase().includes(term);
   }
 
 }

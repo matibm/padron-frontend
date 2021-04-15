@@ -184,9 +184,40 @@
 
                     </div>
                 </div>
+
+                <div class="inline-flex">
+                    <h4 class="mr-3"><b>Fondo:</b></h4>
+                    <div class="" *ngIf="!fondo">
+                        <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                            <ng-template ng-option-tmp let-item="item">
+                                <div>
+                                    <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                    <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                    <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                                    <small>{{item.RUC}}</small>
+                                </div>
+
+                            </ng-template>
+                        </ng-select>
+                    </div>
+
+                    <div class="" *ngIf="fondo">
+                        <h4>
+                            <div *ngIf="fondo.NOMBRES">{{fondo.NOMBRES}} {{fondo.APELLIDOS}}</div>
+                            <div *ngIf="fondo.NOMBRES && fondo.RAZON"> - </div>
+                            <div *ngIf="fondo.RAZON">{{fondo.RAZON}} </div>
+
+                            <small>{{fondo.RUC}}</small>
+                        </h4>
+                    </div>
+
+                </div>
+
                 <div class="d-flex">
                     <div class="mx-auto">
-                        <button (click)="confirmarPago(contrato._id, montoAPagar.value)" class="btn btn-success">Confirmar Pago</button>
+                        <button (click)="confirmarPago(contrato._id, montoAPagar.value, fondo)" [disabled]="!fondo" class="btn btn-success">Confirmar Pago</button>
                     </div>
 
                 </div>
