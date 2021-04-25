@@ -34,6 +34,9 @@ import { FacturaPdfComponent } from './factura-pdf/factura-pdf.component';
 import { CrearProductoComponent } from './crear-producto/crear-producto.component';
 import { ListaProductosComponent } from './lista-productos/lista-productos.component';
 import { EditarProductoComponent } from './editar-producto/editar-producto.component';
+import { CrearFacturaComponent } from './crear-factura/crear-factura.component';
+import { ModalContratosComponent } from './modal-contratos/modal-contratos.component';
+import { ModalPdfComponent } from './modal-pdf/modal-pdf.component';
 
 @NgModule({
   declarations: [IncrementadorComponent,
@@ -58,6 +61,9 @@ import { EditarProductoComponent } from './editar-producto/editar-producto.compo
     CrearProductoComponent,
     ListaProductosComponent,
     EditarProductoComponent,
+    CrearFacturaComponent,
+    ModalContratosComponent,
+    ModalPdfComponent,
 
   ],
   imports: [

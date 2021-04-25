@@ -17,19 +17,24 @@ export class ContratoPdfComponent implements OnInit {
   ) { }
   id
   @Input() contrato: Contrato
+  @Input() printAltoke = true
   tipo_contrato = ''
+  diaCadaMes
   async ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.contrato = await this._contratoService.getContratoById(this.id)
     this.tipo_contrato = this.contrato.producto.COD_CORTO
-     console.log(this.contrato);
-     setTimeout(() => {
-      window.print()  
-     }, 500);
-     
-     window.onafterprint = (event) => {
-      console.log('After print');
-      window.close()
-    };  }
+
+    this.diaCadaMes = new Date(this.contrato.fecha_creacion_unix).getDate()
+
+      if (this.printAltoke) {
+        setTimeout(() => {
+          window.print()  
+         }, 500);
+         
+         window.onafterprint = (event) => {
+           window.close()
+        };  }
+      }
 
 }

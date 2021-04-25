@@ -1,4 +1,4 @@
-<div class="card">
+<div *ngIf="showFilter" class="card">
     <div class="card-body">
         <h4><span class="lstick"></span> Filtros </h4>
         <div class="row">
@@ -185,24 +185,24 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title">Contratos</h4>
-        <table class="table table-hover">
+        <table class="table table-sm table-hover">
             <thead>
                 <tr #tableHeaad class="thead">
                     <th>#</th>
-                    <th id="fecha_creacion_unix" (click)="ordenar('fecha_creacion_unix')">fecha <i class="ml-1 fa fa-sort-desc"></i></th>
-                    <th id="nro_contrato" (click)="ordenar('nro_contrato')">Nro. Contrato <i class="ml-1 fa fa-sort"></i> </th>
-                    <th id="producto" (click)="ordenar('producto')">Servicio o Producto <i class="ml-1 fa fa-sort"></i>
+                    <th id="fecha_creacion_unix" (click)="ordenar('fecha_creacion_unix')">fecha <i *ngIf="false" class="ml-1 fa fa-sort-desc"></i></th>
+                    <th style="width: 50px;" id="nro_contrato" (click)="ordenar('nro_contrato')">Nro. Contrato <i *ngIf="false" class="ml-1 fa fa-sort"></i> </th>
+                    <th id="producto" (click)="ordenar('producto')">Servicio o Producto <i *ngIf="false" class="ml-1 fa fa-sort"></i>
                     </th>
                     <th>Cliente </th>
                     <th>RUC/CI</th>
-                    <th id="manzana" (click)="ordenar('manzana')">Manzana <i class="ml-1 fa fa-sort"></i> </th>
-                    <th id="fila" (click)="ordenar('fila')">Fila <i class="ml-1 fa fa-sort"></i> </th>
-                    <th id="parcela" (click)="ordenar('parcela')">Parcela <i class="ml-1 fa fa-sort"></i> </th>
+                    <th id="manzana" (click)="ordenar('manzana')">Manzana <i *ngIf="false" class="ml-1 fa fa-sort"></i> </th>
+                    <th id="fila" (click)="ordenar('fila')">Fila <i *ngIf="false" class="ml-1 fa fa-sort"></i> </th>
+                    <th id="parcela" (click)="ordenar('parcela')">Parcela <i *ngIf="false" class="ml-1 fa fa-sort"></i> </th>
                 </tr>
             </thead>
             <tbody>
                 <!-- -->
-                <tr [routerLink]="['/admin/info_contrato', contrato._id]" class="pointer" *ngFor="let contrato of contratos | paginate: { itemsPerPage: 10,totalItems:count, currentPage: page } ; let i = index;">
+                <tr (click)="onSelectContrato(contrato)" class="pointer" *ngFor="let contrato of contratos | paginate: { itemsPerPage: 10,totalItems:100, currentPage: page } ; let i = index;">
                     <td scope="row">{{page*10 + (i+1) - 10}}</td>
                     <td>{{contrato.fecha_creacion_unix | date}}</td>
                     <td>{{contrato.nro_contrato}}</td>
@@ -220,6 +220,6 @@
 
             </tbody>
         </table>
-        <pagination-controls (pageChange)="pageChanged($event); page = $event"></pagination-controls>
+        <pagination-controls *ngIf="count> 10" (pageChange)="pageChanged($event); page = $event"></pagination-controls>
     </div>
 </div>

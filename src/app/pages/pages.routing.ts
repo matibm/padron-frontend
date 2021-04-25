@@ -1,3 +1,4 @@
+import { CrearFacturaComponent } from './../components/crear-factura/crear-factura.component';
 import { EditarProductoComponent } from './../components/editar-producto/editar-producto.component';
 import { ListaProductosComponent } from './../components/lista-productos/lista-productos.component';
 import { CrearProductoComponent } from './../components/crear-producto/crear-producto.component';
@@ -52,6 +53,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'progress', component: ProgressComponent },
       { path: 'crear_contrato', component: CrearContratoComponent },
+      { path: 'crear_ingreso', component: CrearFacturaComponent },
       { path: 'grafica1', component: Grafica1Component },
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'usuario/:id', component: PerfilUsuarioComponent },

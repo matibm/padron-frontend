@@ -14,7 +14,7 @@
 
                         <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
-                                <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
                                     <small>{{item.RUC}}</small>
                                 </div>
 
@@ -57,7 +57,7 @@
 
                         <ng-select [items]="clientes" [(ngModel)]="titularAlternativo" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar titular" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
-                                <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
                                     <small>{{item.RUC}}</small>
                                 </div>
 
@@ -100,7 +100,7 @@
                     <div *ngIf="!vendedor">
                         <ng-select [items]="vendedores" [(ngModel)]="vendedor" (search)="searchVendedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar vendedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
-                                <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
                                     <small>{{item.RUC}}</small>
                                 </div>
                             </ng-template>
@@ -129,7 +129,7 @@
                         <div *ngIf="!cobrador">
                             <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchCobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
-                                    <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                    <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
                                         <small>{{item.RUC}}</small>
                                     </div>
 
@@ -195,7 +195,13 @@
                                     <label for="">Entrega</label>
                                     <input type="number" class="form-control" (ngModelChange)="calcularSaldo(en.value)" #en [(ngModel)]="entrega">
                                 </div>
-                                <h5>saldo <b>{{saldo | currency:'':'':'2.0'}} Gs</b></h5>
+                                <!-- <h5>saldo <b>{{saldo | currency:'':'':'2.0'}} Gs</b></h5> -->
+
+                                <div class="form-group">
+                                    <label for="">Total</label>
+                                    <input type="number" class="form-control" (ngModelChange)="calcularCuotas()" [(ngModel)]="saldo" name="" id="" aria-describedby="helpId" placeholder="">
+                                    <small>saldo <b>{{saldo | currency:'':'':'2.0'}} Gs</b></small>
+                                </div>
                             </div>
                             <div class="col-md col-xs">
                                 <div class="form-group">
@@ -363,16 +369,16 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input type="text" [(ngModel)]="manzana" class="form-control" name="manzana" id="" aria-describedby="helpId" placeholder="">
+                                            <input type="text" [(ngModel)]="manzana" class="form-control" name="manzana" aria-describedby="helpId" placeholder="">
                                         </td>
                                         <td>
-                                            <input type="text" [(ngModel)]="fila" class="form-control" name="fila" id="" aria-describedby="helpId" placeholder="">
+                                            <input type="text" [(ngModel)]="fila" class="form-control" name="fila" aria-describedby="helpId" placeholder="">
                                         </td>
                                         <td>
-                                            <input type="text" [(ngModel)]="parcela" class="form-control" name="parcela" id="" aria-describedby="helpId" placeholder="">
+                                            <input type="text" [(ngModel)]="parcela" class="form-control" name="parcela" aria-describedby="helpId" placeholder="">
                                         </td>
                                         <td>
-                                            <input type="text" [(ngModel)]="sector" class="form-control" name="sector" id="" aria-describedby="helpId" placeholder="">
+                                            <input type="text" [(ngModel)]="sector" class="form-control" name="sector" aria-describedby="helpId" placeholder="">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -381,7 +387,7 @@
                     </div>
                     <div class="card">
                         <div class="card-body  ">
-                            <h3>Cuota de Mantenimiento</h3>
+                            <h3>Cuota de Mantenimiento: 150.000 Gs</h3>
                             <div style="max-width: 300px;" class="form-group">
                                 <label for="">Fecha de pago </label>
                                 <input type="text" placeholder="AAAA-MM-DD" class="form-control" [(ngModel)]="stringFechaMantenimiento" (ngModelChange)="calcularFechaMantenimiento()">
@@ -397,25 +403,30 @@
                             <table class=" table  ">
                                 <thead>
                                     <tr>
+                                        <th class="text-center">Nombres y Apellidos</th>
                                         <th class="text-center">C.I.</th>
-                                        <th class="text-center">Nombre</th>
                                         <th class="text-center">Fecha fallecimiento</th>
                                         <th class="text-center">Fecha Inhumacion</th>
+                                        <th class="text-center">Nro Inhumacion</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let item of inhumados; let i = index">
+
                                         <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.ci" name="name-{{i}}" placeholder="cedula de identidad">
+                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.nombre">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.nombre" placeholder="nombre completo">
+                                            <input type="text" class="form-control" [(ngModel)]="item.ci" name="name-{{i}}">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.fecha_fallecimiento" placeholder="fecha de fallecimiento">
+                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.fecha_fallecimiento">
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.fecha_inhumacion" placeholder="fecha de inhumacion">
+                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.fecha_inhumacion">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.nro">
                                         </td>
                                     </tr>
                                 </tbody>

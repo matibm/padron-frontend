@@ -18,12 +18,34 @@ export class FacturaService {
 
   crearFactura(factura) {
 
-    let url = URL_SERVICIOS + '/factura/new';
+    let url = URL_SERVICIOS + '/factura/crear_factura';
     url += `?token=${this._usuarioService.token}`
 
     return this.http.post(url, factura).toPromise().then((resp: any) => {
       console.log(resp);
+      swal.fire({
+        icon: 'success',
+        title: 'Ingreso creado',
+        // text: 'I will close in 2 seconds.',
+        timer: 3000,
+      })
+      return resp.factura
+    })
+  }
+  elimnarFactura(id) {
 
+    let url = URL_SERVICIOS + '/factura/eliminar_factura/'+id;
+    url += `?token=${this._usuarioService.token}`
+
+    return this.http.delete(url).toPromise().then((resp: any) => {
+      console.log(resp);
+      window.history.back()
+      swal.fire({
+        icon: 'success',
+        title: 'Ingreso Elimnado',
+        // text: 'I will close in 2 seconds.',
+        timer: 3000,
+      })
       return resp.factura
     })
   }

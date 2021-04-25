@@ -19,6 +19,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   nivel = 1
   isVendedor
+  isProveedor
   isCobrador
   isCliente
   isEmpleado
@@ -31,6 +32,7 @@ export class CrearUsuarioComponent implements OnInit {
   async crearUsuario() {
     console.log(this.usuario);
     this.isVendedor == true ? this.usuario.VENDEDORES = '1' : this.usuario.VENDEDORES = '0'
+    this.isProveedor == true ? this.usuario.PROVEEDORES = '1' : this.usuario.PROVEEDORES = '0'
     this.isCobrador == true ? this.usuario.COBRADORES = '1' : this.usuario.COBRADORES = '0'
     this.isCliente == true ? this.usuario.CLIENTES = '1' : this.usuario.CLIENTES = '0'
     this.isEmpleado == true ? this.usuario.EMPLEADOS = '1' : this.usuario.EMPLEADOS = '0'
@@ -44,7 +46,7 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
   allowCreate(): boolean {
-    if (this.usuario.NOMBRES && this.usuario.APELLIDOS && this.usuario.TELEFONO1 && this.usuario.EMAIL && this.usuario.password) {
+    if (this.usuario.NOMBRES && this.usuario.APELLIDOS && this.usuario.TELEFONO1 ) {
       return true
     } else {
       return false

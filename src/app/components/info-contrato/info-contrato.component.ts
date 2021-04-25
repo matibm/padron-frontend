@@ -40,7 +40,7 @@ export class InfoContratoComponent implements OnInit {
   fondos
   fondo
   facturasAPagar
-
+  showModalPdf = false
   async ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.contrato = await this._contratoService.getContratoById(this.id)
@@ -64,14 +64,6 @@ export class InfoContratoComponent implements OnInit {
     this.fondos = await this._usuarioService.buscarUsuarios('BANCOS','')
     this.movimientos = (await this._movimientoService.getAllMovimientos({ contrato: this.contrato._id })).movimientos
   }
-
-  viewContrato() {
-    let wopen = window.open('/contratos-pdf/' + this.id)
-    wopen.onafterprint = (event) => {
-      wopen.close()
-    }
-  }
-
 
   calcularPagoPorMonto(monto) {
     let montoAuxiliar = 0

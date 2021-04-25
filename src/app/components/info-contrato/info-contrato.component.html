@@ -298,17 +298,17 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>
-                                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                <td class="text-center">
+                                    {{contrato.manzana}}
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                <td class="text-center">
+                                    {{contrato.fila}}
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                <td class="text-center">
+                                    {{contrato.parcela}}
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="">
+                                <td class="text-center">
+                                    {{contrato.sector}}
                                 </td>
                             </tr>
                         </tbody>
@@ -353,8 +353,12 @@
     <div class="float-right">
         <button type="button" [routerLink]="['/admin/editar_contrato', this.id]" class="btn mr-2 btn-secondary">Editar Contrato</button>
         <button type="button" (click)="crearMovimiento()" class="btn  btn-primary">Crear Movimiento</button>
-        <button type="button" (click)="viewContrato()" class="btn  btn-primary">Ver PDF</button>
+        <button type="button" (click)="showModalPdf = true" class="btn mx-2 btn-primary">Ver PDF</button>
     </div>
 
 
+</div>
+
+<div class="" *ngIf="showModalPdf">
+    <app-modal-pdf [contrato]="contrato" (onClose)="showModalPdf = false"> </app-modal-pdf>
 </div>

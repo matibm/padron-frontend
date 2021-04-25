@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <form ngNativeValidate (ngSubmit)="crearProducto(nombre.value, cod.value, precio.value)" #form="ngForm">
+        <form ngNativeValidate (ngSubmit)="crearProducto(nombre.value, cod.value, precio.value, codigo.value)" #form="ngForm">
 
             <div class="form-group">
                 <label for="">Nombre</label>
@@ -11,6 +11,8 @@
 
                 <label for="">Precio</label>
                 <input type="number" name="precio" id="" #precio class="form-control" placeholder="" required aria-describedby="helpId">
+                <label for="">Codigo</label>
+                <input type="number" name="codigo" id="" #codigo class="form-control" placeholder="" required aria-describedby="helpId">
 
             </div>
 

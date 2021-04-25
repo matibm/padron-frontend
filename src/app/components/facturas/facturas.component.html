@@ -1,8 +1,8 @@
 <div class="card">
 
     <div class="card-body">
-        <h4 *ngIf="showlabel"> <span class="lstick"></span> Ingresos </h4>
-        <table class="table table-hover">
+        <h4 *ngIf="showlabel && facturas"> <span class="lstick"></span> Ingresos </h4>
+        <table class="table table-sm table-hover">
             <thead>
                 <tr>
                     <th *ngIf="!selectable">#</th>
@@ -28,14 +28,14 @@
                     <td *ngIf="!factura.fondo">Sin fondo</td>
                     <td>
                         {{factura.fecha_creacion_unix | date:' d, MMM y'}}
-                        <div class="" *ngIf="!fromOutside"> {{factura.fecha_creacion_unix | date:' h:mm a'}}</div>
+                        <span class="" *ngIf="!fromOutside"> {{factura.fecha_creacion_unix | date:' h:mm a'}}</span>
 
                     </td>
                     <td>{{factura.haber | currency:'':'':'2.0'}} Gs</td>
                     <td *ngIf="!fromOutside">{{factura.titular.NOMBRES | primerNombre}} {{factura.titular.APELLIDOS | primerNombre }} </td>
                     <td>{{factura.vencimiento | date}}</td>
                     <td *ngIf="!fromOutside && factura.servicio">
-                        <div *ngIf="factura.servicio.COD_CORTO == 'C.M.P.'"></div> {{factura.contrato.nombre_servicio }}
+                        <div *ngIf="factura.servicio?.COD_CORTO == 'C.M.P.'"></div> {{factura.servicio.NOMBRE }}
                     </td>
                     <td *ngIf="fromOutside && factura.servicio">
                         {{factura.servicio.COD_CORTO }}

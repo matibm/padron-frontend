@@ -1,10 +1,11 @@
+import { Router } from '@angular/router';
 import { Producto } from './../../models/producto';
 import { ProductosService } from './../../services/productos.service';
 import { UsuarioService } from './../../services/usuario.service';
 import { Usuario } from './../../models/usuario';
 import { ContratoService } from './../../services/contrato.service';
 import { Contrato } from './../../models/contrato';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-lista-contratos',
@@ -15,10 +16,16 @@ export class ListaContratosComponent implements OnInit {
 
   constructor(public _contratoService: ContratoService,
     public _usuarioService: UsuarioService,
-    public _productoService: ProductosService
+    public _productoService: ProductosService,
+    public router: Router
+
 
   ) { }
-  cliente: Usuario
+
+  @Input() showFilter = true
+   @Input() selectable = false
+  @Output() selected = new EventEmitter()
+  @Input() cliente: Usuario
   clientes: Usuario[]
   proveedor: Usuario
   proveedores: Usuario[]
@@ -41,8 +48,10 @@ export class ListaContratosComponent implements OnInit {
   sort_value = -1
   options
   sort
-
+  count = 0
   async ngOnInit() {
+    this.servicios = await this._productoService.getProductos()
+
     this.options = {
       fecha_inicio: this.date_start ? this.date_start : null,
       fecha_fin: this.date_end ? this.date_end : null,
@@ -60,12 +69,18 @@ export class ListaContratosComponent implements OnInit {
       value: this.sort_value
     }
     let resp = await this._contratoService.getContratos(null, this.options, this.sort)
-    this.servicios = await this._productoService.getProductos()
-
-    this.contratos = resp.contratos
     this.count = resp.count
+
+     
+    this.contratos = resp.contratos
+
+    // this.filtrar()
+
+    // console.log(this.contratos);
+    console.log(this.count);
+    
   }
-  count = 0
+ 
   @Input() contratos: Contrato[]
 
   async pageChanged(page) {
@@ -73,7 +88,7 @@ export class ListaContratosComponent implements OnInit {
 
 
     this.contratos = resp.contratos
-    this.count = resp.count
+    // this.count = resp.count
     console.log(page);
 
   }
@@ -126,7 +141,7 @@ export class ListaContratosComponent implements OnInit {
     this.contratos = resp.contratos
     console.log(resp);
 
-    this.count = resp.count
+    // this.count = resp.count
   }
 
   customSearchFn(term: string, item: any) {
@@ -178,8 +193,8 @@ export class ListaContratosComponent implements OnInit {
       value: this.sort_value
     }
     console.log(document.getElementById(value));
-    
-    let newKey:any = document.getElementById(value).childNodes.item(1)
+
+    let newKey: any = document.getElementById(value).childNodes.item(1)
     if (!newKey) {
       return
     }
@@ -191,6 +206,15 @@ export class ListaContratosComponent implements OnInit {
     this.contratos = resp.contratos
     console.log(resp);
 
-    this.count = resp.count
+    // this.count = resp.count
+  }
+
+
+  onSelectContrato(contrato) {
+    if (this.selectable) {
+      this.selected.emit(contrato)
+    } else {
+      this.router.navigateByUrl('/admin/info_contrato/' + contrato._id)
+    }
   }
 }

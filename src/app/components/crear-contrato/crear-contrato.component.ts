@@ -69,7 +69,7 @@ export class CrearContratoComponent implements OnInit {
     fecha_inhumacion: '',
     nombre: '',
     ci: '',
-
+    nro: ''
   }
   inhumados = [
     {
@@ -77,6 +77,7 @@ export class CrearContratoComponent implements OnInit {
     fecha_inhumacion: '',
     nombre: '',
     ci: '1',
+    nro: '1',
 
   } 
 ]
@@ -334,9 +335,9 @@ export class CrearContratoComponent implements OnInit {
   customSearchFn(term: string, item: any) {
     term = term.toLowerCase();
     return item.NOMBRES.toLowerCase().indexOf(term) > -1 ||
-      item.APELLIDOS.toLowerCase().includes(term) ||
-      item.RAZON.toLowerCase().includes(term) ||
-      item.RUC.toLowerCase().includes(term);
+      item.APELLIDOS?.toLowerCase().includes(term) ||
+      item.RAZON?.toLowerCase().includes(term) ||
+      item.RUC?.toLowerCase().includes(term);
   }
 
 
@@ -361,7 +362,7 @@ export class CrearContratoComponent implements OnInit {
     fecha_inhumacion: '',
     nombre: '',
     ci: '',
-
+    nro: ''
   } 
     ]
      

@@ -56,7 +56,7 @@ export class FacturaComponent implements OnInit {
       servicios: [
         {
           cantidad: 1,
-          concepto: this.factura.contrato.producto.NOMBRE,
+          concepto: this.factura.servicio.NOMBRE,
           precioUnitario: this.factura.haber,
           cincoPorciento: null,
           diezPorciento: this.factura.haber * 0.1,
@@ -129,4 +129,7 @@ export class FacturaComponent implements OnInit {
     
     this.isOnline = this.fondo.fondo_online == '1' ? true : false
   }
+
+  
+
 }

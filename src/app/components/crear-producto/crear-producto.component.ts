@@ -17,9 +17,9 @@ export class CrearProductoComponent implements OnInit {
   }
 
 
-  async crearProducto(nombre, cod, precio) {
+  async crearProducto(nombre, cod, precio, codigo) {
     let producto: Producto = {
-      ID_PRODUCTO: new Date().getTime().toString(),
+      ID_PRODUCTO: parseInt(codigo),
       NOMBRE: nombre,
       COD_CORTO: cod,
       PRECIO_MAYORISTA: precio

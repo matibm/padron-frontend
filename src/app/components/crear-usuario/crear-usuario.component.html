@@ -3,22 +3,27 @@
         <div class="col-xs col-md">
             <div class="card">
                 <div class="card-body">
-                    <h3>General</h3>
-                    <div class="form-group">
-                        <label for="">Nombres</label>
-                        <input [(ngModel)]="usuario.NOMBRES" type="text" class="form-control" name="nombres" autocomplete="off">
-                    </div>
+                    <h4>General</h4>
                     <div class="form-group">
                         <label for="">Apellidos</label>
                         <input [(ngModel)]="usuario.APELLIDOS" type="text" class="form-control" name="apellidos" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label for="">RUC</label>
+                        <label for="">Nombres</label>
+                        <input [(ngModel)]="usuario.NOMBRES" type="text" class="form-control" name="nombres" autocomplete="off">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">RUC/CI</label>
                         <input [(ngModel)]="usuario.RUC" type="text" class="form-control" name="RUC" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="">email</label>
                         <input [(ngModel)]="usuario.EMAIL" type="text" class="form-control" name="email" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Perfil de Facebook</label>
+                        <input [(ngModel)]="usuario.facebook" type="text" class="form-control" name="email" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="">contraseña</label>
@@ -27,40 +32,39 @@
 
                     <div class="d-flex">
                         <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isVendedor" type="checkbox" id="check_vendedor" name="check_vendedor-name" class="filled-in chk-col-light-blue" (click)="isVendedor? null :isVendedor='check_vendedor' " checked>
-                            <label for="check_vendedor">Vendedor</label>
+                            <input [(ngModel)]="isCliente" type="checkbox" id="check_cliente" name="check_cliente-name" class="filled-in chk-col-light-blue" (click)="isCliente? null :isCliente='check_cliente' " checked>
+                            <label for="check_cliente">Cliente</label>
                         </div>
+
+                        <div class="mt-1 mr-auto ">
+                            <input [(ngModel)]="isProveedor" type="checkbox" id="check_proveedor" name="check_proveedor-name" class="filled-in chk-col-light-blue" (click)="isProveedor? null :isProveedor='check_proveedor' " checked>
+                            <label for="check_proveedor">Proveedor</label>
+                        </div>
+
                         <div class="mt-1 mr-auto ">
                             <input [(ngModel)]="isCobrador" type="checkbox" id="check_cobrador" name="check_cobrador-name" class="filled-in chk-col-light-blue" (click)="isCobrador? null :isCobrador='check_cobrador' " checked>
                             <label for="check_cobrador">Cobrador</label>
                         </div>
+
+
+
+                    </div>
+
+                    <div class="d-flex">
+
                         <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isCliente" type="checkbox" id="check_cliente" name="check_cliente-name" class="filled-in chk-col-light-blue" (click)="isCliente? null :isCliente='check_cliente' " checked>
-                            <label for="check_cliente">Cliente</label>
+                            <input [(ngModel)]="isBanco" type="checkbox" id="check_banco" name="check_banco-name" class="filled-in chk-col-light-blue" (click)="isBanco? null :isBanco='check_banco' " checked>
+                            <label for="check_banco">Banco</label>
                         </div>
+
                         <div class="mt-1 mr-auto ">
                             <input [(ngModel)]="isEmpleado" type="checkbox" id="check_empleado" name="check_empleado-name" class="filled-in chk-col-light-blue" (click)="isEmpleado? null :isEmpleado='check_empleado' " checked>
                             <label for="check_empleado">Empleado</label>
                         </div>
 
-                    </div>
-
-                    <div class="d-flex">
                         <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isPersona" type="checkbox" id="check_persona" name="check_persona-name" class="filled-in chk-col-light-blue" (click)="isPersona? null :isPersona='check_persona' " checked>
-                            <label for="check_persona">Persona</label>
-                        </div>
-                        <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isEmpresa" type="checkbox" id="check_empresa" name="check_empresa-name" class="filled-in chk-col-light-blue" (click)="isEmpresa? null :isEmpresa='check_empresa' " checked>
-                            <label for="check_empresa">Empresa</label>
-                        </div>
-                        <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isBanco" type="checkbox" id="check_banco" name="check_banco-name" class="filled-in chk-col-light-blue" (click)="isBanco? null :isBanco='check_banco' " checked>
-                            <label for="check_banco">Banco</label>
-                        </div>
-                        <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="manejaCaja" type="checkbox" id="check_maneja_caja" name="check_maneja_caja-name" class="filled-in chk-col-light-blue" (click)="manejaCaja? null :manejaCaja='check_maneja_caja' " checked>
-                            <label for="check_maneja_caja">Maneja Caja</label>
+                            <input [(ngModel)]="isVendedor" type="checkbox" id="check_vendedor" name="check_vendedor-name" class="filled-in chk-col-light-blue" (click)="isVendedor? null :isVendedor='check_vendedor' " checked>
+                            <label for="check_vendedor">Vendedor</label>
                         </div>
                     </div>
 
@@ -75,26 +79,52 @@
         <div class="col-xs col-md">
             <div class="card">
                 <div class="card-body">
-                    <h3>Telefonos</h3>
+                    <h4>Particular</h4>
+
+                    <form class="form-material ">
+
+                        <div class="form-group">
+                            <label for="">Direccion: </label>
+                            <input type="text" name="" [(ngModel)]="usuario.DIRECCION" name="Direccion:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+
+                        </div>
+                    </form>
+
+                    <form class="form-material ">
+                        <div class="form-group">
+                            <label for="">Ciudad: </label>
+                            <input type="text" name="" [(ngModel)]="usuario.NOMCIUDAD" name="</label" id="" class="form-control" placeholder="" aria-describedby="helpId">
+
+                        </div>
+                    </form>
+                    <form class="form-material ">
+
+                        <div class="form-group">
+                            <label for="">Departamento: </label>
+                            <input type="text" [(ngModel)]="usuario.NOMDEPAR" name="departamento" id="" class="form-control" placeholder="" aria-describedby="helpId">
+
+                        </div>
+                    </form>
                     <div class="form-group">
-                        <label for="">Celular particular:</label>
+                        <label for="">Celular:</label>
                         <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
                     </div>
                     <div class="form-group">
-                        <label for="">Teléfono particular:</label>
-                        <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                        <label for="">Línea Baja:</label>
+                        <input type="text" [(ngModel)]="usuario.TELEFONO2" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
                     </div>
-                    <div class="form-group">
-                        <label for="">Celular laboral:</label>
-                        <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="">Teléfono laboral:</label>
-                        <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="">Notas</label>
+                        <textarea class="form-control" name="" id="" rows="6"></textarea>
                     </div>
 
                 </div>
@@ -103,65 +133,56 @@
         <div class="col-xs col-md">
             <div class="card">
                 <div class="card-body">
-                    <h3>Direcciones</h3>
-                    <form class="form-material m-t-40">
+                    <h4>Laboral</h4>
+                    <form class="form-material ">
 
                         <div class="form-group">
-                            <label for="">Ciudad: </label>
-                            <input type="text" name="" [(ngModel)]="usuario.NOMCIUDAD" name="</label" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                            <label for="">Lugar de Trabajo: </label>
+                            <input type="text" [(ngModel)]="usuario.LUGAR_TRABAJO" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
                         </div>
                     </form>
-                    <form class="form-material m-t-40">
-
-                        <div class="form-group">
-                            <label for="">Departamento: </label>
-                            <input type="text" name="" [(ngModel)]="usuario.NOMDEPAR" name="departamento" id="" class="form-control" placeholder="" aria-describedby="helpId">
-
-                        </div>
-                    </form>
-                    <form class="form-material m-t-40">
+                    <form class="form-material ">
 
                         <div class="form-group">
                             <label for="">Direccion: </label>
-                            <input type="text" name="" [(ngModel)]="usuario.DIRECCION" name="Direccion:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                            <input type="text" name="" [(ngModel)]="usuario.direccion_laboral" name="Direccion:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
                         </div>
                     </form>
-                    <form class="form-material m-t-40">
+
+                    <form class="form-material ">
+                        <div class="form-group">
+                            <label for="">Ciudad: </label>
+                            <input type="text" name="" [(ngModel)]="usuario.ciudad_trabajo" name="</label" id="" class="form-control" placeholder="" aria-describedby="helpId">
+
+                        </div>
+                    </form>
+                    <form class="form-material ">
 
                         <div class="form-group">
-                            <label for="">Direccion laboral: </label>
-                            <input type="text" name="" [(ngModel)]="usuario.direccion_laboral" name="Direccion-laboral" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                            <label for="">Departamento: </label>
+                            <input type="text" [(ngModel)]="usuario.DEPARAMENTO_TRABAJO" name="departamento" id="" class="form-control" placeholder="" aria-describedby="helpId">
 
                         </div>
                     </form>
-                    <form class="form-material m-t-40">
 
-                        <div class="form-group">
-                            <label for="">Direccion particular: :</label>
-                            <input type="text" name="" [(ngModel)]="usuario.direccion_particular" name="Direccion-particular" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
-                        </div>
-                    </form>
-                    <form class="form-material m-t-40">
+                    <div class="form-group">
+                        <label for="">Celular:</label>
+                        <input type="text" [(ngModel)]="usuario.TELEFONO3" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
-                        <div class="form-group">
-                            <label for="">Direccion trabajo:</label>
-                            <input type="text" name="" [(ngModel)]="usuario.DIRECCION_TRABAJO" name="Direccion-trabajo" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Línea Baja:</label>
+                        <input type="text" [(ngModel)]="usuario.TEL_TRABAJO" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
-                        </div>
-                    </form>
-                    <form class="form-material m-t-40">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="">Ciudad trabajo:</label>
-                            <input type="text" name="" [(ngModel)]="usuario.ciudad_trabajo" name="trabajo:</" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
 
-                        </div>
-                    </form>
                 </div>
             </div>
+
         </div>
     </div>
     <div>
