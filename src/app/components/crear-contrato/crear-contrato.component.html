@@ -129,7 +129,13 @@
                         <div *ngIf="!cobrador">
                             <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchCobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
-                                    <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
+                                    <div>
+                                        <div class="" *ngIf="item.NOMBRES">
+                                            {{item.APELLIDOS}} {{item.NOMBRES}}
+                                        </div>
+                                        <br>
+                                        <div *ngIf="item.RAZON"> {{item.RAZON}} </div>
+
                                         <small>{{item.RUC}}</small>
                                     </div>
 
@@ -226,19 +232,7 @@
 
                                     <label for="radio_-{{i}}">{{item.name}}</label>
                                 </div>
-                                <!-- <div class="col-md-3 col-xs">
-                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_2" value="DEBITO" required>
-                                    <label for="radio_2">Débito Automático</label>
-                                </div>
-                                <div class="col-md-3 col-xs">
-                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_40" value="BANCARIA" required>
-                                    <label for="radio_40">Transferencia Bancaria</label>
-                                </div>
-                                <div class="col-md-3 col-xs">
-                                    <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_3" value="OFICINA" required>
-                                    <label for="radio_3">Oficina</label>
-                                </div> -->
-                                <button type="button" (click)="pruebalog()" class="btn btn-primary">print</button>
+
                             </div>
 
                         </div>
@@ -324,6 +318,7 @@
                                         <th class="text-center">Fecha Nacimiento</th>
                                         <th class="text-center">edad</th>
                                         <th class="text-center">Plus por edad</th>
+                                        <th class="text-center">quitar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -342,6 +337,9 @@
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" [(ngModel)]="item.plus_edad" name="name-{{i}}" placeholder="fecha de inhumacion">
+                                        </td>
+                                        <td class="text-center">
+                                            <i [ngStyle]="{fontSize: '20px'}" (click)="beneficiarios.splice(i, 1)" class="fa fa-trash pointer text-danger" aria-hidden="true"></i>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -408,6 +406,7 @@
                                         <th class="text-center">Fecha fallecimiento</th>
                                         <th class="text-center">Fecha Inhumacion</th>
                                         <th class="text-center">Nro Inhumacion</th>
+                                        <th class="text-center">quitar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -427,6 +426,9 @@
                                         </td>
                                         <td>
                                             <input type="text" class="form-control" name="name-{{i}}" [(ngModel)]="item.nro">
+                                        </td>
+                                        <td class="text-center">
+                                            <i [ngStyle]="{fontSize: '20px'}" (click)="inhumados.splice(i, 1)" class="fa fa-trash pointer text-danger" aria-hidden="true"></i>
                                         </td>
                                     </tr>
                                 </tbody>

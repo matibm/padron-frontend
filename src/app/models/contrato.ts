@@ -10,7 +10,7 @@ export class Contrato {
         public nro_contrato?: string,
         public _id?: string,
         public id_titular?: string,
-        public id_servicio?: number,
+        public id_servicio?: string,
         public fecha_alta?: string,
         public tipo_pago?: string,
         public precio_total?: number,

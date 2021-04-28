@@ -64,13 +64,7 @@ export class CrearContratoComponent implements OnInit {
       plus_edad: 0
     }
   ]
-  inhumadoVacio = {
-    fecha_fallecimiento: '',
-    fecha_inhumacion: '',
-    nombre: '',
-    ci: '',
-    nro: ''
-  }
+ 
   inhumados = [
     {
     fecha_fallecimiento: '1',
@@ -182,7 +176,13 @@ export class CrearContratoComponent implements OnInit {
   }
 
   inhumadoPush() {
-    this.inhumados.push(this.inhumadoVacio)
+    this.inhumados.push({
+      fecha_fallecimiento: '',
+      fecha_inhumacion: '',
+      nombre: '',
+      ci: '',
+      nro: ''
+    })
   }
 
   calcularSaldo(entrega) {
@@ -368,6 +368,7 @@ export class CrearContratoComponent implements OnInit {
      
     this.producto = producto;
     this.saldo = producto.PRECIO_MAYORISTA;
+    this.manzana = producto.MANZANA
     if (producto.COD_CORTO == 'U.D.P.') {
       this.esUdp = true
     } else this.esUdp = false;
@@ -426,6 +427,11 @@ export class CrearContratoComponent implements OnInit {
   refactor() {
     this.producto = null;
 
+  }
+
+
+  removeInhumaciones(index){
+    this.inhumados.splice(index, 1)
   }
 
 }

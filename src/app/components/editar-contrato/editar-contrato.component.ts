@@ -60,6 +60,24 @@ export class EditarContratoComponent implements OnInit {
   }
   cobradores
 
+  tipos_pago = [
+    {
+      name: 'Oficina',
+      value: 'OFICINA'
+    },
+    {
+      name: 'PAGOPAR',
+      value: 'PAGOPAR'
+    },
+    {
+      name: 'Débito Automático',
+      value: 'DEBITO'
+    },
+    {
+      name: 'Transferencia Bancaria',
+      value: 'BANCARIA'
+    }
+  ]
   esUdp = false;
   beneficiarios = [
     {
@@ -94,6 +112,7 @@ export class EditarContratoComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.contrato = await this._contratoService.getContratoById(this.id)
   //log(this.contrato);
+    
     this.saldo = this.contrato.saldo_pendiente
     this.inhumados = this.contrato.inhumados
     this.vendedor = this.contrato.vendedor

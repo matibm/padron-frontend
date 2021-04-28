@@ -2,6 +2,38 @@
     <div class="card-body">
         <h4><span class="lstick"></span> Filtros </h4>
         <div class="row">
+            <div class="col-xs col-md-3">
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <label>Cliente /CI</label>
+                    <div *ngIf="cliente" (click)="cliente = null" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+                <div class="" *ngIf="!cliente">
+                    <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.NOMBRES"> {{item.APELLIDOS}} {{item.NOMBRES}} </div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+                                <small>{{item.RUC}}</small>
+
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+                <div class="" *ngIf="cliente">
+                    <div>
+                        <div *ngIf="cliente.NOMBRES">{{cliente.NOMBRES}} {{cliente.APELLIDOS}}</div>
+                        <div *ngIf="cliente.NOMBRES && cliente.RAZON"> - </div>
+                        <div *ngIf="cliente.RAZON">{{cliente.RAZON}} </div>
+
+                        <small>{{cliente.RUC}}</small>
+                    </div>
+                </div>
+            </div>
             <div class="col-xs col-md">
                 <div class="form-group">
                     <label for="fecha_inicio">Fecha inicio :
@@ -119,37 +151,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs col-md-3">
-                <div style="justify-content: space-between;" class="inline-flex">
-                    <label>Cliente</label>
-                    <div *ngIf="cliente" (click)="cliente = null" class="pointer close-icon ml-auto">
-                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
-                    </div>
-                </div>
-                <div class="" *ngIf="!cliente">
-                    <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
-                        <ng-template ng-option-tmp let-item="item">
-                            <div>
-                                <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
-                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
-                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
-
-                            </div>
-
-                        </ng-template>
-                    </ng-select>
-                </div>
-                <div class="" *ngIf="cliente">
-                    <div>
-                        <div *ngIf="cliente.NOMBRES">{{cliente.NOMBRES}} {{cliente.APELLIDOS}}</div>
-                        <div *ngIf="cliente.NOMBRES && cliente.RAZON"> - </div>
-                        <div *ngIf="cliente.RAZON">{{cliente.RAZON}} </div>
-
-                        <small>{{cliente.RUC}}</small>
-                    </div>
-                </div>
-            </div>
             <div class="col-xs col-md">
                 <div class="form-group">
                     <label for="manzana">manzana</label>

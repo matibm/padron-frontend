@@ -1,7 +1,7 @@
 
 export class Producto {
     constructor(
-        public ID_PRODUCTO?: number,
+        public ID_PRODUCTO?: string,
         public COD_PRODUCTO?: string,
         public COD_BARRAS?: string,
         public _id?: string,

@@ -17,9 +17,9 @@
                 <thead>
                     <tr>
                         <th>#</th>
-
-                        <th>Nombres</th>
                         <th>Apellidos</th>
+                        <th>Nombres</th>
+
                         <th>Razon</th>
                         <th>Accion</th>
                     </tr>
@@ -28,8 +28,9 @@
 
                     <tr [routerLink]="['/admin/usuario', usuario._id]" class="pointer" *ngFor="let usuario of usuarios; let i = index">
                         <td scope="row">{{i+1}}</td>
-                        <td>{{usuario.NOMBRES}}</td>
                         <td>{{usuario.APELLIDOS}}</td>
+                        <td>{{usuario.NOMBRES}}</td>
+
                         <td>{{usuario.RAZON}}</td>
                         <td>
                             <button type="button" class="btn btn-sm btn-outline-dark">

@@ -11,7 +11,7 @@
                 <label for="">Precio</label>
                 <input type="number" [(ngModel)]="producto.PRECIO_MAYORISTA" name="precio" id="" #precio class="form-control" placeholder="" required aria-describedby="helpId">
                 <label for="">Código</label>
-                <input type="number" [(ngModel)]="producto.ID_PRODUCTO" name="codigo" id="" #codigo class="form-control" placeholder="" required aria-describedby="helpId">
+                <input type="text" [(ngModel)]="producto.ID_PRODUCTO" name="codigo" id="" #codigo class="form-control" placeholder="" required aria-describedby="helpId">
 
             </div>
             <button type="reset" (click)="cancelar()" class="btn mr-3 btn-danger">Cancelar</button>

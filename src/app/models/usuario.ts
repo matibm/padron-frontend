@@ -56,7 +56,7 @@ export class Usuario {
         public ID_VENDEDOR?: string,
         public NOMBRE_VENDEDOR?: string,
         public DIRECCION_TRABAJO?: string,
-        public DEPARAMENTO_TRABAJO?: string,
+        public DEPARTAMENTO_TRABAJO?: string,
         public ID_BENEFICIACIO?: string,
         public TIPO_FICHA?: string,
         public TELEFONO1?: string,

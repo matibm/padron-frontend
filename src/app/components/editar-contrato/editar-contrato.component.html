@@ -46,6 +46,49 @@
             <div class="card ">
                 <div class="card-body">
                     <div style="justify-content: space-between;" class="inline-flex">
+                        <h3 class="card-title">Titular Alternativo</h3>
+                        <div *ngIf="contrato.titular_alternativo" (click)="contrato.titular_alternativo = null" class="pointer close-icon ml-auto">
+                            <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!contrato.titular_alternativo">
+
+                        <ng-select [items]="clientes" [(ngModel)]="contrato.titular_alternativo" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar titular" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                            <ng-template ng-option-tmp let-item="item">
+                                <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
+                                    <small>{{item.RUC}}</small>
+                                </div>
+
+                            </ng-template>
+                        </ng-select>
+
+                    </div>
+                    <div style="width: 100%; " *ngIf="contrato.titular_alternativo ">
+                        <h5>Apellidos: <b>{{contrato.titular_alternativo.APELLIDOS}}</b></h5>
+                        <h5>Nombres: <b>{{contrato.titular_alternativo.NOMBRES}}</b></h5>
+                        <h5>Razon Social: <b>{{contrato.titular_alternativo.RAZON}}</b></h5>
+                        <h5>RUC: <b>{{contrato.titular_alternativo.RUC}}</b></h5>
+                        <h5>Direccion P: <b>{{contrato.titular_alternativo.DIRECCION}}</b></h5>
+                        <h5>Direccion L: <b>{{contrato.titular_alternativo.DIRECCION_TRABAJO}}</b></h5>
+                        <h5>Ciudad: <b>{{contrato.titular_alternativo.ciudad_trabajo}}</b></h5>
+
+                        <h5>Telefonos: {{contrato.titular_alternativo.TELEFONO}}</h5>
+
+                        <div class="row ">
+                            <div class="col ">
+                            </div>
+                            <div class="col ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md col-xs">
+            <div class="card ">
+                <div class="card-body">
+                    <div style="justify-content: space-between;" class="inline-flex">
                         <h4 class="card-title">Vendedor</h4>
                         <div *ngIf="vendedor" (click)="vendedor = null" class="pointer close-icon ml-auto">
                             <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
@@ -173,7 +216,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="mt-2 inline-flex">
+                            <div *ngIf="false" class="mt-2 inline-flex">
                                 <div style="width: 100%;" class="row">
                                     <div class="col-md-4 col-xs">
                                         <input [disabled]='!editarproducto' [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_1" value="cobrador" required>
@@ -192,33 +235,7 @@
                                 </div>
 
                             </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-4 col-xs">
-                                    <div class="form-group">
-                                        <label for="">Numero de Contrato: </label>
-                                        <input [disabled]='!editarproducto' type="text" class="form-control" name="" autocomplete="off" [(ngModel)]="nro_contrato" id="facturanumero" aria-describedby="helpId" placeholder="">
-                                    </div>
-                                </div>
 
-                                <div class="col-md-8 col-xs  ">
-                                    <label>Lugar de cobranza</label>
-
-                                    <div class="row">
-                                        <div class="col-md col-xs">
-                                            <input [disabled]='!editarproducto' [(ngModel)]="radioLugarCobranza" name="idTipoPlan3" type="radio" class="with-gap radio-col-blue-grey" id="radio_particular" value="particular" required>
-                                            <label for="radio_particular">Direccion Particular</label>
-                                        </div>
-                                        <div class="col-md col-xs">
-                                            <input [(ngModel)]="radioLugarCobranza" name="idTipoPlan3" type="radio" class="with-gap radio-col-blue-grey" id="radio_laboral" value="laboral" required>
-                                            <label for="radio_laboral">Direccion Laboral</label>
-                                        </div>
-
-                                    </div>
-
-
-                                </div>
-                            </div>
 
 
                         </div>
@@ -226,6 +243,33 @@
                     </div>
                     <button type="button" *ngIf="editarproducto" (click)="cancelarEdiciondeProducto()" class="btn float-right btn-danger">Cancelar</button>
                     <button type="button" *ngIf="!editarproducto" (click)="editarProducto()" class="btn float-right btn-info">Editar Producto</button>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="mt-2 inline-flex">
+                        <div style="width: 100%;" class="row">
+                            <div *ngFor="let item of tipos_pago; let i = index;" class="col-md-3 col-xs">
+                                <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_-{{i}}" [value]="item.value" required>
+
+                                <label for="radio_-{{i}}">{{item.name}}</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-xs">
+                            <div class="form-group">
+                                <label for="">Numero de Contrato: </label>
+                                <input type="text" class="form-control" name="" autocomplete="off" [(ngModel)]="nro_contrato" id="facturanumero" aria-describedby="helpId" placeholder="">
+                            </div>
+                        </div>
+
+
+                    </div>
 
                 </div>
             </div>
