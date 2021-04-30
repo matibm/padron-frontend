@@ -115,6 +115,18 @@
                     </h4>
                 </div>
                 <hr>
+
+                <div class="mt-2 inline-flex">
+                    <div style="width: 100%;" class="row">
+                        <div *ngFor="let item of tipos_pago; let i = index;" class="col-md-3 col-xs">
+                            <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" [value]="item.value" required>
+
+                            <label>{{item.name}}</label>
+                        </div>
+
+                    </div>
+
+                </div>
                 <div class="row">
                     <div class="col-md-4 col-xs">
                         <div class="form-group">
@@ -188,7 +200,7 @@
                         <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
                                 <div>
-                                    <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                    <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                     <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                     <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 

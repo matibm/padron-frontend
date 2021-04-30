@@ -175,9 +175,11 @@
                         <h5>Nombre: <b>{{producto.NOMBRE}} - {{producto.COD_CORTO}}</b></h5>
                         <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
                         <!-- <h5>Entrega: </h5>  -->
-                        <hr>
+                        <div class="">
+                            <h5>saldo: <b>{{saldo + saldoPlusEdad | currency:'':'':'2.0'}} Gs</b></h5>
 
-                        <div class="mt-2 inline-flex">
+                        </div>
+                        <div *ngIf="!esPsm" class="mt-2 inline-flex">
                             <h4 class=" mr-3">Forma de Pago: </h4>
                             <div style="width: 90%;" class="row">
 
@@ -195,7 +197,7 @@
                             </div>
 
                         </div>
-                        <div class="row">
+                        <div *ngIf="!esPsm" class="row">
                             <div class="col-md col-xs">
                                 <div class="form-group">
                                     <label for="">Entrega</label>
@@ -336,7 +338,7 @@
                                             <label for="">{{item.edad}} años</label>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.plus_edad" name="name-{{i}}" placeholder="fecha de inhumacion">
+                                            <input type="number" class="form-control" (ngModelChange)="sumarPlusPorEdad()" [(ngModel)]="item.plus_edad" name="plus-name-{{i}}" placeholder="plus por edad">
                                         </td>
                                         <td class="text-center">
                                             <i [ngStyle]="{fontSize: '20px'}" (click)="beneficiarios.splice(i, 1)" class="fa fa-trash pointer text-danger" aria-hidden="true"></i>

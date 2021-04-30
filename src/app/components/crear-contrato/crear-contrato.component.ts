@@ -53,8 +53,9 @@ export class CrearContratoComponent implements OnInit {
     plus_edad: 0
   }
   cobradores
-
+  saldoPlusEdad = 0
   esUdp = false;
+  esPsm = false;
   beneficiarios = [
     {
       nombre: '1',
@@ -64,17 +65,17 @@ export class CrearContratoComponent implements OnInit {
       plus_edad: 0
     }
   ]
- 
+
   inhumados = [
     {
-    fecha_fallecimiento: '1',
-    fecha_inhumacion: '',
-    nombre: '',
-    ci: '1',
-    nro: '1',
+      fecha_fallecimiento: '1',
+      fecha_inhumacion: '',
+      nombre: '',
+      ci: '1',
+      nro: '1',
 
-  } 
-]
+    }
+  ]
   facturas
   radioValue = 'OFICINA'
   fechaPago = new Date()
@@ -83,10 +84,10 @@ export class CrearContratoComponent implements OnInit {
   servicioCMP
   numeroFactura
 
-  trackItem (index, item) {
-    
-  //log(item);
-    
+  trackItem(index, item) {
+
+    //log(item);
+
     return index
   }
   tipos_pago = [
@@ -110,8 +111,8 @@ export class CrearContratoComponent implements OnInit {
 
 
   pruebalog() {
-    
-  //log(this.radioValue);
+
+    //log(this.radioValue);
 
   }
   showInfoContrato = false;
@@ -132,7 +133,7 @@ export class CrearContratoComponent implements OnInit {
     this.fechaMantenimiento = new Date(`${date.getFullYear() + 1}-01-05`)
     this.fechaMantenimiento.setUTCHours(5)
 
-  //log(this.fechaMantenimiento);
+    //log(this.fechaMantenimiento);
 
     this.productos = await this._productoService.getProductos()
     for (let i = 0; i < this.productos.length; i++) {
@@ -140,8 +141,9 @@ export class CrearContratoComponent implements OnInit {
       if (element.COD_CORTO == 'C.M.P.') {
         this.servicioCMP = element
       }
+
     }
-  //log(this.servicioCMP);
+    //log(this.servicioCMP);
 
     // this.clientes = await this._usuarioService.getClientes()
     // this.vendedores = await this._usuarioService.getVendedores()
@@ -150,7 +152,7 @@ export class CrearContratoComponent implements OnInit {
   }
   selectedDate
   calcularEdad(date) {
-  //log(date);
+    //log(date);
 
     if (date.length > 4) {
       let hoy = new Date()
@@ -164,7 +166,7 @@ export class CrearContratoComponent implements OnInit {
       ) {
         edad--
       }
-    //log(edad);
+      //log(edad);
 
       return edad
     } else return 0
@@ -186,7 +188,7 @@ export class CrearContratoComponent implements OnInit {
   }
 
   calcularSaldo(entrega) {
-  //log(entrega);
+    //log(entrega);
 
     if (entrega) {
       this.saldo = this.producto.PRECIO_MAYORISTA - parseInt(entrega);
@@ -255,7 +257,7 @@ export class CrearContratoComponent implements OnInit {
     return Number(num);
   }
   async crearContrato() {
-   
+
 
     if (!this.facturas && this.pagoradioValue === 'contado') {
       this.plazo = 1
@@ -299,14 +301,17 @@ export class CrearContratoComponent implements OnInit {
     //   servicio: this.servicioCMP._id,
     //   fecha_creacion_unix: new Date().getTime()
     // })
-     let send = {
+
+     
+
+    let send = {
       contrato: nuevo_contrato,
       facturas: null,
       fechaPago: this.fechaPago,
       crearCMP: this.esUdp
     }
 
-    await this._contratoService.newContrato(send) 
+    await this._contratoService.newContrato(send)
 
   }
   async searchCobradores(val: any) {
@@ -357,21 +362,29 @@ export class CrearContratoComponent implements OnInit {
 
     this.inhumados = [
 
-       {
-    fecha_fallecimiento: '',
-    fecha_inhumacion: '',
-    nombre: '',
-    ci: '',
-    nro: ''
-  } 
+      {
+        fecha_fallecimiento: '',
+        fecha_inhumacion: '',
+        nombre: '',
+        ci: '',
+        nro: ''
+      }
     ]
-     
+
     this.producto = producto;
     this.saldo = producto.PRECIO_MAYORISTA;
     this.manzana = producto.MANZANA
     if (producto.COD_CORTO == 'U.D.P.') {
       this.esUdp = true
-    } else this.esUdp = false;
+    } else if (producto.COD_CORTO == 'P.S.M.') {
+      this.esPsm = true;
+    } else {
+      this.esUdp = false;
+      this.esPsm = false;
+
+    }
+
+
   }
   seleccionarCliente(cliente) {
     this.cliente = cliente;
@@ -430,8 +443,29 @@ export class CrearContratoComponent implements OnInit {
   }
 
 
-  removeInhumaciones(index){
+  removeInhumaciones(index) {
     this.inhumados.splice(index, 1)
   }
+
+  sumarPlusPorEdad(){
+    this.saldoPlusEdad = 0
+    
+    
+    for (let i = 0; i < this.beneficiarios.length; i++) {
+      const beneficiario = this.beneficiarios[i];
+      
+      this.saldoPlusEdad += beneficiario.plus_edad
+
+    }
+    console.log(this.saldoPlusEdad);
+    
+  }
+
+
+
+
+
+
+
 
 }

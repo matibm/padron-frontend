@@ -16,7 +16,7 @@
                             <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
                                     <div>
-                                        <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                        <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                         <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                         <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
@@ -54,7 +54,7 @@
                             <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchCobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
                                     <div>
-                                        <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                        <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                         <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                         <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 

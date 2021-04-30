@@ -54,7 +54,7 @@
                             <ng-select [items]="fondos" [(ngModel)]="fondo" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
                                     <div>
-                                        <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                        <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                         <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                         <div *ngIf="item.RAZON">{{item.RAZON}} </div>
                                         <small>{{item.RUC}}</small>
@@ -111,7 +111,7 @@
                             <ng-select [items]="proveedores" [(ngModel)]="proveedor" (search)="searchProveedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar proveedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
                                     <div>
-                                        <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                        <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                         <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                         <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
@@ -146,7 +146,7 @@
                             <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
                                     <div>
-                                        <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                        <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                         <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                         <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 

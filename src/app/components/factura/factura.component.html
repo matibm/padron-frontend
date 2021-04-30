@@ -104,7 +104,7 @@
                         <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (ngModelChange)="onSelectFondo(fondo)" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
                                 <div>
-                                    <div *ngIf="item.NOMBRES">{{item.NOMBRES}} {{item.APELLIDOS}}</div>
+                                    <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                     <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                     <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 

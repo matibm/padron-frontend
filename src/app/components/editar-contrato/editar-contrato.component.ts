@@ -97,7 +97,7 @@ export class EditarContratoComponent implements OnInit {
   }
   inhumados: Inhumado[] 
   facturas
-  radioValue = 'administracion'
+  radioValue  
   fechaPago = new Date()
   pagoradioValue = 'contado'
   stringFechaPago
@@ -112,7 +112,7 @@ export class EditarContratoComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.contrato = await this._contratoService.getContratoById(this.id)
   //log(this.contrato);
-    
+    this.radioValue = this.contrato.tipo_pago
     this.saldo = this.contrato.saldo_pendiente
     this.inhumados = this.contrato.inhumados
     this.vendedor = this.contrato.vendedor
@@ -240,7 +240,7 @@ export class EditarContratoComponent implements OnInit {
     this.calcularSaldo(num)
     return Number(num);
   }
-  async crearContrato() {
+  async editarContrato() {
    
 
     if (!this.facturas && this.pagoradioValue === 'contado') {
@@ -262,7 +262,7 @@ export class EditarContratoComponent implements OnInit {
       this.contrato.nro_contrato = this.nro_contrato,
       this.contrato.activo = '1',
       this.contrato.vendedor = this.vendedor,
-       this.contrato.fecha_creacion_unix = new Date().valueOf() // falta poner campode fecha para poder modificar
+      this.contrato.fecha_creacion_unix = new Date().valueOf() // falta poner campode fecha para poder modificar
  
     
     if (this.esUdp) {

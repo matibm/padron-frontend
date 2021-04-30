@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div *ngIf="contrato" class="row">
         <div class="col-md col-xs">
             <div class="card ">
                 <div class="card-body">
@@ -14,7 +14,7 @@
 
                         <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
-                                <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
                                     <small>{{item.RUC}}</small>
                                 </div>
 
@@ -99,7 +99,7 @@
                     <div *ngIf="!vendedor">
                         <ng-select [items]="vendedores" [(ngModel)]="vendedor" (search)="searchVendedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar vendedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
-                                <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
                                     <small>{{item.RUC}}</small>
                                 </div>
                             </ng-template>
@@ -128,7 +128,7 @@
                         <div *ngIf="!cobrador">
                             <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchCobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
-                                    <div> {{item.NOMBRES}} {{item.APELLIDOS}} <br>
+                                    <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
                                         <small>{{item.RUC}}</small>
                                     </div>
 
@@ -236,7 +236,17 @@
 
                             </div>
 
+                            <div class="mt-2 inline-flex">
+                                <div style="width: 100%;" class="row">
+                                    <div *ngFor="let item of tipos_pago; let i = index;" class="col-md-3 col-xs">
+                                        <input [(ngModel)]="contrato.tipo_pago" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_-{{i}}" [value]="item.value" required>
 
+                                        <label for="radio_-{{i}}">{{item.name}}</label>
+                                    </div>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -249,17 +259,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    <div class="mt-2 inline-flex">
-                        <div style="width: 100%;" class="row">
-                            <div *ngFor="let item of tipos_pago; let i = index;" class="col-md-3 col-xs">
-                                <input [(ngModel)]="radioValue" name="idTipoPlan" type="radio" class="with-gap radio-col-blue-grey" id="radio_-{{i}}" [value]="item.value" required>
 
-                                <label for="radio_-{{i}}">{{item.name}}</label>
-                            </div>
-
-                        </div>
-
-                    </div>
                     <div class="row">
                         <div class="col-md-4 col-xs">
                             <div class="form-group">
@@ -431,7 +431,7 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" (click)="crearContrato()" [disabled]="disableCrearContrato()" class="btn float-right btn-success">Actualizar Contrato</button>
+                <button type="button" (click)="editarContrato()" [disabled]="disableCrearContrato()" class="btn float-right btn-success">Actualizar Contrato</button>
 
             </div>
         </div>

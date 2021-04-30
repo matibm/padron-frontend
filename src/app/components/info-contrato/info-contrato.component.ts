@@ -41,18 +41,37 @@ export class InfoContratoComponent implements OnInit {
   fondo
   facturasAPagar
   showModalPdf = false
+  radioValue
+  tipos_pago = [
+    {
+      name: 'Oficina',
+      value: 'OFICINA'
+    },
+    {
+      name: 'PAGOPAR',
+      value: 'PAGOPAR'
+    },
+    {
+      name: 'Débito Automático',
+      value: 'DEBITO'
+    },
+    {
+      name: 'Transferencia Bancaria',
+      value: 'BANCARIA'
+    }
+  ]
   async ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.contrato = await this._contratoService.getContratoById(this.id)
 
     console.log(this.contrato);
-
+    this.radioValue = this.contrato.tipo_pago
     this.titular = this.contrato.titular
     this.cliente = this.contrato.titular
     this.producto = this.contrato.producto
     this.vendedor = this.contrato.vendedor
     this.cobrador = this.contrato.cobrador
-    this.titularAlternativo = this.contrato.titular_alternativo
+    this.titularAlternativo = this.contrato?.titular_alternativo
     if (this.producto.COD_CORTO == 'U.D.P.') {
       this.esUdp = true
     } else this.esUdp = false;
@@ -112,5 +131,5 @@ export class InfoContratoComponent implements OnInit {
       item.RAZON.toLowerCase().includes(term) ||
       item.RUC.toLowerCase().includes(term);
   }
-
+ 
 }
