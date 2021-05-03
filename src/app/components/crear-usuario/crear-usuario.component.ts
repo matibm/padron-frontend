@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Usuario } from './../../models/usuario';
 import { UsuarioService } from './../../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -21,6 +22,7 @@ export class CrearUsuarioComponent implements OnInit {
   isVendedor
   isProveedor
   isCobrador
+  isContratado
   isCliente
   isEmpleado
   ruc
@@ -34,6 +36,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.isVendedor == true ? this.usuario.VENDEDORES = '1' : this.usuario.VENDEDORES = '0'
     this.isProveedor == true ? this.usuario.PROVEEDORES = '1' : this.usuario.PROVEEDORES = '0'
     this.isCobrador == true ? this.usuario.COBRADORES = '1' : this.usuario.COBRADORES = '0'
+    this.isContratado == true ? this.usuario.CONTRATADO = '1' : this.usuario.CONTRATADO = '0'
     this.isCliente == true ? this.usuario.CLIENTES = '1' : this.usuario.CLIENTES = '0'
     this.isEmpleado == true ? this.usuario.EMPLEADOS = '1' : this.usuario.EMPLEADOS = '0'
     this.isPersona == true ? this.usuario.PERSONA = '1' : this.usuario.PERSONA = '0'
@@ -51,6 +54,20 @@ export class CrearUsuarioComponent implements OnInit {
     } else {
       return false
     }
+  }
+
+
+  async consultar(ruc){
+    let consulta = await this._usuarioService.buscarUsuarios('ALL', ruc)    
+    if (consulta) {
+      swal.fire({
+        icon: 'success',
+        title: 'Usuario Existente',
+         text: `${consulta[0].NOMBRES} ${consulta[0].APELLIDOS} `,
+        timer: 3000,
+      })
+    }
+
   }
 
 }

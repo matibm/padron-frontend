@@ -1,3 +1,4 @@
+import { DpDatePickerModule } from 'ng2-date-picker';
 import { PipeModule } from './../pipes/pipe.module';
 import { NombreCortoPipe } from './../pipes/nombre-corto.pipe';
 import { AvatarModule } from 'ngx-avatar';
@@ -37,6 +38,7 @@ import { EditarProductoComponent } from './editar-producto/editar-producto.compo
 import { CrearFacturaComponent } from './crear-factura/crear-factura.component';
 import { ModalContratosComponent } from './modal-contratos/modal-contratos.component';
 import { ModalPdfComponent } from './modal-pdf/modal-pdf.component';
+import { DatepickerModule } from 'ng2-datepicker';
 
 @NgModule({
   declarations: [IncrementadorComponent,
@@ -77,8 +79,9 @@ import { ModalPdfComponent } from './modal-pdf/modal-pdf.component';
     RouterModule,
     NgxPaginationModule,
     NgxLoadingModule.forRoot({}),
-    PipeModule
-  ],
+    PipeModule,
+    DatepickerModule
+   ],
   exports: [
     IncrementadorComponent,
     DonaComponent,

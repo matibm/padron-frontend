@@ -16,6 +16,7 @@
                     <div class="form-group">
                         <label for="">RUC/CI</label>
                         <input [(ngModel)]="usuario.RUC" type="text" class="form-control" name="RUC" autocomplete="off">
+                        <button type="button" (click)="consultar(usuario.RUC)" class="btn mt-2 btn-secondary">Consultar usuario</button>
                     </div>
                     <div class="form-group">
                         <label for="">email</label>
@@ -23,9 +24,9 @@
                     </div>
                     <div class="form-group">
                         <label for="">Perfil de Facebook</label>
-                        <input [(ngModel)]="usuario.facebook" type="text" class="form-control" name="email" autocomplete="off">
+                        <input [(ngModel)]="usuario.facebook" type="text" class="form-control" name="facebook" autocomplete="off">
                     </div>
-                    <div class="form-group">
+                    <div *ngIf="false" class="form-group">
                         <label for="">contraseña</label>
                         <input type="password" [(ngModel)]="usuario.password" class="form-control" name="password" autocomplete="off">
                     </div>
@@ -44,6 +45,10 @@
                         <div class="mt-1 mr-auto ">
                             <input [(ngModel)]="isCobrador" type="checkbox" id="check_cobrador" name="check_cobrador-name" class="filled-in chk-col-light-blue" (click)="isCobrador? null :isCobrador='check_cobrador' " checked>
                             <label for="check_cobrador">Cobrador</label>
+                        </div>
+                        <div class="mt-1 mr-auto ">
+                            <input [(ngModel)]="isContratado" type="checkbox" id="check_contratado" name="check_contratado-name" class="filled-in chk-col-light-blue" (click)="isContratado? null :isContratado='check_contratado' " checked>
+                            <label for="check_contratado">Contratado</label>
                         </div>
 
 

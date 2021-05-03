@@ -193,7 +193,7 @@ export class CrearContratoComponent implements OnInit {
     if (entrega) {
       this.saldo = this.producto.PRECIO_MAYORISTA - parseInt(entrega);
     } else {
-      this.saldo = this.producto.PRECIO_MAYORISTA;
+      this.saldo = parseInt(this.producto.PRECIO_MAYORISTA.toString());
     }
   }
 
@@ -372,7 +372,7 @@ export class CrearContratoComponent implements OnInit {
     ]
 
     this.producto = producto;
-    this.saldo = producto.PRECIO_MAYORISTA;
+    this.saldo = parseInt(producto.PRECIO_MAYORISTA.toString());
     this.manzana = producto.MANZANA
     if (producto.COD_CORTO == 'U.D.P.') {
       this.esUdp = true
@@ -447,12 +447,12 @@ export class CrearContratoComponent implements OnInit {
     this.inhumados.splice(index, 1)
   }
 
-  sumarPlusPorEdad(){
+  sumarPlusPorEdad(beneficiarios){
     this.saldoPlusEdad = 0
     
     
-    for (let i = 0; i < this.beneficiarios.length; i++) {
-      const beneficiario = this.beneficiarios[i];
+    for (let i = 0; i < beneficiarios.length; i++) {
+      const beneficiario = beneficiarios[i];
       
       this.saldoPlusEdad += beneficiario.plus_edad
 

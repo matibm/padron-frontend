@@ -18,7 +18,7 @@ import { from } from 'rxjs';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 import { QrCodeModule } from 'ng-qrcode';
-
+ 
 
 import { NgxLoadingModule } from 'ngx-loading';
 import { AvatarModule } from 'ngx-avatar';
@@ -52,7 +52,7 @@ import { AvatarModule } from 'ngx-avatar';
     RouterModule,
     ComponentsModule,
     QrCodeModule,
-    NgxLoadingModule.forRoot({})
+     NgxLoadingModule.forRoot({})
 
   ],
 })

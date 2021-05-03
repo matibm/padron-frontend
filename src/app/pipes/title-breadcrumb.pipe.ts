@@ -11,6 +11,7 @@ export class TitleBreadcrumbPipe implements PipeTransform {
     value == 'crear_contrato' ? data = 'Crear Nuevo Contrato' : null
     value == 'lista_contratos' ? data = 'Lista de Contratos' : null
     value == 'info_caja' ? data = 'Información de Caja' : null
+    value == 'usuarios' ? data = 'Lista de usuarios' : null
 
     return data;
   }

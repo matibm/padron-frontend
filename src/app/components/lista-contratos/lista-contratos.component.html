@@ -36,10 +36,11 @@
             </div>
             <div class="col-xs col-md">
                 <div class="form-group">
-                    <label for="fecha_inicio">Fecha inicio :
+                    <!-- <label for="fecha_inicio">Fecha inicio :
                         <span><b>{{date_start | date}}</b></span>
                     </label>
-                    <input type="text" name="fecha_inicio" [(ngModel)]="date_start_StiringTemporal" (ngModelChange)="date_start = calcularFecha(date_start_StiringTemporal)" id="fecha_inicio" class="form-control" placeholder="AAAA MM DD" aria-describedby="fechainicioid">
+                    <input type="text" name="fecha_inicio" [(ngModel)]="date_start_StiringTemporal" (ngModelChange)="date_start = calcularFecha(date_start_StiringTemporal)" id="fecha_inicio" class="form-control" placeholder="AAAA MM DD" aria-describedby="fechainicioid"> -->
+                    <ngx-datepicker [options]="optionsDP" [(ngModel)]="model"></ngx-datepicker>
 
                 </div>
             </div>

@@ -59,7 +59,7 @@ const routes: Routes = [
       { path: 'usuario/:id', component: PerfilUsuarioComponent },
       { path: 'lista_contratos', component: ListaContratosComponent },
       { path: 'info_contrato/:id', component: InfoContratoComponent },
-      { path: 'nuevo_usuario', component: CrearUsuarioComponent },
+      { path: 'crear_usuario', component: CrearUsuarioComponent },
       { path: 'factura/:id', component: FacturaComponent },
       { path: 'facturas', component: ListaFacturasComponent },
       { path: 'movimientos', component: MovimientosComponent },

@@ -57,9 +57,13 @@
                                 <br>
                                 <p class="text-muted">{{usuario.RUC}}</p>
                             </div>
-                            <div class="col-md-3 col-xs-6 b-r"> <strong>Rol de Usuario</strong>
+                            <div *ngIf="false" class="col-md-3 col-xs-6 b-r"> <strong>Rol de Usuario</strong>
                                 <br>
                                 <p class="text-muted">administrador</p>
+                            </div>
+                            <div class="col-md-3 col-xs-6 b-r"> <strong>Fecha de creacion</strong>
+                                <br>
+                                <p class="text-muted">{{usuario.fecha_creacion | date}}</p>
                             </div>
                             <div class="col-md-3 col-xs-6"> <strong>Estado</strong>
                                 <br>

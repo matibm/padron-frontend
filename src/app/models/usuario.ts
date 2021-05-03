@@ -14,6 +14,7 @@ export class Usuario {
         public LUGAR_TRABAJO?: string,
         public fondo_online?: string,
         public TEL_TRABAJO?: string,
+        public nivel_permiso?: number,
         public NOMCIUDAD?: string,
         public password?: string,
         public NOMDEPAR?: string,
@@ -69,6 +70,7 @@ export class Usuario {
         public EMPLEADOS?: string,
         public PERSONA?: string,
         public EMPRESA?: string,
+        public CONTRATADO?: string,
         public BANCOS?: string,
         public MANEJA_CAJA?: string,
         public COBRADORES?: string,
@@ -77,6 +79,7 @@ export class Usuario {
         public direccion_particular?: string,
         public direccion_laboral?: string,
         public fecha_alta?: string,
+        public fecha_creacion?: string,
         public ciudad_trabajo?: string,
     ) {
 

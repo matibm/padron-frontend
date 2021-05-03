@@ -338,7 +338,7 @@
                                             <label for="">{{item.edad}} años</label>
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" (ngModelChange)="sumarPlusPorEdad()" [(ngModel)]="item.plus_edad" name="plus-name-{{i}}" placeholder="plus por edad">
+                                            <input type="number" class="form-control" [(ngModel)]="item.plus_edad" (ngModelChange)="sumarPlusPorEdad(beneficiarios)" name="plus-name-{{i}}" placeholder="plus por edad">
                                         </td>
                                         <td class="text-center">
                                             <i [ngStyle]="{fontSize: '20px'}" (click)="beneficiarios.splice(i, 1)" class="fa fa-trash pointer text-danger" aria-hidden="true"></i>

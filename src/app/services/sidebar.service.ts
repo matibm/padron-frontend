@@ -13,7 +13,7 @@ export class SidebarService {
       icono: 'mdi mdi-account-multiple',
       submenu: [
         
-        { titulo: 'crear usuario', url: 'nuevo_usuario' },
+        { titulo: 'crear usuario', url: 'crear_usuario' },
         { titulo: 'lista de usuarios', url: 'usuarios' },
       ]
     },

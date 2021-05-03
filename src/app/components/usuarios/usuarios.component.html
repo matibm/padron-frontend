@@ -7,7 +7,7 @@
             <form class="form-material m-t-40">
                 <div class="form-group">
 
-                    <input type="text" (keyup)="searchUsuarios(val.value)" [(ngModel)]="searching" name="search" #val class="form-control form-control-line" placeholder="Busca usuario">
+                    <input #searchInput type="text" (keyup)="searchUsuarios(val.value)" [(ngModel)]="searching" name="search" #val class="form-control form-control-line" placeholder="Busca usuario">
                 </div>
 
             </form>
