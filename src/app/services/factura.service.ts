@@ -160,11 +160,15 @@ export class FacturaService {
       Object.entries(options).forEach(([key, value]) => {
         if (value) {
           url += `&${key}=${value}`        
+        } else if (value == false) {
+          url += `&${key}=${value}`        
         }
       });
     }
     
     return this.http.get(url).toPromise().then((resp: any) => {
+      console.log("respuesta ");
+      
       return resp
     })
   }

@@ -9,6 +9,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { IDatePickerConfig } from 'ng2-date-picker';
 import { DatepickerOptions } from 'ng2-datepicker';
 import locale from 'date-fns/locale/es';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-lista-contratos',
@@ -53,7 +54,10 @@ export class ListaContratosComponent implements OnInit {
   sort
   count = 0
   model = new Date()
-
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
   optionsDP: DatepickerOptions = {
     // minYear: getYear(new Date()) - 30, // minimum available and selectable year
     // maxYear: getYear(new Date()) + 30, // maximum available and selectable year

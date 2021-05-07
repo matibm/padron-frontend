@@ -1,4 +1,4 @@
-import { DpDatePickerModule } from 'ng2-date-picker';
+ import { DpDatePickerModule } from 'ng2-date-picker';
 import { PipeModule } from './../pipes/pipe.module';
 import { NombreCortoPipe } from './../pipes/nombre-corto.pipe';
 import { AvatarModule } from 'ngx-avatar';
@@ -39,7 +39,17 @@ import { CrearFacturaComponent } from './crear-factura/crear-factura.component';
 import { ModalContratosComponent } from './modal-contratos/modal-contratos.component';
 import { ModalPdfComponent } from './modal-pdf/modal-pdf.component';
 import { DatepickerModule } from 'ng2-datepicker';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import {  MAT_DATE_LOCALE} from '@angular/material/core';
+import { NotifierModule } from 'angular-notifier';
 
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 @NgModule({
   declarations: [IncrementadorComponent,
     DonaComponent,
@@ -80,13 +90,26 @@ import { DatepickerModule } from 'ng2-datepicker';
     NgxPaginationModule,
     NgxLoadingModule.forRoot({}),
     PipeModule,
-    DatepickerModule
+    NgxMaskModule.forRoot(maskConfig),
+    DatepickerModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    NotifierModule.withConfig({
+       behaviour: { autoHide: 2000},
+       position: { horizontal: {position: 'right'}}
+    }),
+
+
    ],
   exports: [
     IncrementadorComponent,
     DonaComponent,
     ListaContratosComponent,
 
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'es-PY'},
   ]
 
 })

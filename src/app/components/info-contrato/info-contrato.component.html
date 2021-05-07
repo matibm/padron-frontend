@@ -142,6 +142,22 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md col-xs">
+
+            <app-lista-movimientos [movimientos]="movimientos"></app-lista-movimientos>
+
+
+        </div>
+        <div class="col-lg" *ngIf="facturas">
+
+            <app-facturas [count]="facturasCount" [options]="facturaOptions" [fromOutside]='true' [facturas]='facturas'></app-facturas>
+
+        </div>
+
+    </div>
+
+
     <div class="card">
         <div class="card-body">
             <h4> <span class="lstick"></span>Pagar Cuotas</h4>
@@ -234,20 +250,6 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md col-xs">
-
-            <app-lista-movimientos [movimientos]="movimientos"></app-lista-movimientos>
-
-
-        </div>
-        <div class="col-lg" *ngIf="facturas">
-
-            <app-facturas [count]="facturasCount" [options]="facturaOptions" [fromOutside]='true' [facturas]='facturas'></app-facturas>
-
-        </div>
-
-    </div>
 
     <div *ngIf="producto">
         <div *ngIf="!esUdp" class="">

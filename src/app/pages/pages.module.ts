@@ -16,6 +16,8 @@ import { PagesComponent } from './pages.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { from } from 'rxjs';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 import { QrCodeModule } from 'ng-qrcode';
  
@@ -31,8 +33,10 @@ import { AvatarModule } from 'ngx-avatar';
     Grafica1Component,
     PagesComponent,
     AccountSettingsComponent,
+
      
    ],
+
   
   exports: [
     DashboardComponent,

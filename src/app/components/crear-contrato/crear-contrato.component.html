@@ -176,7 +176,7 @@
                         <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
                         <!-- <h5>Entrega: </h5>  -->
                         <div class="">
-                            <h5>saldo: <b>{{saldo + saldoPlusEdad | currency:'':'':'2.0'}} Gs</b></h5>
+                            <h5>Total: <b>{{saldo + saldoPlusEdad | currency:'':'':'2.0'}} Gs</b></h5>
 
                         </div>
                         <div *ngIf="!esPsm" class="mt-2 inline-flex">
@@ -315,8 +315,8 @@
                             <table class=" table  ">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">C.I.</th>
                                         <th class="text-center">Nombre</th>
+                                        <th class="text-center">C.I.</th>
                                         <th class="text-center">Fecha Nacimiento</th>
                                         <th class="text-center">edad</th>
                                         <th class="text-center">Plus por edad</th>
@@ -326,16 +326,17 @@
                                 <tbody>
                                     <tr *ngFor="let item of beneficiarios; let i = index">
                                         <td>
-                                            <input type="text" class="form-control" [(ngModel)]="item.doc" name="name-{{i}}" placeholder="cedula de identidad">
-                                        </td>
-                                        <td>
                                             <input type="text" class="form-control" [(ngModel)]="item.nombre" name="name-{{i}}" placeholder="nombre completo">
                                         </td>
+                                        <td>
+                                            <input type="text" class="form-control" [(ngModel)]="item.doc" name="name-{{i}}" placeholder="cedula de identidad">
+                                        </td>
+
                                         <td>
                                             <input type="text" class="form-control" (ngModelChange)="item.edad = calcularEdad(fchn.value)" #fchn [(ngModel)]="item.fecha_nacimiento" name="name-{{i}}" placeholder="aaaa/mm/dd">
                                         </td>
                                         <td>
-                                            <label for="">{{item.edad}} años</label>
+                                            <label class="border p-1 rounded" for="">{{item.edad}}</label>
                                         </td>
                                         <td>
                                             <input type="number" class="form-control" [(ngModel)]="item.plus_edad" (ngModelChange)="sumarPlusPorEdad(beneficiarios)" name="plus-name-{{i}}" placeholder="plus por edad">
