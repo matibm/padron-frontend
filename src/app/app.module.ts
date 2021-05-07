@@ -20,7 +20,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PricePipe } from './pipes/price.pipe';
 import {DpDatePickerModule} from 'ng2-date-picker';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import localePy from '@angular/common/locales/es-PY';
 registerLocaleData(localePy, 'es-PY');
@@ -68,7 +68,8 @@ import { NombreCortoPipe } from './pipes/nombre-corto.pipe';
     PipeModule,
     DpDatePickerModule,
     NgSelectModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    BrowserAnimationsModule
     // NgbModule
   ],
   providers: [CurrencyPipe, { provide: LOCALE_ID, useValue: 'es-PY' }],

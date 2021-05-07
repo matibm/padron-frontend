@@ -276,21 +276,22 @@ export class EditarContratoComponent implements OnInit {
       this.contrato.parcela = null
       this.contrato.sector = null
     }
-    if (this.editarproducto && this.esUdp) {
-      this.facturas.push({
-        vencimiento: this.fechaMantenimiento,
-        monto: 150000,
-        haber: 150000,
-        titular: this.cliente,
-        iscmp: true,
-        servicio: this.servicioCMP._id,
-        fecha_creacion_unix: new Date().getTime()
-      })
-    }
+    // if (this.editarproducto && this.esUdp) {
+    //   this.facturas.push({
+    //     vencimiento: this.fechaMantenimiento,
+    //     monto: 150000,
+    //     haber: 150000,
+    //     titular: this.cliente,
+    //     iscmp: true,
+    //     servicio: this.servicioCMP._id,
+    //     fecha_creacion_unix: new Date().getTime()
+    //   })
+    // }
   //log(this.facturas);
     let send = {
       contrato: this.contrato,
-      facturas: this.facturas
+      facturas: this.facturas,
+      fechaPago: this.fechaPago
     }
 
     await this._contratoService.updateContrato(send, this.editarproducto).then(() => {

@@ -1,6 +1,7 @@
 <div class="card">
     <div style="font-size: medium;" class="card-body">
         <h4><span class="lstick"></span> Filtros </h4>
+
         <div class="row">
             <!-- <div class="col-xs col-md">
                 <div class="form-group">
@@ -18,6 +19,7 @@
                     <input type="text" name="fecha_fin" id="fecha_fin" [(ngModel)]="date_end_StiringTemporal" (ngModelChange)="date_end = calcularFecha(date_end_StiringTemporal)" class="form-control" placeholder="AAAA MM DD" aria-describedby="fechafinid">
                 </div>
             </div> -->
+            <!-- Clientes -->
             <div class="col-xs col-md">
                 <div style="justify-content: space-between;" class="inline-flex">
                     <label>Cliente</label>
@@ -49,6 +51,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Fondo -->
             <div class="col-xs col-md">
                 <div style="justify-content: space-between;" class="inline-flex">
                     <label>Fondo</label>
@@ -82,6 +85,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Servicio -->
             <div style="min-width: 550px;" class="col-xs col-md">
                 <div style="justify-content: space-between;" class="inline-flex">
                     <label>Servicio</label>
@@ -103,43 +107,6 @@
             </div>
 
 
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-xs col-md">
-
-                <div style="justify-content: space-between;" class="inline-flex">
-                    <label>Cobrador</label>
-                    <div *ngIf="cobrador" (click)="cobrador = null; filtrar()" class="pointer close-icon ml-auto">
-                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
-                    </div>
-                </div>
-                <div class="" *ngIf="!cobrador">
-                    <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchcobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
-                        <ng-template ng-option-tmp let-item="item">
-                            <div>
-                                <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
-                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
-                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
-
-
-                            </div>
-
-                        </ng-template>
-                    </ng-select>
-                </div>
-
-
-                <div class="" *ngIf="cobrador">
-                    <div>
-                        <div *ngIf="cobrador.NOMBRES">{{cobrador.NOMBRES}} {{cobrador.APELLIDOS}}</div>
-                        <div *ngIf="cobrador.NOMBRES && cobrador.RAZON"> - </div>
-                        <div *ngIf="cobrador.RAZON">{{cobrador.RAZON}} </div>
-
-                        <small>{{cobrador.RUC}}</small>
-                    </div>
-                </div>
-            </div>
             <div class="col-xs col-md">
                 <div style="justify-content: space-between;" class="inline-flex">
                     <label>Vendedor</label>
@@ -174,6 +141,119 @@
                     </div>
                 </div>
             </div>
+            <div class="col-xs col-md">
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <label>Estado</label>
+
+                </div>
+                <div class="">
+                    <ng-select [(ngModel)]="estadoSeleccionado" (ngModelChange)="filtrar()">
+                        <ng-option *ngFor="let item of estados" [value]="item.estado">
+                            <div class="text-{{item.color}}">
+                                {{item.estado}}
+                            </div>
+
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <!-- Cobrador -->
+            <div class="col-xs col-md">
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <label>Cobrador</label>
+                    <div *ngIf="cobrador" (click)="cobrador = null; filtrar()" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+                <div class="" *ngIf="!cobrador">
+                    <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchcobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+
+                <div class="" *ngIf="cobrador">
+                    <div>
+                        <div *ngIf="cobrador.NOMBRES">{{cobrador.NOMBRES}} {{cobrador.APELLIDOS}}</div>
+                        <div *ngIf="cobrador.NOMBRES && cobrador.RAZON"> - </div>
+                        <div *ngIf="cobrador.RAZON">{{cobrador.RAZON}} </div>
+
+                        <small>{{cobrador.RUC}}</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs mt-3  col-md">
+                <div class="form-group">
+                    <!-- <label for="fecha_fin">Fecha de emision</label> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha de Emision</mat-label>
+                        <mat-date-range-input [formGroup]="rangeEmision" [rangePicker]="pickerEmision">
+                            <input autocomplete="off" matStartDate formControlName="start" placeholder="fecha inicio">
+                            <input matEndDate formControlName="end" (dateChange)="filtrar()" placeholder="fecha fin">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="pickerEmision"></mat-datepicker-toggle>
+                        <mat-date-range-picker #pickerEmision></mat-date-range-picker>
+                        <mat-error *ngIf="rangeEmision.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                        <mat-error *ngIf="rangeEmision.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                    </mat-form-field>
+
+                    <!-- <p>Selected range: {{range.value | json}}</p> -->
+                </div>
+            </div>
+            <div class="col-xs mt-3  col-md">
+                <div class="form-group">
+                    <!-- <label for="fecha_fin">Fecha de emision</label> -->
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha de vencimiento</mat-label>
+                        <mat-date-range-input [formGroup]="rangeVencimiento" [rangePicker]="pickerVencimiento">
+                            <input matStartDate formControlName="start" placeholder="fecha inicio">
+                            <input matEndDate formControlName="end" (dateInput)="filtrar()" placeholder="fecha fin">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="pickerVencimiento"></mat-datepicker-toggle>
+                        <mat-date-range-picker #pickerVencimiento></mat-date-range-picker>
+
+                        <mat-error *ngIf="rangeVencimiento.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                        <mat-error *ngIf="rangeVencimiento.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                    </mat-form-field>
+
+                    <!-- <p>Selected range: {{range.value | json}}</p> -->
+                </div>
+            </div>
+            <div class="col-xs mt-3  col-md">
+                <div class="form-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Fecha de Pago</mat-label>
+                        <mat-date-range-input [formGroup]="rangePagado" [rangePicker]="pickerPagado">
+                            <input matStartDate formControlName="start" placeholder="fecha inicio">
+                            <input matEndDate formControlName="end" (dateInput)="filtrar()" placeholder="fecha fin">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="pickerPagado"></mat-datepicker-toggle>
+                        <mat-date-range-picker #pickerPagado></mat-date-range-picker>
+
+                        <mat-error *ngIf="rangePagado.controls.start.hasError('matStartDateInvalid')">Fecha inicio inválida</mat-error>
+                        <mat-error *ngIf="rangePagado.controls.end.hasError('matEndDateInvalid')">Fecha fin inválida</mat-error>
+                    </mat-form-field>
+
+                    <!-- <p>Selected range: {{range.value | json}}</p> -->
+                </div>
+            </div>
+
+            <!-- contrato -->
             <div class="col-xs col-md">
                 <div *ngIf="cliente && !contrato" class="d-flex mt-3">
                     <button type="button" (click)="showModal = true" class="btn mx-auto btn-info">Seleccionar Contrato</button>
@@ -325,3 +405,4 @@
 
 
 <app-modal-contratos (contratoSelected)="onContratoSelected($event)" [cliente]="cliente" (onClose)="showModal = false" *ngIf="showModal"></app-modal-contratos>
+<notifier-container></notifier-container>

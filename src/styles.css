@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~angular-notifier/styles";
 #themecolors .selector {
     cursor: pointer;
 }
@@ -19,4 +20,14 @@
 
 .close-icon :hover {
     color: #ef5350;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
 }
