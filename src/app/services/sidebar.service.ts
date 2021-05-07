@@ -43,6 +43,7 @@ export class SidebarService {
         { titulo: 'caja', url: 'info_caja' },
         { titulo: 'resumen', url: 'resumen' },
         { titulo: 'transferencias', url: 'transferencia' },
+
       ]
     }
   ]
