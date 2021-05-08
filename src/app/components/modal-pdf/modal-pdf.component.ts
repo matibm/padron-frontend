@@ -24,8 +24,7 @@ export class ModalPdfComponent implements OnInit {
   style:any = {}
 
   print(event){
-    console.log(event.target);
-    if (event.target.id == 'afuera') {
+     if (event.target.id == 'afuera') {
       this.onClose.emit()
     }
   }
