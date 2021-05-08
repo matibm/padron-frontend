@@ -15,6 +15,10 @@ export class ContratoPdfComponent implements OnInit {
     public route: ActivatedRoute,
     private _contratoService: ContratoService
   ) { }
+  observaciones =`.
+  .
+.
+  `
   id
   @Input() contrato: Contrato
   @Input() printAltoke = true

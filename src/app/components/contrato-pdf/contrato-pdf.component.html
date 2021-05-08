@@ -378,4 +378,362 @@
             <br> <b>www.parqimperial.com</b>
         </div>
     </div>
+    <div *ngIf="tipo_contrato == 'P.S.V.'" style="width: 1000px;" class="mx-auto bg-white  ">
+        <div style="display: block; width: 100%;" class="mt-3 row mr-3">
+            <div class="inline-flex">
+                <div class="ml-3">
+                    <img style="position: absolute;   margin-left: 20px;" width="215px" src="../../../assets/images/logo2020.png" alt="">
+                </div>
+
+                <div class="ml-auto">
+                    <div class="float-right" style="text-align: initial;">
+                        <h2>CONTRATO DE</h2>
+                        <h3>Prestacion de Servicio Vitalicio (PSV)</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mr-3">
+            <div class="col-5">
+
+            </div>
+            <div class="col-7 p-0 m-0">
+                <div class="inline-flex">
+                    <div style="width: 100%" class="border rounded">
+
+                        <div class="row p-0 m-0">
+                            <div align="center" class=" px-0 col b-r">
+                                <div class=" bg-light">
+                                    <h4 align="center" class="m-0">Fecha</h4>
+
+                                </div>
+                                <hr class="m-0 p-0">
+
+                                <div class="my-1">{{contrato.fecha_creacion_unix | date }}</div>
+
+                            </div>
+                            <div align="center" class=" px-0 col b-r">
+                                <div class=" bg-light">
+                                    <h4 align="center" class="m-0">Certificado Nº</h4>
+
+                                </div>
+                                <hr class="m-0 p-0">
+
+                                <div class="my-1">{{contrato.nro_contrato | ruc}}</div>
+
+
+                            </div>
+                            <div align="center" class=" px-0 col b-r">
+                                <div class=" bg-light">
+                                    <h4 align="center" class="m-0">Tipo de Servicio</h4>
+
+                                </div>
+                                <hr class="m-0 p-0">
+
+                                <div class="my-1">Falta dato</div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div style="width: 100%; display: flex;" class="mt-3 lead mr-3 ">
+            <div class="mx-auto">
+                <i>El Que suscribe</i>
+            </div>
+
+
+        </div>
+
+        <div class="inline-flex mt-1">
+
+            <div style="width: 50%" class="border ml-3 rounded">
+
+                <div class="row p-0 m-0">
+                    <div align="center" class=" px-0 col ">
+                        <div class=" bg-light">
+                            <h4 align="center" class="m-0">Apellido(s) o Razón Social</h4>
+
+                        </div>
+                        <hr class="m-0 p-0">
+
+                        <div class="text-capitalize my-1">{{contrato.titular.APELLIDOS}}</div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div style="width: 50%" class="border mx-3 rounded">
+
+                <div class="row p-0 m-0">
+                    <div align="center" class=" px-0 col ">
+                        <div class=" bg-light">
+                            <h4 align="center" class="m-0">Nombre (s)</h4>
+
+                        </div>
+                        <hr class="m-0 p-0">
+
+                        <div class="my-1 text-capitalize">{{contrato.titular.NOMBRES}}</div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="inline-flex mt-3">
+
+            <div style="width: 33.34%" class="border ml-3 rounded">
+
+                <div class="row p-0 m-0">
+                    <div align="center" class=" px-0 col  ">
+                        <div class="bg-light">
+                            <h4 align="center" class="m-0">RUC/Cedula de Identidad</h4>
+
+                        </div>
+                        <hr class="m-0 p-0">
+
+                        <div class="my-1">{{contrato.titular.RUC | ruc}}</div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div style="width: 33.34%" class="border mx-3 rounded">
+
+                <div class="row p-0 m-0">
+                    <div align="center" class=" px-0 col  ">
+                        <div class="bg-light">
+                            <h4 align="center" class="m-0">Correo Electrónico</h4>
+
+                        </div>
+                        <hr class="m-0 p-0">
+
+                        <div class="my-1">{{contrato.titular.EMAIL}}</div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div style="width: 33.34%" class="border mr-3 rounded">
+                <div class="row p-0 m-0">
+                    <div align="center" class=" px-0 col  ">
+                        <div class="bg-light">
+                            <h4 align="center" class="m-0">Perfil Facebook</h4>
+                        </div>
+                        <hr class="m-0 p-0">
+                        <div class="my-1">@</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div style="width: 96.85%" class="border mt-3 mx-3 rounded">
+            <div class="row p-0 m-0">
+                <div align="left" class=" px-0 col  ">
+
+                    <div class="m-1"><b>Direccion particular: Casa o Depto Nº: </b> {{contrato.titular.DIRECCION}}</div>
+                    <hr class="m-0 p-0">
+                    <div class="m-1"><b>Calle: </b></div>
+                    <hr class="m-0 p-0">
+                    <div class="m-1 inline-flex">
+                        <div style="width: 50%;" class=""></div>
+                        <div style="width: 50%;" class="b-l"> <b class="ml-2">Tel: </b>{{contrato.titular.TELEFONO2}}
+                        </div>
+                    </div>
+                    <hr class="m-0 p-0">
+                    <div class="m-1 inline-flex">
+                        <div style="width: 33.34%;" class=""> <b class="">Depto: {{contrato.titular.NOMDEPAR}} </b>
+                        </div>
+                        <div style="width: 33.34%;" class="b-l"> <b class="ml-2">Ciudad:</b> {{contrato.titular.NOMCIUDAD}}
+                        </div>
+                        <div style="width: 33.34%;" class="b-l"> <b class="ml-2">Cel: </b> {{contrato.titular.TELEFONO1}} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 96.85%" class="border mt-3 mx-3 rounded">
+            <div class="row p-0 m-0">
+                <div align="left" class=" px-0 col  ">
+
+                    <div class="m-1"><b>Lugar de Trabajo: </b> {{contrato.titular.LUGAR_TRABAJO}} </div>
+                    <hr class="m-0 p-0">
+                    <div class="m-1"><b>Dirección:</b> {{contrato.titular.direccion_laboral}} </div>
+                    <hr class="m-0 p-0">
+                    <div class="m-1 inline-flex">
+                        <div style="width: 50%;" class=""></div>
+                        <div style="width: 50%;" class="b-l"> <b class="ml-2">Tel:</b> {{contrato.titular.TEL_TRABAJO}}
+                        </div>
+                    </div>
+                    <hr class="m-0 p-0">
+                    <div class="m-1 inline-flex">
+                        <div style="width: 33.34%;" class=""> <b class="">Depto: </b> {{contrato.titular.DEPARTAMENTO_TRABAJO}} </div>
+                        <div style="width: 33.34%;" class="b-l"> <b class="ml-2">Ciudad: </b> {{contrato.titular.ciudad_trabajo}} </div>
+                        <div style="width: 33.34%;" class="b-l"> <b class="ml-2">Cel: </b> {{contrato.titular.TELEFONO3}} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-3 mt-2">
+            <i>*En caso de mi ausencia otorgo todos los derechos y obligaciones sobre mi parcela a:</i>
+            <div style="width: 100%" class="border rounded">
+                <div class="row p-0 m-0">
+                    <div align="left" class=" px-0 col  ">
+
+                        <div class="m-1 text-capitalize"><b>Apellido(s) y Nombre(s):</b> {{contrato.titular_alternativo?.APELLIDOS}} {{contrato.titular_alternativo?.NOMBRES}} </div>
+                        <hr class="m-0 p-0">
+                        <div class="m-1 text-capitalize"><b>Parentesco: </b></div>
+                        <hr class="m-0 p-0">
+                        <div class="m-1 text-capitalize"><b>Dir. Particular:</b> {{contrato.titular_alternativo.DIRECCION}}</div>
+                        <hr class="m-0 p-0">
+                        <div class="m-1 text-capitalize"><b>Lugar de Trabajo:</b> {{contrato.titular_alternativo.LUGAR_TRABAJO}}</div>
+                        <hr class="m-0 p-0">
+                        <div class="m-1 text-capitalize"><b>Dir. Laboral:</b> {{contrato.titular_alternativo.direccion_laboral}} </div>
+                        <hr class="m-0 p-0">
+                        <div class="m-1 inline-flex">
+                            <div style="width: 33.34%;" class=""> <b class="">Doc. Identidad: </b></div>
+                            <div style="width: 33.34%;" class="b-l"> <b class="ml-2">Tel:</b></div>
+                            <div style="width: 33.34%;" class="b-l"> <b class="ml-2">Cel: </b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mx-3 inline-flex">
+            <div class="mr-auto mt-4">
+                Forma de Pago:
+            </div>
+            <div class="mr-auto mt-4">
+                Contado:
+                <i *ngIf="contrato.plazo>1" style="font-size: 20px;" class="mdi mdi-checkbox-blank-outline"></i>
+                <i *ngIf="contrato.plazo==1" style="font-size: 20px;" class="mdi mdi-checkbox-marked-outline"></i>
+
+            </div>
+            <div class="mr-auto mt-4">
+                Cuotas:
+                <i *ngIf="contrato.plazo==1" style="font-size: 20px;" class="mdi mdi-checkbox-blank-outline"></i>
+                <i *ngIf="contrato.plazo>1" style="font-size: 20px;" class="mdi mdi-checkbox-marked-outline"></i>
+            </div>
+            <div class=" mt-4">
+                <div class="inline-flex">
+                    Acepto:
+                    <div class="d-block">
+                        <span class="mx-1">__________________________</span>
+                        <div class="inline-flex">
+                            <div class="mx-auto"><i>firma</i></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mt-2  mx-3 border">
+            <div class="inline-flex b-b">
+                <div class="mx-auto">ENTREGA INICIAL</div>
+                <div class="b-r"></div>
+                <div class="mx-auto">CUOTAS A PAGAR</div>
+                <div class="b-r"></div>
+                <div class="mx-auto">VENCIMIENTO</div>
+                <div class="b-r"></div>
+                <div class="mx-auto">MONTO TOTALL</div>
+            </div>
+            <div class="inline-flex">
+                <div style="width: 25%;" class="mrs-auto">Gs. {{contrato.entrega | currency: '':'':'2.0'}}</div>
+                <div style="width: 25%;" class="mrs-auto">{{contrato.plazo}} de Gs. {{contrato.saldo_pendiente / contrato.plazo | currency: '':'':'2.0'}}</div>
+                <div style="width: 25%;" class="mrs-auto">{{diaCadaMes}} de c/mes</div>
+                <div style="width: 25%;" class="mrs-auto">Gs. {{contrato.producto.PRECIO_MAYORISTA | currency: '':'':'2.0'}}
+                </div>
+            </div>
+        </div>
+        <div class="mx-3 p-2 border mt-2 inline-flex">
+            <div class="mr-auto ">
+                <i *ngIf="contrato.tipo_pago == 'PAGOPAR' " style="font-size: 20px;" class="mdi mdi-checkbox-marked-outline"></i>
+                <i *ngIf="contrato.tipo_pago != 'PAGOPAR' " style="font-size: 20px;" class="mdi mdi-checkbox-blank-outline"></i> PAGOPAR
+            </div>
+            <div class="mr-auto ">
+                <i *ngIf="contrato.tipo_pago == 'DEBITO' " style="font-size: 20px;" class="mdi mdi-checkbox-marked-outline"></i>
+                <i *ngIf="contrato.tipo_pago != 'DEBITO' " style="font-size: 20px;" class="mdi mdi-checkbox-blank-outline"></i> DEB. AUTOM.
+            </div>
+            <div class="mr-auto ">
+                <i *ngIf="contrato.tipo_pago == 'BANCARIA' " style="font-size: 20px;" class="mdi mdi-checkbox-marked-outline"></i>
+                <i *ngIf="contrato.tipo_pago != 'BANCARIA' " style="font-size: 20px;" class="mdi mdi-checkbox-blank-outline"></i> TRANSF. BANC.
+            </div>
+            <div class="mr-auto ">
+                <i *ngIf="contrato.tipo_pago == 'OFICINA' " style="font-size: 20px;" class="mdi mdi-checkbox-marked-outline"></i>
+                <i *ngIf="contrato.tipo_pago != 'OFICINA' " style="font-size: 20px;" class="mdi mdi-checkbox-blank-outline"></i> OFICINA
+            </div>
+        </div>
+        <div class="mx-3  mt-2 px-2 py-1" style="text-align: initial;">
+
+            <div style="border-bottom: 1px solid gray; width: 100%;">
+                <i style="border-bottom: 1px solid gray;">Observaciones:</i> <br> <br>
+            </div>
+        </div>
+        <div class="mx-3  mt-2 px-2 py-1" style="text-align: initial;">
+            <p class="fw-bolder"><i>Acepto las clausulas generales del pliego de condiciones al dorso de este contrato, solicito ser inscripto
+                como Titular del </i> Contrato de Prestacion de Servicios Vitalicios de Eduardo Clebsch S.A. (Imperial), declarando bajo fe de juramento <i>que los datos aportados son correctos</i></p>
+        </div>
+
+        <div class="mx-3 border px-5 pt-5 py-1 " style="display: flex; text-align: initial;">
+            <div class="mr-auto" style="display: block;">
+                <div class=" " style="display: block; width: fit-content;">
+                    ____________________________
+                    <br>
+                    <div style="display: flex;">
+                        <div class="mx-auto">
+                            Firma del Asesor
+                        </div>
+                    </div>
+
+                </div>
+                <div class="" style="display: block;">
+                    <span class="mt-1"> C.I.____________________________</span>
+                    <br>
+                    <small class="mt-3"> Aclaracion de Firma____________________________</small>
+                </div>
+            </div>
+            <div class="ml-auto" style="display: block;">
+                <div class=" " style="display: block; width: fit-content;">
+                    ____________________________
+                    <br>
+                    <div style="display: flex;">
+                        <div class="mx-auto">
+                            Firma del Suscriptor
+                        </div>
+                    </div>
+
+                </div>
+                <div class="" style="display: block;">
+                    <span class="mt-1"> C.I.____________________________</span>
+                    <br>
+                    <small class="mt-3"> Aclaracion de Firma____________________________</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="mx-3 border lead bg-light mt-2 py-2 py-1" style="text-align: center;">
+            <b> Declaro haber leido y aceptado el pliego de condiciones detallado al dorso.</b>
+        </div>
+
+        <div class="mx-3 mt-2" style="text-align: center;">
+            <b>Ofic. Central:</b> Cerro Cora Nº 333 - Campo Santo - km. 12 - Camino a Santo Domingo - Encarnacion - Py
+            <br> Tel: (071) 202803 - 209035 - Cel: (0985) 932 785 - (0985) 189 036 - (0985) 732 784
+            <br> <b>www.parqimperial.com</b>
+        </div>
+    </div>
 </div>
