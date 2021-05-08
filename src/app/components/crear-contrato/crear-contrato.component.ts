@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Contrato } from '../../models/contrato';
 import { Inhumado } from '../../models/unhumado';
 import { ContratoService } from '../../services/contrato.service';
@@ -16,12 +17,22 @@ import swal from 'sweetalert2';
   styleUrls: ['./crear-contrato.component.css']
 })
 export class CrearContratoComponent implements OnInit {
+  constructor(
+    public _productoService: ProductosService,
+    public _usuarioService: UsuarioService,
+    public readonly swalTargets: SwalPortalTargets,
+    public _contratoService: ContratoService,
+    public router: Router
+
+  ) { }
+
 
   cliente: Usuario
   clientes: Usuario[] = null
 
   titularAlternativo: Usuario
-
+  fecha_creacion = new Date()
+  fecha_primer_pago = new Date().getTime()
   productos: Producto[] = null
   vendedores: Usuario[] = null
   clientesSearch = this.clientes;
@@ -61,7 +72,7 @@ export class CrearContratoComponent implements OnInit {
       nombre: '1',
       doc: '',
       fecha_nacimiento: '',
-      edad: '',
+      edad: null,
       plus_edad: 0
     }
   ]
@@ -83,7 +94,7 @@ export class CrearContratoComponent implements OnInit {
   stringFechaPago
   servicioCMP
   numeroFactura
-
+  esPsv
   trackItem(index, item) {
 
     //log(item);
@@ -119,13 +130,7 @@ export class CrearContratoComponent implements OnInit {
   radioDebito = false
   radioAdministracion = false
   radioCobrador = false
-  constructor(
-    public _productoService: ProductosService,
-    public _usuarioService: UsuarioService,
-    public readonly swalTargets: SwalPortalTargets,
-    public _contratoService: ContratoService
-  ) {
-  }
+
 
   async ngOnInit() {
     let date = new Date()
@@ -152,9 +157,10 @@ export class CrearContratoComponent implements OnInit {
   }
   selectedDate
   calcularEdad(date) {
-    //log(date);
+    console.log(date);
+    
 
-    if (date.length > 4) {
+     
       let hoy = new Date()
       let fechaNacimiento = new Date(date)
       fechaNacimiento.setHours(5)
@@ -169,12 +175,17 @@ export class CrearContratoComponent implements OnInit {
       //log(edad);
 
       return edad
-    } else return 0
-
+   
   }
 
   beneficiarioPush() {
-    this.beneficiarios.push(this.beneficiarioVacio)
+    this.beneficiarios.push({
+      nombre: '',
+      doc: '',
+      fecha_nacimiento: '',
+      edad: '',
+      plus_edad: 0
+    })
   }
 
   inhumadoPush() {
@@ -214,23 +225,11 @@ export class CrearContratoComponent implements OnInit {
 
   }
   calcularFechaPago() {
+    console.log("se cambio fecha", this.fecha_primer_pago);
 
-    let d = new Date(this.stringFechaPago);
-    d.setUTCHours(5)
+    // this.fechaPago = this.fecha_primer_pago
+    this.facturas = this.crearFacturas(this.montoCuotas, this.plazo);
 
-    if (Object.prototype.toString.call(d) === "[object Date]") {
-      // it is a date
-      if (isNaN(d.getTime())) {  // d.valueOf() could also work
-        // date is not valid
-      } else {
-        // date is valid
-        this.fechaPago = d
-        this.facturas = this.crearFacturas(this.montoCuotas, this.plazo);
-
-      }
-    } else {
-      // not a date
-    }
   }
   calcularFechaMantenimiento() {
 
@@ -283,7 +282,7 @@ export class CrearContratoComponent implements OnInit {
       saldo_pendiente: this.saldo,
       tipo_pago: this.radioValue,
       inhumados: this.inhumados,
-      fecha_creacion_unix: new Date().valueOf() // falta poner campode fecha para poder modificar
+      fecha_creacion_unix: this.fecha_creacion.getTime()
 
     }
     if (this.esUdp) {
@@ -302,7 +301,7 @@ export class CrearContratoComponent implements OnInit {
     //   fecha_creacion_unix: new Date().getTime()
     // })
 
-     
+
 
     let send = {
       contrato: nuevo_contrato,
@@ -311,7 +310,8 @@ export class CrearContratoComponent implements OnInit {
       crearCMP: this.esUdp
     }
 
-    await this._contratoService.newContrato(send)
+    let contratoCreado = await this._contratoService.newContrato(send)
+    this.router.navigateByUrl(`/admin/info_contrato/${contratoCreado._id}` )
 
   }
   async searchCobradores(val: any) {
@@ -378,6 +378,8 @@ export class CrearContratoComponent implements OnInit {
       this.esUdp = true
     } else if (producto.COD_CORTO == 'P.S.M.') {
       this.esPsm = true;
+    } else if (producto.COD_CORTO == 'P.S.V.') {
+      this.esPsv = true;
     } else {
       this.esUdp = false;
       this.esPsm = false;
@@ -447,18 +449,18 @@ export class CrearContratoComponent implements OnInit {
     this.inhumados.splice(index, 1)
   }
 
-  sumarPlusPorEdad(beneficiarios){
+  sumarPlusPorEdad(beneficiarios) {
     this.saldoPlusEdad = 0
-    
-    
+
+
     for (let i = 0; i < beneficiarios.length; i++) {
       const beneficiario = beneficiarios[i];
-      
+
       this.saldoPlusEdad += beneficiario.plus_edad
 
     }
     console.log(this.saldoPlusEdad);
-    
+
   }
 
 

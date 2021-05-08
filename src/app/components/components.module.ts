@@ -1,6 +1,5 @@
- import { DpDatePickerModule } from 'ng2-date-picker';
+import { CrearContratoComponent } from './crear-contrato/crear-contrato.component';
 import { PipeModule } from './../pipes/pipe.module';
-import { NombreCortoPipe } from './../pipes/nombre-corto.pipe';
 import { AvatarModule } from 'ngx-avatar';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -16,7 +15,6 @@ import { PerfilUsuarioComponent } from './perfil-usuario/perfil-usuario.componen
 import { InfoContratoComponent } from './info-contrato/info-contrato.component';
 import { FacturaComponent } from './factura/factura.component';
 import { FacturasComponent } from './facturas/facturas.component';
-
 import { NgxLoadingModule } from 'ngx-loading';
 import { CrearEgresoComponent } from './crear-egreso/crear-egreso.component';
 import { ListaMovimientosComponent } from './lista-movimientos/lista-movimientos.component';
@@ -45,6 +43,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import {  MAT_DATE_LOCALE} from '@angular/material/core';
 import { NotifierModule } from 'angular-notifier';
+import { MatInputModule } from '@angular/material/input';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -76,7 +75,8 @@ const maskConfig: Partial<IConfig> = {
     CrearFacturaComponent,
     ModalContratosComponent,
     ModalPdfComponent,
-
+    CrearContratoComponent,
+    
   ],
   imports: [
     AvatarModule,
@@ -94,6 +94,7 @@ const maskConfig: Partial<IConfig> = {
     DatepickerModule,
     MatDatepickerModule,
     MatFormFieldModule,
+    MatInputModule,
     MatNativeDateModule,
     NotifierModule.withConfig({
        behaviour: { autoHide: 2000},

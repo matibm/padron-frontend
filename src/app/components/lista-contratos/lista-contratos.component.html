@@ -13,11 +13,11 @@
                     <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                         <ng-template ng-option-tmp let-item="item">
                             <div>
-                                <div *ngIf="item.NOMBRES"> {{item.APELLIDOS}} {{item.NOMBRES}} </div>
+                                <div *ngIf="item.APELLIDOS"> {{item.APELLIDOS}} {{item.NOMBRES}} </div>
                                 <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                 <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
-                                <small>{{item.RUC}}</small>
+                                <small>{{item.RUC | ruc}}</small>
 
                             </div>
 
@@ -30,7 +30,7 @@
                         <div *ngIf="cliente.NOMBRES && cliente.RAZON"> - </div>
                         <div *ngIf="cliente.RAZON">{{cliente.RAZON}} </div>
 
-                        <small>{{cliente.RUC}}</small>
+                        <small>{{cliente.RUC | ruc}}</small>
                     </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                     <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchcobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                         <ng-template ng-option-tmp let-item="item">
                             <div>
-                                <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                 <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                 <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
@@ -118,7 +118,7 @@
                         <div *ngIf="cobrador   .NOMBRES && cobrador  .RAZON"> - </div>
                         <div *ngIf="cobrador   .RAZON">{{cobrador .RAZON}} </div>
 
-                        <small>{{cobrador.RUC}}</small>
+                        <small>{{cobrador.RUC | ruc}}</small>
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@
                     <ng-select [items]="vendedores" [(ngModel)]="vendedor" (search)="searchvendedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar vendedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                         <ng-template ng-option-tmp let-item="item">
                             <div>
-                                <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                 <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                 <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
@@ -153,7 +153,7 @@
                         <div *ngIf="vendedor   .NOMBRES && vendedor  .RAZON"> - </div>
                         <div *ngIf="vendedor   .RAZON">{{vendedor .RAZON}} </div>
 
-                        <small>{{vendedor.RUC}}</small>
+                        <small>{{vendedor.RUC | ruc}}</small>
                     </div>
                 </div>
             </div>
@@ -213,11 +213,11 @@
                 <tr (click)="onSelectContrato(contrato)" class="pointer" *ngFor="let contrato of contratos | paginate: { itemsPerPage: 10,totalItems:100, currentPage: page } ; let i = index;">
                     <td scope="row">{{page*10 + (i+1) - 10}}</td>
                     <td>{{contrato.fecha_creacion_unix | date}}</td>
-                    <td>{{contrato.nro_contrato}}</td>
+                    <td>{{contrato.nro_contrato | ruc}}</td>
                     <td>{{contrato.nombre_servicio}}</td>
                     <td *ngIf="contrato.titular">{{contrato.titular.NOMBRES | primerNombre}} {{contrato.titular.APELLIDOS | primerNombre}}</td>
                     <td *ngIf="!contrato.titular">---</td>
-                    <td *ngIf="contrato.titular">{{contrato.titular.RUC}}</td>
+                    <td *ngIf="contrato.titular">{{contrato.titular.RUC | ruc}}</td>
                     <td *ngIf="!contrato.manzana">---</td>
                     <td *ngIf="!contrato.fila">---</td>
                     <td *ngIf="!contrato.parcela">---</td>

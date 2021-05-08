@@ -33,7 +33,7 @@
                         <h4 class="pointer" [routerLink]="['/admin/usuario', factura.titular._id]">
                             {{factura.titular.NOMBRES}} {{factura.titular.APELLIDOS}}
                             <br>
-                            <small>{{factura.titular.RUC}}</small>
+                            <small>{{factura.titular.RUC | ruc}}</small>
 
                         </h4>
                     </div>
@@ -53,7 +53,7 @@
                         <h4 class="pointer" [routerLink]="['/admin/usuario', factura.vendedor._id]">
                             {{factura.vendedor.NOMBRES}} {{factura.vendedor.APELLIDOS}}
                             <br>
-                            <small>{{factura.vendedor.RUC}}</small>
+                            <small>{{factura.vendedor.RUC | ruc}}</small>
 
                         </h4>
                     </div>
@@ -73,7 +73,7 @@
                         <h4 class="pointer" [routerLink]="['/admin/usuario', factura.cobrador._id]">
                             {{factura.cobrador.NOMBRES}} {{factura.cobrador.APELLIDOS}}
                             <br>
-                            <small>{{factura.cobrador.RUC}}</small>
+                            <small>{{factura.cobrador.RUC | ruc}}</small>
 
                         </h4>
                     </div>
@@ -104,12 +104,12 @@
                         <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (ngModelChange)="onSelectFondo(fondo)" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
                                 <div>
-                                    <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                    <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                     <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                     <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
 
-                                    <small>{{item.RUC}}</small>
+                                    <small>{{item.RUC | ruc}}</small>
                                 </div>
 
                             </ng-template>
@@ -122,7 +122,7 @@
                             <div *ngIf="fondo.NOMBRES && fondo.RAZON"> - </div>
                             <div *ngIf="fondo.RAZON">{{fondo.RAZON}} </div>
 
-                            <small>{{fondo.RUC}}</small>
+                            <small>{{fondo.RUC | ruc}}</small>
                         </h4>
                     </div>
 
