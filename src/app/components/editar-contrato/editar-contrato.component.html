@@ -15,7 +15,7 @@
                         <ng-select [items]="clientes" [(ngModel)]="cliente" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
                                 <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
-                                    <small>{{item.RUC}}</small>
+                                    <small>{{item.RUC | ruc}}</small>
                                 </div>
 
                             </ng-template>
@@ -26,7 +26,7 @@
                         <h5>Apellidos: <b>{{cliente.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{cliente.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{cliente.RAZON}}</b></h5>
-                        <h5>RUC: <b>{{cliente.RUC}}</b></h5>
+                        <h5>RUC: <b>{{cliente.RUC | ruc}}</b></h5>
                         <h5>Direccion: <b>{{cliente.direccion_particular}}</b></h5>
                         <h5>Ciudad: <b>{{cliente.ciudad_trabajo}}</b></h5>
 
@@ -57,7 +57,7 @@
                         <ng-select [items]="clientes" [(ngModel)]="contrato.titular_alternativo" (search)="searchClientes($event)" notFoundText="no se encontraron resultados" placeholder="buscar titular" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
                                 <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
-                                    <small>{{item.RUC}}</small>
+                                    <small>{{item.RUC | ruc}}</small>
                                 </div>
 
                             </ng-template>
@@ -68,7 +68,7 @@
                         <h5>Apellidos: <b>{{contrato.titular_alternativo.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{contrato.titular_alternativo.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{contrato.titular_alternativo.RAZON}}</b></h5>
-                        <h5>RUC: <b>{{contrato.titular_alternativo.RUC}}</b></h5>
+                        <h5>RUC: <b>{{contrato.titular_alternativo.RUC | ruc}}</b></h5>
                         <h5>Direccion P: <b>{{contrato.titular_alternativo.DIRECCION}}</b></h5>
                         <h5>Direccion L: <b>{{contrato.titular_alternativo.DIRECCION_TRABAJO}}</b></h5>
                         <h5>Ciudad: <b>{{contrato.titular_alternativo.ciudad_trabajo}}</b></h5>
@@ -100,7 +100,7 @@
                         <ng-select [items]="vendedores" [(ngModel)]="vendedor" (search)="searchVendedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar vendedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
                                 <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
-                                    <small>{{item.RUC}}</small>
+                                    <small>{{item.RUC | ruc}}</small>
                                 </div>
                             </ng-template>
                         </ng-select>
@@ -109,7 +109,7 @@
                         <h5>Apellidos: <b>{{vendedor.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{vendedor.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{vendedor.RAZON}}</b></h5>
-                        <h5>RUC: <b>{{vendedor.RUC}}</b></h5>
+                        <h5>RUC: <b>{{vendedor.RUC | ruc}}</b></h5>
                         <h5>Telefonos: {{vendedor.TELEFONO}}</h5>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                             <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchCobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                 <ng-template ng-option-tmp let-item="item">
                                     <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
-                                        <small>{{item.RUC}}</small>
+                                        <small>{{item.RUC | ruc}}</small>
                                     </div>
 
                                 </ng-template>
@@ -140,7 +140,7 @@
                         <h5>Apellidos: <b>{{cobrador.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{cobrador.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{cobrador.RAZON}}</b></h5>
-                        <h5>RUC: <b>{{cobrador.RUC}}</b></h5>
+                        <h5>RUC: <b>{{cobrador.RUC | ruc}}</b></h5>
                         <h5>Telefonos: {{cobrador.TELEFONO}}</h5>
                     </div>
                 </div>

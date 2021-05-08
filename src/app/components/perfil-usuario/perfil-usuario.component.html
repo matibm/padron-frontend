@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-md-3 col-xs-6 b-r"> <strong>RUC</strong>
                                 <br>
-                                <p class="text-muted">{{usuario.RUC}}</p>
+                                <p class="text-muted">{{usuario.RUC | ruc}}</p>
                             </div>
                             <div *ngIf="false" class="col-md-3 col-xs-6 b-r"> <strong>Rol de Usuario</strong>
                                 <br>
@@ -117,7 +117,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label>RUC/CI: <b>{{usuario.RUC}}</b></label>
+                                        <label>RUC/CI: <b>{{usuario.RUC | ruc}}</b></label>
 
                                     </div>
                                     <div class="form-group">

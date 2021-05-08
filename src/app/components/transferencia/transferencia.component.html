@@ -14,12 +14,12 @@
                     <ng-select [items]="fondos" [(ngModel)]="fondoOrigen" (ngModelChange)="selectFondoOrigen(fondoOrigen)" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                         <ng-template ng-option-tmp let-item="item">
                             <div>
-                                <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                 <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                 <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
 
-                                <small>{{item.RUC}}</small>
+                                <small>{{item.RUC | ruc}}</small>
                             </div>
 
                         </ng-template>
@@ -32,7 +32,7 @@
                         <div *ngIf="fondoOrigen.NOMBRES && fondoOrigen.RAZON"> - </div>
                         <div *ngIf="fondoOrigen.RAZON">{{fondoOrigen.RAZON}} </div>
 
-                        <small>{{fondoOrigen.RUC}}</small>
+                        <small>{{fondoOrigen.RUC | ruc}}</small>
                     </div>
                 </div>
             </div>
@@ -53,12 +53,12 @@
                     <ng-select [items]="fondos" [(ngModel)]="fondoDestino" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                         <ng-template ng-option-tmp let-item="item">
                             <div>
-                                <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                 <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                 <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
 
-                                <small>{{item.RUC}}</small>
+                                <small>{{item.RUC | ruc}}</small>
                             </div>
 
                         </ng-template>
@@ -71,7 +71,7 @@
                         <div *ngIf="fondoDestino.NOMBRES && fondoDestino.RAZON"> - </div>
                         <div *ngIf="fondoDestino.RAZON">{{fondoDestino.RAZON}} </div>
 
-                        <small>{{fondoDestino.RUC}}</small>
+                        <small>{{fondoDestino.RUC | ruc}}</small>
                     </div>
                 </div>
             </div>

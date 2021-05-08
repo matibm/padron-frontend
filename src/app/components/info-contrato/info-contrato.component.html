@@ -11,7 +11,7 @@
                         <h5>Apellidos: <b>{{cliente.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{cliente.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{cliente.RAZON}}</b></h5>
-                        <h5>RUC: <b>{{cliente.RUC}}</b></h5>
+                        <h5>RUC: <b>{{cliente.RUC | ruc}}</b></h5>
                         <h5>Direccion: <b>{{cliente.direccion_particular}}</b></h5>
                         <h5>Ciudad: <b>{{cliente.ciudad_trabajo}}</b></h5>
 
@@ -38,7 +38,7 @@
                         <h5>Apellidos: <b>{{titularAlternativo.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{titularAlternativo.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{titularAlternativo.RAZON}}</b></h5>
-                        <h5>RUC: <b>{{titularAlternativo.RUC}}</b></h5>
+                        <h5>RUC: <b>{{titularAlternativo.RUC | ruc}}</b></h5>
                         <h5>Direccion: <b>{{titularAlternativo.direccion_particular}}</b></h5>
                         <h5>Ciudad: <b>{{titularAlternativo.ciudad_trabajo}}</b></h5>
 
@@ -68,7 +68,7 @@
                         <h5>Apellidos: <b>{{vendedor.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{vendedor.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{vendedor.RAZON}}</b></h5>
-                        <h5>RUC: <b>{{vendedor.RUC}}</b></h5>
+                        <h5>RUC: <b>{{vendedor.RUC | ruc}}</b></h5>
                         <h5>Telefonos: {{vendedor.TELEFONO}}</h5>
                     </div>
                 </div>
@@ -84,11 +84,23 @@
                         <h5>Apellidos: <b>{{cobrador.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{cobrador.NOMBRES}}</b></h5>
                         <h5>Razon Social: <b>{{cobrador.RAZON}}</b></h5>
-                        <h5>RUC: <b>{{cobrador.RUC}}</b></h5>
+                        <h5>RUC: <b>{{cobrador.RUC | ruc}}</b></h5>
                         <h5>Telefonos: {{cobrador.TELEFONO}}</h5>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="card">
+        <div *ngIf="contrato" class="card-body">
+            <div style="justify-content: space-between;" class="inline-flex">
+                <h3 class="card-title">Contrato</h3>
+
+            </div>
+            <h5>Número de contrato: <b>{{contrato.nro_contrato | ruc}}</b></h5>
+            <h5>Fecha de creación: <b>{{contrato.fecha_creacion_unix | date}}</b></h5>
+
+
         </div>
     </div>
     <div class="card">
@@ -102,7 +114,7 @@
             <div class="" *ngIf="producto">
                 <h5>Nombre: <b>{{producto.NOMBRE}} - {{producto.COD_CORTO}}</b></h5>
                 <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
-                <h5>Saldo: <b>{{contrato.saldo_pendiente | currency:'':'':'2.0'}} Gs</b></h5>
+                <h5>Total: <b>{{contrato.saldo_pendiente | currency:'':'':'2.0'}} Gs</b></h5>
                 <!-- <h5>Entrega: </h5>  -->
                 <hr>
 
@@ -216,12 +228,12 @@
                         <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">
                                 <div>
-                                    <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                    <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                     <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                     <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
 
-                                    <small>{{item.RUC}}</small>
+                                    <small>{{item.RUC | ruc}}</small>
                                 </div>
 
                             </ng-template>
@@ -234,7 +246,7 @@
                             <div *ngIf="fondo.NOMBRES && fondo.RAZON"> - </div>
                             <div *ngIf="fondo.RAZON">{{fondo.RAZON}} </div>
 
-                            <small>{{fondo.RUC}}</small>
+                            <small>{{fondo.RUC | ruc}}</small>
                         </h4>
                     </div>
 
@@ -269,7 +281,7 @@
                         <tbody>
                             <tr *ngFor="let item of contrato.beneficiarios; let i = index">
                                 <td class="text-center">
-                                    {{item.doc}}
+                                    {{item.doc| ruc}}
                                 </td>
                                 <td class="text-center">
                                     {{item.nombre}}
@@ -341,16 +353,16 @@
                         <tbody>
                             <tr *ngFor="let item of contrato.inhumados; let i = index">
                                 <td class="text-center">
-                                    {{item.ci}}
+                                    {{item.ci | ruc}}
                                 </td>
                                 <td class="text-center">
                                     {{item.nombre}}
                                 </td>
                                 <td class="text-center">
-                                    {{item.fecha_fallecimiento}}
+                                    {{item.fecha_fallecimiento| date}}
                                 </td>
                                 <td class="text-center">
-                                    {{item.fecha_inhumacion}}
+                                    {{item.fecha_inhumacion | date}}
                                 </td>
                             </tr>
                         </tbody>

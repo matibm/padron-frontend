@@ -14,8 +14,7 @@ import { CurrencyPipe, CommonModule, registerLocaleData } from '@angular/common'
 //=====Componentes=======
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
-import { CrearContratoComponent } from './components/crear-contrato/crear-contrato.component';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+ // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PricePipe } from './pipes/price.pipe';
@@ -44,7 +43,7 @@ import { NombreCortoPipe } from './pipes/nombre-corto.pipe';
     // LoginComponent,
     // RegisterComponent,
     NopagefoundComponent,
-    CrearContratoComponent,
+   
     PricePipe,
      
     // NombreCortoPipe

@@ -17,12 +17,12 @@
                                     <ng-select [items]="fondos" [(ngModel)]="fondo" (ngModelChange)="seleccionarFondo(fondo)" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="Filtrar por fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                                         <ng-template ng-option-tmp let-item="item">
                                             <div>
-                                                <div *ngIf="item.NOMBRES">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                                <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                                 <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                                 <div *ngIf="item.RAZON">{{item.RAZON}} </div>
 
 
-                                                <small>{{item.RUC}}</small>
+                                                <small>{{item.RUC | ruc}}</small>
                                             </div>
 
                                         </ng-template>
@@ -35,7 +35,7 @@
                                         <div *ngIf="fondo.NOMBRES && fondo.RAZON"> - </div>
                                         <div *ngIf="fondo.RAZON">{{fondo.RAZON}} </div>
 
-                                        <small>{{fondo.RUC}}</small>
+                                        <small>{{fondo.RUC | ruc}}</small>
                                     </h3>
                                 </div>
                                 <div *ngIf="fondo" (click)="fondo = null" class="pointer close-icon ml-2">
