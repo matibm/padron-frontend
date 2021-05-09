@@ -4,6 +4,7 @@ import { NombreCortoPipe } from './nombre-corto.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RucPipe } from './ruc.pipe';
+import { EdadPipe } from './edad.pipe';
 
 
 
@@ -12,11 +13,12 @@ import { RucPipe } from './ruc.pipe';
     NombreCortoPipe,
     PrimerNombrePipe,
     IconPipe,
-    RucPipe
+    RucPipe,
+    EdadPipe
   ],
   imports: [
     CommonModule
   ], 
-  exports: [NombreCortoPipe, PrimerNombrePipe, RucPipe, IconPipe]
+  exports: [NombreCortoPipe, PrimerNombrePipe, RucPipe, IconPipe, EdadPipe]
 })
 export class PipeModule { }

@@ -95,29 +95,22 @@
         <div *ngIf="contrato" class="card-body">
             <div style="justify-content: space-between;" class="inline-flex">
                 <h3 class="card-title">Contrato</h3>
-
             </div>
             <h5>Número de contrato: <b>{{contrato.nro_contrato | ruc}}</b></h5>
             <h5>Fecha de creación: <b>{{contrato.fecha_creacion_unix | date}}</b></h5>
-
-
         </div>
     </div>
     <div class="card">
         <div class="card-body">
             <div style="justify-content: space-between;" class="inline-flex">
                 <h3 class="card-title">Producto</h3>
-
             </div>
-
-
             <div class="" *ngIf="producto">
                 <h5>Nombre: <b>{{producto.NOMBRE}} - {{producto.COD_CORTO}}</b></h5>
                 <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
                 <h5>Total: <b>{{contrato.saldo_pendiente | currency:'':'':'2.0'}} Gs</b></h5>
                 <!-- <h5>Entrega: </h5>  -->
                 <hr>
-
                 <div class="mt-2 inline-flex">
                     <h4 *ngIf="contrato.plazo == 1" class=" mr-3"><b>Forma de Pago:</b> Contado</h4>
                     <h4 *ngIf="contrato.plazo != 1" class=" mr-3"><b>Forma de Pago:</b> En {{contrato.plazo}} cuotas </h4>
@@ -127,7 +120,6 @@
                     </h4>
                 </div>
                 <hr>
-
                 <div class="mt-2 inline-flex">
                     <div style="width: 100%;" class="row">
                         <div *ngFor="let item of tipos_pago; let i = index;" class="col-md-3 col-xs">
@@ -135,67 +127,46 @@
 
                             <label>{{item.name}}</label>
                         </div>
-
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-xs">
                         <div class="form-group">
                             <label for=""><b>Numero de contrato:</b> {{contrato.nro_contrato}}</label>
-
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-md col-xs">
-
             <app-lista-movimientos [movimientos]="movimientos"></app-lista-movimientos>
-
-
         </div>
         <div class="col-lg" *ngIf="facturas">
-
             <app-facturas [count]="facturasCount" [options]="facturaOptions" [fromOutside]='true' [facturas]='facturas'></app-facturas>
-
         </div>
-
     </div>
-
-
     <div class="card">
         <div class="card-body">
             <h4> <span class="lstick"></span>Pagar Cuotas</h4>
-
             <div class="my-3 d-flex">
                 <div class="mx-auto">
                     <div class="form-group">
                         <input type="text" class="form-control" #montoAPagar name="" id="" aria-describedby="helpId" placeholder="ingresar monto a pagar">
                     </div>
                 </div>
-
             </div>
             <div class="d-flex">
                 <div class="mx-auto">
                     <button (click)="getFacturasApagar(contrato._id, montoAPagar.value)" class="btn btn-info">calcular</button>
                 </div>
-
             </div>
             <div class="" *ngIf="facturasAPagar">
-
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Cuotas</h3>
-
                         <div style="overflow: auto; max-height: 400px;">
-
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -204,24 +175,17 @@
                                         <th>Monto</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
-
                                     <tr *ngFor="let cuota of facturasAPagar; let i = index">
                                         <td scope="row">{{i+1}}</td>
                                         <td>{{cuota.vencimiento | date}}</td>
                                         <td>{{cuota.haber| currency:'':'':'2.0' }} Gs</td>
                                     </tr>
-
-
                                 </tbody>
-
                             </table>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="inline-flex">
                     <h4 class="mr-3"><b>Fondo:</b></h4>
                     <div class="" *ngIf="!fondo">
@@ -231,21 +195,16 @@
                                     <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
                                     <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
                                     <div *ngIf="item.RAZON">{{item.RAZON}} </div>
-
-
                                     <small>{{item.RUC | ruc}}</small>
                                 </div>
-
                             </ng-template>
                         </ng-select>
                     </div>
-
                     <div class="" *ngIf="fondo">
                         <h4>
                             <div *ngIf="fondo.NOMBRES">{{fondo.NOMBRES}} {{fondo.APELLIDOS}}</div>
                             <div *ngIf="fondo.NOMBRES && fondo.RAZON"> - </div>
                             <div *ngIf="fondo.RAZON">{{fondo.RAZON}} </div>
-
                             <small>{{fondo.RUC | ruc}}</small>
                         </h4>
                     </div>
@@ -261,7 +220,6 @@
             </div>
         </div>
     </div>
-
 
     <div *ngIf="producto">
         <div *ngIf="!esUdp" class="">
@@ -287,13 +245,13 @@
                                     {{item.nombre}}
                                 </td>
                                 <td class="text-center">
-                                    {{item.fecha_nacimiento}}
+                                    {{item.fecha_nacimiento | date}}
                                 </td>
                                 <td class="text-center">
-                                    1
+                                    {{item.fecha_nacimiento | edad}}
                                 </td>
                                 <td class="text-center">
-                                    2
+                                    {{item.plus_edad}}
                                 </td>
                             </tr>
                         </tbody>

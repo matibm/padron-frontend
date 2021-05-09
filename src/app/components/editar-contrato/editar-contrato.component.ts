@@ -40,7 +40,7 @@ export class EditarContratoComponent implements OnInit {
   producto: Producto
   saldo = 0
   vendedor: Usuario
-  nro_contrato = ''
+  nro_contrato 
   cobrador: Usuario
   plazo: number
   contrato: Contrato
@@ -58,6 +58,8 @@ export class EditarContratoComponent implements OnInit {
     edad: '',
     plus_edad: 0
   }
+
+  fecha_creacion: Date
   cobradores
 
   tipos_pago = [
@@ -111,6 +113,7 @@ export class EditarContratoComponent implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
     this.contrato = await this._contratoService.getContratoById(this.id)
+    this.fecha_creacion = new Date(this.contrato.fecha_creacion_unix)
   //log(this.contrato);
     this.radioValue = this.contrato.tipo_pago
     this.saldo = this.contrato.saldo_pendiente
@@ -157,7 +160,7 @@ export class EditarContratoComponent implements OnInit {
       nombre: '',
       doc: '',
       fecha_nacimiento: '',
-       plus_edad: 0
+       plus_edad: null
     })
   }
 
@@ -259,10 +262,9 @@ export class EditarContratoComponent implements OnInit {
       this.contrato.precio_total = this.producto.PRECIO_MAYORISTA,
       this.contrato.producto = this.producto,
       this.contrato.titular = this.cliente,
-      this.contrato.nro_contrato = this.nro_contrato,
       this.contrato.activo = '1',
       this.contrato.vendedor = this.vendedor,
-      this.contrato.fecha_creacion_unix = new Date().valueOf() // falta poner campode fecha para poder modificar
+      this.contrato.fecha_creacion_unix = this.fecha_creacion.getTime()  // falta poner campode fecha para poder modificar
  
     
     if (this.esUdp) {
