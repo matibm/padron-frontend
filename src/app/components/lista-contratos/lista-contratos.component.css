@@ -2,3 +2,7 @@
     cursor: pointer;
     font-size: small;
 }
+
+td {
+    width: max-content;
+}

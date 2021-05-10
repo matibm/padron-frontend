@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 // import { Options } from 'select2';
 import { SwalPortalTargets, SwalDirective } from '@sweetalert2/ngx-sweetalert2';
 import swal from 'sweetalert2';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-crear-contrato',
@@ -29,6 +31,7 @@ export class CrearContratoComponent implements OnInit {
 
   cliente: Usuario
   clientes: Usuario[] = null
+  clientesAlternativo: Usuario[] = null
 
   titularAlternativo: Usuario
   fecha_creacion = new Date()
@@ -95,6 +98,10 @@ export class CrearContratoComponent implements OnInit {
   servicioCMP
   numeroFactura
   esPsv
+  inputClientes = new Subject<string>();
+  loadingClientes = false;
+  inputAlternativo = new Subject<string>();
+  loadingAlternativo = false;
   trackItem(index, item) {
 
     //log(item);
@@ -133,6 +140,8 @@ export class CrearContratoComponent implements OnInit {
 
 
   async ngOnInit() {
+    this.observableBuscadores()
+
     let date = new Date()
 
     this.fechaMantenimiento = new Date(`${date.getFullYear() + 1}-01-05`)
@@ -322,7 +331,24 @@ export class CrearContratoComponent implements OnInit {
 
   async searchClientes(val: any) {
     if (val.term.length > 0) {
-      this.clientes = await this._usuarioService.buscarUsuarios('CLIENTES', val.term)
+    //   this.clientes = await this._usuarioService.buscarUsuarios('CLIENTES', val.term)
+
+    //   const searchBox = document.getElementById('search');
+
+    // // streams
+    // const keyup$ = fromEvent(searchBox, 'keyup');
+
+    // wait .5s between keyups to emit current value
+    this.inputClientes.pipe(
+         
+        debounceTime(3000),
+        distinctUntilChanged()
+      )
+      .subscribe(async (txt) => {
+        // this.isSearching = true
+        this.clientes = await this._usuarioService.buscarUsuarios('CLIENTES', txt)
+        // this.isSearching = false
+      });
 
     }
   }
@@ -463,7 +489,36 @@ export class CrearContratoComponent implements OnInit {
 
   }
 
-
+ 
+  observableBuscadores(){
+    this.inputClientes.pipe(
+         
+      debounceTime(200),
+      distinctUntilChanged()
+    )
+    .subscribe(async (txt) => {
+      if (!txt) {
+        return
+      }
+      this.loadingClientes = true
+      this.clientes = await this._usuarioService.buscarUsuarios('CLIENTES', txt)
+      this.loadingClientes = false
+    });
+    
+    this.inputAlternativo.pipe(
+         
+      debounceTime(200),
+      distinctUntilChanged()
+    )
+    .subscribe(async (txt) => {
+      if (!txt) {
+        return
+      }
+      this.loadingAlternativo = true
+      this.clientesAlternativo = await this._usuarioService.buscarUsuarios('CLIENTES', txt)
+      this.loadingAlternativo = false
+    });
+  }
 
 
 

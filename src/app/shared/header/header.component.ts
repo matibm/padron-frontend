@@ -16,6 +16,15 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  open(){
+    console.log("openes");
+    
+    setTimeout(() => {
+    // document.body.classList.remove('show-sidebar');
+      
+    }, 300);
+  }
+
   logout(){
     this._usuarioService.logout()
   }

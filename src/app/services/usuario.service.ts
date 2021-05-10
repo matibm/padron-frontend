@@ -66,6 +66,8 @@ export class UsuarioService {
     })
   }
   buscarUsuarios(tipo, busqueda) {
+    console.log("buscando", busqueda);
+    
     let url = `${URL_SERVICIOS}/usuario/search/${tipo}`;
     url += `?token=${this.token}`
     url += `&query=${busqueda}`

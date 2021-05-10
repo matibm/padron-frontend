@@ -92,7 +92,7 @@ export class FacturasComponent implements OnInit {
         item.classList.add('table-info')
       }
     } else {
-      this.router.navigateByUrl(`/admin/factura/${id}`)
+      this.router.navigateByUrl(`/admin/ingreso/${id}`)
     }
 
     this.listItemsEvent.emit(this.listItems)

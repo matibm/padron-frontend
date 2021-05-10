@@ -26,6 +26,7 @@ export class PerfilUsuarioComponent implements OnInit {
   movimientos: Movimiento[]
   isPersona
   isEmpresa
+  isContratado
   isBanco
   manejaCaja
   cobroOnline
@@ -71,6 +72,7 @@ export class PerfilUsuarioComponent implements OnInit {
     this.isEmpleado = this.usuario.EMPLEADOS == '1' ? 'check_empleado' : null
     this.isPersona = this.usuario.PERSONA == '1' ? 'check_persona' : null
     this.isEmpresa = this.usuario.EMPRESA == '1' ? 'check_empresa' : null
+    this.isContratado = this.usuario.CONTRATADO == '1' ? 'check_contratado' : null
     this.isBanco = this.usuario.BANCOS == '1' ? 'check_banco' : null
     this.manejaCaja = this.usuario.MANEJA_CAJA == '1' ? 'check_maneja_caja' : null
     this.cobroOnline = this.usuario.fondo_online == '1' ? 'check_maneja_caja' : null
@@ -91,6 +93,7 @@ export class PerfilUsuarioComponent implements OnInit {
     usuario.EMPLEADOS = this.isEmpleado ? '1' : '0';
     usuario.PERSONA = this.isPersona ? '1' : '0';
     usuario.EMPRESA = this.isEmpresa ? '1' : '0';
+    usuario.CONTRATADO = this.isContratado ? '1' : '0';
     usuario.BANCOS = this.isBanco ? '1' : '0';
     usuario.MANEJA_CAJA = this.manejaCaja ? '1' : '0';
     usuario.fondo_online = this.cobroOnline ? '1' : '0';

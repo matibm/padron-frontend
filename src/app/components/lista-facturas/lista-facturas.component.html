@@ -198,59 +198,53 @@
             </div>
 
             <div class="col-xs mt-3  col-md">
-                <div class="form-group">
-                    <!-- <label for="fecha_fin">Fecha de emision</label> -->
-                    <mat-form-field appearance="fill">
-                        <mat-label>Fecha de Emision</mat-label>
-                        <mat-date-range-input [formGroup]="rangeEmision" [rangePicker]="pickerEmision">
-                            <input autocomplete="off" matStartDate formControlName="start" placeholder="fecha inicio">
-                            <input matEndDate formControlName="end" (dateChange)="filtrar()" placeholder="fecha fin">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="pickerEmision"></mat-datepicker-toggle>
-                        <mat-date-range-picker #pickerEmision></mat-date-range-picker>
-                        <mat-error *ngIf="rangeEmision.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                        <mat-error *ngIf="rangeEmision.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-                    </mat-form-field>
+                <!-- <label for="fecha_fin">Fecha de emision</label> -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha de Emision</mat-label>
+                    <mat-date-range-input [formGroup]="rangeEmision" [rangePicker]="pickerEmision">
+                        <input autocomplete="off" matStartDate formControlName="start" placeholder="fecha inicio">
+                        <input matEndDate formControlName="end" (dateChange)="filtrar()" placeholder="fecha fin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="pickerEmision"></mat-datepicker-toggle>
+                    <mat-date-range-picker #pickerEmision></mat-date-range-picker>
+                    <mat-error *ngIf="rangeEmision.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                    <mat-error *ngIf="rangeEmision.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                </mat-form-field>
 
-                    <!-- <p>Selected range: {{range.value | json}}</p> -->
-                </div>
+                <!-- <p>Selected range: {{range.value | json}}</p> -->
             </div>
             <div class="col-xs mt-3  col-md">
-                <div class="form-group">
-                    <!-- <label for="fecha_fin">Fecha de emision</label> -->
-                    <mat-form-field appearance="fill">
-                        <mat-label>Fecha de vencimiento</mat-label>
-                        <mat-date-range-input [formGroup]="rangeVencimiento" [rangePicker]="pickerVencimiento">
-                            <input matStartDate formControlName="start" placeholder="fecha inicio">
-                            <input matEndDate formControlName="end" (dateInput)="filtrar()" placeholder="fecha fin">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="pickerVencimiento"></mat-datepicker-toggle>
-                        <mat-date-range-picker #pickerVencimiento></mat-date-range-picker>
+                <!-- <label for="fecha_fin">Fecha de emision</label> -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha de vencimiento</mat-label>
+                    <mat-date-range-input [formGroup]="rangeVencimiento" [rangePicker]="pickerVencimiento">
+                        <input matStartDate formControlName="start" placeholder="fecha inicio">
+                        <input matEndDate formControlName="end" (dateInput)="filtrar()" placeholder="fecha fin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="pickerVencimiento"></mat-datepicker-toggle>
+                    <mat-date-range-picker #pickerVencimiento></mat-date-range-picker>
 
-                        <mat-error *ngIf="rangeVencimiento.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                        <mat-error *ngIf="rangeVencimiento.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
-                    </mat-form-field>
+                    <mat-error *ngIf="rangeVencimiento.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                    <mat-error *ngIf="rangeVencimiento.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+                </mat-form-field>
 
-                    <!-- <p>Selected range: {{range.value | json}}</p> -->
-                </div>
+                <!-- <p>Selected range: {{range.value | json}}</p> -->
             </div>
             <div class="col-xs mt-3  col-md">
-                <div class="form-group">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Fecha de Pago</mat-label>
-                        <mat-date-range-input [formGroup]="rangePagado" [rangePicker]="pickerPagado">
-                            <input matStartDate formControlName="start" placeholder="fecha inicio">
-                            <input matEndDate formControlName="end" (dateInput)="filtrar()" placeholder="fecha fin">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle matSuffix [for]="pickerPagado"></mat-datepicker-toggle>
-                        <mat-date-range-picker #pickerPagado></mat-date-range-picker>
+                <mat-form-field appearance="fill">
+                    <mat-label>Fecha de Pago</mat-label>
+                    <mat-date-range-input [formGroup]="rangePagado" [rangePicker]="pickerPagado">
+                        <input matStartDate formControlName="start" placeholder="fecha inicio">
+                        <input matEndDate formControlName="end" (dateInput)="filtrar()" placeholder="fecha fin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="pickerPagado"></mat-datepicker-toggle>
+                    <mat-date-range-picker #pickerPagado></mat-date-range-picker>
 
-                        <mat-error *ngIf="rangePagado.controls.start.hasError('matStartDateInvalid')">Fecha inicio inválida</mat-error>
-                        <mat-error *ngIf="rangePagado.controls.end.hasError('matEndDateInvalid')">Fecha fin inválida</mat-error>
-                    </mat-form-field>
+                    <mat-error *ngIf="rangePagado.controls.start.hasError('matStartDateInvalid')">Fecha inicio inválida</mat-error>
+                    <mat-error *ngIf="rangePagado.controls.end.hasError('matEndDateInvalid')">Fecha fin inválida</mat-error>
+                </mat-form-field>
 
-                    <!-- <p>Selected range: {{range.value | json}}</p> -->
-                </div>
+                <!-- <p>Selected range: {{range.value | json}}</p> -->
             </div>
 
             <!-- contrato -->

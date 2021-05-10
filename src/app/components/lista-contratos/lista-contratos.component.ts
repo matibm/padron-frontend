@@ -27,7 +27,7 @@ export class ListaContratosComponent implements OnInit {
   ) { }
 
   @Input() showFilter = true
-   @Input() selectable = false
+  @Input() selectable = false
   @Output() selected = new EventEmitter()
   @Input() cliente: Usuario
   clientes: Usuario[]
@@ -75,10 +75,10 @@ export class ListaContratosComponent implements OnInit {
   };
 
   configDP: IDatePickerConfig = {
-     
+
   }
   async ngOnInit() {
-    
+
     this.servicios = await this._productoService.getProductos()
 
     this.options = {
@@ -100,16 +100,16 @@ export class ListaContratosComponent implements OnInit {
     let resp = await this._contratoService.getContratos(null, this.options, this.sort)
     this.count = resp.count
 
-     
+
     this.contratos = resp.contratos
 
     // this.filtrar()
 
     // console.log(this.contratos);
     console.log(this.count);
-    
+
   }
- 
+
   @Input() contratos: Contrato[]
 
   async pageChanged(page) {
@@ -122,7 +122,7 @@ export class ListaContratosComponent implements OnInit {
 
   }
   seleccionarProducto(producto: Producto) {
-
+    this.filtrar()
     this.servicio = producto;
 
   }
@@ -149,8 +149,8 @@ export class ListaContratosComponent implements OnInit {
 
   async filtrar() {
     this.options = {
-      fecha_inicio: this.date_start,
-      fecha_fin: this.date_end,
+      fecha_inicio: this.range.value.start ? new Date(this.range.value.start).getTime() : null,
+      fecha_fin: this.range.value.end ? new Date(this.range.value.end).setHours(59, 59, 59, 59) : null,
       cliente: this.cliente ? this.cliente._id : null,
       fila: this.fila,
       manzana: this.manzana,
@@ -170,7 +170,7 @@ export class ListaContratosComponent implements OnInit {
     this.contratos = resp.contratos
     console.log(resp);
 
-    // this.count = resp.count
+    this.count = resp.count
   }
 
   customSearchFn(term: string, item: any) {

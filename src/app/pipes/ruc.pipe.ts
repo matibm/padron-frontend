@@ -24,14 +24,12 @@ export class RucPipe implements PipeTransform {
       number = parseInt(value)
     }
     conpuntos = this.cp.transform(number, '', '', '2.0')
-    console.log(conpuntos);
-    
+     
     // if (value % 1 == 0) {
     //   texto = texto.slice(0, texto.length -2 )
     // }  
     let texto = conpuntos + guion
-    console.log(texto);
-    
+     
     return conpuntos ? texto : '';
 
   }

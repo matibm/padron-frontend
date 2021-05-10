@@ -26,11 +26,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
-import { AccountSettingsComponent } from './account-settings/account-settings.component';
-import { PromesasComponent } from './promesas/promesas.component';
-import { RxjsComponent } from './rxjs/rxjs.component';
-
-
+import { AccountSettingsComponent } from './account-settings/account-settings.component'; 
 const routes: Routes = [
   // {
   //   path: 'contrato',
@@ -62,9 +58,9 @@ const routes: Routes = [
       { path: 'lista_contratos', component: ListaContratosComponent },
       { path: 'info_contrato/:id', component: InfoContratoComponent },
       { path: 'crear_usuario', component: CrearUsuarioComponent },
-      { path: 'factura/:id', component: FacturaComponent },
-      { path: 'facturas', component: ListaFacturasComponent },
-      { path: 'movimientos', component: MovimientosComponent },
+      { path: 'ingreso/:id', component: FacturaComponent },
+      { path: 'ingresos', component: ListaFacturasComponent },
+      { path: 'gastos', component: MovimientosComponent },
       { path: 'contrato_pdf/:id', component: ContratoPdfComponent },
       { path: 'editar_contrato/:id', component: EditarContratoComponent },
       { path: 'info_caja', component: InfoCajaComponent },
