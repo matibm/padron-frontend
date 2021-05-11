@@ -1,4 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
+import { EdadPipe } from './../../pipes/edad.pipe';
+ import { ActivatedRoute, Router } from '@angular/router';
 import { Inhumado } from './../../models/unhumado';
 import { Contrato } from './../../models/contrato';
 import { Producto } from './../../models/producto';
@@ -23,9 +24,11 @@ export class EditarContratoComponent implements OnInit {
     public readonly swalTargets: SwalPortalTargets,
     public _contratoService: ContratoService,
     public route: ActivatedRoute,
-
+    public router: Router,
+    public edadPipe: EdadPipe
   ) { }
-  opacity = 'disable'
+
+   opacity = 'disable'
   cliente: Usuario
   clientes: Usuario[] = null
   productos: Producto[] = null
@@ -40,7 +43,7 @@ export class EditarContratoComponent implements OnInit {
   producto: Producto
   saldo = 0
   vendedor: Usuario
-  nro_contrato 
+  nro_contrato
   cobrador: Usuario
   plazo: number
   contrato: Contrato
@@ -51,6 +54,9 @@ export class EditarContratoComponent implements OnInit {
   fila
   parcela
   sector
+  guardando = false
+  esPsm = false
+  esPsv = false
   beneficiarioVacio = {
     nombre: '',
     doc: '',
@@ -97,33 +103,34 @@ export class EditarContratoComponent implements OnInit {
     ci: '',
 
   }
-  inhumados: Inhumado[] 
+  inhumados: Inhumado[]
   facturas
-  radioValue  
-  fechaPago = new Date()
+  radioValue
+  fechaPago
   pagoradioValue = 'contado'
   stringFechaPago
-  servicioCMP
+  servicioCMP : Producto
   numeroFactura
   editarproducto = false
   respaldoProducto
   id
   async ngOnInit() {
     let date = new Date()
-
+     
     this.id = this.route.snapshot.paramMap.get('id');
     this.contrato = await this._contratoService.getContratoById(this.id)
     this.fecha_creacion = new Date(this.contrato.fecha_creacion_unix)
-  //log(this.contrato);
+    //log(this.contrato);
     this.radioValue = this.contrato.tipo_pago
     this.saldo = this.contrato.saldo_pendiente
     this.inhumados = this.contrato.inhumados
     this.vendedor = this.contrato.vendedor
     this.cobrador = this.contrato.cobrador
     this.seleccionarProducto(this.contrato.producto)
-    this.fechaMantenimiento = new Date(`${date.getFullYear() + 1}-01-05`).setHours(24)
+    this.fechaMantenimiento = new Date( new Date(new Date().setFullYear(date.getFullYear() + 1, 0, 5)).setHours(0,0,0,0) )
+    console.log(this.fechaMantenimiento);
     
-    
+
     this.cliente = this.contrato.titular
 
     this.productos = await this._productoService.getProductos()
@@ -131,12 +138,18 @@ export class EditarContratoComponent implements OnInit {
       const element = this.productos[i];
       if (element.COD_CORTO == 'C.M.P.') {
         this.servicioCMP = element
-      }
+      } 
     }
+    if (this.contrato.producto.COD_CORTO == 'P.S.M.') {
+      this.esPsm = true
+    }
+    if (this.contrato.producto.COD_CORTO == 'P.S.V.') {
+      this.esPsv = true
+    } 
   }
 
   calcularEdad(date) {
- 
+
     if (date.length > 4) {
       let hoy = new Date()
       let fechaNacimiento = new Date(date)
@@ -149,7 +162,7 @@ export class EditarContratoComponent implements OnInit {
       ) {
         edad--
       }
- 
+
       return edad
     } else return 0
 
@@ -160,22 +173,22 @@ export class EditarContratoComponent implements OnInit {
       nombre: '',
       doc: '',
       fecha_nacimiento: '',
-       plus_edad: null
+      plus_edad: null
     })
   }
 
   inhumadoPush() {
-    this.contrato.inhumados.push( {
+    this.contrato.inhumados.push({
       fecha_fallecimiento: '',
       fecha_inhumacion: '',
       nombre: '',
       ci: '',
-  
+
     })
   }
 
   calcularSaldo(entrega) {
-  //log(entrega);
+    //log(entrega);
 
     if (entrega) {
       // this.saldo = this.producto.PRECIO_MAYORISTA - parseInt(entrega);
@@ -202,22 +215,8 @@ export class EditarContratoComponent implements OnInit {
   }
   calcularFechaPago() {
 
-    let d = new Date(this.stringFechaPago);
-    d.setUTCHours(5)
+    this.facturas = this.crearFacturas(this.montoCuotas, this.plazo);
 
-    if (Object.prototype.toString.call(d) === "[object Date]") {
-      // it is a date
-      if (isNaN(d.getTime())) {  // d.valueOf() could also work
-        // date is not valid
-      } else {
-        // date is valid
-        this.fechaPago = d
-        this.facturas = this.crearFacturas(this.montoCuotas, this.plazo);
-
-      }
-    } else {
-      // not a date
-    }
   }
   calcularFechaMantenimiento() {
 
@@ -244,15 +243,15 @@ export class EditarContratoComponent implements OnInit {
     return Number(num);
   }
   async editarContrato() {
-   
 
-    if (!this.facturas && this.pagoradioValue === 'contado') {
+
+    if (!this.facturas && this.pagoradioValue === 'contado' && this.fechaPago) {
       this.plazo = 1
       this.facturas = this.crearFacturas(this.contrato.saldo_pendiente, 1)
     }
 
-    
-      this.contrato.id_contrato = new Date().getTime().toString(),   // se puede quitar
+
+    this.contrato.id_contrato = new Date().getTime().toString(),   // se puede quitar
       this.contrato.cobrador = this.cobrador || {},
       this.contrato.cuota = this.montoCuotas,
       this.contrato.entrega = this.entrega,
@@ -265,19 +264,9 @@ export class EditarContratoComponent implements OnInit {
       this.contrato.activo = '1',
       this.contrato.vendedor = this.vendedor,
       this.contrato.fecha_creacion_unix = this.fecha_creacion.getTime()  // falta poner campode fecha para poder modificar
- 
-    
-    if (this.esUdp) {
-      this.contrato.manzana = this.manzana
-      this.contrato.fila = this.fila
-      this.contrato.parcela = this.parcela
-      this.contrato.sector = this.sector
-    }else{
-      this.contrato.manzana = null
-      this.contrato.fila = null
-      this.contrato.parcela = null
-      this.contrato.sector = null
-    }
+
+
+
     // if (this.editarproducto && this.esUdp) {
     //   this.facturas.push({
     //     vencimiento: this.fechaMantenimiento,
@@ -289,13 +278,13 @@ export class EditarContratoComponent implements OnInit {
     //     fecha_creacion_unix: new Date().getTime()
     //   })
     // }
-  //log(this.facturas);
+    //log(this.facturas);
     let send = {
       contrato: this.contrato,
       facturas: this.facturas,
-      fechaPago: this.fechaPago
+      fechaPago: this.fechaPago ? this.fechaPago : new Date()
     }
-
+    this.guardando = true
     await this._contratoService.updateContrato(send, this.editarproducto).then(() => {
       swal.fire({
         icon: 'success',
@@ -304,6 +293,8 @@ export class EditarContratoComponent implements OnInit {
         timer: 2000,
       })
     });
+    this.guardando = false
+
     window.history.back()
   }
   async searchCobradores(val: any) {
@@ -358,7 +349,7 @@ export class EditarContratoComponent implements OnInit {
         fecha_inhumacion: '',
         nombre: '',
         ci: '',
-    
+
       }
     ]
     if (this.cobrador) {
@@ -438,12 +429,21 @@ export class EditarContratoComponent implements OnInit {
     }).then(res => {
 
       if (res.isConfirmed == true) {
+        this.fechaPago = new Date()
         this.editarproducto = true
       } else {
 
       }
     })
   }
- 
+
+  removerProducto(){
+    this.esPsm = false
+    this.esUdp = false
+  }
+
+  cancelar(){
+    window.history.back()
+  }
 
 }

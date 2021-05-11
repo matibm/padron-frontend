@@ -38,6 +38,7 @@ export class SidebarService {
       titulo: 'Finanzas',
       icono: 'mdi mdi-cash',
       submenu: [
+        { titulo: 'Cobranzas', url: 'cobranzas' },
         { titulo: 'Ingresos', url: 'ingresos' },
         { titulo: 'Gastos', url: 'gastos' },
         { titulo: 'caja', url: 'info_caja' },

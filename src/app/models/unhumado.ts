@@ -4,7 +4,9 @@ export class Inhumado {
       public nombre: string,
       public fecha_fallecimiento?: string,
       public fecha_inhumacion?: string,
-      public ci?: string
+      public ci?: string,
+      public nro?: string,
+
     ) {
 
     }

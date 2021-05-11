@@ -1,3 +1,4 @@
+import { CobranzaComponent } from './../components/cobranza/cobranza.component';
 import { CrearFacturaComponent } from './../components/crear-factura/crear-factura.component';
 import { EditarProductoComponent } from './../components/editar-producto/editar-producto.component';
 import { ListaProductosComponent } from './../components/lista-productos/lista-productos.component';
@@ -60,6 +61,7 @@ const routes: Routes = [
       { path: 'crear_usuario', component: CrearUsuarioComponent },
       { path: 'ingreso/:id', component: FacturaComponent },
       { path: 'ingresos', component: ListaFacturasComponent },
+      { path: 'cobranzas', component: CobranzaComponent },
       { path: 'gastos', component: MovimientosComponent },
       { path: 'contrato_pdf/:id', component: ContratoPdfComponent },
       { path: 'editar_contrato/:id', component: EditarContratoComponent },

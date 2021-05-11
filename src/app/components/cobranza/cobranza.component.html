@@ -1,0 +1,266 @@
+<div class="card">
+    <div style="font-size: medium;" class="card-body">
+        <h4><span class="lstick"></span> Filtros </h4>
+
+        <div class="row">
+
+            <div class="col-xs col-md">
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <h4 class="card-title">Cliente</h4>
+                    <div *ngIf="cliente" (click)="cliente = null" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+
+                <div *ngIf="!cliente">
+
+                    <ng-select [typeahead]="inputClientes" [loading]="loadingClientes" [(ngModel)]="cliente" [items]="clientes" (ngModelChange)="filtrar()" name="dsfdbrweqcda" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
+                                <small>{{item.RUC | ruc}}</small>
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+
+                </div>
+                <div style="width: 100%; " *ngIf="cliente ">
+                    <h5>Apellidos: <b>{{cliente.APELLIDOS}}</b></h5>
+                    <h5>Nombres: <b>{{cliente.NOMBRES}}</b></h5>
+
+                    <h5>RUC: <b>{{cliente.RUC | ruc}}</b></h5>
+                    <h5>Direccion P: <b>{{cliente.DIRECCION}}</b></h5>
+                    <h5>Ciudad P: <b>{{cliente.NOMCIUDAD}}</b></h5>
+                    <h5>Direccion L: <b>{{cliente.DIRECCION_TRABAJO}}</b></h5>
+                    <h5>Ciudad L: <b>{{cliente.ciudad_trabajo}}</b></h5>
+                    <h5>Telefonos: <b>{{cliente.TELEFONO1}}</b></h5>
+
+                    <div class="row ">
+                        <div class="col ">
+                        </div>
+                        <div class="col ">
+                        </div>
+                    </div>
+                </div>
+                <div class="" *ngIf="cliente">
+                    <div>
+                        <div *ngIf="cliente.NOMBRES">{{cliente.NOMBRES}} {{cliente.APELLIDOS}}</div>
+                        <div *ngIf="cliente.NOMBRES && cliente.RAZON"> - </div>
+                        <div *ngIf="cliente.RAZON">{{cliente.RAZON}} </div>
+
+                        <small>{{cliente.RUC | ruc}}</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs col-md">
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <label>Cobrador</label>
+                    <div *ngIf="cobrador" (click)="cobrador = null; filtrar()" class="pointer close-icon ml-auto">
+                        <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                    </div>
+                </div>
+                <div class="" *ngIf="!cobrador">
+                    <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchcobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+
+                <div class="" *ngIf="cobrador">
+                    <div>
+                        <div *ngIf="cobrador.NOMBRES">{{cobrador.NOMBRES}} {{cobrador.APELLIDOS}}</div>
+                        <div *ngIf="cobrador.NOMBRES && cobrador.RAZON"> - </div>
+                        <div *ngIf="cobrador.RAZON">{{cobrador.RAZON}} </div>
+
+                        <small>{{cobrador.RUC | ruc}}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs col-md">
+                <div *ngIf="cliente && !contrato" class="d-flex mt-3">
+                    <button type="button" (click)="showModal = true" class="btn mx-auto btn-info">Seleccionar Contrato</button>
+                </div>
+
+                <div style="width: fit-content;" class="mt-3" *ngIf="contrato">
+                    <div style="display: flex;" class="">
+                        <span>Contrato</span>
+                        <div *ngIf="contrato" style="height: fit-content;" class="pointer close-icon ml-auto">
+                            <button (click)="contrato = null; filtrar()" type="button" class="btn btn-sm btn-light"><i
+                                    class=" ti-close  "></i></button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="contrato">
+                        <div style="display: flex;" class="">
+
+                            <div class="card bg-light">
+                                <div class="card-body">
+
+                                    <span><b>Titular:</b> {{contrato.titular.NOMBRES}}
+                                        {{contrato.titular.APELLIDOS}}</span>
+                                    <br>
+                                    <span><b>Servicio:</b> {{contrato.producto.NOMBRE}}</span>
+                                    <br>
+                                    <span><b>Número de contrato:</b> {{contrato.nro_contrato}}</span>
+                                    <br>
+                                    <span><b>Fecha de creación:</b> {{contrato.fecha_creacion_unix | date }}</span>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- Estado -->
+            <!-- <div class="col-xs col-md">
+                <div style="justify-content: space-between;" class="inline-flex">
+                    <label>Estado</label>
+
+                </div>
+                <div class="">
+                    <ng-select [(ngModel)]="estadoSeleccionado" (ngModelChange)="filtrar()">
+                        <ng-option *ngFor="let item of estados" [value]="item.estado">
+                            <div class="text-{{item.color}}">
+                                {{item.estado}}
+                            </div>
+
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+
+            </div> -->
+        </div>
+        <hr>
+        <div class="row">
+            <!-- Cobrador -->
+
+
+
+
+            <!-- contrato -->
+
+        </div>
+        <!-- <hr> -->
+
+
+
+        <!-- <button type="button" (click)="filtrar()" class=" float-right btn btn-primary">filtrar</button> -->
+    </div>
+</div>
+
+<!-- <div class="card">
+    <div class="card-body">
+        <div class="d-flex">
+            <button type="button" [routerLink]="['/admin/crear_ingreso']" routerLinkActive="router-link-active" class="btn btn-info mx-auto">Crear Nuevo Ingreso</button>
+        </div>
+    </div>
+</div> -->
+<app-facturas *ngIf="!showModal && cliente" [count]="count" [options]="opciones" [facturas]="facturas"></app-facturas>
+
+<div *ngIf="contrato" class="card">
+    <div class="card-body">
+        <h4> <span class="lstick"></span>Pagar Cuotas</h4>
+
+        <div class="my-3 d-flex">
+            <div class="mx-auto">
+                <div class="form-group">
+                    <input type="text" class="form-control" #montoAPagar name="" id="" aria-describedby="helpId" placeholder="ingresar monto a pagar">
+                </div>
+            </div>
+
+        </div>
+        <div class="d-flex">
+            <div class="mx-auto">
+                <button (click)="getFacturasApagar(contrato._id, montoAPagar.value)" class="btn btn-info">calcular</button>
+            </div>
+
+        </div>
+        <div class="" *ngIf="facturasAPagar">
+
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Cuotas</h3>
+
+                    <div style="overflow: auto; max-height: 400px;">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Vencimiento</th>
+                                    <th>Monto</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr *ngFor="let cuota of facturasAPagar; let i = index">
+                                    <td scope="row">{{i+1}}</td>
+                                    <td>{{cuota.vencimiento | date}}</td>
+                                    <td>{{cuota.haber| currency:'':'':'2.0' }} Gs</td>
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="inline-flex">
+                <h4 class="mr-3"><b>Fondo:</b></h4>
+                <div class="" *ngIf="!fondo">
+                    <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                        <ng-template ng-option-tmp let-item="item">
+                            <div>
+                                <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
+                                <div *ngIf="item.NOMBRES && item.RAZON"> - </div>
+                                <div *ngIf="item.RAZON">{{item.RAZON}} </div>
+
+
+                                <small>{{item.RUC | ruc}}</small>
+                            </div>
+
+                        </ng-template>
+                    </ng-select>
+                </div>
+
+                <div class="" *ngIf="fondo">
+                    <h4>
+                        <div *ngIf="fondo.NOMBRES">{{fondo.NOMBRES}} {{fondo.APELLIDOS}}</div>
+                        <div *ngIf="fondo.NOMBRES && fondo.RAZON"> - </div>
+                        <div *ngIf="fondo.RAZON">{{fondo.RAZON}} </div>
+
+                        <small>{{fondo.RUC | ruc}}</small>
+                    </h4>
+                </div>
+
+            </div>
+
+            <div class="d-flex">
+                <div class="mx-auto">
+                    <button (click)="confirmarPago(contrato._id, montoAPagar.value, fondo)" [disabled]="!fondo" class="btn btn-success">Confirmar Pago</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-modal-contratos (contratoSelected)="onContratoSelected($event)" [cliente]="cliente" (onClose)="showModal = false" *ngIf="showModal"></app-modal-contratos>

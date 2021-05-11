@@ -98,8 +98,13 @@
                     <a [href]="factura.link_de_pago">{{factura.link_de_pago}}</a>
                 </h4>
 
-                <div class="inline-flex">
-                    <h4 class="mr-3"><b>Fondo:</b></h4>
+                <div style="width: fit-content;">
+                    <div style="justify-content: space-between; display: flex;">
+                        <h4 class="card-title">Fondo</h4>
+                        <div *ngIf="fondo" (click)="fondo = null" class="pointer close-icon ml-auto">
+                            <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
+                        </div>
+                    </div>
                     <div class="" *ngIf="!fondo">
                         <ng-select [ngStyle]="{minWidth: '300px'}" [items]="fondos" [(ngModel)]="fondo" (ngModelChange)="onSelectFondo(fondo)" (search)="searchBancos($event)" notFoundText="no se encontraron resultados" placeholder="buscar origen fondo" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                             <ng-template ng-option-tmp let-item="item">

@@ -58,37 +58,17 @@ export class CrearContratoComponent implements OnInit {
   manzana
   fila
   parcela
-  sector
-  beneficiarioVacio = {
-    nombre: '',
-    doc: '',
-    fecha_nacimiento: '',
-    edad: '',
-    plus_edad: 0
-  }
+  sector   
   cobradores
   saldoPlusEdad = 0
   esUdp = false;
   esPsm = false;
   beneficiarios = [
-    {
-      nombre: '1',
-      doc: '',
-      fecha_nacimiento: '',
-      edad: null,
-      plus_edad: 0
-    }
+    
   ]
 
   inhumados = [
-    {
-      fecha_fallecimiento: '1',
-      fecha_inhumacion: '',
-      nombre: '',
-      ci: '1',
-      nro: '1',
-
-    }
+     
   ]
   facturas
   radioValue = 'OFICINA'
@@ -193,7 +173,7 @@ export class CrearContratoComponent implements OnInit {
       doc: '',
       fecha_nacimiento: '',
       edad: '',
-      plus_edad: 0
+      plus_edad:  null
     })
   }
 
@@ -377,40 +357,27 @@ export class CrearContratoComponent implements OnInit {
   }
   seleccionarProducto(producto: Producto) {
     this.beneficiarios = [
-      {
-        nombre: '',
-        doc: '',
-        fecha_nacimiento: '',
-        edad: '',
-        plus_edad: 0
-      }
+      
     ]
 
     this.inhumados = [
 
-      {
-        fecha_fallecimiento: '',
-        fecha_inhumacion: '',
-        nombre: '',
-        ci: '',
-        nro: ''
-      }
+       
     ]
 
     this.producto = producto;
     this.saldo = parseInt(producto.PRECIO_MAYORISTA.toString());
     this.manzana = producto.MANZANA
+    this.esUdp = false;
+    this.esPsm = false;
+    this.esPsv = false;
     if (producto.COD_CORTO == 'U.D.P.') {
       this.esUdp = true
     } else if (producto.COD_CORTO == 'P.S.M.') {
       this.esPsm = true;
     } else if (producto.COD_CORTO == 'P.S.V.') {
       this.esPsv = true;
-    } else {
-      this.esUdp = false;
-      this.esPsm = false;
-
-    }
+    }  
 
 
   }
@@ -470,6 +437,7 @@ export class CrearContratoComponent implements OnInit {
 
   }
 
+  
 
   removeInhumaciones(index) {
     this.inhumados.splice(index, 1)

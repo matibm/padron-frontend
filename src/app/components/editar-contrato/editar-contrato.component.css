@@ -1,3 +1,7 @@
 .disable {
     opacity: 0.5;
 }
+
+.card {
+    min-width: max-content;
+}

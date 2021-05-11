@@ -10,7 +10,7 @@
                     <div style="width: 100%; " *ngIf="cliente ">
                         <h5>Apellidos: <b>{{cliente.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{cliente.NOMBRES}}</b></h5>
-                        <h5>Razon Social: <b>{{cliente.RAZON}}</b></h5>
+
                         <h5>RUC: <b>{{cliente.RUC | ruc}}</b></h5>
                         <h5>Direccion: <b>{{cliente.direccion_particular}}</b></h5>
                         <h5>Ciudad: <b>{{cliente.ciudad_trabajo}}</b></h5>
@@ -110,13 +110,18 @@
                 <h5>Precio: <b>{{producto.PRECIO_MAYORISTA | currency:'':'':'2.0'}} Gs</b></h5>
                 <h5>Total: <b>{{contrato.saldo_pendiente | currency:'':'':'2.0'}} Gs</b></h5>
                 <!-- <h5>Entrega: </h5>  -->
-                <hr>
-                <div class="mt-2 inline-flex">
-                    <h4 *ngIf="contrato.plazo == 1" class=" mr-3"><b>Forma de Pago:</b> Contado</h4>
-                    <h4 *ngIf="contrato.plazo != 1" class=" mr-3"><b>Forma de Pago:</b> En {{contrato.plazo}} cuotas </h4>
-                    <h4 *ngIf="contrato.entrega" class=" mr-3"><b>Entrega:</b> {{contrato.entrega | currency: '':'':'2.0'}} Gs</h4>
-                    <h4 *ngIf="!contrato.entrega" class=" mr-3"><b>Entrega:</b> Sin entrega</h4>
-                    <h4 *ngIf="contrato.entrega" class=" mr-3"><b>saldo:</b> {{(contrato.producto.PRECIO_MAYORISTA - contrato.entrega ) | currency: '':'':'2.0'}} Gs
+                <div *ngIf="!esPsm" class="mt-2 inline-flex">
+                    <h4 class=" mr-3"><b>Forma de Pago:</b>
+                        <span *ngIf="contrato.plazo == 1"> Contado</span>
+                        <span *ngIf="contrato.plazo != 1"> En {{contrato.plazo}} cuotas</span>
+                    </h4>
+
+                    <h4 class=" mr-3"><b>Entrega:</b>
+                        <span *ngIf="contrato.entrega">{{contrato.entrega | currency:'':'':'2.0'}} Gs</span>
+                        <span *ngIf="!contrato.entrega">Sin entrega</span>
+                    </h4>
+
+                    <h4 *ngIf="contrato.entrega" class=" mr-3"><b>Total:</b> {{(contrato.producto.PRECIO_MAYORISTA - contrato.entrega ) | currency: '':'':'2.0'}} Gs
                     </h4>
                 </div>
                 <hr>
@@ -140,11 +145,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md col-xs">
+        <div *ngIf="movimientos" class="col-md col-xs">
             <app-lista-movimientos [movimientos]="movimientos"></app-lista-movimientos>
         </div>
         <div class="col-lg" *ngIf="facturas">
-            <app-facturas [count]="facturasCount" [options]="facturaOptions" [fromOutside]='true' [facturas]='facturas'></app-facturas>
+            <app-facturas [count]="facturasCount" [options]="facturaOptions" [fromOutside]='true' [facturas]='facturas'>
+            </app-facturas>
         </div>
     </div>
     <div class="card">
@@ -222,7 +228,7 @@
     </div>
 
     <div *ngIf="producto">
-        <div *ngIf="!esUdp" class="">
+        <div *ngIf="!esUdp && !esPsv" class="">
             <div class="card">
                 <div class="card-body">
                     <h3>Beneficiarios</h3>
@@ -302,8 +308,10 @@
                     <table class=" table  ">
                         <thead>
                             <tr>
-                                <th class="text-center">C.I.</th>
                                 <th class="text-center">Nombre</th>
+                                <th class="text-center">C.I.</th>
+
+
                                 <th class="text-center">Fecha fallecimiento</th>
                                 <th class="text-center">Fecha Inhumacion</th>
                             </tr>
@@ -311,10 +319,10 @@
                         <tbody>
                             <tr *ngFor="let item of contrato.inhumados; let i = index">
                                 <td class="text-center">
-                                    {{item.ci | ruc}}
+                                    {{item.nombre}}
                                 </td>
                                 <td class="text-center">
-                                    {{item.nombre}}
+                                    {{item.ci | ruc}}
                                 </td>
                                 <td class="text-center">
                                     {{item.fecha_fallecimiento| date}}
@@ -330,9 +338,47 @@
             </div>
         </div>
 
+        <div *ngIf="esPsv && contrato.inhumados">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Servicio utilizado en:</h3>
+                    <table class=" table  ">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nombres y Apellidos</th>
+                                <th class="text-center">C.I.</th>
+                                <th class="text-center">Fecha fallecimiento</th>
+                                <th class="text-center">Fecha Inhumacion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of contrato.inhumados; let i = index">
+
+                                <td>
+                                    {{item.nombre}}
+                                </td>
+                                <td>
+                                    {{item.ci}}
+                                </td>
+                                <td>
+                                    {{item.fecha_fallecimiento}}
+                                </td>
+                                <td>
+                                    {{item.fecha_inhumacion}}
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="float-right">
-        <button type="button" [routerLink]="['/admin/editar_contrato', this.id]" class="btn mr-2 btn-secondary">Editar Contrato</button>
+        <button type="button" [routerLink]="['/admin/editar_contrato', this.id]" class="btn mr-2 btn-secondary">Editar
+            Contrato</button>
         <button type="button" (click)="crearMovimiento()" class="btn  btn-primary">Crear Movimiento</button>
         <button type="button" (click)="showModalPdf = true" class="btn mx-2 btn-primary">Ver PDF</button>
     </div>

@@ -27,7 +27,9 @@ export class InfoContratoComponent implements OnInit {
   contrato: Contrato
   id
   facturas: Factura[]
-  esUdp
+  esUdp = false
+  esPsv = false
+  esPsm = false
   cliente
   titular
   cobrador
@@ -74,7 +76,12 @@ export class InfoContratoComponent implements OnInit {
     this.titularAlternativo = this.contrato?.titular_alternativo
     if (this.producto.COD_CORTO == 'U.D.P.') {
       this.esUdp = true
-    } else this.esUdp = false;
+    } else if (this.producto.COD_CORTO == 'P.S.M.') {
+      this.esPsm = true
+    } 
+     else if (this.producto.COD_CORTO == 'P.S.V.') {
+      this.esPsv = true
+    } 
     // this.facturas = await this._facturaService.getFacturasByContrato(this.contrato._id)
     this.facturaOptions = { contrato: this.contrato._id }
     let respFacturas = await this._facturaService.getFacturasOptions(this.facturaOptions)

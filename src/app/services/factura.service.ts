@@ -152,7 +152,7 @@ export class FacturaService {
       return resp
     })
   }
-  getFacturasOptions(options?: any) {
+  getFacturasOptions(options?: any, sort?) {
 
     let url = URL_SERVICIOS + '/factura/all';
     url += `?token=${this._usuarioService.token}`
@@ -165,7 +165,10 @@ export class FacturaService {
         }
       });
     }
-    
+    if (sort) {
+      url += `&sort_key=${sort.key}`
+      url += `&sort_value=${sort.value}`
+    }
     return this.http.get(url).toPromise().then((resp: any) => {
       console.log("respuesta ");
       

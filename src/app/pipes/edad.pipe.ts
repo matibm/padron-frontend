@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class EdadPipe implements PipeTransform {
 
-  transform(date: any, ...args: unknown[]): unknown {
+  transform(date: any, ...args: unknown[]): any {
     if (!date) {
       return null
     }

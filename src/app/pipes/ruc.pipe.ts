@@ -19,7 +19,9 @@ export class RucPipe implements PipeTransform {
     let conpuntos
     if (value.includes('-')) {
       guion += value.slice(value.indexOf('-'))
-      number = parseInt(value.slice(0, value.indexOf('-') - 1))
+      console.log(guion);
+      
+      number = parseInt(value.slice(0, value.indexOf('-') ))
     } else {
       number = parseInt(value)
     }

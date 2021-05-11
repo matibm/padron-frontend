@@ -19,6 +19,7 @@ import { EdadPipe } from './edad.pipe';
   imports: [
     CommonModule
   ], 
-  exports: [NombreCortoPipe, PrimerNombrePipe, RucPipe, IconPipe, EdadPipe]
+  exports: [NombreCortoPipe, PrimerNombrePipe, RucPipe, IconPipe, EdadPipe],
+  providers: [EdadPipe]
 })
 export class PipeModule { }
