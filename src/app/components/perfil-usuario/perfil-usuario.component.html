@@ -41,6 +41,8 @@
                 </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#movimientos" role="tab">Movimientos</a>
                 </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#pagos" role="tab">Pagos</a>
+                </li>
                 <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Ajustes</a>
                 </li>
             </ul>
@@ -256,7 +258,6 @@
 
                     </div>
                 </div>
-                <!--second tab-->
                 <div class="tab-pane" id="profile" role="tabpanel">
                     <div class="card-body">
 
@@ -310,6 +311,29 @@
                     <div *ngIf="facturas" class="card-body">
 
                         <app-lista-movimientos [movimientos]="movimientos"></app-lista-movimientos>
+                    </div>
+                </div>
+                <div class="tab-pane" id="pagos" role="tabpanel">
+                    <div *ngIf="pagos" class="card-body">
+
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nro Factura</th>
+                                    <th>Fecha de creacion</th>
+                                    <th>Monto</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr (click)="mostrarModal(item._id)" class="pointer" *ngFor="let item of pagos">
+                                    <td>{{ item.nro_factura }}</td>
+                                    <td> {{item.fecha_creacion | date}} </td>
+                                    <td> {{item.monto | currency: '':'':'2.0'}} Gs</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="tab-pane" id="settings" role="tabpanel">
@@ -564,8 +588,6 @@
 </div>
 
 
-<div class="" *ngIf="usuario">
-
-
-
+<div class="" *ngIf="facturapdf">
+    <app-modal-factura (onClose)="facturapdf = null" [facturaPDF]="facturapdf"></app-modal-factura>
 </div>

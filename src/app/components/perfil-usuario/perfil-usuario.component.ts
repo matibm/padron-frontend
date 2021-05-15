@@ -30,6 +30,8 @@ export class PerfilUsuarioComponent implements OnInit {
   isBanco
   manejaCaja
   cobroOnline
+  pagos
+  facturapdf
   constructor(
     public _usuarioService: UsuarioService,
     public route: ActivatedRoute,
@@ -46,7 +48,11 @@ export class PerfilUsuarioComponent implements OnInit {
   facturas
   comentarios
   async ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
 
+    this.pagos = await this._facturaService.getPagos(this.id)
+    console.log("pagos", this.pagos);
+    
     this._comentarioService.listen('push_comentarios').subscribe((data: any) => {
       this.comentarios = data
 
@@ -57,7 +63,6 @@ export class PerfilUsuarioComponent implements OnInit {
     })
     this._comentarioService.emitir('get_comentarios', 'e')
 
-    this.id = this.route.snapshot.paramMap.get('id');
     this.usuario = await this._usuarioService.getUsuarioPorId(this.id)
     console.log(this.usuario);
     
@@ -116,4 +121,33 @@ export class PerfilUsuarioComponent implements OnInit {
     })
   }
 
+  async mostrarModal(id){
+    let resp = await this._facturaService.getDetallePago(id)
+     
+    let pago = resp.pago
+    let facturas = resp.facturas
+    let servicios =[]
+    for (let i = 0; i < facturas.length; i++) {
+      const factura = facturas[i];
+      servicios.push({
+        cantidad: 1,
+        concepto: factura.servicio.NOMBRE,
+        precioUnitario: factura.haber,
+        cincoPorciento: null,
+        diezPorciento: factura.haber * 0.1
+      })
+    }
+    this.facturapdf = {
+      _id: pago._id,
+      nombres: `${pago.cliente.NOMBRES} ${pago.cliente.APELLIDOS}`,
+      fecha: pago.fecha_creacion,
+      direccion: `direccion de prueba`,
+      ruc: pago.cliente.RUC,
+      tel: pago.cliente.TELEFONO1,
+      notaDeRemision: '123123',
+      servicios: servicios
+    }
+    console.log(this.facturapdf);
+    
+  }
 }

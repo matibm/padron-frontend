@@ -52,7 +52,11 @@ export class CobranzaComponent implements OnInit {
   contratos
   contrato
   facturasAPagar
+  facturasAPagarAux = []
+  montoTotal = 0
+  lista = []
   sort: any
+
   sort_key = 'vencimiento'
   sort_value = 1
   estados = [
@@ -71,8 +75,8 @@ export class CobranzaComponent implements OnInit {
       estado: "PENDIENTES",
       color: 'danger'
     },
-
   ]
+  filtros = []
   estadoSeleccionado = 'TODOS'
 
   rangeEmision = new FormGroup({
@@ -193,15 +197,41 @@ export class CobranzaComponent implements OnInit {
     if (monto < 1) {
       return
     }
-    this.facturasAPagar = await this._facturaService.pagarPorMonto({ contrato: id, monto: monto })
+    this.facturasAPagar = await this._facturaService.pagarPorMonto({ lista: [{ contrato: id, monto: parseInt(monto) }] })
   }
 
   async searchBancos(val) {
     this.fondos = await this._usuarioService.buscarUsuarios('BANCOS', val.term)
   }
-  async confirmarPago(id, monto, fondo) {
-    await this._facturaService.pagarPorMonto({ contrato: id, monto: monto, confirmado: true, fondo: fondo._id })
+  async agregarIngreso(id, monto) {
+    this.facturasAPagar = null;
+    this.montoTotal += parseInt(monto)
+    let obj = {
+      contrato: id,
+      monto: monto
+    }
+    this.lista.push(obj)
+    // this.filtros.push()
+    this.facturasAPagarAux = await this._facturaService.pagarPorMonto({ lista: this.lista })
+    this.contrato = null
+    this.filtrar()
+
+
+  }
+  async confirmarPago() {
+    await this._facturaService.pagarPorMonto({
+      lista: this.lista,
+      montoTotal: this.montoTotal,
+      cliente: this.cliente._id,
+      cobrador: this.cobrador?._id,
+      confirmado: true,
+      fondo: this.fondo._id,
+      nro_timbrado: '144542331',
+      nro_factura: '4544352',
+      numero: '002-004'
+    })
     this.ngOnInit()
+    this.contrato = null;
     this.facturasAPagar = null
   }
 
@@ -237,5 +267,15 @@ export class CobranzaComponent implements OnInit {
       this.loadingCobrador = false
     });
   }
+
+  reset() {
+    this.contrato = null
+    this.lista = []
+    this.montoTotal = 0
+    this.facturasAPagar = null
+    this.cliente = null
+    this.ngOnInit()
+  }
+
 
 }

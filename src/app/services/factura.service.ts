@@ -53,7 +53,7 @@ export class FacturaService {
 
     let url = URL_SERVICIOS + '/factura/pagar_por_monto';
     url += `?token=${this._usuarioService.token}`
-
+    
     return this.http.post(url, body).toPromise().then((resp: any) => {
       console.log(resp);
       if (body.confirmado) {
@@ -92,6 +92,26 @@ export class FacturaService {
       console.log(resp);
 
       return resp.factura
+    })
+  }
+  getPagos(cliente_id) {
+    let url = `${URL_SERVICIOS}/factura/get_pagos`;
+    url += `?token=${this._usuarioService.token}`
+    url += `&cliente_id=${cliente_id}`
+    return this.http.get(url).toPromise().then((resp: any) => {
+      console.log(resp);
+
+      return resp.pagos
+    })
+  }
+  getDetallePago(id) {
+    let url = `${URL_SERVICIOS}/factura/get_detalle_pago`;
+    url += `?token=${this._usuarioService.token}`
+    url += `&id=${id}`
+    return this.http.get(url).toPromise().then((resp: any) => {
+      console.log(resp);
+
+      return resp
     })
   }
   

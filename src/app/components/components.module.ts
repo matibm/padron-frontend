@@ -45,6 +45,7 @@ import {  MAT_DATE_LOCALE} from '@angular/material/core';
 import { NotifierModule } from 'angular-notifier';
 import { MatInputModule } from '@angular/material/input';
 import { CobranzaComponent } from './cobranza/cobranza.component';
+import { ModalFacturaComponent } from './modal-factura/modal-factura.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -78,6 +79,7 @@ const maskConfig: Partial<IConfig> = {
     ModalPdfComponent,
     CrearContratoComponent,
     CobranzaComponent,
+    ModalFacturaComponent,
     
   ],
   imports: [
