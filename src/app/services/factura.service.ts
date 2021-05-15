@@ -95,14 +95,21 @@ export class FacturaService {
     })
   }
   getPagos(cliente_id) {
-    let url = `${URL_SERVICIOS}/factura/get_pagos`;
+    let url = `${URL_SERVICIOS}/factura/get_pagos/`+cliente_id;
     url += `?token=${this._usuarioService.token}`
-    url += `&cliente_id=${cliente_id}`
+    // url += `&cliente_id=${cliente_id}`
+    console.log(url);
+    
     return this.http.get(url).toPromise().then((resp: any) => {
       console.log(resp);
 
       return resp.pagos
-    })
+    },
+      (err)=>{
+        console.log(err);
+        
+      }
+    )
   }
   getDetallePago(id) {
     let url = `${URL_SERVICIOS}/factura/get_detalle_pago`;

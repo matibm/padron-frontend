@@ -29,32 +29,27 @@ export class FacturaPdfComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.facturaPDF) {
       this.factura = await this.getDetallePago(this.facturaPDF._id)
-      
-    } else 
-    if (this.id) {
 
-      
-       this.factura = await this.getDetallePago(this.id)
-       
-      
-      
-      
+    } else
+      if (this.id) {
+        this.factura = await this.getDetallePago(this.id)
 
-    } 
+      }
 
     if (this.printAltoke) {
       setTimeout(() => {
-        window.print()  
-       }, 500);
-       
-       window.onafterprint = (event) => {
-         window.close()
-      };  }
+        window.print()
+      }, 500);
+
+      window.onafterprint = (event) => {
+        window.close()
+      };
+    }
 
     for (let i = 0; i < this.factura.servicios.length; i++) {
       const element = this.factura.servicios[i];
       this.items[i] = element
-      this.total += element.precioUnitario,
+      this.total += element.precio,
         this.totalIva += element.diezPorciento
     }
 
@@ -218,22 +213,39 @@ export class FacturaPdfComponent implements OnInit {
       return this.Millones(data.enteros) + " " + data.letrasMonedaPlural + " " + data.letrasCentavos;
   }
 
-  async getDetallePago(id){
+  async getDetallePago(id) {
     let resp = await this._facturaService.getDetallePago(id)
-     
+
     let pago = resp.pago
+    console.log(pago);
+
     let facturas = resp.facturas
-    let servicios =[]
+    let servicios = []
+    let contratosSinRepetir = []
     for (let i = 0; i < facturas.length; i++) {
       const factura = facturas[i];
-      servicios.push({
-        cantidad: 1,
-        concepto: factura.servicio.NOMBRE,
-        precioUnitario: factura.precio_unitario? factura.precio_unitario : factura.haber,
-        precio: factura.haber,
-        cincoPorciento: null,
-        diezPorciento: factura.haber * 0.1
-      })
+
+      if (contratosSinRepetir.includes(factura.contrato) && !factura.parcial) {
+        for (let j = 0; j < servicios.length; j++) {
+          const element = servicios[j];
+          element.cantidad++
+          element.precio += factura.haber
+          element.diezPorciento += factura.haber * 0.1
+        }
+      } else {
+        servicios.push({
+          contrato: factura.contrato,
+          cantidad: 1,
+          concepto: `${factura.servicio.NOMBRE}`,
+          precioUnitario: factura.precio_unitario ? factura.precio_unitario : factura.haber,
+          precio: factura.haber,
+          cincoPorciento: null,
+          diezPorciento: factura.haber * 0.1
+        })
+        contratosSinRepetir.push(factura.contrato)
+      }
+
+
     }
     this.facturaPDF = {
       _id: pago._id,
@@ -245,7 +257,7 @@ export class FacturaPdfComponent implements OnInit {
       notaDeRemision: '123123',
       servicios: servicios
     }
-     return this.facturaPDF
+    return this.facturaPDF
   }
 
 }

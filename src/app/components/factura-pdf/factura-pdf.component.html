@@ -75,7 +75,7 @@
                         <span>Señor(es): <u><b>{{factura.nombres}}</b></u></span>
                     </div>
                     <div style="width: 40%; display: flex;" class="">
-                        <div class="mr-1">C.I. o RUC: <u>{{factura.RUC | ruc}}</u></div>
+                        <div class="mr-1">C.I. o RUC: <u>{{factura.ruc | ruc}}</u></div>
 
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                     <div style="width: 10%; display: flex; border-bottom: 1px solid; border-right: 1px solid;">
                     </div>
                     <div style="width: 10%; display: flex; border-bottom: 1px solid; ">
-                        <span class="m-auto">{{totalIva | currency: '':'':'2.0'}}</span>
+                        <!-- <span class="m-auto">{{totalIva | currency: '':'':'2.0'}}</span> -->
 
                     </div>
 

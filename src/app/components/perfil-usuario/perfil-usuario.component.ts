@@ -51,7 +51,7 @@ export class PerfilUsuarioComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.pagos = await this._facturaService.getPagos(this.id)
-    console.log("pagos", this.pagos);
+    // console.log("pagos", this.pagos);
     
     this._comentarioService.listen('push_comentarios').subscribe((data: any) => {
       this.comentarios = data

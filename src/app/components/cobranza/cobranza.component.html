@@ -160,7 +160,7 @@
                             <tbody>
 
                                 <tr *ngFor="let cuota of facturasAPagar; let i = index">
-                                    <td scope="row">{{i+1}}</td>
+                                    <td scope="row">{{cuota.nro_factura}}</td>
                                     <td>{{cuota.vencimiento | date}}</td>
                                     <td>{{cuota.haber| currency:'':'':'2.0' }} Gs</td>
                                 </tr>
