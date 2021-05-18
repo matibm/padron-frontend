@@ -31,7 +31,7 @@
                             <h5>RUC: <b>{{cliente.RUC | ruc}}</b></h5>
                             <h5>Direccion P: <b>{{cliente.DIRECCION}}</b></h5>
                             <h5>Ciudad P: <b>{{cliente.NOMCIUDAD}}</b></h5>
-                            <h5>Direccion L: <b>{{cliente.DIRECCION_TRABAJO}}</b></h5>
+                            <h5>Direccion L: <b>{{cliente.direccion_laboral}}</b></h5>
                             <h5>Ciudad L: <b>{{cliente.ciudad_trabajo}}</b></h5>
                             <h5>Telefonos: <b>{{cliente.TELEFONO1}}</b></h5>
 
@@ -71,13 +71,12 @@
                         <div style="width: 100%; " *ngIf="titularAlternativo ">
                             <h5>Apellidos: <b>{{titularAlternativo.APELLIDOS}}</b></h5>
                             <h5>Nombres: <b>{{titularAlternativo.NOMBRES}}</b></h5>
-                            <h5>Razon Social: <b>{{titularAlternativo.RAZON}}</b></h5>
                             <h5>RUC: <b>{{titularAlternativo.RUC | ruc}}</b></h5>
                             <h5>Direccion P: <b>{{titularAlternativo.DIRECCION}}</b></h5>
-                            <h5>Direccion L: <b>{{titularAlternativo.DIRECCION_TRABAJO}}</b></h5>
-                            <h5>Ciudad: <b>{{titularAlternativo.ciudad_trabajo}}</b></h5>
-
-                            <h5>Telefonos: {{titularAlternativo.TELEFONO}}</h5>
+                            <h5>Ciudad P: <b>{{titularAlternativo.NOMCIUDAD}}</b></h5>
+                            <h5>Direccion L: <b>{{titularAlternativo.direccion_laboral}}</b></h5>
+                            <h5>Ciudad L: <b>{{titularAlternativo.ciudad_trabajo}}</b></h5>
+                            <h5>Telefonos: <b>{{titularAlternativo.TELEFONO1}}</b></h5>
 
                             <div class="row ">
                                 <div class="col ">
@@ -112,9 +111,12 @@
                         <div style="width: 100%; " *ngIf="vendedor ">
                             <h5>Apellidos: <b>{{vendedor.APELLIDOS}}</b></h5>
                             <h5>Nombres: <b>{{vendedor.NOMBRES}}</b></h5>
-                            <h5>Razon Social: <b>{{vendedor.RAZON}}</b></h5>
                             <h5>RUC: <b>{{vendedor.RUC | ruc}}</b></h5>
-                            <h5>Telefonos: {{vendedor.TELEFONO}}</h5>
+                            <h5>Direccion P: <b>{{vendedor.DIRECCION}}</b></h5>
+                            <h5>Ciudad P: <b>{{vendedor.NOMCIUDAD}}</b></h5>
+                            <h5>Direccion L: <b>{{vendedor.direccion_laboral}}</b></h5>
+                            <h5>Ciudad L: <b>{{vendedor.ciudad_trabajo}}</b></h5>
+                            <h5>Telefonos: <b>{{vendedor.TELEFONO1}}</b></h5>
                         </div>
                     </div>
                 </div>
@@ -149,9 +151,12 @@
                         <div style="width: 100%; " *ngIf="cobrador">
                             <h5>Apellidos: <b>{{cobrador.APELLIDOS}}</b></h5>
                             <h5>Nombres: <b>{{cobrador.NOMBRES}}</b></h5>
-                            <h5>Razon Social: <b>{{cobrador.RAZON}}</b></h5>
                             <h5>RUC: <b>{{cobrador.RUC | ruc}}</b></h5>
-                            <h5>Telefonos: {{cobrador.TELEFONO}}</h5>
+                            <h5>Direccion P: <b>{{cobrador.DIRECCION}}</b></h5>
+                            <h5>Ciudad P: <b>{{cobrador.NOMCIUDAD}}</b></h5>
+                            <h5>Direccion L: <b>{{cobrador.direccion_laboral}}</b></h5>
+                            <h5>Ciudad L: <b>{{cobrador.ciudad_trabajo}}</b></h5>
+                            <h5>Telefonos: <b>{{cobrador.TELEFONO1}}</b></h5>
                         </div>
                     </div>
                 </div>
@@ -159,6 +164,7 @@
         </div>
         <div class="row">
             <div class="col-md col-xs">
+                <!-- Nro y fecha de Contrato -->
                 <div class="card">
                     <div class="card-body">
                         <div style="justify-content: space-between;" class="inline-flex">
@@ -166,7 +172,7 @@
                         </div>
                         <div class="form-group">
                             <label for="">Numero de Contrato: </label>
-                            <input type="number" required class="form-control" name="nuroContrsd" autocomplete="off !important" [(ngModel)]="nro_contrato" id="facturanumero" aria-describedby="helpId" placeholder="">
+                            <input type="number" required class="form-control" name="nroFactura" autocomplete="off" [(ngModel)]="nro_contrato">
                         </div>
                         <mat-form-field appearance="fill">
                             <mat-label>Fecha de creacion</mat-label>
@@ -176,9 +182,10 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <!-- Producto -->
                 <div class="card">
                     <div class="card-body">
-                        <div style="justify-content: space-between;" class="inline-flex">
+                        <div style=" display: flex;">
                             <h3 class="card-title">Producto</h3>
                             <div *ngIf="producto" (click)="producto = null " class="pointer close-icon ml-auto">
                                 <button type="button" class="btn btn-sm btn-light"><i class=" ti-close  "></i></button>
@@ -248,6 +255,17 @@
                                     <!-- <h5> <b>{{fechaPago |date}}</b></h5> -->
                                 </div>
                             </div>
+                            <div *ngIf="esPsm">
+                                <div style="width: fit-content;" class="">
+                                    <div class="form-group">
+                                        <label for="">Cantidad de cuotas a crear</label>
+
+                                        <input type="number" name="cantidadCuotaPSM" [(ngModel)]="cantidadCuotaPSM" class="form-control">
+
+                                    </div>
+                                </div>
+
+                            </div>
                             <hr>
                             <div class="mt-2 inline-flex">
                                 <div style="width: 100%;" class="row">
@@ -277,6 +295,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Facturas -->
                 <div class="" *ngIf="facturas">
 
                     <div class="card">
@@ -315,6 +334,7 @@
 
                 </div>
                 <div *ngIf="producto">
+                    <!-- Beneficiarios -->
                     <div *ngIf="!esUdp && !esPsv" class="">
                         <div class="card">
                             <div class="card-body">
@@ -384,6 +404,7 @@
                     </div>
                     <!-- U.D.P. -->
                     <div *ngIf="esUdp">
+                        <!-- ubicacion -->
                         <div class="card">
                             <div class="card-body  ">
                                 <h3>Ubicacion</h3>
@@ -415,6 +436,7 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- Cuota Mantenimiento -->
                         <div class="card">
                             <div class="card-body  ">
                                 <h3>Cuota de Mantenimiento: 150.000 Gs</h3>
@@ -427,6 +449,7 @@
 
                             </div>
                         </div>
+                        <!-- Inhumaciones -->
                         <div class="card">
                             <div class="card-body">
                                 <h3>Inhumaciones</h3>
@@ -485,6 +508,7 @@
                     </div>
                     <!-- P.S.V. -->
                     <div *ngIf="esPsv">
+                        <!-- Servicio Utilizado en -->
                         <div class="card">
                             <div class="card-body">
                                 <h3>Servicio utilizado en:</h3>

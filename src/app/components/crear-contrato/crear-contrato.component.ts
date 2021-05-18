@@ -82,6 +82,7 @@ export class CrearContratoComponent implements OnInit {
   loadingClientes = false;
   inputAlternativo = new Subject<string>();
   loadingAlternativo = false;
+  cantidadCuotaPSM = 120
   trackItem(index, item) {
 
     //log(item);

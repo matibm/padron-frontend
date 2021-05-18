@@ -10,7 +10,7 @@
                     </button>
                 </div>
                 <div *ngIf="style" [ngStyle]="style" class=" modal-body " align="center">
-                    <app-factura-pdf [printAltoke]="false" [facturaPDF]="facturaPDF"></app-factura-pdf>
+                    <app-factura-pdf [printAltoke]="false" [existe]="existe" [facturaPDF]="facturaPDF"></app-factura-pdf>
                 </div>
 
                 <div class="modal-footer">

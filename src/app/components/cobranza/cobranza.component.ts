@@ -56,9 +56,10 @@ export class CobranzaComponent implements OnInit {
   montoTotal = 0
   lista = []
   sort: any
-
+  facturaPdf
   sort_key = 'vencimiento'
   sort_value = 1
+  showPDF = false
   estados = [
     {
       id: 1,
@@ -180,7 +181,12 @@ export class CobranzaComponent implements OnInit {
   }
 
   async onSelectClient(cliente) {
+    this.nombreFactura = `${cliente.NOMBRES} ${cliente.APELLIDOS}`
+    this.rucFactura = cliente.RUC
+    this.telFactura = cliente.TELEFONO1
+    this.direccionFactura = cliente.DIRECCION
     this.contratos = await this._contratoSerivce.getContratosByTitular(cliente._id)
+
     console.log(this.contratos);
     this.filtrar()
 
@@ -215,7 +221,7 @@ export class CobranzaComponent implements OnInit {
     this.facturasAPagarAux = await this._facturaService.pagarPorMonto({ lista: this.lista })
     this.contrato = null
     this.filtrar()
-
+    this.facturaPdf = this.crearPDF(this.facturasAPagarAux)
 
   }
   async confirmarPago() {
@@ -277,5 +283,76 @@ export class CobranzaComponent implements OnInit {
     this.ngOnInit()
   }
 
+  async crearPDF(facturas) {
+    let servicios = []
+    let contratosSinRepetir = []
+    let fsinrepetir = []
+     
+    for (let i = 0; i < facturas.length; i++) {
+      const factura = facturas[i];
+      let existe = false
+
+      for (let m = 0; m < fsinrepetir.length; m++) {
+        const element = fsinrepetir[m];
+        if (element.contrato == factura.contrato && element.haber === factura.haber) {
+          element.cantidad++
+          element.precio += factura.haber
+          element.diezPorciento += factura.haber * 0.1
+          existe = true
+        }
+      }
+      if (!existe) {
+        fsinrepetir.push({
+          contrato: factura.contrato,
+          cantidad: 1,
+          concepto: `${factura.servicio.NOMBRE}`,
+          precioUnitario: factura.precio_unitario ? factura.precio_unitario : factura.haber,
+          precio: factura.haber,
+          cincoPorciento: null,
+          haber: factura.haber,
+          diezPorciento: factura.haber * 0.1
+        })
+      }
+
+      // if (contratosSinRepetir.includes(factura.contrato) && !factura.parcial) {
+      //   for (let j = 0; j < servicios.length; j++) {
+      //     const element = servicios[j];
+      //     element.cantidad++
+      //     element.precio += factura.haber
+      //     element.diezPorciento += factura.haber * 0.1
+      //   }
+      // } else {
+      //   servicios.push({
+      //     contrato: factura.contrato,
+      //     cantidad: 1,
+      //     concepto: `${factura.servicio.NOMBRE}`,
+      //     precioUnitario: factura.precio_unitario ? factura.precio_unitario : factura.haber,
+      //     precio: factura.haber,
+      //     cincoPorciento: null,
+      //     diezPorciento: factura.haber * 0.1
+      //   })
+      //   contratosSinRepetir.push(factura.contrato)
+      // }
+      servicios = fsinrepetir
+    }
+    let facturaPDF = {
+      nombres: this.nombreFactura,
+      fecha: Date.now(),
+      direccion: this.direccionFactura,
+      ruc: this.rucFactura,
+      tel: this.telFactura,
+      notaDeRemision: '123123',
+      servicios: servicios
+    }
+    console.log("-----------------------------------------------");
+    console.log(facturaPDF);
+    
+    return facturaPDF
+  }
+
+  nombreFactura
+  rucFactura
+  telFactura
+  direccionFactura
 
 }

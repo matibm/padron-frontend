@@ -26,15 +26,6 @@ export class SidebarService {
        ]
     },
     {
-      titulo: 'Productos',
-      icono: 'mdi mdi-shopping',
-      submenu: [
-        { titulo: 'crear producto', url: 'crear_producto' },
-        { titulo: 'lista de productos', url: 'lista_productos' }
-       ]
-    },
-    
-    {
       titulo: 'Finanzas',
       icono: 'mdi mdi-cash',
       submenu: [
@@ -46,7 +37,17 @@ export class SidebarService {
         { titulo: 'transferencias', url: 'transferencia' },
 
       ]
+    },
+    {
+      titulo: 'Productos',
+      icono: 'mdi mdi-shopping',
+      submenu: [
+        { titulo: 'crear producto', url: 'crear_producto' },
+        { titulo: 'lista de productos', url: 'lista_productos' }
+       ]
     }
+    
+    
   ]
  
   refreshRoute() {

@@ -15,6 +15,7 @@ export class FacturaPdfComponent implements OnInit {
   @Input() factura
   @Input() facturaPDF
   @Input() printAltoke = true
+  @Input() existe = true
 
   totalTexto = ''
   constructor(
@@ -26,10 +27,19 @@ export class FacturaPdfComponent implements OnInit {
   tipo_contrato = ''
   id
   async ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if (this.facturaPDF) {
-      this.factura = await this.getDetallePago(this.facturaPDF._id)
 
+    this.id = this.route.snapshot.paramMap.get('id');
+
+
+
+    if (this.facturaPDF) {
+      if (this.facturaPDF._id) {
+        this.factura = await this.getDetallePago(this.facturaPDF._id)
+
+      } else {
+        this.factura = (await this.facturaPDF)
+
+      }
     } else
       if (this.id) {
         this.factura = await this.getDetallePago(this.id)
@@ -222,30 +232,54 @@ export class FacturaPdfComponent implements OnInit {
     let facturas = resp.facturas
     let servicios = []
     let contratosSinRepetir = []
+    let fsinrepetir = []
+
     for (let i = 0; i < facturas.length; i++) {
       const factura = facturas[i];
+      let existe = false
 
-      if (contratosSinRepetir.includes(factura.contrato) && !factura.parcial) {
-        for (let j = 0; j < servicios.length; j++) {
-          const element = servicios[j];
+      for (let m = 0; m < fsinrepetir.length; m++) {
+        const element = fsinrepetir[m];
+        if (element.contrato == factura.contrato && element.haber === factura.haber) {
           element.cantidad++
           element.precio += factura.haber
           element.diezPorciento += factura.haber * 0.1
+          existe = true
         }
-      } else {
-        servicios.push({
+      }
+      if (!existe) {
+        fsinrepetir.push({
           contrato: factura.contrato,
           cantidad: 1,
           concepto: `${factura.servicio.NOMBRE}`,
           precioUnitario: factura.precio_unitario ? factura.precio_unitario : factura.haber,
           precio: factura.haber,
           cincoPorciento: null,
+          haber: factura.haber,
           diezPorciento: factura.haber * 0.1
         })
-        contratosSinRepetir.push(factura.contrato)
       }
 
-
+      // if (contratosSinRepetir.includes(factura.contrato) && !factura.parcial) {
+      //   for (let j = 0; j < servicios.length; j++) {
+      //     const element = servicios[j];
+      //     element.cantidad++
+      //     element.precio += factura.haber
+      //     element.diezPorciento += factura.haber * 0.1
+      //   }
+      // } else {
+      //   servicios.push({
+      //     contrato: factura.contrato,
+      //     cantidad: 1,
+      //     concepto: `${factura.servicio.NOMBRE}`,
+      //     precioUnitario: factura.precio_unitario ? factura.precio_unitario : factura.haber,
+      //     precio: factura.haber,
+      //     cincoPorciento: null,
+      //     diezPorciento: factura.haber * 0.1
+      //   })
+      //   contratosSinRepetir.push(factura.contrato)
+      // }
+      servicios = fsinrepetir
     }
     this.facturaPDF = {
       _id: pago._id,

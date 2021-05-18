@@ -22,11 +22,12 @@
                         <div style="width: 100%; " *ngIf="cliente ">
                             <h5>Apellidos: <b>{{cliente.APELLIDOS}}</b></h5>
                             <h5>Nombres: <b>{{cliente.NOMBRES}}</b></h5>
-
                             <h5>RUC: <b>{{cliente.RUC | ruc}}</b></h5>
-                            <h5>Direccion: <b>{{cliente.direccion_particular}}</b></h5>
-                            <h5>Ciudad: <b>{{cliente.ciudad_trabajo}}</b></h5>
-                            <h5>Telefonos: {{cliente.TELEFONO}}</h5>
+                            <h5>Direccion P: <b>{{cliente.DIRECCION}}</b></h5>
+                            <h5>Ciudad P: <b>{{cliente.NOMCIUDAD}}</b></h5>
+                            <h5>Direccion L: <b>{{cliente.direccion_laboral}}</b></h5>
+                            <h5>Ciudad L: <b>{{cliente.ciudad_trabajo}}</b></h5>
+                            <h5>Telefonos: <b>{{cliente.TELEFONO1}}</b></h5>
                             <div class="row ">
                                 <div class="col ">
                                 </div>
@@ -58,12 +59,12 @@
                         <div style="width: 100%; " *ngIf="contrato.titular_alternativo ">
                             <h5>Apellidos: <b>{{contrato.titular_alternativo.APELLIDOS}}</b></h5>
                             <h5>Nombres: <b>{{contrato.titular_alternativo.NOMBRES}}</b></h5>
-                            <h5>Razon Social: <b>{{contrato.titular_alternativo.RAZON}}</b></h5>
                             <h5>RUC: <b>{{contrato.titular_alternativo.RUC | ruc}}</b></h5>
                             <h5>Direccion P: <b>{{contrato.titular_alternativo.DIRECCION}}</b></h5>
-                            <h5>Direccion L: <b>{{contrato.titular_alternativo.DIRECCION_TRABAJO}}</b></h5>
-                            <h5>Ciudad: <b>{{contrato.titular_alternativo.ciudad_trabajo}}</b></h5>
-                            <h5>Telefonos: {{contrato.titular_alternativo.TELEFONO}}</h5>
+                            <h5>Ciudad P: <b>{{contrato.titular_alternativo.NOMCIUDAD}}</b></h5>
+                            <h5>Direccion L: <b>{{contrato.titular_alternativo.direccion_laboral}}</b></h5>
+                            <h5>Ciudad L: <b>{{contrato.titular_alternativo.ciudad_trabajo}}</b></h5>
+                            <h5>Telefonos: <b>{{contrato.titular_alternativo.TELEFONO1}}</b></h5>
                             <div class="row ">
                                 <div class="col ">
                                 </div>
@@ -95,9 +96,12 @@
                         <div style="width: 100%; " *ngIf="vendedor ">
                             <h5>Apellidos: <b>{{vendedor.APELLIDOS}}</b></h5>
                             <h5>Nombres: <b>{{vendedor.NOMBRES}}</b></h5>
-                            <h5>Razon Social: <b>{{vendedor.RAZON}}</b></h5>
                             <h5>RUC: <b>{{vendedor.RUC | ruc}}</b></h5>
-                            <h5>Telefonos: {{vendedor.TELEFONO}}</h5>
+                            <h5>Direccion P: <b>{{vendedor.DIRECCION}}</b></h5>
+                            <h5>Ciudad P: <b>{{vendedor.NOMCIUDAD}}</b></h5>
+                            <h5>Direccion L: <b>{{vendedor.direccion_laboral}}</b></h5>
+                            <h5>Ciudad L: <b>{{vendedor.ciudad_trabajo}}</b></h5>
+                            <h5>Telefonos: <b>{{vendedor.TELEFONO1}}</b></h5>
                         </div>
                     </div>
                 </div>
@@ -126,9 +130,12 @@
                         <div style="width: 100%; " *ngIf="cobrador">
                             <h5>Apellidos: <b>{{cobrador.APELLIDOS}}</b></h5>
                             <h5>Nombres: <b>{{cobrador.NOMBRES}}</b></h5>
-                            <h5>Razon Social: <b>{{cobrador.RAZON}}</b></h5>
                             <h5>RUC: <b>{{cobrador.RUC | ruc}}</b></h5>
-                            <h5>Telefonos: {{cobrador.TELEFONO}}</h5>
+                            <h5>Direccion P: <b>{{cobrador.DIRECCION}}</b></h5>
+                            <h5>Ciudad P: <b>{{cobrador.NOMCIUDAD}}</b></h5>
+                            <h5>Direccion L: <b>{{cobrador.direccion_laboral}}</b></h5>
+                            <h5>Ciudad L: <b>{{cobrador.ciudad_trabajo}}</b></h5>
+                            <h5>Telefonos: <b>{{cobrador.TELEFONO1}}</b></h5>
                         </div>
                     </div>
                 </div>
@@ -178,12 +185,12 @@
                                     <h4 class=" mr-3">Forma de Pago: </h4>
                                     <div style="width: 90%;" class="row">
                                         <div class="col-md-4 col-xs">
-                                            <input [disabled]='!editarproducto' [(ngModel)]="pagoradioValue" (click)="resetPlazo()" class="with-gap radio-col-blue-grey" name="idTispoPlan2" type="radio" id="radio_4" value="contado" required>
+                                            <input [disabled]='!editarproducto' [(ngModel)]="pagoradioValue" (click)="resetPlazo()" class="with-gap radio-col-blue-grey" name="idTispoPlan2" type="radio" id="radio_4" value="contado">
 
                                             <label for="radio_4">Contado</label>
                                         </div>
                                         <div class="col-md-4 col-xs">
-                                            <input [disabled]='!editarproducto' [(ngModel)]="pagoradioValue" name="iddTipsoPlan2" class="with-gap radio-col-blue-grey" type="radio" id="radio_5" value="cuota" required>
+                                            <input [disabled]='!editarproducto' [(ngModel)]="pagoradioValue" name="iddTipsoPlan2" class="with-gap radio-col-blue-grey" type="radio" id="radio_5" value="cuota">
                                             <label for="radio_5">Cuotas</label>
                                         </div>
                                     </div>

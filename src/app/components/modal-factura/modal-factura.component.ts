@@ -10,6 +10,7 @@ export class ModalFacturaComponent implements OnInit {
   constructor() { }
   @Output() onClose = new EventEmitter()
   @Input() facturaPDF 
+  @Input() existe 
   ngOnInit(): void {
     let height = window.screen.availHeight
     console.log();

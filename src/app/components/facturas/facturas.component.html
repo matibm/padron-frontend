@@ -1,7 +1,7 @@
 <div class="card">
 
     <div class="card-body">
-        <h4 *ngIf="showlabel && facturas"> <span class="lstick"></span> Ingresos </h4>
+        <h4 *ngIf="showlabel && facturas"> <span class="lstick"></span> Extracto de Cuotas </h4>
         <div style="overflow-x: auto;" class="">
             <table class="table table-sm table-hover">
                 <thead>
@@ -18,7 +18,7 @@
                         <th class="text-center" style="min-width: 130px;">
                             Nro. Contrato
                         </th>
-                        <th class="text-center" style="min-width: 200px;">
+                        <th *ngIf="false" class="text-center" style="min-width: 200px;">
                             Emisión
                         </th>
                         <th class="text-center" style="min-width: 150px;">
@@ -55,7 +55,7 @@
                             <div *ngIf="!factura.contrato">---</div>
                         </td>
 
-                        <td class="text-center">
+                        <td *ngIf="false" class="text-center">
                             {{factura.fecha_creacion_unix | date:' d, MMM y'}}
                             <span class="" *ngIf="!fromOutside"> {{factura.fecha_creacion_unix | date:' h:mm a'}}</span>
 

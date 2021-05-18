@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="" *ngIf="!cobrador">
-                    <ng-select [items]="cobradores" [(ngModel)]="cobrador" (search)="searchcobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                    <ng-select [items]="cobradores" [(ngModel)]="cobrador" (ngModelChange)="filtrar()" (search)="searchcobradores($event)" notFoundText="no se encontraron resultados" placeholder="buscar cobrador" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                         <ng-template ng-option-tmp let-item="item">
                             <div>
                                 <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
@@ -123,7 +123,7 @@
                     </div>
                 </div>
                 <div class="" *ngIf="!vendedor">
-                    <ng-select [items]="vendedores" [(ngModel)]="vendedor" (search)="searchvendedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar vendedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                    <ng-select [items]="vendedores" [(ngModel)]="vendedor" (ngModelChange)="filtrar()" (search)="searchvendedores($event)" notFoundText="no se encontraron resultados" placeholder="buscar vendedor" bindLabel="NOMBRES" [searchFn]="customSearchFn">
                         <ng-template ng-option-tmp let-item="item">
                             <div>
                                 <div *ngIf="item.APELLIDOS">{{item.APELLIDOS}} {{item.NOMBRES}}</div>
@@ -153,30 +153,23 @@
             <div class="col-xs col-md">
                 <div class="form-group">
                     <label for="manzana">manzana</label>
-                    <input type="text" [(ngModel)]="manzana" name="manzana" id="manzanainput" class="form-control" placeholder="manzana">
+                    <input type="text" [(ngModel)]="manzana" (ngModelChange)="filtrar()" name="manzana" id="manzanainput" class="form-control" placeholder="manzana">
                 </div>
             </div>
             <div class="col-xs col-md">
                 <div class="form-group">
                     <label for="fila">fila</label>
-                    <input type="text" [(ngModel)]="fila" name="fila" id="filainput" class="form-control" placeholder="fila">
+                    <input type="text" [(ngModel)]="fila" (ngModelChange)="filtrar()" name="fila" id="filainput" class="form-control" placeholder="fila">
                 </div>
             </div>
             <div class="col-xs col-md">
                 <div class="form-group">
                     <label for="parcela">parcela</label>
-                    <input type="text" name="parcela" [(ngModel)]="parcela" id="parcelainput" class="form-control" placeholder="parcela">
+                    <input type="text" name="parcela" [(ngModel)]="parcela" (ngModelChange)="filtrar()" id="parcelainput" class="form-control" placeholder="parcela">
                 </div>
             </div>
         </div>
-        <div class="" style="width: 100%; display: flex; ">
-            <div class="mx-auto">
-                <button type="button" (click)="filtrar()" class=" btn btn-primary">filtrar</button>
 
-            </div>
-
-
-        </div>
 
 
     </div>

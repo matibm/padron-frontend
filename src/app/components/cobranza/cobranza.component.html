@@ -14,7 +14,8 @@
 
                 <div *ngIf="!cliente">
 
-                    <ng-select [typeahead]="inputClientes" [loading]="loadingClientes" [(ngModel)]="cliente" [items]="clientes" (ngModelChange)="filtrar()" name="dsfdbrweqcda" notFoundText="no se encontraron resultados" placeholder="buscar cliente" bindLabel="NOMBRES" [searchFn]="customSearchFn">
+                    <ng-select [typeahead]="inputClientes" [loading]="loadingClientes" [(ngModel)]="cliente" [items]="clientes" (ngModelChange)="filtrar(); onSelectClient(cliente);" name="dsfdbrweqcda" notFoundText="no se encontraron resultados" placeholder="buscar cliente"
+                        bindLabel="NOMBRES" [searchFn]="customSearchFn">
                         <ng-template ng-option-tmp let-item="item">
                             <div> {{item.APELLIDOS}} {{item.NOMBRES}} <br>
                                 <small>{{item.RUC | ruc}}</small>
@@ -306,9 +307,10 @@
     <div style="display: flex;">
         <div class="ml-auto">
             <button (click)="reset()" class="btn mx-2 btn-inverse">Reestablecer</button>
+            <button (click)="showPDF = true" [disabled]="facturasAPagarAux.length < 1" class="btn mx-2 btn-info">Vista previa PDF</button>
             <button (click)="confirmarPago( )" [disabled]="!fondo || facturasAPagarAux.length < 1" class="btn mx-2 btn-success">Confirmar Pago</button>
         </div>
     </div>
 </div>
-
+<app-modal-factura *ngIf="showPDF" (onClose)="showPDF = false" [existe]="false" [facturaPDF]="facturaPdf"></app-modal-factura>
 <app-modal-contratos (contratoSelected)="onContratoSelected($event)" [cliente]="cliente" (onClose)="showModal = false" *ngIf="showModal"></app-modal-contratos>

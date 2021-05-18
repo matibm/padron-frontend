@@ -10,13 +10,12 @@
                     <div style="width: 100%; " *ngIf="cliente ">
                         <h5>Apellidos: <b>{{cliente.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{cliente.NOMBRES}}</b></h5>
-
                         <h5>RUC: <b>{{cliente.RUC | ruc}}</b></h5>
-                        <h5>Direccion: <b>{{cliente.direccion_particular}}</b></h5>
-                        <h5>Ciudad: <b>{{cliente.ciudad_trabajo}}</b></h5>
-
-                        <h5>Telefonos: {{cliente.TELEFONO}}</h5>
-
+                        <h5>Direccion P: <b>{{cliente.DIRECCION}}</b></h5>
+                        <h5>Ciudad P: <b>{{cliente.NOMCIUDAD}}</b></h5>
+                        <h5>Direccion L: <b>{{cliente.direccion_laboral}}</b></h5>
+                        <h5>Ciudad L: <b>{{cliente.ciudad_trabajo}}</b></h5>
+                        <h5>Telefonos: <b>{{cliente.TELEFONO1}}</b></h5>
                         <div class="row ">
                             <div class="col ">
                             </div>
@@ -37,13 +36,12 @@
                     <div style="width: 100%; " *ngIf="titularAlternativo ">
                         <h5>Apellidos: <b>{{titularAlternativo.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{titularAlternativo.NOMBRES}}</b></h5>
-                        <h5>Razon Social: <b>{{titularAlternativo.RAZON}}</b></h5>
                         <h5>RUC: <b>{{titularAlternativo.RUC | ruc}}</b></h5>
-                        <h5>Direccion: <b>{{titularAlternativo.direccion_particular}}</b></h5>
-                        <h5>Ciudad: <b>{{titularAlternativo.ciudad_trabajo}}</b></h5>
-
-                        <h5>Telefonos: {{titularAlternativo.TELEFONO}}</h5>
-
+                        <h5>Direccion P: <b>{{titularAlternativo.DIRECCION}}</b></h5>
+                        <h5>Ciudad P: <b>{{titularAlternativo.NOMCIUDAD}}</b></h5>
+                        <h5>Direccion L: <b>{{titularAlternativo.direccion_laboral}}</b></h5>
+                        <h5>Ciudad L: <b>{{titularAlternativo.ciudad_trabajo}}</b></h5>
+                        <h5>Telefonos: <b>{{titularAlternativo.TELEFONO1}}</b></h5>
                         <div class="row ">
                             <div class="col ">
                             </div>
@@ -67,9 +65,12 @@
                     <div style="width: 100%; " *ngIf="vendedor ">
                         <h5>Apellidos: <b>{{vendedor.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{vendedor.NOMBRES}}</b></h5>
-                        <h5>Razon Social: <b>{{vendedor.RAZON}}</b></h5>
                         <h5>RUC: <b>{{vendedor.RUC | ruc}}</b></h5>
-                        <h5>Telefonos: {{vendedor.TELEFONO}}</h5>
+                        <h5>Direccion P: <b>{{vendedor.DIRECCION}}</b></h5>
+                        <h5>Ciudad P: <b>{{vendedor.NOMCIUDAD}}</b></h5>
+                        <h5>Direccion L: <b>{{vendedor.direccion_laboral}}</b></h5>
+                        <h5>Ciudad L: <b>{{vendedor.ciudad_trabajo}}</b></h5>
+                        <h5>Telefonos: <b>{{vendedor.TELEFONO1}}</b></h5>
                     </div>
                 </div>
             </div>
@@ -83,9 +84,12 @@
                     <div style="width: 100%; " *ngIf="cobrador">
                         <h5>Apellidos: <b>{{cobrador.APELLIDOS}}</b></h5>
                         <h5>Nombres: <b>{{cobrador.NOMBRES}}</b></h5>
-                        <h5>Razon Social: <b>{{cobrador.RAZON}}</b></h5>
                         <h5>RUC: <b>{{cobrador.RUC | ruc}}</b></h5>
-                        <h5>Telefonos: {{cobrador.TELEFONO}}</h5>
+                        <h5>Direccion P: <b>{{cobrador.DIRECCION}}</b></h5>
+                        <h5>Ciudad P: <b>{{cobrador.NOMCIUDAD}}</b></h5>
+                        <h5>Direccion L: <b>{{cobrador.direccion_laboral}}</b></h5>
+                        <h5>Ciudad L: <b>{{cobrador.ciudad_trabajo}}</b></h5>
+                        <h5>Telefonos: <b>{{cobrador.TELEFONO1}}</b></h5>
                     </div>
                 </div>
             </div>
@@ -153,7 +157,7 @@
             </app-facturas>
         </div>
     </div>
-    <div class="card">
+    <div *ngIf="false" class="card">
         <div class="card-body">
             <h4> <span class="lstick"></span>Pagar Cuotas</h4>
             <div class="my-3 d-flex">
