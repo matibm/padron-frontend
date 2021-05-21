@@ -19,7 +19,7 @@ export class UsuarioService {
     this.user_id = localStorage.getItem('user_id');
     this.itsLogued = this.token ? true : false;
 
-    this.inicializarUsuario()
+    // this.inicializarUsuario()
   }
 
   async inicializarUsuario() {

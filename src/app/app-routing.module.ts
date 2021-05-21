@@ -1,3 +1,4 @@
+import { PersonasComponent } from './components/personas/personas.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesRoutingModule } from './pages/pages.routing';
@@ -19,6 +20,7 @@ const routes: Routes = [
   // path: '/auth' AuthRouting
   
   
+  {path: 'personas', component: PersonasComponent },
   
   {path: '', redirectTo:'/admin', pathMatch: 'full'},
   {path: '**', component: NopagefoundComponent},
