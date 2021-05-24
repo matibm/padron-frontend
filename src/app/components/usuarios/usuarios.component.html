@@ -4,13 +4,13 @@
     </ng-template>
     <div class="card">
         <div class="card-body">
-            <form class="form-material  ">
+            <!-- <form class="form-material  ">
                 <div class="form-group">
 
                     <input #searchInput id="search" type="text" [(ngModel)]="searching" name="search" autocomplete="off" #val class="form-control form-control-line" placeholder="Busca usuario">
                 </div>
                 <small *ngIf="isSearching">Buscando... <i class="fa fa-spin fa-circle-o-notch"></i></small>
-            </form>
+            </form> -->
 
             <div *ngIf="usuarios" class="table-responsive">
 
@@ -18,27 +18,27 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Apellidos</th>
                             <th>Nombres</th>
+                            <th>Usuario</th>
+                            <th>Candidato</th>
+                            <th>admin</th>
+                            <th>mesa</th>
+                            <th>reporte</th>
 
-                            <th>Ruc</th>
-                            <th>Accion</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         <tr [routerLink]="['/admin/usuario', usuario._id]" class="pointer" *ngFor="let usuario of usuarios; let i = index">
                             <td scope="row">{{i+1}}</td>
-                            <td>{{usuario.APELLIDOS}}</td>
-                            <td>{{usuario.NOMBRES}}</td>
+                            <td>{{usuario.nombre}}</td>
+                            <td>{{usuario.email}}</td>
+                            <td>{{usuario.candidato}}</td>
+                            <td>{{usuario.isadmin}}</td>
+                            <td>{{usuario.ismesa}}</td>
+                            <td>{{usuario.isreporte}}</td>
 
-                            <td>{{usuario.RUC| ruc}}</td>
-                            <td>
-                                <button type="button" class="btn btn-sm btn-outline-dark">
-                                    <i class="fa fa-pencil"></i>
-            
-                                </button>
-                            </td>
+
                         </tr>
 
                     </tbody>

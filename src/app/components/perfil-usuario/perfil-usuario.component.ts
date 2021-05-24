@@ -1,3 +1,5 @@
+import { UsuarioP } from './../../models/usuariop';
+import { PersonaService } from './../../services/persona.service';
 import { MovimientoService } from './../../services/movimiento.service';
 import { Movimiento } from './../../models/movimiento';
 import { WhatsappService } from './../../services/whatsapp.service';
@@ -39,94 +41,104 @@ export class PerfilUsuarioComponent implements OnInit {
     public _contratoService: ContratoService,
     public _facturaService: FacturaService,
     public _comentarioService: WhatsappService,
-    public _movimientoService: MovimientoService
+    public _movimientoService: MovimientoService,
+    public _personaService: PersonaService
+
   ) { }
   id
   contratos: Contrato[]
-  usuario: Usuario
+  usuario: UsuarioP
   cuotas: Cuota[]
   facturas
   comentarios
+
+
+  departamentos
+  distritoSeleccionado
+  seccionalSeleccionado
+  seccionales
+  localSeleccionado
+  mesaSeleccionado
+  mesas
+  locales
+  distritos
+  opciones: any = { nombre: '' }
+  dptoSeleccionado
+
+
+  ismesa
+  isreporte
+  isadmin
+
+
   async ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-
-    this.pagos = await this._facturaService.getPagos(this.id)
-    // console.log("pagos", this.pagos);
-    
-    // this._comentarioService.listen('push_comentarios').subscribe((data: any) => {
-    //   this.comentarios = data
-
-    // })
-    // this._comentarioService.listen('push_comentario').subscribe((data: any) => {
-    //   this.comentarios.push(data)
-
-    // })
-    // this._comentarioService.emitir('get_comentarios', 'e')
-
     this.usuario = await this._usuarioService.getUsuarioPorId(this.id)
     console.log(this.usuario);
-    
     this.usuario.password = ''
+    this.ismesa = this.usuario.ismesa
+    this.isadmin = this.usuario.isadmin
+    this.isreporte = this.usuario.isreporte
 
-    this.facturas = (await this._facturaService.getFacturas(null, null, null, null, null, this.id)).facturas
+    this.dptoSeleccionado = this.usuario.desc_dep
+    this.distritoSeleccionado = this.usuario.desc_dis
+    this.localSeleccionado = this.usuario.desc_locanr
+    this.seccionalSeleccionado = this.usuario.desc_sec
+    this.mesaSeleccionado = this.usuario.mesa
 
+    this.opciones.desc_dep = this.usuario.desc_dep
+    this.opciones.desc_dis = this.usuario.desc_dis
+    this.opciones.desc_locanr = this.usuario.desc_locanr
+    this.opciones.desc_sec = this.usuario.desc_sec
+    this.opciones.mesa = this.usuario.mesa
+    await this.getLista()
 
-    this.isVendedor = this.usuario.VENDEDORES == '1' ? 'check_vendedor' : null
-    this.isCobrador = this.usuario.COBRADORES == '1' ? 'check_cobrador' : null
-    this.isCliente = this.usuario.CLIENTES == '1' ? 'check_cliente' : null
-    this.isEmpleado = this.usuario.EMPLEADOS == '1' ? 'check_empleado' : null
-    this.isPersona = this.usuario.PERSONA == '1' ? 'check_persona' : null
-    this.isEmpresa = this.usuario.EMPRESA == '1' ? 'check_empresa' : null
-    this.isContratado = this.usuario.CONTRATADO == '1' ? 'check_contratado' : null
-    this.isBanco = this.usuario.BANCOS == '1' ? 'check_banco' : null
-    this.manejaCaja = this.usuario.MANEJA_CAJA == '1' ? 'check_maneja_caja' : null
-    this.cobroOnline = this.usuario.fondo_online == '1' ? 'check_maneja_caja' : null
-    this.cuotas = await this._cuotaService.getCuotaByTitular(this.id)
-    this.contratos = await this._contratoService.getContratosByTitular(this.id);
-    this.movimientos = (await this._movimientoService.getAllMovimientos({cliente: this.id})).movimientos
-  }
-
-  prueba() {
+    this.departamentos = await this._personaService.getLista({ nombre: '' }, 'desc_dep')
 
   }
 
-  async actualizarUsuario(usuario) {
 
-    usuario.VENDEDORES = this.isVendedor ? '1' : '0';
-    usuario.COBRADORES = this.isCobrador ? '1' : '0';
-    usuario.CLIENTES = this.isCliente ? '1' : '0';
-    usuario.EMPLEADOS = this.isEmpleado ? '1' : '0';
-    usuario.PERSONA = this.isPersona ? '1' : '0';
-    usuario.EMPRESA = this.isEmpresa ? '1' : '0';
-    usuario.CONTRATADO = this.isContratado ? '1' : '0';
-    usuario.BANCOS = this.isBanco ? '1' : '0';
-    usuario.MANEJA_CAJA = this.manejaCaja ? '1' : '0';
-    usuario.fondo_online = this.cobroOnline ? '1' : '0';
+ async refreshfiltros(elquecambio?) {
+    if (elquecambio == 'depto') {
+      this.opciones = { nombre: '' }
+      this.opciones.desc_dep = this.dptoSeleccionado
 
-    let resp = await this._usuarioService.modificarUsuarios(usuario)
-  }
+      this.distritoSeleccionado = null
+      this.localSeleccionado = null
+      this.seccionalSeleccionado = null
 
-  comentar(texto) {
-    let comentario = {
-      usuario: this.usuario,
-      titular: this._usuarioService.usuario,
-      texto: texto
+      this.getLista()
+    this.departamentos = await this._personaService.getLista({ nombre: '' }, 'desc_dep')
+
+    } else{
+      this.getLista()
+
     }
-    // this._comentarioService.emitir('nuevo_comentario', comentario)
 
-
-    // this._comentarioService.listen('error').subscribe(data => {
-    //   console.log(data);
-
-    // })
   }
 
-  async mostrarModal(id){
+  async actualizarUsuario() {
+
+    this.usuario.desc_dep = this.opciones.desc_dep
+    this.usuario.desc_dis = this.opciones.desc_dis
+    this.usuario.desc_locanr = this.opciones.desc_locanr
+    this.usuario.desc_sec = this.opciones.desc_sec
+    this.usuario.mesa = this.opciones.mesa
+
+     this.usuario.ismesa = this.ismesa 
+     this.usuario.isadmin = this.isadmin 
+     this.usuario.isreporte = this.isreporte 
+
+    let resp = await this._usuarioService.modificarUsuarios(this.usuario)
+  }
+ 
+
+  async mostrarModal(id) {
     let resp = await this._facturaService.getDetallePago(id)
-     
+
     let pago = resp.pago
     let facturas = resp.facturas
-    let servicios =[]
+    let servicios = []
     for (let i = 0; i < facturas.length; i++) {
       const factura = facturas[i];
       servicios.push({
@@ -148,6 +160,33 @@ export class PerfilUsuarioComponent implements OnInit {
       servicios: servicios
     }
     console.log(this.facturapdf);
-    
+
   }
+
+
+  async getLista() {
+    this.departamentos = await this._personaService.getLista(this.opciones, 'desc_dep')
+    this.distritos = await this._personaService.getLista(this.opciones, 'desc_dis')
+    this.seccionales = await this._personaService.getLista(this.opciones, 'desc_sec')
+    this.locales = await this._personaService.getLista(this.opciones, 'desc_locanr')
+    this.mesas = await this._personaService.getLista(this.opciones, 'mesa')
+  }
+
+
+  allowCreate(): boolean {
+    if (this.usuario.nombre && this.usuario.password && this.usuario.email) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+
+  modificarUsuario(){
+    
+
+  }
+
+
+
 }

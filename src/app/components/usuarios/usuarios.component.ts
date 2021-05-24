@@ -1,3 +1,4 @@
+import { UsuarioP } from './../../models/usuariop';
 import { Usuario } from './../../models/usuario';
 import { UsuarioService } from './../../services/usuario.service';
 import { Component, DoCheck, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
@@ -21,7 +22,7 @@ export class UsuariosComponent implements OnInit, DoCheck {
   constructor(
     public _usuarioService: UsuarioService
   ) { }
-  usuarios: Usuario[]
+  usuarios: UsuarioP[]
   public loading = false;
 
   async ngOnInit() {
@@ -31,10 +32,10 @@ export class UsuariosComponent implements OnInit, DoCheck {
 
     }, 100);
     // this.usuarios = await this._usuarioService.getUsuarios();
-    console.log(this.usuarios);
     this.loading = false;
 
-
+    this.usuarios = await this._usuarioService.getUsuariosP()
+    console.log(this.usuarios);
 
     // elem ref
     const searchBox = document.getElementById('search');

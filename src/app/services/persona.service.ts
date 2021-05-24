@@ -22,7 +22,14 @@ export class PersonaService {
     return this.http.post(url, body, { responseType: 'blob' })
   }
   getLista(body, tipo) {
-
+    let bodyAux = {}
+    Object.entries(body).forEach(([key, value]) => {
+      if (value) {
+         
+        bodyAux[key] = body[key]
+      }
+    });
+    body = bodyAux
     let url = URL_SERVICIOS + '/persona/lista';
     url += `?token=${this._usuarioService.token}`
     url += `&distinct_code=${tipo}`

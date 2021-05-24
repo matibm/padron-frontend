@@ -16,37 +16,7 @@ export class SidebarService {
         { titulo: 'crear usuario', url: 'crear_usuario' },
         { titulo: 'lista de usuarios', url: 'usuarios' },
       ]
-    },
-    {
-      titulo: 'Contratos',
-      icono: 'mdi mdi-file-document',
-      submenu: [
-        { titulo: 'crear contrato', url: 'crear_contrato' },
-        { titulo: 'lista de contratos', url: 'lista_contratos' },
-       ]
-    },
-    {
-      titulo: 'Finanzas',
-      icono: 'mdi mdi-cash',
-      submenu: [
-        { titulo: 'Cobranzas', url: 'cobranzas' },
-        { titulo: 'Ingresos', url: 'ingresos' },
-        { titulo: 'Gastos', url: 'gastos' },
-        { titulo: 'caja', url: 'info_caja' },
-        { titulo: 'resumen', url: 'resumen' },
-        { titulo: 'transferencias', url: 'transferencia' },
-
-      ]
-    },
-    {
-      titulo: 'Productos',
-      icono: 'mdi mdi-shopping',
-      submenu: [
-        { titulo: 'crear producto', url: 'crear_producto' },
-        { titulo: 'lista de productos', url: 'lista_productos' }
-       ]
-    }
-    
+    } 
     
   ]
  

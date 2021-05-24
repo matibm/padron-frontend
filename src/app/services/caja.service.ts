@@ -14,7 +14,7 @@ export class CajaService {
     public http: HttpClient,
     public _usuarioService: UsuarioService
   ) {
-    this.getCajaActual()
+    // this.getCajaActual()
   }
 
   cajaActual

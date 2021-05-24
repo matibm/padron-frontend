@@ -39,7 +39,7 @@ export class UsuarioService {
   }
 
   getUsuarioPorId(id): Promise<Usuario> {
-    let url = URL_SERVICIOS + `/usuario/id/${id}`;
+    let url = URL_SERVICIOS + `/persona/usuario_by_id/${id}`;
     url += `?token=${this.token}`
     return this.http.get(url).toPromise().then((resp: any) => {
       return resp.usuario
@@ -70,17 +70,28 @@ export class UsuarioService {
   buscarUsuarios(tipo, busqueda) {
     console.log("buscando", busqueda);
 
-    let url = `${URL_SERVICIOS}/usuario/search/${tipo}`;
+    let url = `${URL_SERVICIOS}/buscar_usuario/${busqueda}`;
     url += `?token=${this.token}`
-    url += `&query=${busqueda}`
+    // url += `&query=${busqueda}`
+    return this.http.get(url).toPromise().then((resp: any) => {
+      return resp.usuarios
+    })
+  }
+  getUsuariosP() {
+
+    let url = `${URL_SERVICIOS}/persona/lista_usuario`;
+    url += `?token=${this.token}`
+    // url += `&query=${busqueda}`
     return this.http.get(url).toPromise().then((resp: any) => {
       return resp.usuarios
     })
   }
   modificarUsuarios(usuario) {
-    let url = `${URL_SERVICIOS}/usuario/edit/${usuario._id}`;
+    let url = `${URL_SERVICIOS}/persona/editar_usuario`;
     url += `?token=${this.token}`
-    return this.http.put(url, usuario).toPromise().then((resp: any) => {
+    console.log(usuario);
+    
+    return this.http.post(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);
 
       swal.fire({
