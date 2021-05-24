@@ -1,3 +1,5 @@
+import { UsuarioP } from './../../models/usuariop';
+import { PersonaService } from './../../services/persona.service';
 import { Router } from '@angular/router';
 import { Usuario } from './../../models/usuario';
 import { UsuarioService } from './../../services/usuario.service';
@@ -12,16 +14,21 @@ import swal from 'sweetalert2';
 export class CrearUsuarioComponent implements OnInit {
 
   constructor(public _usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    public _personaService: PersonaService
   ) { }
 
   ngOnInit(): void {
+    this.getLista()
   }
 
   nivel = 1
   isVendedor
   isProveedor
   isCobrador
+  ismesa
+  isreporte
+  isadmin
   isContratado
   isCliente
   isEmpleado
@@ -30,26 +37,35 @@ export class CrearUsuarioComponent implements OnInit {
   isEmpresa
   isBanco
   manejaCaja
-  usuario: Usuario = {}
+  usuario:UsuarioP = {}
+  departamentos  
+  distritoSeleccionado
+  seccionalSeleccionado
+  seccionales  
+  localSeleccionado
+  mesaSeleccionado
+  mesas
+  locales 
+  distritos  
+  opciones: any = {nombre: ''}
+  dptoSeleccionado
   async crearUsuario() {
-    console.log(this.usuario);
-    this.isVendedor == true ? this.usuario.VENDEDORES = '1' : this.usuario.VENDEDORES = '0'
-    this.isProveedor == true ? this.usuario.PROVEEDORES = '1' : this.usuario.PROVEEDORES = '0'
-    this.isCobrador == true ? this.usuario.COBRADORES = '1' : this.usuario.COBRADORES = '0'
-    this.isContratado == true ? this.usuario.CONTRATADO = '1' : this.usuario.CONTRATADO = '0'
-    this.isCliente == true ? this.usuario.CLIENTES = '1' : this.usuario.CLIENTES = '0'
-    this.isEmpleado == true ? this.usuario.EMPLEADOS = '1' : this.usuario.EMPLEADOS = '0'
-    this.isPersona == true ? this.usuario.PERSONA = '1' : this.usuario.PERSONA = '0'
-    this.isEmpresa == true ? this.usuario.EMPRESA = '1' : this.usuario.EMPRESA = '0'
-    this.isBanco == true ? this.usuario.BANCOS = '1' : this.usuario.BANCOS = '0'
-    this.manejaCaja == true ? this.usuario.MANEJA_CAJA = '1' : this.usuario.MANEJA_CAJA = '0'
+     
+    this.usuario.ismesa = this.ismesa
+    this.usuario.isreporte = this.isreporte
+    this.usuario.isadmin = this.isadmin
+    this.usuario.desc_dep = this.dptoSeleccionado,
+    this.usuario.desc_dis = this.distritoSeleccionado
+    this.usuario.desc_sec = this.seccionalSeleccionado
+    this.usuario.desc_locanr = this.localSeleccionado
+    this.usuario.mesa = this.mesaSeleccionado
 
     let us = await this._usuarioService.crearUsuario(this.usuario)
-    this.router.navigateByUrl('/admin/usuario/' + us._id)
+    // this.router.navigateByUrl('/admin/usuario/' + us._id)
   }
 
   allowCreate(): boolean {
-    if (this.usuario.NOMBRES && this.usuario.APELLIDOS && this.usuario.TELEFONO1 ) {
+    if (this.usuario.nombre && this.usuario.password && this.usuario.email ) {
       return true
     } else {
       return false
@@ -68,6 +84,14 @@ export class CrearUsuarioComponent implements OnInit {
       })
     }
 
+  }
+
+  async getLista(){
+    this.departamentos = await this._personaService.getLista(this.opciones, 'desc_dep') 
+    this.distritos = await this._personaService.getLista(this.opciones, 'desc_dis') 
+    this.seccionales = await this._personaService.getLista(this.opciones, 'desc_sec') 
+    this.locales = await this._personaService.getLista(this.opciones, 'desc_locanr') 
+    this.mesas = await this._personaService.getLista(this.opciones, 'mesa') 
   }
 
 }

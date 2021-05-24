@@ -53,15 +53,15 @@ export class PerfilUsuarioComponent implements OnInit {
     this.pagos = await this._facturaService.getPagos(this.id)
     // console.log("pagos", this.pagos);
     
-    this._comentarioService.listen('push_comentarios').subscribe((data: any) => {
-      this.comentarios = data
+    // this._comentarioService.listen('push_comentarios').subscribe((data: any) => {
+    //   this.comentarios = data
 
-    })
-    this._comentarioService.listen('push_comentario').subscribe((data: any) => {
-      this.comentarios.push(data)
+    // })
+    // this._comentarioService.listen('push_comentario').subscribe((data: any) => {
+    //   this.comentarios.push(data)
 
-    })
-    this._comentarioService.emitir('get_comentarios', 'e')
+    // })
+    // this._comentarioService.emitir('get_comentarios', 'e')
 
     this.usuario = await this._usuarioService.getUsuarioPorId(this.id)
     console.log(this.usuario);
@@ -112,13 +112,13 @@ export class PerfilUsuarioComponent implements OnInit {
       titular: this._usuarioService.usuario,
       texto: texto
     }
-    this._comentarioService.emitir('nuevo_comentario', comentario)
+    // this._comentarioService.emitir('nuevo_comentario', comentario)
 
 
-    this._comentarioService.listen('error').subscribe(data => {
-      console.log(data);
+    // this._comentarioService.listen('error').subscribe(data => {
+    //   console.log(data);
 
-    })
+    // })
   }
 
   async mostrarModal(id){

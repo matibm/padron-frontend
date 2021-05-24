@@ -16,32 +16,32 @@ export class WhatsappService {
   constructor(public http: HttpClient,
     public _usuarioService: UsuarioService,
   ) {
-    this.socket = io(URL_SERVICIOS)
+    // this.socket = io(URL_SERVICIOS)
   }
 
-  generateQr() {  
-    let url = URL_SERVICIOS + '/whatsapp/generate_qr';
-    url += `?token=${this._usuarioService.token}`
-    return this.http.get(url).toPromise().then((resp: any) => {
-      return resp.token
-    })
-  }
+  // generateQr() {  
+  //   let url = URL_SERVICIOS + '/whatsapp/generate_qr';
+  //   url += `?token=${this._usuarioService.token}`
+  //   return this.http.get(url).toPromise().then((resp: any) => {
+  //     return resp.token
+  //   })
+  // }
 
-  listen(eventName) {
-    return new Observable((subscriber) => {
-      this.socket.on(eventName, (data) => {
-        subscriber.next(data)
-      })
-    })
-  }
-  emitir(tipo, data) {
-    console.log("emitiendo");
+  // listen(eventName) {
+  //   return new Observable((subscriber) => {
+  //     this.socket.on(eventName, (data) => {
+  //       subscriber.next(data)
+  //     })
+  //   })
+  // }
+  // emitir(tipo, data) {
+  //   console.log("emitiendo");
     
-    this.socket.emit(tipo, data);
+  //   this.socket.emit(tipo, data);
 
-  }
-  pruebaSocket( ) {
+  // }
+  // pruebaSocket( ) {
     
-  }
+  // }
 
 }

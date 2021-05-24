@@ -19,15 +19,27 @@ export class LoginComponent implements OnInit {
 
   async login(email, password) {
     let usuario = {
-      EMAIL: email,
+      email: email,
       password: password
     }
     let resp = await this._usuarioService.login(usuario);
     if (resp.ok == true) {
       localStorage.setItem('token', resp.token);
+      localStorage.setItem('id', resp.user_id);
+      localStorage.setItem('usuario', JSON.stringify(resp.user));
       this._usuarioService.token = resp.token
       this._usuarioService.itsLogued = true
-      this.router.navigateByUrl('/')
+      this._usuarioService.usuario = resp.user
+      if (resp.user.isadmin) {
+        this.router.navigateByUrl('/')                
+      } else if(resp.user.isreporte) {
+        this.router.navigateByUrl('/personas')                        
+      
+      } else if(resp.user.ismesa) {
+        this.router.navigateByUrl('/mesa')                
+
+      }
+
     }
   }
 

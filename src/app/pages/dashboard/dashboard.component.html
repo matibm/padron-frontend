@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="false" class="row">
 
     <div class="col-lg-6 col-md-12">
         <div class="card">
@@ -68,3 +68,8 @@
         </div>
     </div>
 </div>
+
+<button type="button" [routerLink]="['/admin/crear_usuario']" routerLinkActive="router-link-active" class="btn mx-2 btn-primary">Crear nuevo usuario</button>
+<button type="button" class="btn mx-2 btn-primary">Lista de usuarios</button>
+<button type="button" [routerLink]="['/personas']" routerLinkActive="router-link-active" class="btn mx-2 btn-primary">Hacer Reporte</button>
+<button type="button" [routerLink]="['/mesa']" routerLinkActive="router-link-active" class="btn mx-2 btn-primary">Votar</button>

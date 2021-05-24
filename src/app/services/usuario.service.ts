@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import swal from 'sweetalert2';
 import { URL_SERVICIOS } from './../config/global';
 import { HttpClient } from '@angular/common/http';
@@ -15,6 +16,7 @@ export class UsuarioService {
   constructor(
     public http: HttpClient
   ) {
+    this.cargarStorage()
     this.token = localStorage.getItem('token');
     this.user_id = localStorage.getItem('user_id');
     this.itsLogued = this.token ? true : false;
@@ -67,7 +69,7 @@ export class UsuarioService {
   }
   buscarUsuarios(tipo, busqueda) {
     console.log("buscando", busqueda);
-    
+
     let url = `${URL_SERVICIOS}/usuario/search/${tipo}`;
     url += `?token=${this.token}`
     url += `&query=${busqueda}`
@@ -92,7 +94,7 @@ export class UsuarioService {
   }
 
   crearUsuario(usuario) {
-    let url = `${URL_SERVICIOS}/usuario/crear_usuario`;
+    let url = `${URL_SERVICIOS}/persona/crear_usuario`;
     url += `?token=${this.token}`
     return this.http.post(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);
@@ -104,10 +106,12 @@ export class UsuarioService {
       })
       return resp.usuario
     }, (error) => {
+      console.log(error);
+
       swal.fire({
         icon: 'error',
         title: 'Error al crear usuario',
-        text: error
+        text: error?.statusText
 
       })
       return error
@@ -117,7 +121,7 @@ export class UsuarioService {
   login(usuario) {
     console.log(usuario);
 
-    let url = `${URL_SERVICIOS}/usuario/login`;
+    let url = `${URL_SERVICIOS}/persona/login`;
     return this.http.post(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);
       this.usuario = resp.user
@@ -133,6 +137,64 @@ export class UsuarioService {
     this.itsLogued = false;
   }
 
+ 
+  getUsuario(id) {
+    let url = URL_SERVICIOS + '/persona/usuario/' + id;
+    url += '?token=' + this.token;
+    return this.http.get(url).pipe(map((data: any) => {
+      console.log(data);
+
+      return data.usuario
+    }))
+  }
+  cargarStorage() {
+    let p = new Promise((error) => {
+
+      if (localStorage) {
+        //console.log("funcion");
+
+      }
+      if (localStorage.getItem('token')) {
+
+        this.token = localStorage.getItem('token');
+        this.usuario = JSON.parse(localStorage.getItem('usuario'));
+      } else {
+        this.token = '';
+        this.usuario = null
+
+      }
+    }).catch(err => {
+      //console.log(err);
+     })
+
+    // p.then(()=>{
+    // //console.log("oiko");
+
+    // })
+  }
+
+  estaLogueado() {
+    let id = localStorage.getItem('id')
+    if (!id) {
+      return false
+    }
+
+    return this.getUsuario(id).toPromise().then((resp: any) => {
+ 
+      return true
+
+    }).catch(err => {
+     
+      console.log(err);
+
+      this.logout()
+
+      return false
+    })
+
+
+
+  }
 
 
 }

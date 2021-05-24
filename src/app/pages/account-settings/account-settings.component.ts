@@ -19,22 +19,22 @@ export class AccountSettingsComponent implements OnInit {
   authenticated = false;
 
   ngOnInit(): void {
-    this._whatsappService.listen('push_actividad').subscribe((data: any) => {
-      console.log(data);
+    // this._whatsappService.listen('push_actividad').subscribe((data: any) => {
+    //   console.log(data);
       
-      if (data.authenticated == false) {
-        this.tokenQr = data.token
-      }
-      if (data.authenticated == true) {
-        this.authenticated = true
-        if (data.message) {
-          this.chats.push(data.message)    
-        }
-      }
+    //   if (data.authenticated == false) {
+    //     this.tokenQr = data.token
+    //   }
+    //   if (data.authenticated == true) {
+    //     this.authenticated = true
+    //     if (data.message) {
+    //       this.chats.push(data.message)    
+    //     }
+    //   }
       
-    })
+    // })
 
-    this.settingsService.checkCurrentTheme();
+    // this.settingsService.checkCurrentTheme();
   }
 
   changeTheme(theme: string) {
@@ -47,7 +47,7 @@ export class AccountSettingsComponent implements OnInit {
 
   async generateQr() {
     // this.tokenQr = await this._whatsappService.generateQr()
-    this._whatsappService.pruebaSocket()
+    // this._whatsappService.pruebaSocket()
   }
 
 

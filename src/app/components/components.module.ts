@@ -47,6 +47,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CobranzaComponent } from './cobranza/cobranza.component';
 import { ModalFacturaComponent } from './modal-factura/modal-factura.component';
 import { PersonasComponent } from './personas/personas.component';
+import { MesaComponent } from './mesa/mesa.component';
 
 
 const maskConfig: Partial<IConfig> = {
@@ -82,6 +83,7 @@ const maskConfig: Partial<IConfig> = {
     CobranzaComponent,
     ModalFacturaComponent,
     PersonasComponent,
+    MesaComponent,
     
   ],
   imports: [

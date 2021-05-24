@@ -1,0 +1,41 @@
+<div style="width: 100%;">
+    <div style="display: flex;">
+        <div class="mx-auto">
+            <div style="width: fit-content;">
+                <div style="display: flex;">
+                    <form (ngSubmit)="buscar(ci.value, 'ci')" #form="ngForm">
+                        <div class="form-group m-2">
+                            <label for="">Buscar por CI</label>
+                            <input type="text" class="form-control" #ci name="" id="ci" aria-describedby="helpId" placeholder="">
+                            <button type="submit" class="btn my-2 btn-primary">Buscar</button>
+                        </div>
+                    </form>
+                    <form (ngSubmit)="buscar(orden.value, 'orden')" #form="ngForm">
+                        <div class="form-group m-2">
+                            <label for="">Buscar por Nro de Orden</label>
+                            <input type="text" #orden class="form-control" name="" id="orden" aria-describedby="helpId" placeholder="">
+                            <button type="submit" class="btn my-2 btn-primary">Buscar</button>
+
+                        </div>
+                    </form>
+                </div>
+                <hr>
+
+                <div *ngIf="persona">
+                    <h4>Seccional: <b>{{persona.desc_sec}}</b></h4>
+                    <h4>Nombre: <b>{{persona.nombre}}</b></h4>
+                    <h4>Apellido: <b>{{persona.apellido}}</b></h4>
+                    <h4>Nro Cedula: <b>{{persona.numero_ced}}</b></h4>
+                    <h4>Nro Orden: <b>{{persona.orden}}</b></h4>
+                    <h4>Votó:
+                        <b *ngIf="persona.voto">Si</b>
+                        <b *ngIf="!persona.voto">No</b>
+
+                    </h4>
+                    <button *ngIf="!persona.voto" (click)="votar(persona.numero_ced)" type="button" class="btn btn-inverse ">Votar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

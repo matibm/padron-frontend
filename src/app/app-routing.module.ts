@@ -7,20 +7,13 @@ import { AuthRoutingModule } from './auth/auth.routing';
 
 
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
-
-
-
-
-
-
-
+ 
 const routes: Routes = [
   
   // path: '/dashboard' PagesRouting
   // path: '/auth' AuthRouting
   
   
-  {path: 'personas', component: PersonasComponent },
   
   {path: '', redirectTo:'/admin', pathMatch: 'full'},
   {path: '**', component: NopagefoundComponent},

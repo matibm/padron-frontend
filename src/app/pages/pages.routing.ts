@@ -1,3 +1,8 @@
+import { MesaComponent } from './../components/mesa/mesa.component';
+import { ReporteGuard } from './../guard/reporte.guard';
+import { AdminGuard } from './../guard/admin.guard';
+import { PersonasComponent } from './../components/personas/personas.component';
+import { LoginGuard } from './../guard/login.guard';
 import { CobranzaComponent } from './../components/cobranza/cobranza.component';
 import { CrearFacturaComponent } from './../components/crear-factura/crear-factura.component';
 import { EditarProductoComponent } from './../components/editar-producto/editar-producto.component';
@@ -27,7 +32,7 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
-import { AccountSettingsComponent } from './account-settings/account-settings.component'; 
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 const routes: Routes = [
   // {
   //   path: 'contrato',
@@ -47,38 +52,40 @@ const routes: Routes = [
   // },
   {
     path: 'admin', component: PagesComponent,
-    canActivate: [AuthGuard],
+    canActivate: [LoginGuard],
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'progress', component: ProgressComponent },
-      { path: 'crear_contrato', component: CrearContratoComponent },
-      { path: 'crear_ingreso', component: CrearFacturaComponent },
-      { path: 'grafica1', component: Grafica1Component },
-      { path: 'usuarios', component: UsuariosComponent },
-      { path: 'usuario/:id', component: PerfilUsuarioComponent },
+      { path: 'editar_contrato/:id', component: EditarContratoComponent },
+      { path: 'editar_producto/:id', component: EditarProductoComponent },
+      { path: 'account-settings', component: AccountSettingsComponent },
       { path: 'lista_contratos', component: ListaContratosComponent },
       { path: 'info_contrato/:id', component: InfoContratoComponent },
-      { path: 'crear_usuario', component: CrearUsuarioComponent },
-      { path: 'ingreso/:id', component: FacturaComponent },
+      { path: 'lista_productos', component: ListaProductosComponent },
+      { path: 'crear_producto', component: CrearProductoComponent },
+      { path: 'crear_contrato', component: CrearContratoComponent },
+      { path: 'contrato_pdf/:id', component: ContratoPdfComponent },
+      { path: 'transferencia', component: TransferenciaComponent },
+      { path: 'crear_usuario', component: CrearUsuarioComponent, canActivate: [AdminGuard] },
+      { path: 'crear_ingreso', component: CrearFacturaComponent },
+      { path: 'usuario/:id', component: PerfilUsuarioComponent },
       { path: 'ingresos', component: ListaFacturasComponent },
+      { path: 'ingreso/:id', component: FacturaComponent },
       { path: 'cobranzas', component: CobranzaComponent },
       { path: 'gastos', component: MovimientosComponent },
-      { path: 'contrato_pdf/:id', component: ContratoPdfComponent },
-      { path: 'editar_contrato/:id', component: EditarContratoComponent },
       { path: 'info_caja', component: InfoCajaComponent },
+      { path: 'progress', component: ProgressComponent },
+      { path: 'grafica1', component: Grafica1Component },
+      { path: 'usuarios', component: UsuariosComponent },
       { path: 'resumen', component: ResumenComponent },
-      { path: 'transferencia', component: TransferenciaComponent },
-      { path: 'crear_producto', component: CrearProductoComponent },
-      { path: 'editar_producto/:id', component: EditarProductoComponent },
-      { path: 'lista_productos', component: ListaProductosComponent },
-
-      { path: 'account-settings', component: AccountSettingsComponent },
+     
 
     ]
 
-
   },
+  { path: 'personas', component: PersonasComponent, canActivate:[ReporteGuard]},
+  { path: 'mesa', component: MesaComponent, canActivate:[LoginGuard]},
   { path: 'contratos-pdf/:id', component: ContratoPdfComponent },
+  
   { path: 'factura-pdf/:id', component: FacturaPdfComponent }
 
 

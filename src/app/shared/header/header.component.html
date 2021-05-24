@@ -186,7 +186,7 @@
                 <li class="nav-item dropdown">
                     <div style=" height: 100%; padding-top: 12px;" data-toggle="dropdown" class="dropdown-toggle">
                         <a *ngIf="_usuarioService.usuario" style="height: 100%; " class="nav-link   waves-effect waves-dark" href="" aria-haspopup="true" aria-expanded="false">
-                            <ngx-avatar [size]="30" name="{{[_usuarioService.usuario.NOMBRES, _usuarioService.usuario.APELLIDOS ] | nombreCorto }}">
+                            <ngx-avatar [size]="30" name="{{_usuarioService.usuario.nombre}}">
                             </ngx-avatar>
                         </a>
                     </div>
@@ -195,10 +195,10 @@
                         <ul class="dropdown-user">
                             <li>
                                 <div *ngIf="_usuarioService.usuario" class="dw-user-box inline-flex">
-                                    <ngx-avatar [round]="false" [cornerRadius]="4" name="{{[_usuarioService.usuario.NOMBRES, _usuarioService.usuario.APELLIDOS ] | nombreCorto }}">
+                                    <ngx-avatar [round]="false" [cornerRadius]="4" name="{{_usuarioService.usuario.nombre}}">
                                     </ngx-avatar>
                                     <div class="u-text">
-                                        <h4>{{[_usuarioService.usuario.NOMBRES, _usuarioService.usuario.APELLIDOS ] | nombreCorto }}</h4>
+                                        <h4>{{_usuarioService.usuario.nombre}}</h4>
                                         <p class="text-muted">varun@gmail.com</p><a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
                                     </div>
                                 </div>

@@ -3,185 +3,127 @@
         <div class="col-xs col-md">
             <div class="card">
                 <div class="card-body">
-                    <h4>General</h4>
-                    <div class="form-group">
-                        <label for="">Apellidos/Razon</label>
-                        <input [(ngModel)]="usuario.APELLIDOS" type="text" class="form-control" name="apellidos" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Nombres</label>
-                        <input [(ngModel)]="usuario.NOMBRES" type="text" class="form-control" name="nombres" autocomplete="off">
+                    <div class="row">
+                        <div class="col-xs col-md">
+                            <div class="form-group">
+                                <label for="">Nombres</label>
+                                <input [(ngModel)]="usuario.nombre" type="text" class="form-control" name="nombres" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">nombre de usuario</label>
+                                <input [(ngModel)]="usuario.email" type="text" class="form-control" name="email" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">pin</label>
+                                <input type="password" [(ngModel)]="usuario.password" class="form-control" name="password" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Candidato</label>
+                                <input type="text" [(ngModel)]="usuario.candidato" class="form-control" name="candidato" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-xs col-md">
+                            <div style="justify-content: space-between;" class="inline-flex mt-1">
+                                <label>Departamentos</label>
+
+                            </div>
+                            <div class="">
+                                <ng-select [(ngModel)]="dptoSeleccionado" (ngModelChange)="opciones.desc_dep = dptoSeleccionado; ngOnInit();">
+                                    <ng-option *ngFor="let item of departamentos" [value]="item">
+                                        <div>
+                                            {{item}}
+                                        </div>
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div style="justify-content: space-between;" class="inline-flex mt-1">
+                                <label>Distritos</label>
+
+                            </div>
+                            <div class="">
+                                <ng-select [(ngModel)]="distritoSeleccionado" (ngModelChange)="opciones.desc_dis = distritoSeleccionado; ngOnInit();">
+                                    <ng-option *ngFor="let item of distritos" [value]="item">
+                                        <div>
+                                            {{item}}
+                                        </div>
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div style="justify-content: space-between;" class="inline-flex mt-1">
+                                <label>Seccional</label>
+                            </div>
+                            <div class="">
+                                <ng-select [(ngModel)]="seccionalSeleccionado" (ngModelChange)="opciones.desc_sec = seccionalSeleccionado; ngOnInit();">
+                                    <ng-option *ngFor="let item of seccionales" [value]="item">
+                                        <div>
+                                            {{item}}
+                                        </div>
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div style="justify-content: space-between;" class="inline-flex mt-1">
+                                <label>Local</label>
+                            </div>
+                            <div class="">
+                                <ng-select [(ngModel)]="localSeleccionado">
+                                    <ng-option *ngFor="let item of locales" [value]="item">
+                                        <div>
+                                            {{item}}
+                                        </div>
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                            <div style="justify-content: space-between;" class="inline-flex mt-1">
+                                <label>Mesa</label>
+                            </div>
+                            <div class="">
+                                <ng-select [(ngModel)]="mesaSeleccionado">
+                                    <ng-option *ngFor="let item of mesas" [value]="item">
+                                        <div>
+                                            {{item}}
+                                        </div>
+                                    </ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="">RUC/CI</label>
-                        <input [(ngModel)]="usuario.RUC" type="text" class="form-control" name="RUC" autocomplete="off">
-                        <button type="button" (click)="consultar(usuario.RUC)" class="btn mt-2 btn-secondary">Consultar usuario</button>
+
+                    <div class="row">
+                        <div class="col-xs col-md">
+
+                        </div>
+                        <div class="col-xs col-md">
+
+                        </div>
+
+                        <div class="col-xs col-md">
+
+                        </div>
+                        <div class="col-xs col-md">
+
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">email</label>
-                        <input [(ngModel)]="usuario.EMAIL" type="text" class="form-control" name="email" autocomplete="off">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Perfil de Facebook</label>
-                        <input [(ngModel)]="usuario.facebook" type="text" class="form-control" name="facebook" autocomplete="off">
-                    </div>
-                    <div *ngIf="false" class="form-group">
-                        <label for="">contraseña</label>
-                        <input type="password" [(ngModel)]="usuario.password" class="form-control" name="password" autocomplete="off">
-                    </div>
+
+                    <label for="">Nivel de Acceso</label>
 
                     <div class="d-flex">
                         <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isCliente" type="checkbox" id="check_cliente" name="check_cliente-name" class="filled-in chk-col-light-blue" (click)="isCliente? null :isCliente='check_cliente' " checked>
-                            <label for="check_cliente">Cliente</label>
+                            <input [(ngModel)]="ismesa" type="checkbox" id="check_mesa" name="check_mesa-name" class="filled-in chk-col-light-blue" (click)="ismesa? null :ismesa='check_mesa' " checked>
+                            <label for="check_mesa">mesa</label>
                         </div>
 
                         <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isProveedor" type="checkbox" id="check_proveedor" name="check_proveedor-name" class="filled-in chk-col-light-blue" (click)="isProveedor? null :isProveedor='check_proveedor' " checked>
-                            <label for="check_proveedor">Proveedor</label>
+                            <input [(ngModel)]="isreporte" type="checkbox" id="check_reporte" name="check_reporte-name" class="filled-in chk-col-light-blue" (click)="isreporte? null :isreporte='check_reporte' " checked>
+                            <label for="check_reporte">reporte</label>
                         </div>
 
                         <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isCobrador" type="checkbox" id="check_cobrador" name="check_cobrador-name" class="filled-in chk-col-light-blue" (click)="isCobrador? null :isCobrador='check_cobrador' " checked>
-                            <label for="check_cobrador">Cobrador</label>
+                            <input [(ngModel)]="isadmin" type="checkbox" id="check_admin" name="check_admin-name" class="filled-in chk-col-light-blue" (click)="isadmin? null :isadmin='check_admin' " checked>
+                            <label for="check_admin">administrador</label>
                         </div>
-                        <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isContratado" type="checkbox" id="check_contratado" name="check_contratado-name" class="filled-in chk-col-light-blue" (click)="isContratado? null :isContratado='check_contratado' " checked>
-                            <label for="check_contratado">Contratado</label>
-                        </div>
-
-
-
-                    </div>
-
-                    <div class="d-flex">
-
-                        <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isBanco" type="checkbox" id="check_banco" name="check_banco-name" class="filled-in chk-col-light-blue" (click)="isBanco? null :isBanco='check_banco' " checked>
-                            <label for="check_banco">Banco</label>
-                        </div>
-
-                        <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isEmpleado" type="checkbox" id="check_empleado" name="check_empleado-name" class="filled-in chk-col-light-blue" (click)="isEmpleado? null :isEmpleado='check_empleado' " checked>
-                            <label for="check_empleado">Empleado</label>
-                        </div>
-
-                        <div class="mt-1 mr-auto ">
-                            <input [(ngModel)]="isVendedor" type="checkbox" id="check_vendedor" name="check_vendedor-name" class="filled-in chk-col-light-blue" (click)="isVendedor? null :isVendedor='check_vendedor' " checked>
-                            <label for="check_vendedor">Vendedor</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="">Nivel de Acceso</label>
-                        <input type="number" name="" [(ngModel)]="nivel" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-xs col-md">
-            <div class="card">
-                <div class="card-body">
-                    <h4>Particular</h4>
-
-                    <form class="form-material ">
-
-                        <div class="form-group">
-                            <label for="">Direccion: </label>
-                            <input type="text" name="" [(ngModel)]="usuario.DIRECCION" name="Direccion:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                        </div>
-                    </form>
-
-                    <form class="form-material ">
-                        <div class="form-group">
-                            <label for="">Ciudad: </label>
-                            <input type="text" name="" [(ngModel)]="usuario.NOMCIUDAD" name="</label" id="" class="form-control" placeholder="" aria-describedby="helpId">
-
-                        </div>
-                    </form>
-                    <form class="form-material ">
-
-                        <div class="form-group">
-                            <label for="">Departamento: </label>
-                            <input type="text" [(ngModel)]="usuario.NOMDEPAR" name="departamento" id="" class="form-control" placeholder="" aria-describedby="helpId">
-
-                        </div>
-                    </form>
-                    <div class="form-group">
-                        <label for="">Celular:</label>
-                        <input type="text" [(ngModel)]="usuario.TELEFONO1" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="">Línea Baja:</label>
-                        <input type="text" [(ngModel)]="usuario.TELEFONO2" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                    </div>
-
-
-
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="">Notas</label>
-                        <textarea class="form-control" name="" id="" rows="6"></textarea>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-xs col-md">
-            <div class="card">
-                <div class="card-body">
-                    <h4>Laboral</h4>
-                    <form class="form-material ">
-
-                        <div class="form-group">
-                            <label for="">Lugar de Trabajo: </label>
-                            <input type="text" [(ngModel)]="usuario.LUGAR_TRABAJO" name="" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                        </div>
-                    </form>
-                    <form class="form-material ">
-
-                        <div class="form-group">
-                            <label for="">Direccion: </label>
-                            <input type="text" name="" [(ngModel)]="usuario.direccion_laboral" name="Direccion:" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                        </div>
-                    </form>
-
-                    <form class="form-material ">
-                        <div class="form-group">
-                            <label for="">Ciudad: </label>
-                            <input type="text" name="" [(ngModel)]="usuario.ciudad_trabajo" name="</label" id="" class="form-control" placeholder="" aria-describedby="helpId">
-
-                        </div>
-                    </form>
-                    <form class="form-material ">
-
-                        <div class="form-group">
-                            <label for="">Departamento: </label>
-                            <input type="text" [(ngModel)]="usuario.DEPARTAMENTO_TRABAJO" name="departamento" id="" class="form-control" placeholder="" aria-describedby="helpId">
-
-                        </div>
-                    </form>
-
-
-                    <div class="form-group">
-                        <label for="">Celular:</label>
-                        <input type="text" [(ngModel)]="usuario.TELEFONO3" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="">Línea Baja:</label>
-                        <input type="text" [(ngModel)]="usuario.TEL_TRABAJO" name="Telefono-1" id="" class="form-control" placeholder="" aria-describedby="helpId" autocomplete="off">
-
                     </div>
 
 
