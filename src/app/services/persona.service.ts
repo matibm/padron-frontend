@@ -19,6 +19,34 @@ export class PersonaService {
     let url = URL_SERVICIOS + '/persona/filter';
     // url += `?token=${this._usuarioService.token}`
 
+    let timerInterval
+    swal.fire({
+      title: 'Generando Archivo',
+      html: 'Por favor espere unos segundos',
+       // timerProgressBar: true,
+      didOpen: () => {
+        swal.showLoading()
+       
+      },
+      willClose: () => {
+        clearInterval(timerInterval)
+      }
+    }).then((result) => {
+      /* Read more about handling dismissals below */
+      if (result.dismiss === swal.DismissReason.timer) {
+        console.log('I was closed by the timer')
+      }
+    })
+    let bodyAux = {}
+
+    Object.entries(body).forEach(([key, value]) => {
+      if (value) {
+         
+        bodyAux[key] = body[key]
+      }
+    });
+    body = bodyAux
+
     return this.http.post(url, body, { responseType: 'blob' })
   }
   getLista(body, tipo) {
@@ -42,6 +70,16 @@ export class PersonaService {
 
     let url = URL_SERVICIOS + '/persona/personas';
     url += `?token=${this._usuarioService.token}`
+    let bodyAux = {}
+
+    Object.entries(body).forEach(([key, value]) => {
+      if (value) {
+         
+        bodyAux[key] = body[key]
+      }
+    });
+    body = bodyAux
+
     return this.http.post(url, body).toPromise().then((data: any) => {
       return data.personas
     })

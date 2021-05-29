@@ -83,6 +83,7 @@ const routes: Routes = [
 
   },
   { path: 'personas', component: PersonasComponent, canActivate:[ReporteGuard]},
+  { path: 'reporte', component: PersonasComponent, canActivate:[ReporteGuard]},
   { path: 'mesa', component: MesaComponent, canActivate:[LoginGuard]},
   { path: 'contratos-pdf/:id', component: ContratoPdfComponent },
   

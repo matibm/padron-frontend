@@ -128,7 +128,7 @@ export class PerfilUsuarioComponent implements OnInit {
      this.usuario.ismesa = this.ismesa 
      this.usuario.isadmin = this.isadmin 
      this.usuario.isreporte = this.isreporte 
-
+    
     let resp = await this._usuarioService.modificarUsuarios(this.usuario)
   }
  

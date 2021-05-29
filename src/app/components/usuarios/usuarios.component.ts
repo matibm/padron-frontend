@@ -1,7 +1,8 @@
+import { PersonaService } from './../../services/persona.service';
 import { UsuarioP } from './../../models/usuariop';
 import { Usuario } from './../../models/usuario';
 import { UsuarioService } from './../../services/usuario.service';
-import { Component, DoCheck, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component,  ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { of } from "rxjs";
 
 import {
@@ -16,25 +17,40 @@ import { fromEvent } from 'rxjs';
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css']
 })
-export class UsuariosComponent implements OnInit, DoCheck {
+export class UsuariosComponent implements OnInit {
   @ViewChild("searchInput", { static: true }) search: ElementRef
   @ViewChildren("searchInput") searchInput: QueryList<ElementRef>
   constructor(
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+    public _personaService: PersonaService
+
+
   ) { }
   usuarios: UsuarioP[]
   public loading = false;
+  opciones: any = {}
+  candidato
+  candidatos
+
+
+
+
+
+
+
+
+
 
   async ngOnInit() {
     this.loading = true;
-    setTimeout(() => {
-      this.searchInput.first.nativeElement.focus();
 
-    }, 100);
+
+    this.getlistas()
+
     // this.usuarios = await this._usuarioService.getUsuarios();
     this.loading = false;
 
-    this.usuarios = await this._usuarioService.getUsuariosP()
+    this.usuarios = await this._usuarioService.getUsuariosP(this.opciones)
     console.log(this.usuarios);
 
     // elem ref
@@ -52,85 +68,44 @@ export class UsuariosComponent implements OnInit, DoCheck {
 
       )
       .subscribe(async (txt) => {
+        console.log("text",txt);
+        
         this.isSearching = true
-        this.usuarios = await this._usuarioService.buscarUsuarios('ALL', txt)
+        this.usuarios = await this._usuarioService.buscarCandidatos(txt, this.opciones)
         this.isSearching = false
       });
-
 
   }
 
   isSearching = false;
   apiResponse = [];
 
-  async ngDoCheck() {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // fromEvent(this.search.nativeElement, 'keyup').pipe(
-
-    //   // get value
-    //   map((event: any) => {
-    //     return event.target.value;
-    //   })
-    //   // if character length greater then 2
-    //   , filter(res => res.length > 2)
-
-    //   // Time in milliseconds between key events
-    //   , debounceTime(1000)
-
-    //   // If previous query is diffent from current   
-    //   , distinctUntilChanged()
-
-    //   // subscription for response
-    // ).subscribe(async (text: string) => {
-    //   try {
-
-    //     this.isSearching = true;
-
-
-    //     this.usuarios = await this._usuarioService.buscarUsuarios('ALL', text)
-    //     this.isSearching = false;
-
-    //   } catch (error) {
-    //     console.log(error);
-    //     return
-    //   }
-    // this.searchGetCall(text).subscribe((res) => {
-    //   console.log('res', res);
-    //   this.isSearching = false;
-    //   this.apiResponse = res;
-    // }, (err) => {
-    //   this.isSearching = false;
-    //   console.log('error', err);
-    // });
-
-    // });
-  
-
-  }
-  searching
-
-
-  async searchUsuarios(val: any) {
-
-    if (val.length > 0) {
-
-
-      this.usuarios = await this._usuarioService.buscarUsuarios('ALL', this.searching)
-
+  rebuscar(toOmit: Array<string>) {
+    for (let i = 0; i < toOmit.length; i++) {
+      const element = toOmit[i];
+      this.opciones[element] = null
     }
+    console.log(this.opciones);
+
+    this.getlistas()
+
   }
+
+  departamentos
+  distritos
+  seccionales
+  locales
+  
+  async getlistas() {
+
+    this.departamentos = await this._personaService.getLista(this.opciones, 'desc_dep')
+    this.distritos = await this._personaService.getLista(this.opciones, 'desc_dis')
+    this.seccionales = await this._personaService.getLista(this.opciones, 'desc_sec')
+    this.locales = await this._personaService.getLista(this.opciones, 'desc_locanr')
+    this.usuarios = await this._usuarioService.getUsuariosP(this.opciones)
+    
+  }
+ 
+  searching
+ 
 }

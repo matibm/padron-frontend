@@ -2,26 +2,46 @@
     <div style="display: flex;">
         <div class="mx-auto">
             <div style="width: fit-content;">
-                <div style="display: flex;">
-                    <form (ngSubmit)="buscar(ci.value, 'ci')" #form="ngForm">
-                        <div class="form-group m-2">
-                            <label for="">Buscar por CI</label>
-                            <input type="text" class="form-control" #ci name="" id="ci" aria-describedby="helpId" placeholder="">
-                            <button type="submit" class="btn my-2 btn-primary">Buscar</button>
-                        </div>
-                    </form>
-                    <form (ngSubmit)="buscar(orden.value, 'orden')" #form="ngForm">
-                        <div class="form-group m-2">
-                            <label for="">Buscar por Nro de Orden</label>
-                            <input type="text" #orden class="form-control" name="" id="orden" aria-describedby="helpId" placeholder="">
-                            <button type="submit" class="btn my-2 btn-primary">Buscar</button>
+                <div style="z-index: 400; position:-webkit-sticky; background-color: #FCFCFC; position:sticky; margin-top:0px; top: 0px; width: 100%;">
+                    <div style="display: flex;">
+                        <div class="mx-auto">
+                            <form (ngSubmit)="buscar(ci.value, 'ci')" class="form-material" #form="ngForm">
+                                <div class="form-group m-2">
+                                    <!-- <label for="">Buscar por CI</label> -->
+                                    <div style="display: flex;" class="">
+                                        <input type="text" class="form-control" #ci name="" id="ci" aria-describedby="helpId" placeholder="Buscar por C.I.">
+                                        <button type="submit" class="btn m-2 btn-primary">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                        <a (click)="_usuarioService.logout()" routerLink="/login" type="submit" class="btn my-2 btn-outline-danger">
+                                            <i class="mdi mdi-exit-to-app"></i>
+                                        </a>
+                                    </div>
 
+                                </div>
+                            </form>
+                            <!-- <form (ngSubmit)="buscar(orden.value, 'orden')" #form="ngForm">
+                                <div class="form-group m-2">
+                                    <label for="">Buscar por Nro de Orden</label>
+                                    <input type="text" #orden class="form-control" name="" id="orden" aria-describedby="helpId" placeholder="">
+                                    <button type="submit" class="btn my-2 btn-primary">Buscar</button>
+        
+                                </div>
+                            </form> -->
                         </div>
-                    </form>
+                    </div>
                 </div>
-                <hr>
+                <div class="row mt-5">
+                    <div class="col-md col-xs" align="center" *ngIf="personas">
+                        <button *ngFor="let item of personas" style="width: 68px;" (click)="persona = item ;votar(item.numero_ced)" [disabled]="item.voto" [ngClass]="{'btn-info': !item.voto, 'btn-success': item.voto}" type="button" class="btn m-2 ">{{item.orden}}</button>
 
-                <div *ngIf="persona">
+                    </div>
+                    <div class="col-md col-xs" align="center" *ngIf="!personas">
+                        Buscando votantes...
+
+                    </div>
+                </div>
+                <!-- <div *ngIf="persona">
                     <h4>Seccional: <b>{{persona.desc_sec}}</b></h4>
                     <h4>Nombre: <b>{{persona.nombre}}</b></h4>
                     <h4>Apellido: <b>{{persona.apellido}}</b></h4>
@@ -33,7 +53,7 @@
 
                     </h4>
                     <button *ngIf="!persona.voto" (click)="votar(persona.numero_ced)" type="button" class="btn btn-inverse ">Votar</button>
-                </div>
+                </div> -->
 
             </div>
         </div>

@@ -4,13 +4,93 @@
     </ng-template>
     <div class="card">
         <div class="card-body">
-            <!-- <form class="form-material  ">
-                <div class="form-group">
 
-                    <input #searchInput id="search" type="text" [(ngModel)]="searching" name="search" autocomplete="off" #val class="form-control form-control-line" placeholder="Busca usuario">
+            <div class="row">
+                <div class="col-xs col-md-3">
+                    <div style="justify-content: space-between;" class="inline-flex">
+                        <label>Departamentos</label>
+                    </div>
+                    <div class="">
+                        <ng-select [(ngModel)]="opciones.desc_dep" (ngModelChange)=" rebuscar( ['desc_locanr', 'desc_sec', 'desc_dis']) ">
+                            <ng-option *ngFor="let item of departamentos" [value]="item">
+                                <div>
+                                    {{item}}
+                                </div>
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col-xs col-md-3">
+                    <div style="justify-content: space-between;" class="inline-flex">
+                        <label>Distritos</label>
+
+                    </div>
+                    <div class="">
+                        <ng-select [(ngModel)]="opciones.desc_dis" (ngModelChange)=" rebuscar( ['desc_locanr', 'desc_sec']) ">
+                            <ng-option *ngFor="let item of distritos" [value]="item">
+                                <div>
+                                    {{item}}
+                                </div>
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div *ngIf="opciones.desc_dis" class="col-xs col-md-3">
+                    <div style="justify-content: space-between;" class="inline-flex">
+                        <label>Seccional</label>
+                    </div>
+                    <div class="">
+                        <ng-select [(ngModel)]="opciones.desc_sec" (ngModelChange)=" rebuscar(['desc_locanr'])">
+                            <ng-option *ngFor="let item of seccionales" [value]="item">
+                                <div>
+                                    {{item}}
+                                </div>
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div *ngIf="opciones.desc_sec" class="col-xs col-md-3">
+                    <div style="justify-content: space-between;" class="inline-flex">
+                        <label>Local</label>
+                    </div>
+                    <div class="">
+                        <ng-select [(ngModel)]="opciones.desc_locanr" (ngModelChange)=" rebuscar( [])">
+                            <ng-option *ngFor="let item of locales" [value]="item">
+                                <div>
+                                    {{item}}
+                                </div>
+                            </ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+            <form class=" form-material m-2 ">
+                <div class="form-group">
+                    <input #searchInput id="search" type="text" [(ngModel)]="searching" name="search" autocomplete="off" #val class="form-control form-control-line" placeholder="Busca candidato">
                 </div>
                 <small *ngIf="isSearching">Buscando... <i class="fa fa-spin fa-circle-o-notch"></i></small>
-            </form> -->
+            </form>
+
+            <div class="">
+
+                <div class="d-flex">
+                    <div class="mt-1 mr-auto ">
+                        <input [(ngModel)]="opciones.ismesa" (ngModelChange)="getlistas()" type="checkbox" id="check_mesa" name="check_mesa-name" class="filled-in chk-col-light-blue" (click)="opciones.ismesa? null :opciones.ismesa='check_mesa' " checked>
+                        <label for="check_mesa">mesa</label>
+                    </div>
+
+                    <div class="mt-1 mr-auto ">
+                        <input [(ngModel)]="opciones.isreporte" (ngModelChange)="getlistas()" type="checkbox" id="check_reporte" name="check_reporte-name" class="filled-in chk-col-light-blue" (click)="opciones.isreporte? null :opciones.isreporte='check_reporte' " checked>
+                        <label for="check_reporte">reporte</label>
+                    </div>
+
+                    <div class="mt-1 mr-auto ">
+                        <input [(ngModel)]="opciones.isadmin" (ngModelChange)="getlistas()" type="checkbox" id="check_admin" name="check_admin-name" class="filled-in chk-col-light-blue" (click)="opciones.isadmin? null :opciones.isadmin='check_admin' " checked>
+                        <label for="check_admin">administrador</label>
+                    </div>
+                </div>
+
+            </div>
 
             <div *ngIf="usuarios" class="table-responsive">
 
@@ -18,9 +98,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nombres</th>
-                            <th>Usuario</th>
                             <th>Candidato</th>
+                            <th>Usuario</th>
+                            <!-- <th>Candidato</th> -->
                             <th>admin</th>
                             <th>mesa</th>
                             <th>reporte</th>
@@ -33,11 +113,10 @@
                             <td scope="row">{{i+1}}</td>
                             <td>{{usuario.nombre}}</td>
                             <td>{{usuario.email}}</td>
-                            <td>{{usuario.candidato}}</td>
+                            <!-- <td>{{usuario.candidato}}</td> -->
                             <td>{{usuario.isadmin}}</td>
                             <td>{{usuario.ismesa}}</td>
                             <td>{{usuario.isreporte}}</td>
-
 
                         </tr>
 

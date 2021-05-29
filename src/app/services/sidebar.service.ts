@@ -9,12 +9,15 @@ export class SidebarService {
   urlActual
   menu: any[] = [
     {
-      titulo: 'Usuarios',
-      icono: 'mdi mdi-account-multiple',
+      titulo: 'MENU',
+      icono: 'mdi mdi-menu',
       submenu: [
         
-        { titulo: 'crear usuario', url: 'crear_usuario' },
-        { titulo: 'lista de usuarios', url: 'usuarios' },
+        { titulo: 'Crear usuario', url: 'crear_usuario' },
+        { titulo: 'Lista de usuarios', url: 'usuarios' },
+        { titulo: 'Reporte', url: '/reporte' },
+        { titulo: 'Mesa', url: '/mesa' },
+        { titulo: 'Inicio', url: '/admin' },
       ]
     } 
     

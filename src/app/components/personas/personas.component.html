@@ -1,14 +1,13 @@
 <div class="card">
     <div class="card-body">
-        <h4><span class="lstick"></span>Filtros</h4>
+        <h4><span class="lstick"></span>Reporte</h4>
         <div class="row">
-            <div class="col-xs col-md-3">
+            <div *ngIf="usuario.isadmin" class="col-xs col-md-3">
                 <div style="justify-content: space-between;" class="inline-flex">
                     <label>Departamentos</label>
-
                 </div>
                 <div class="">
-                    <ng-select [(ngModel)]="dptoSeleccionado" (ngModelChange)="opciones.desc_dep = dptoSeleccionado; ngOnInit();">
+                    <ng-select [(ngModel)]="opciones.desc_dep" (ngModelChange)=" rebuscar( ['desc_locanr', 'desc_sec', 'desc_dis']) ">
                         <ng-option *ngFor="let item of departamentos" [value]="item">
                             <div>
                                 {{item}}
@@ -17,13 +16,13 @@
                     </ng-select>
                 </div>
             </div>
-            <div class="col-xs col-md-3">
+            <div *ngIf="usuario.isadmin  " class="col-xs col-md-3">
                 <div style="justify-content: space-between;" class="inline-flex">
                     <label>Distritos</label>
 
                 </div>
                 <div class="">
-                    <ng-select [(ngModel)]="distritoSeleccionado" (ngModelChange)="opciones.desc_dis = distritoSeleccionado; ngOnInit();">
+                    <ng-select [(ngModel)]="opciones.desc_dis" (ngModelChange)=" rebuscar( ['desc_locanr', 'desc_sec']) ">
                         <ng-option *ngFor="let item of distritos" [value]="item">
                             <div>
                                 {{item}}
@@ -32,12 +31,12 @@
                     </ng-select>
                 </div>
             </div>
-            <div class="col-xs col-md-3">
+            <div *ngIf="opciones.desc_dis" class="col-xs col-md-3">
                 <div style="justify-content: space-between;" class="inline-flex">
                     <label>Seccional</label>
                 </div>
                 <div class="">
-                    <ng-select [(ngModel)]="seccionalSeleccionado" (ngModelChange)="opciones.desc_sec = seccionalSeleccionado; ngOnInit();">
+                    <ng-select [(ngModel)]="opciones.desc_sec" (ngModelChange)=" rebuscar(['desc_locanr'])">
                         <ng-option *ngFor="let item of seccionales" [value]="item">
                             <div>
                                 {{item}}
@@ -46,12 +45,12 @@
                     </ng-select>
                 </div>
             </div>
-            <div class="col-xs col-md-3">
+            <div *ngIf="opciones.desc_sec" class="col-xs col-md-3">
                 <div style="justify-content: space-between;" class="inline-flex">
                     <label>Local</label>
                 </div>
                 <div class="">
-                    <ng-select [(ngModel)]="localSeleccionado">
+                    <ng-select [(ngModel)]="opciones.desc_locanr" (ngModelChange)=" rebuscar( [])">
                         <ng-option *ngFor="let item of locales" [value]="item">
                             <div>
                                 {{item}}
@@ -63,4 +62,16 @@
         </div>
     </div>
 </div>
-<button type="button" (click)="filtrar()" class="btn btn-primary">Filtrar</button>
+<div class="card">
+    <div class="card-body">
+        <div style="width: 100%;">
+            <div style="display: flex;">
+                <div class="mx-auto">
+                    <a routerLink="/login" type="button" (click)="_usuarioService.logout()" class="btn mr-3 btn-danger">Salir</a>
+                    <button type="button" (click)="filtrar()" class="btn btn-inverse">Crear Reporte</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

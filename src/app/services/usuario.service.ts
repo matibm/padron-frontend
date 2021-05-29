@@ -77,12 +77,47 @@ export class UsuarioService {
       return resp.usuarios
     })
   }
-  getUsuariosP() {
+  buscarCandidatos(busqueda, opciones) {
+
+    console.log("buscando", busqueda);
+    let bodyAux = {}
+
+    Object.entries(opciones).forEach(([key, value]) => {
+      if (value) {
+
+        bodyAux[key] = opciones[key]
+      }
+    });
+    opciones = bodyAux
+    let url = `${URL_SERVICIOS}/persona/get_candidatos`;
+    url += `?token=${this.token}`
+    url += `&search=${busqueda}`
+    return this.http.post(url, opciones).toPromise().then((resp: any) => {
+      console.log(resp);
+
+      return resp.usuarios
+    },
+      (error) => {
+        console.log(error);
+
+      })
+  }
+  getUsuariosP(body) {
 
     let url = `${URL_SERVICIOS}/persona/lista_usuario`;
     url += `?token=${this.token}`
     // url += `&query=${busqueda}`
-    return this.http.get(url).toPromise().then((resp: any) => {
+
+    let bodyAux = {}
+
+    Object.entries(body).forEach(([key, value]) => {
+      if (value) {
+
+        bodyAux[key] = body[key]
+      }
+    });
+    body = bodyAux
+    return this.http.post(url, body).toPromise().then((resp: any) => {
       return resp.usuarios
     })
   }
@@ -90,7 +125,7 @@ export class UsuarioService {
     let url = `${URL_SERVICIOS}/persona/editar_usuario`;
     url += `?token=${this.token}`
     console.log(usuario);
-    
+    this.usuario = usuario
     return this.http.post(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);
 
@@ -148,7 +183,7 @@ export class UsuarioService {
     this.itsLogued = false;
   }
 
- 
+
   getUsuario(id) {
     let url = URL_SERVICIOS + '/persona/usuario/' + id;
     url += '?token=' + this.token;
@@ -176,7 +211,7 @@ export class UsuarioService {
       }
     }).catch(err => {
       //console.log(err);
-     })
+    })
 
     // p.then(()=>{
     // //console.log("oiko");
@@ -191,11 +226,11 @@ export class UsuarioService {
     }
 
     return this.getUsuario(id).toPromise().then((resp: any) => {
- 
+
       return true
 
     }).catch(err => {
-     
+
       console.log(err);
 
       this.logout()
