@@ -142,6 +142,16 @@ export class UsuarioService {
   crearUsuario(usuario) {
     let url = `${URL_SERVICIOS}/persona/crear_usuario`;
     url += `?token=${this.token}`
+    
+    let bodyAux = {}
+
+    Object.entries(usuario).forEach(([key, value]) => {
+      if (value) {
+
+        bodyAux[key] = usuario[key]
+      }
+    });
+    usuario = bodyAux
     return this.http.post(url, usuario).toPromise().then((resp: any) => {
       console.log(resp);
       swal.fire({

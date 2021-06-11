@@ -59,7 +59,8 @@ export class CrearUsuarioComponent implements OnInit {
     this.usuario.desc_sec = this.seccionalSeleccionado
     this.usuario.desc_locanr = this.localSeleccionado
     this.usuario.mesa = this.mesaSeleccionado
-
+    console.log(this.usuario);
+    
     let us = await this._usuarioService.crearUsuario(this.usuario)
     // this.router.navigateByUrl('/admin/usuario/' + us._id)
   }

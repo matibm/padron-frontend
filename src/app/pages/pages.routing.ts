@@ -52,7 +52,7 @@ const routes: Routes = [
   // },
   {
     path: 'admin', component: PagesComponent,
-    canActivate: [LoginGuard],
+    canActivate: [AdminGuard],
     children: [
       { path: '', component: DashboardComponent },
       { path: 'editar_contrato/:id', component: EditarContratoComponent },
@@ -78,6 +78,7 @@ const routes: Routes = [
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'resumen', component: ResumenComponent },
      
+      { path: 'reporte', component: PersonasComponent},
 
     ]
 

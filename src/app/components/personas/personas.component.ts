@@ -91,4 +91,8 @@ export class PersonasComponent implements OnInit {
 
   }
 
+  back(){
+    window.location.reload()
+  }
+
 }

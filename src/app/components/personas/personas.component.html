@@ -1,3 +1,7 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-inverse">
+    <a (click)="back()" class="navbar-brand" href="#">Inicio</a>
+</nav>
+
 <div class="card">
     <div class="card-body">
         <h4><span class="lstick"></span>Reporte</h4>
@@ -67,7 +71,7 @@
         <div style="width: 100%;">
             <div style="display: flex;">
                 <div class="mx-auto">
-                    <a routerLink="/login" type="button" (click)="_usuarioService.logout()" class="btn mr-3 btn-danger">Salir</a>
+                    <a routerLink="/login" type="button" (click)="_usuarioService.logout()" class="btn mr-3 btn-danger">Cerrar Sesion</a>
                     <button type="button" (click)="filtrar()" class="btn btn-inverse">Crear Reporte</button>
 
                 </div>
